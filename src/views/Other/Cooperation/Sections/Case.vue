@@ -17,6 +17,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
   <div class="case-box">
     <div class="process-header">
       <h3 style="text-align: center">合作案例</h3>
+      <p style="font-size: 30px;">看看其他合作夥伴的空間有了新方向！</p>
     </div>
     <div class="card1">
       <n-card title="带封面的卡片" hoverable>
@@ -24,11 +25,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
           <div class="title-box">
             <div class="title-img">
               <a href="javascript:;">
-                <MaterialAvatar
-                  :image="team4"
-                  alt="Image placeholder"
-                  size="lg"
-                />
+                <MaterialAvatar :image="team4" alt="Image placeholder" size="lg" />
               </a>
             </div>
             <div class="title-p" style="vertical-align: middle">
@@ -55,11 +52,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
           <div class="title-box">
             <div class="title-img">
               <a href="javascript:;">
-                <MaterialAvatar
-                  :image="team4"
-                  alt="Image placeholder"
-                  size="lg"
-                />
+                <MaterialAvatar :image="team4" alt="Image placeholder" size="lg" />
               </a>
             </div>
             <div class="title-p" style="vertical-align: middle">
@@ -89,8 +82,8 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
   width: 100%;
   display: grid;
   grid-template-columns: auto auto;
-  grid-auto-rows: 50px auto;
-  column-gap: 10px;
+  grid-auto-rows: 100px auto;
+  column-gap: 30px;
   grid-template-areas:
     "header header"
     "card1 card2";
