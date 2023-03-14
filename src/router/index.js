@@ -24,20 +24,22 @@ import ElProgressBars from "../layouts/sections/elements/progress-bars/ProgressB
 import ElToggles from "../layouts/sections/elements/toggles/TogglesView.vue";
 import ElTypography from "../layouts/sections/elements/typography/TypographyView.vue";
 
-import UserTermsView from "../views/Other/UserTerms/UserTermsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/aaa",
-      name: "aaa",
-      component: ()=>import ("../views/Other/UserTerms/Section/aaa.vue"),
-    },
-    {
-      path: "/user-terms",
-      name: "user-terms",
-      component: UserTermsView,
+      path: "/userview",
+      name: "userview",
+      component: ()=>import ("../views/Other/UserTerms/UserView.vue"),
+      children: [
+        {
+          path: "userterms",
+          name: "userview-userterms",
+          component: () => import('../views/Other/UserTerms/Section/userterms.vue'),
+        },
+
+      ]
     },
     {
       path: "/",

@@ -16,7 +16,7 @@ const props = defineProps({
   },
   transparent: {
     type: Boolean,
-    default: true
+    default: false
   },
   light: {
     type: Boolean,
