@@ -251,7 +251,7 @@ watch(
               aria-labelledby="dropdownMenuOffset"
             >
               <RouterLink
-                :to="{ name: 'about' }"
+                :to="{ name: 'signin-basic' }"
                 class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color"
                 :href="action.route"
