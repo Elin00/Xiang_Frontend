@@ -15,7 +15,7 @@ const props = defineProps({
   },
   transparent: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   light: {
     type: Boolean,
@@ -33,47 +33,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  data() {
-    return {
-      isTransparent: this.transparent,
-      isLight: this.light,
-      isDark: this.dark,
-      isSticky: this.sticky,
-      item: [],
-      inputText: "",
-    };
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-  watch: {
-    isTransparent(newVal) {
-      this.$emit("update:transparent", newVal);
-    },
-    isSticky(newVal) {
-      this.$emit("update:sticky", newVal);
-    },
-  },
-  methods: {
-    handleScroll() {
-      // Check if the page is scrolled more than 100px
-      if (window.pageYOffset > 100) {
-        this.isTransparent = false;
-        this.isSticky = true;
-      } else {
-        this.isTransparent = true;
-        this.isSticky = false;
-      }
-    },
-    ChangeColor() {
-      document.querySelector("a").style.color = "red";
-    },
-  },
 });
-
 // set arrow  color
 function getArrowColor() {
   if (props.transparent && textDark.value) {
@@ -88,7 +48,7 @@ function getArrowColor() {
 // set text color
 const getTextColor = () => {
   let color;
-  if (props.transparent && textDark.value) {
+  if (props.transparent) {
     color = "text-dark";
   } else if (props.transparent) {
     color = "text-white";
@@ -124,10 +84,11 @@ watch(
 <template>
   <nav
     class="navbar navbar-expand-lg top-0 p-0"
+    style="margin: 0px -24px"
     :class="{
-      'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3 ':
+      'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-':
         props.transparent,
-      ' blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0  position-absolute navbar-shrink sticky ':
+      ' blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0  ':
         props.sticky,
       'navbar-light bg-white py-3': props.light,
       ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark,
@@ -152,11 +113,7 @@ watch(
         title="Designed and Coded by Creative Tim"
         data-placement="bottom"
       >
-        <font-awesome-icon
-          :icon="['fa', 'house']"
-          size="3x"
-        ></font-awesome-icon>
-        <span style="font-size: 36px">想享Xing</span>
+        <span style="font-size: 36px">想享Xiang</span>
       </RouterLink>
       <RouterLink
         class="navbar-brand d-block d-md-none"
@@ -170,13 +127,10 @@ watch(
         title="Designed and Coded by Creative Tim"
         data-placement="bottom"
       >
-        Material Design
+        想享Xiang
       </RouterLink>
-      <a
-        href="https://www.creative-tim.com/product/vue-material-kit-pro"
-        class="btn btn-sm bg-gradient-success mb-0 ms-auto d-lg-none d-block"
-        >Buy Now</a
-      >
+      <!-- <a href="https://www.creative-tim.com/product/vue-material-kit-pro"
+                  class="btn btn-sm bg-gradient-success mb-0 ms-auto d-lg-none d-block">Buy Now</a> -->
       <button
         class="navbar-toggler shadow-none ms-2"
         type="button"
@@ -197,7 +151,8 @@ watch(
         id="navigation"
       >
         <ul class="navbar-nav navbar-nav-hover ms-auto">
-          <a
+          <RouterLink
+            :to="{ name: 'RoomGuideView' }"
             class="py-3 ps-3 d-flex"
             id="title"
             style="padding-right: 15px; color: aliceblue; font-size: 24px"
@@ -209,7 +164,7 @@ watch(
             href="#"
             onclick="smoothToPricing('pricing-soft-ui')"
             @mouseover="ChangeColor"
-            >瀏覽空間</a
+            >瀏覽空間</RouterLink
           >
           <a
             class="py-3 ps-3 d-flex"
@@ -224,11 +179,11 @@ watch(
             >加入合作空間</a
           >
         </ul>
-        <ul class="navbar-nav d-lg-block d-none">
+        <ul class="navbar-nav d-lg-block">
           <li class="nav-item dropdown dropdown-hover">
             <a
               id="menu"
-              class="nav-link d-flex align-items-center cursor-pointer happ-icon-menu icon-menu"
+              class="nav-link d-flex align-items-center cursor-pointer"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               data-bs-offset="10,20"
@@ -251,18 +206,18 @@ watch(
               aria-labelledby="dropdownMenuOffset"
             >
               <RouterLink
-                :to="{ name: 'signin-basic' }"
+                :to="{ name: 'about' }"
                 class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color"
                 :href="action.route"
                 ><span>{{ action.label1 }}</span></RouterLink
               >
-              <a
+              <RouterLink
+                :to="{ name: 'rentroomView' }"
                 class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color"
-                href="#pricing-soft-ui"
-                onclick="smoothToPricing('pricing-soft-ui')"
-                >註冊</a
+                :href="action.route"
+                >註冊</RouterLink
               >
               <a
                 class="dropdown-item py-3 ps-3 border-radius-md"
@@ -271,13 +226,12 @@ watch(
                 onclick="smoothToPricing('pricing-soft-ui')"
                 >領取優惠</a
               >
-
-              <RouterLink
-                :to="{ name: 'questions' }"
+              <a
                 class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color"
-                :href="action.route"
-                ><span>常見問答</span></RouterLink
+                href="#pricing-soft-ui"
+                onclick="smoothToPricing('pricing-soft-ui')"
+                >常見問答</a
               >
             </div>
           </li>
