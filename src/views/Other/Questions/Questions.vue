@@ -6,7 +6,6 @@ import NavbarDefault from "../../../examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../../../examples/footers/FooterDefault.vue";
 import Header from "../../../examples/Header.vue";
 
-
 //Vue Material Kit 2 components
 import MaterialSocialButton from "@/components/MaterialSocialButton.vue";
 
@@ -30,11 +29,18 @@ onUnmounted(() => {
 
 <template>
   <Header>
-    <div class="page-header min-vh-75" :style="`background-image: url(${vueMkHeader})`" loading="lazy">
+    <div
+      class="page-header min-vh-75"
+      :style="`background-image: url(${vueMkHeader})`"
+      loading="lazy"
+    >
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto position-relative">
-            <h1 class="text-white pt-3 mt-n5 me-2" :style="{ display: 'inline-block ' }">
+            <h1
+              class="text-white pt-3 mt-n5 me-2"
+              :style="{ display: 'inline-block ' }"
+            >
               Material Kit 2
             </h1>
             <p class="lead text-white px-5 mt-3" :style="{ fontWeight: '500' }">
@@ -47,8 +53,11 @@ onUnmounted(() => {
     </div>
   </Header>
 
-  <div class="question" style="border: 1px #777 solid; border-radius: 20px; padding: 20px 50px">
-    <h5 style="text-align: center">常見問題</h5>
+  <div
+    class="question"
+    style="border: 1px #777 solid; border-radius: 20px; padding: 20px 50px"
+  >
+    <h5 style="text-align: center">常見問答</h5>
 
     <n-collapse accordion>
       <n-collapse-item title="想享是怎樣的空間？" name="1">
@@ -138,11 +147,31 @@ onUnmounted(() => {
 
 <style>
 .question {
-  margin-top: 110px;
+  margin-top: 50px;
   width: 700px;
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, 0%);
+}
+
+.question h5 {
+  font-size: 25px;
+  animation: openIn 1s ease-in-out;
+}
+
+@keyframes openIn {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.question div {
+  font-size: 15px;
 }
 </style>
