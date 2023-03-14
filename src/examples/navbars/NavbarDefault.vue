@@ -227,12 +227,12 @@ watch(
                 onclick="smoothToPricing('pricing-soft-ui')"
                 >領取優惠</a
               >
-              <a
+              <RouterLink
+                :to="{ name: 'questions' }"
                 class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color"
-                href="#pricing-soft-ui"
                 onclick="smoothToPricing('pricing-soft-ui')"
-                >常見問答</a
+                >常見問答</RouterLink
               >
             </div>
           </li>

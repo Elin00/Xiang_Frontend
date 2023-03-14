@@ -25,7 +25,9 @@ import ElToggles from "../layouts/sections/elements/toggles/TogglesView.vue";
 import ElTypography from "../layouts/sections/elements/typography/TypographyView.vue";
 import RentRoomView from "../views/RoomGuide/RentRoomView.vue";
 import RoomGuideView from "../views/RoomGuide/RoomGuideView.vue";
-import Cooperation from "../views/Other/Cooperation/Cooperation.vue";
+import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
+import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,9 +38,15 @@ const router = createRouter({
       component: PresentationView,
     },
     {
-      path: "/Cooperation",
+      path: "/questions",
+      name: "questions",
+      component: QuestionsView,
+    },
+
+    {
+      path: "/cooperation",
       name: "cooperation",
-      component: Cooperation,
+      component: CooperationView,
     },
     {
       path: "/views/roomguide",
