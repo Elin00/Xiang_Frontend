@@ -166,7 +166,8 @@ watch(
             @mouseover="ChangeColor"
             >瀏覽空間</RouterLink
           >
-          <a
+          <RouterLink
+            :to="{ name: 'cooperation' }"
             class="py-3 ps-3 d-flex"
             id="title"
             style="padding-right: 15px; color: aliceblue; font-size: 24px"
@@ -176,7 +177,7 @@ watch(
                 : 'text-white font-weight-bolder ms-sm-3',
             ]"
             href="#"
-            >加入合作空間</a
+            >加入合作空間</RouterLink
           >
         </ul>
         <ul class="navbar-nav d-lg-block">
