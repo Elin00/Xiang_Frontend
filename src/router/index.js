@@ -36,7 +36,7 @@ const router = createRouter({
       component: PresentationView,
     },
     {
-      path: "/views/Cooperation",
+      path: "/Cooperation",
       name: "cooperation",
       component: Cooperation,
     },
