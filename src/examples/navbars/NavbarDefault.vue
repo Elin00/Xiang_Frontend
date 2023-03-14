@@ -111,7 +111,7 @@ watch(
         想享Xiang
       </RouterLink>
       <!-- <a href="https://www.creative-tim.com/product/vue-material-kit-pro"
-              class="btn btn-sm bg-gradient-success mb-0 ms-auto d-lg-none d-block">Buy Now</a> -->
+                  class="btn btn-sm bg-gradient-success mb-0 ms-auto d-lg-none d-block">Buy Now</a> -->
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation"
         aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">
@@ -122,11 +122,12 @@ watch(
       </button>
       <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
         <ul class="navbar-nav navbar-nav-hover ms-auto">
-          <a class=" py-3 ps-3 d-flex" id="title" style="padding-right: 15px; color: aliceblue;font-size:24px;" :class="[
-            (props.transparent && textDark.value) || !props.transparent
-              ? 'text-dark font-weight-bolder ms-sm-3'
-              : 'text-white font-weight-bolder ms-sm-3'
-          ]" href="#" onclick="smoothToPricing('pricing-soft-ui')" @mouseover="ChangeColor">瀏覽空間</a>
+          <RouterLink :to="{ name: 'RoomGuideView' }" class=" py-3 ps-3 d-flex" id="title"
+            style="padding-right: 15px; color: aliceblue;font-size:24px;" :class="[
+              (props.transparent && textDark.value) || !props.transparent
+                ? 'text-dark font-weight-bolder ms-sm-3'
+                : 'text-white font-weight-bolder ms-sm-3'
+            ]" href="#" onclick="smoothToPricing('pricing-soft-ui')" @mouseover="ChangeColor">瀏覽空間</RouterLink>
           <a class=" py-3 ps-3 d-flex" id="title" style="padding-right: 15px; color: aliceblue;font-size:24px;" :class="[
             (props.transparent && textDark.value) || !props.transparent
               ? 'text-dark font-weight-bolder ms-sm-3'
@@ -138,9 +139,9 @@ watch(
             <a id="menu" class="nav-link d-flex align-items-center cursor-pointer" data-bs-toggle="dropdown"
               aria-expanded="false" data-bs-offset="10,20">
               <div style="
-                                              border-radius: 40%;
-                                              background-color: rgba(255, 255, 255, 0.7);
-                                            ">
+                                                  border-radius: 40%;
+                                                  background-color: rgba(255, 255, 255, 0.7);
+                                                ">
                 <span class="material-icons" style="font-size: 3em">
                   manage_accounts
                 </span>
