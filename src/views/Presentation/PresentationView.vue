@@ -12,7 +12,7 @@ import PresentationTestimonials from "./Sections/PresentationTestimonials.vue";
 import presentationcarousel from "./Sections/presentationcarousel.vue";
 import presentation跑馬燈 from "./Sections/presentation跑馬燈.vue";
 import presentation使用者操作 from "./Sections/presentation使用者操作.vue";
-
+import test from "../RoomGuide/test.vue";
 //images
 import vueMkHeader from "@/assets/img/office-dark.jpg";
 
@@ -39,16 +39,19 @@ onUnmounted(() => {
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto position-relative">
-            <h1
-              class="text-white pt-3 mt-n5 me-2"
+            <h3
+              class="text-black pt-3 mt-n5 me-2"
+              style="font-weight: bold"
               :style="{ display: 'inline-block ' }"
             >
-              Material Kit 2
-            </h1>
-            <p class="lead text-white px-5 mt-3" :style="{ fontWeight: '500' }">
-              Start the Development With Bootstrap 5 Design System inspired by
-              Material Design.
-            </p>
+              在這個充滿緊張與焦慮的世界中，我們致力於為您創造一個放鬆、交流、學習與成長的共享空間。
+            </h3>
+            <div class="container">
+              <div class="row">
+                <!-- 放下拉選擇器 -->
+                <test />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -72,4 +75,3 @@ onUnmounted(() => {
   </div>
   <!-- <DefaultFooter /> -->
 </template>
-

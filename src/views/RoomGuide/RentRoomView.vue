@@ -1,6 +1,6 @@
 <script setup>
-import datepickerDesign from "../RoomGuide/datepickerDesign.vue";
-import datepickerDesign2 from "../RoomGuide/datepickerDesign2.vue";
+import datepickerDesign from "../RoomGuide/datepickerDailyrentalDesign.vue";
+import datepickerDesign2 from "../RoomGuide/datepickerhourlyrentalDesign.vue";
 import { ref } from "vue";
 import { Navigation, Pagination, Autoplay, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -102,13 +102,8 @@ const showModal = ref(false);
             <span class="price d-flex mt-2 justify-content-start">$27000/天<span class="price-tag">假日收費</span></span>
           </div>
           <div class="time-choose clearfix d-flex justify-content-center mt-5">
-            <label for="start-date" style="color: black; font-size: larger">開始日期:</label>
-            <datepickerDesign />
-            <!-- <input type="date" id="start-date" name="start-date" /> -->
-
-            <label for="end-date" style="color: black; font-size: larger">結束日期:</label>
-            <datepickerDesign />
-            <!-- <input type="date" id="end-date" name="end-date" /> -->
+           <!-- 這邊顯示日租的時間 -->
+           <datepickerDesign />
           </div>
           <div class="actionBtn mb-5">
             <button class="fullBtn">天數 * 價格 | 立即預訂</button>
