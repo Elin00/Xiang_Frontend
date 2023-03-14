@@ -17,10 +17,10 @@ import { RouterLink, RouterView } from "vue-router";
                             Material Design.
                         </p>
                     </div>
-                        </div>
-                    </div>
-                </div>
-            </Header> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Header> -->
 
     <div class="container">
         <div class="row">
@@ -49,7 +49,8 @@ import { RouterLink, RouterView } from "vue-router";
 <style>
 .menu {
     width: 16.67%;
-    position: sticky;
+    position: fixed;
+    top: 10%;
     padding-right: 15px;
     margin-bottom: 50px;
 }
