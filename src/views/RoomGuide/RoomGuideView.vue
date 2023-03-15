@@ -11,6 +11,18 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { onMounted, ref } from "vue";
 
+//import pinia
+import { defineComponent } from '../../stores/filterBar.js';
+
+const store = defineComponent('filterBar');
+
+const currentFilter = ref('location');
+
+function selectFilter(filterName) {
+    currentFilter.value = filterName;
+    store.selectFilter(filterName);
+}
+
 const mapContainer = ref(null);
 
 const data = [
@@ -75,6 +87,22 @@ onMounted(() => {
 
 </script>
 <template>
+    <!-- 過濾器 -->
+    <header>
+        <div class="filter-bar filter-wrapper">
+            <div class="filter-group location" @click="selectFilter('location')">
+                <span :class="{ focus: currentFilter === 'location' }">城市</span>
+            </div>
+            <div class="divider"></div>
+            <div class="filter-group hourlyTime" @click="selectFilter('hourlyTime')">
+                <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
+            </div>
+            <div class="divider"></div>
+            <div class="filter-group guest" @click="selectFilter('guest')">
+                <span :class="{ focus: currentFilter === 'guest' }">人數</span>
+            </div>
+        </div>
+    </header>
     <div class="container-fluid">
         <div class="row">
             <div class="col-6 gy-8 space-wrapper">
@@ -126,6 +154,73 @@ onMounted(() => {
     grid-gap: 24px;
     grid-template-columns: repeat(2, 1fr);
 } */
+
+/* 過濾器 */
+.filter-bar {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #c9c9c9;
+    border-radius: 8px;
+    position: relative;
+    z-index: 99;
+}
+
+.filter-wrapper {
+    margin: 18px auto 0;
+}
+
+.filter-bar.focus {
+    background: #f7f7f7;
+}
+
+.filter-bar .filter-group.location {
+    min-width: 200px;
+}
+
+.filter-bar .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    padding: 15px 15px 20px 25px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all .3s ease;
+}
+
+.filter-bar .divider {
+    display: block;
+    height: 27px;
+    border-left: 1px solid #e7e7e7;
+    margin: 0 14px;
+}
+
+.filter-bar .filter-group.hourlyTime {
+    min-width: 222px;
+}
+
+.filter-bar .filter-group.guest[data-v-391ff127] {
+    min-width: 252px;
+}
+
+/* .filter-bar .filter-group{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    padding: 15px 15px 20px 25px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all .3s ease;
+} */
+
+.filter-bar .filter-group.focus {
+    background: #fff;
+    box-shadow: 0 0 4px #00000014, 0 0 14px #0000001f;
+    transform: scale(1.02);
+}
 </style>
 <script>
 </script>
