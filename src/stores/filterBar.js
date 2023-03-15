@@ -1,17 +1,11 @@
-import { defineComponent } from 'vue';
-import { useStore } from 'pinia';
+import { defineStore } from 'pinia'
 
-export default defineComponent({
-    setup() {
-        const store = useStore();
-
-        function selectFilter(filterName) {
-            store.currentFilter.value = filterName;
-        }
-
-        return {
-            currentFilter: store.currentFilter,
-            selectFilter,
-        };
-    },
-});
+export const useCounterStore = defineStore('counter', () => {
+    const selectFilter = (filterName) => {
+        store.currentFilter.value = filterName;
+    }
+    return {
+        currentFilter: store.currentFilter,
+        selectFilter,
+    };
+})

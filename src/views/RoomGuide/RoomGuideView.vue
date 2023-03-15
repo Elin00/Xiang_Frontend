@@ -12,9 +12,7 @@ import "leaflet/dist/leaflet.css";
 import { onMounted, ref } from "vue";
 
 //import pinia
-import { defineComponent } from '../../stores/filterBar.js';
 
-const store = defineComponent('filterBar');
 
 const currentFilter = ref('location');
 
@@ -89,17 +87,13 @@ onMounted(() => {
 <template>
     <!-- 過濾器 -->
     <header>
-        <div class="filter-bar filter-wrapper">
+        <div class="filter-bar filter-wrapper mt-3 ml-3">
             <div class="filter-group location" @click="selectFilter('location')">
                 <span :class="{ focus: currentFilter === 'location' }">城市</span>
             </div>
             <div class="divider"></div>
             <div class="filter-group hourlyTime" @click="selectFilter('hourlyTime')">
                 <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
-            </div>
-            <div class="divider"></div>
-            <div class="filter-group guest" @click="selectFilter('guest')">
-                <span :class="{ focus: currentFilter === 'guest' }">人數</span>
             </div>
         </div>
     </header>
@@ -131,6 +125,9 @@ onMounted(() => {
     border: 1px solid red;
     display: block;
 } */
+.ml-3 {
+    margin-left: 30px;
+}
 
 .fix-pos {
     position: fixed;
