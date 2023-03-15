@@ -4,6 +4,7 @@ import { NCard } from "naive-ui";
 
 // image
 import team4 from "@/assets/img/team-2.jpg";
+import team8 from "@/assets/img/team-8.jpg";
 import vueMkHeader from "@/assets/img/office-dark.jpg";
 import Cooperation from "@/assets/img/Cooperation.jpg";
 import Cooperation2 from "@/assets/img/Cooperation2.jpg";
@@ -25,11 +26,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
           <div class="title-box">
             <div class="title-img">
               <a href="javascript:;">
-                <MaterialAvatar :image="team4" alt="Image placeholder" size="lg" />
+                <MaterialAvatar :image="team8" alt="Image placeholder" size="lg" />
               </a>
             </div>
             <div class="title-p" style="vertical-align: middle">
-              <h5>業主A</h5>
+              <h5>業主-鄭智智</h5>
               <p style="font-weight: bold">大幅補貼了辦公室的租金！</p>
             </div>
             <p>“把公司會議室於非上班時段出租，大幅貼補了辦公室的租金！”</p>
@@ -78,7 +79,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
 
 <style>
 .case-box {
-  margin-top: 80px;
+  margin-top: 150px;
   width: 100%;
   display: grid;
   grid-template-columns: auto auto;
