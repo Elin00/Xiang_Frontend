@@ -85,7 +85,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
   width: 900px;
   left: 50%;
   grid-template-columns: 400px 500px;
-  grid-auto-rows: 160px 160px 160px 160px;
+  grid-auto-rows: 150px 150px 150px 150px;
   column-gap: 40px;
   grid-template-areas:
     "strength-img box1"
@@ -95,29 +95,27 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
 }
 .strength-img {
   grid-area: strength-img;
-  background-color: palevioletred;
+  background-color: oldlace;
+  border-radius: 20px;
+  border: 1px solid #ccc;
 }
 .Sbox1 {
   grid-area: box1;
-  background-color: antiquewhite;
   border-radius: 20px;
   border: 1px solid #ccc;
 }
 .Sbox2 {
   grid-area: box2;
-  background-color: aqua;
   border-radius: 20px;
   border: 1px solid #ccc;
 }
 .Sbox3 {
   grid-area: box3;
-  background-color: wheat;
   border-radius: 20px;
   border: 1px solid #ccc;
 }
 .Sbox4 {
   grid-area: box4;
-  background-color: oldlace;
   border-radius: 20px;
   border: 1px solid #ccc;
 }
