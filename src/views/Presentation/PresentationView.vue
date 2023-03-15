@@ -13,8 +13,7 @@ import presentationcarousel from "./Sections/presentationcarousel.vue";
 import presentation跑馬燈 from "./Sections/presentation跑馬燈.vue";
 import presentation使用者操作 from "./Sections/presentation使用者操作.vue";
 import presentationHeader打字效果 from "./Sections/presentationHeader打字效果.vue";
-
-
+import test from "../RoomGuide/test.vue";
 
 //images
 import vueMkHeader from "@/assets/img/office-dark.jpg";
@@ -34,11 +33,20 @@ onUnmounted(() => {
 <template>
   <!-- 這邊要改中間內容 -->
   <Header>
-    <div class="page-header min-vh-75" :style="`background-image: url(${vueMkHeader})`" loading="lazy">
+    <div
+      class="page-header min-vh-75"
+      :style="`background-image: url(${vueMkHeader})`"
+      loading="lazy"
+    >
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto position-relative">
             <presentationHeader打字效果 />
+            <div class="container">
+              <div class="row">
+                <test />
+              </div>
+            </div>
           </div>
         </div>
       </div>
