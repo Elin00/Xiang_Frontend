@@ -1,14 +1,32 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useMemberDataStore } from "../../../../stores/memberData.js";
+import CreditCard from '../../Components/CreditCard.vue'
 
 const memberDataStore = useMemberDataStore();
 const years = new Date().getFullYear();
-const creditNum = reactive(['', '', '', ''])
-const creditDate = reactive({ year: years, month: 1 })
+const cardNum = reactive(['', '', '', ''])
+const cardDate = reactive({ year: years, month: 1 })
+const cardCodeNum = ref(0);
 
-const saveCredit = () => {
-   console.log(creditNum);
+//正則驗證
+const cardNumRule = /[0-9]{4}/;
+const cardCodeRule = /[0-9]{3}/;
+
+const saveCard = () => {
+   if (memberDataStore.creditCard.length >= 3) {
+      alert('超過三組卡號，請先刪除再新增');
+   } else {
+      if (cardNumRule.test(cardNum[0]) && cardNumRule.test(cardNum[1]) && cardNumRule.test(cardNum[2]) && cardNumRule.test(cardNum[3]) && cardCodeRule.test(cardCodeNum.value)) {
+         memberDataStore.addCreditCard(cardNum.toString());
+      } else {
+         alert('輸入內容不正確，請輸入16位數字');
+      }
+   }
+   cardNum[0] = '';
+   cardNum[1] = '';
+   cardNum[2] = '';
+   cardNum[3] = '';
 }
 
 </script>
@@ -16,19 +34,18 @@ const saveCredit = () => {
    <div class="container">
       <div class="row">
          <div class="col">
-            <h4>綁定信用卡</h4>4
+            <h4>綁定信用卡</h4>
             <p>綁定信用卡加速付款程序，讓預訂更順暢！</p>
          </div>
       </div>
-      <div class="row mb-4">
-         <div class="d-flex col-6 border-bottom">
-            <div id="creditCard1" class="emptyCard mb-5">
-               <h6>尚未新增信用卡</h6>
-            </div>
-         </div>
-      </div>
+
+      <CreditCard v-if="memberDataStore.creditCard.length < 1" :have="false" />
+
+      <CreditCard v-for="cardItem in memberDataStore.creditCard.length" :have="memberDataStore.creditCard.length >= 1"
+         :cardNumInCard="memberDataStore.creditCard[cardItem - 1]" />
+
       <div class="row mb-5">
-         <div class="col">
+         <div class="col d-flex">
             <!-- Button trigger modal -->
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">新增信用卡</button>
          </div>
@@ -52,33 +69,34 @@ const saveCredit = () => {
                <p>信用卡號</p>
                <div class="d-flex mb-3">
                   <input type="text" class="form-control btn-light creditCardText" placeholder="0000" maxlength="4"
-                     v-model="creditNum[0]">
+                     v-model="cardNum[0]">
                   <h5 class="creditDash form-control">-</h5>
                   <input type="text" class="form-control btn-light creditCardText" placeholder="0000" maxlength="4"
-                     v-model="creditNum[1]">
+                     v-model="cardNum[1]">
                   <h5 class="creditDash form-control">-</h5>
                   <input type="text" class="form-control btn-light creditCardText" placeholder="0000" maxlength="4"
-                     v-model="creditNum[2]">
+                     v-model="cardNum[2]">
                   <h5 class="creditDash form-control">-</h5>
                   <input type="text" class="form-control btn-light creditCardText" placeholder="0000" maxlength="4"
-                     v-model="creditNum[3]">
+                     v-model="cardNum[3]">
                </div>
                <p>信用卡到期日</p>
                <div class="d-flex">
-                  <select v-model="creditDate.month" class="form-select w-10 text-center">
+                  <select v-model="cardDate.month" class="form-select w-10 text-center">
                      <option v-for="month in 12">{{ month }}</option>
                   </select>
                   <h5 class="creditDash form-control">/</h5>
-                  <select v-model="creditDate.year" class="form-select w-15 text-center">
+                  <select v-model="cardDate.year" class="form-select w-15 text-center">
                      <option v-for="num in 25">{{ years + num - 1 }}</option>
                   </select>
                </div>
                <p>驗證碼</p>
-               <input type="text" class="form-control btn-light w-15 creditCardText" placeholder="000" maxlength="3">
+               <input type="text" class="form-control btn-light w-15 creditCardText" placeholder="000" maxlength="3"
+                  v-model="cardCodeNum">
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-               <button type="button" class="btn btn-primary" @click="saveCredit">儲存更新</button>
+               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="saveCard">儲存更新</button>
             </div>
          </div>
       </div>

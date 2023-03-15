@@ -23,7 +23,7 @@ import DefaultFooter from "../src/examples/footers/FooterDefault.vue";
   <div class="container-fluid position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
-        <NavbarDefault :sticky="true" />
+        <NavbarDefault :sticky="true" class="mb-4" />
       </div>
     </div>
   </div>

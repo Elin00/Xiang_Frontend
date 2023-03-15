@@ -4,7 +4,7 @@ import { useMemberDataStore } from '../../../stores/memberData.js'
 const memberDataStore = useMemberDataStore();
 
 const props = defineProps({
-    creditNumInCard: {
+    cardNumInCard: {
         type: String,
         default: '',
     },
@@ -21,8 +21,8 @@ const props = defineProps({
         <div class="d-flex col-6 border-bottom">
             <div class="mb-5" :class="have ? 'haveCard' : 'emptyCard'">
                 <button v-if="have" class="btn btn-danger p-2"
-                    @click="memberDataStore.removeCreditCard(creditNumInCard)">刪除</button>
-                <h6>{{ have ? `${creditNumInCard.slice(0, 4)}-****-****-****` : '尚未新增信用卡' }}</h6>
+                    @click="memberDataStore.removeCreditCard(cardNumInCard)">刪除</button>
+                <h6>{{ have ? `${cardNumInCard.slice(0, 4)}-****-****-****` : '尚未新增信用卡' }}</h6>
             </div>
         </div>
     </div>
