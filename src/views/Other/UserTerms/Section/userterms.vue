@@ -4,7 +4,7 @@
 <template>
     <article class="col-9 ">
         <h1 class="">《使用者條款》</h1>
-        <p class="">更新日期：2021年11月22日</p>
+        <p class="">更新日期：2023年03月15日</p>
         <div>
             <section class="">
                 <p class="">
@@ -313,7 +313,7 @@
             </section>
             <!-- last -->
             <section class="-">
-                <p class="-">
+                <p style="color: maroon; font-weight: 700; font-style: italic; font-size: medium;">
                     如您對上述使用者條款有任何疑問或意見，或您獲悉與本網站及/或本公司相關之任何違規或違法行為，請洽詢及/或通知本公司。
                 </p>
             </section>
