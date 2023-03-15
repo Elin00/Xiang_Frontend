@@ -31,15 +31,9 @@ onMounted(() => {
           <div class="row">
             <div class="col-12 mx-auto">
               <div class="card z-index-0 fadeIn3 fadeInBottom">
-                <div
-                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-                >
-                  <div
-                    class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1"
-                  >
-                    <h4
-                      class="text-white font-weight-bolder text-center mt-2 mb-0"
-                    >
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                  <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                       登入
                     </h4>
                   </div>
@@ -47,34 +41,19 @@ onMounted(() => {
                 <div class="card-body">
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電子信箱</label
-                      ><!--v-if--><input
-                        id="email"
-                        type="email"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
+                        type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label
-                      ><!--v-if--><input
-                        id="password"
-                        type="password"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0px">
                       <a href="#" style="color: green">忘記密碼?</a>
                     </div>
 
                     <div class="text-center">
-                      <button
-                        class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                      >
+                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
                         登入
                       </button>
                     </div>
@@ -113,15 +92,9 @@ onMounted(() => {
           <div class="row">
             <div class="col-12 mx-auto">
               <div class="card z-index-0 fadeIn3 fadeInBottom">
-                <div
-                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-                >
-                  <div
-                    class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1"
-                  >
-                    <h4
-                      class="text-white font-weight-bolder text-center mt-2 mb-0"
-                    >
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                  <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                       立即註冊成為想享夥伴
                     </h4>
                   </div>
@@ -129,60 +102,29 @@ onMounted(() => {
                 <div class="card-body">
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >姓名</label
-                      ><!--v-if--><input
-                        id="name"
-                        type="name"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input id="name" type="name"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電子信箱</label
-                      ><!--v-if--><input
-                        id="email"
-                        type="email"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
+                        type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電話</label
-                      ><!--v-if--><input
-                        id="phone"
-                        type="phone"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input id="phone" type="phone"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label
-                      ><!--v-if--><input
-                        id="password"
-                        type="password"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
-                    <div class="form-check" style="padding-left: 0px">
-                      <MaterialCheckbox id="terms" checked
-                        >我已閱讀並同意 想享<a href="#" style="color: green"
-                          >各項條款</a
-                        >
+                    <div class="form-check" style="padding-left: 0;">
+                      <MaterialCheckbox id="terms" style="padding-left: 0;" checked>我已閱讀並同意 想享<a href="#"
+                          style="color: green">各項條款</a>
                       </MaterialCheckbox>
                     </div>
 
                     <div class="text-center">
-                      <button
-                        class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                      >
+                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
                         註冊
                       </button>
                     </div>
@@ -221,15 +163,9 @@ onMounted(() => {
           <div class="row">
             <div class="col-12 mx-auto">
               <div class="card z-index-0 fadeIn3 fadeInBottom">
-                <div
-                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-                >
-                  <div
-                    class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1"
-                  >
-                    <h4
-                      class="text-white font-weight-bolder text-center mt-2 mb-0"
-                    >
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                  <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                       註冊成為會員
                     </h4>
                   </div>
@@ -237,60 +173,29 @@ onMounted(() => {
                 <div class="card-body">
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >姓名</label
-                      ><!--v-if--><input
-                        id="name"
-                        type="name"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input id="name" type="name"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電子信箱</label
-                      ><!--v-if--><input
-                        id="email"
-                        type="email"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
+                        type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電話</label
-                      ><!--v-if--><input
-                        id="phone"
-                        type="phone"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input id="phone" type="phone"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label
-                      ><!--v-if--><input
-                        id="password"
-                        type="password"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0px">
-                      <MaterialCheckbox id="terms" checked
-                        >我已閱讀並同意 想享<a href="#" style="color: green"
-                          >各項條款</a
-                        >
+                      <MaterialCheckbox id="terms" style="padding-left: 0;" checked>我已閱讀並同意 想享<a href="#"
+                          style="color: green">各項條款</a>
                       </MaterialCheckbox>
                     </div>
 
                     <div class="text-center">
-                      <button
-                        class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                      >
+                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
                         註冊
                       </button>
                     </div>
@@ -333,6 +238,8 @@ onMounted(() => {
   display: inline-block;
   width: 150px;
   border-top: 1px solid #ccc;
+  transform: translateY(-4px);
+
 }
 
 .order .txt {
