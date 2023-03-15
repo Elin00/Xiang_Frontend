@@ -38,6 +38,12 @@ const router = createRouter({
           name: "userview-userterms",
           component: () => import('../views/Other/UserTerms/Section/userterms.vue'),
         },
+        {
+          path: "privacy",
+          name: "userview-privacy",
+          component: () => import('../views/Other/UserTerms/Section/privacy.vue'),
+        },
+
 
       ]
     },
