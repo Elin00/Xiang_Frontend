@@ -38,9 +38,7 @@ onUnmounted(() => {
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto position-relative">
-
             <presentationHeader打字效果 />
-
           </div>
         </div>
       </div>
@@ -63,4 +61,3 @@ onUnmounted(() => {
   </div>
   <!-- <DefaultFooter /> -->
 </template>
-

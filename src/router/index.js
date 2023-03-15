@@ -29,9 +29,29 @@ import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
 import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
 
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/userview",
+      name: "userview",
+      component: ()=>import ("../views/Other/UserTerms/UserView.vue"),
+      children: [
+        {
+          path: "userterms",
+          name: "userview-userterms",
+          component: () => import('../views/Other/UserTerms/Section/userterms.vue'),
+        },
+        {
+          path: "privacy",
+          name: "userview-privacy",
+          component: () => import('../views/Other/UserTerms/Section/privacy.vue'),
+        },
+
+
+      ]
+    },
     {
       path: "/",
       name: "presentation",
