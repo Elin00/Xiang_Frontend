@@ -28,35 +28,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Header>
-    <div
-      class="page-header min-vh-75"
-      :style="`background-image: url(${vueMkHeader})`"
-      loading="lazy"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7 text-center mx-auto position-relative">
-            <h1
-              class="text-white pt-3 mt-n5 me-2"
-              :style="{ display: 'inline-block ' }"
-            >
-              Material Kit 2
-            </h1>
-            <p class="lead text-white px-5 mt-3" :style="{ fontWeight: '500' }">
-              Start the Development With Bootstrap 5 Design System inspired by
-              Material Design.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Header>
-
-  <div
-    class="question"
-    style="border: 1px #777 solid; border-radius: 20px; padding: 20px 50px"
-  >
+  <div class="question" style="border: 1px #CCC solid; border-radius: 20px; padding: 20px 50px">
     <h5 style="text-align: center">常見問答</h5>
 
     <n-collapse accordion>
@@ -147,12 +119,13 @@ onUnmounted(() => {
 
 <style>
 .question {
-  margin-top: 50px;
   width: 700px;
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, 0%);
+  box-shadow: 0 0 10px;
+
 }
 
 .question h5 {
@@ -165,6 +138,7 @@ onUnmounted(() => {
     opacity: 0;
     transform: translateY(25px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);

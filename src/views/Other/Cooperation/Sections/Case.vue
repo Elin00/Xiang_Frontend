@@ -65,7 +65,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
           <div class="img-wrap">
             <img :src="Cooperation2" />
           </div>
-          <p class="p-title">
+          <p class="p-title" id="JoinUs">
             總坪數：10.3 坪<br />每坪分潤：3,300 元/月(僅平日晚上與假日開放)
           </p>
           <p>
@@ -79,7 +79,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
 
 <style>
 .case-box {
-  margin-top: 150px;
+  margin-top: 250px;
   width: 100%;
   display: grid;
   grid-template-columns: auto auto;

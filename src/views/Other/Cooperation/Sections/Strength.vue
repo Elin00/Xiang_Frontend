@@ -7,15 +7,17 @@ import Icon1 from "@/assets/img/strength-Icon1.png";
 import Icon2 from "@/assets/img/strength-Icon2.png";
 import Icon3 from "@/assets/img/Icon3.png";
 import Icon4 from "@/assets/img/strength-Icon4.png";
-
-
-
-
-
+import StrengthImg from "@/assets/img/strength-img.jpg";
+import StrengthImg2 from "@/assets/img/strength-img2.jpg";
 
 
 //Vue Material Kit 2 components
 import MaterialAvatar from "@/components/MaterialAvatar.vue";
+import MaterialButton from "@/components/MaterialButton.vue";
+
+
+
+
 </script>
 
 
@@ -24,7 +26,22 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
     <h3 style="text-align: center">我們的優勢</h3>
 
     <div class="strength-box">
-      <div class="strength-img"></div>
+      <div class="strength-img">
+        <div class="card-filp">
+          <div class="front">
+            <img :src="StrengthImg" style="  border-radius: 20px;" />
+          </div>
+          <div class="back" :style="`background-image: url(${StrengthImg2})`"
+            style=" height: 590px; border-radius: 20px;">
+            <div style="margin-left: 35%;  transform: translateY(520px);">
+              <MaterialButton variant="outline" color="dark" class="w-auto me-2"><a href="#JoinUs">立即加入我們</a>
+              </MaterialButton>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
       <div class="Sbox1">
         <div class="row">
           <div class="col-2" style="padding-left: 30px; padding-top: 10px">
@@ -97,7 +114,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
   left: 50%;
   grid-template-columns: 400px 500px;
   grid-auto-rows: 150px 150px 150px 150px;
-  column-gap: 40px;
+  column-gap: 60px;
   grid-template-areas:
     "strength-img box1"
     "strength-img box2"
@@ -107,37 +124,77 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
 
 .strength-img {
   grid-area: strength-img;
-  background-color: oldlace;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+
 }
 
 .Sbox1 {
   grid-area: box1;
   border-radius: 20px;
   border: 1px solid #ccc;
+  box-shadow: 0 0 5px;
 }
 
 .Sbox2 {
   grid-area: box2;
   border-radius: 20px;
   border: 1px solid #ccc;
+  box-shadow: 0 0 5px;
 }
 
 .Sbox3 {
   grid-area: box3;
   border-radius: 20px;
   border: 1px solid #ccc;
+  box-shadow: 0 0 5px;
 }
 
 .Sbox4 {
   grid-area: box4;
   border-radius: 20px;
   border: 1px solid #ccc;
+  box-shadow: 0 0 5px;
+
 }
 
 .strength-box div {
   margin-bottom: 15px;
   font-size: 15px;
+}
+
+/* 圖片翻轉 */
+.card-filp {
+  width: 400px;
+  height: 600px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1.5s;
+}
+
+.front,
+.back {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  backface-visibility: hidden;
+}
+
+.front {
+  width: 400px;
+  height: 600px;
+}
+
+.back {
+  width: 400px;
+  height: 600px;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.card-filp:hover {
+  transform: rotateY(180deg);
 }
 </style>
