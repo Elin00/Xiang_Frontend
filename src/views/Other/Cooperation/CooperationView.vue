@@ -10,10 +10,8 @@ import Case from "./Sections/Case.vue";
 import Process from "./Sections/Process.vue";
 import Strength from "./Sections/Strength.vue";
 
-
 //dep
 import Typed from "typed.js";
-
 
 //Naive
 import { NCard } from "naive-ui";
@@ -52,7 +50,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Header>
+  <!-- <Header>
     <div class="page-header min-vh-75" :style="`background-image: url(${vueMkHeader})`" loading="lazy">
       <div class="container">
         <div class="row">
@@ -64,20 +62,13 @@ onUnmounted(() => {
               <div id="typed-strings">
                 <h1>舒適安心的聚會空間，享受與朋友們再次相聚的快樂</h1>
                 <h1>在零打擾的專屬空間，找回屬於自己的專注節奏</h1>
-
               </div>
             </h4>
-
-
-            <!-- <p class="lead text-white px-5 mt-3" :style="{ fontWeight: '500' }">
-                                              Start the Development With Bootstrap 5 Design System inspired by
-                                              Material Design.
-                                            </p> -->
           </div>
         </div>
       </div>
     </div>
-  </Header>
+  </Header> -->
   <Strength />
   <Case />
   <Process />
