@@ -1,12 +1,10 @@
 <script setup>
 // Vue Material Kit 2 components
-import RotatingCard from "@/examples/cards/rotatingCards/RotatingCard.vue";
-import RotatingCardFront from "@/examples/cards/rotatingCards/RotatingCardFront.vue";
-import RotatingCardBack from "@/examples/cards/rotatingCards/RotatingCardBack.vue";
+import RotatingCardForRoom from "@/examples/component/RotatingCardForRoom.vue";
+import RotatingCardFrontForRoom from "@/examples/component/RotatingCardFrontForRoom.vue";
+import RotatingCardBackForRoom from "@/examples/component/RotatingCardBackForRoom.vue";
 
-// example component
-import Breadcrumbs from "@/examples/Breadcrumbs.vue";
-
+//leaflet
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { onMounted, ref } from "vue";
@@ -22,32 +20,19 @@ function selectFilter(filterName) {
 }
 
 const mapContainer = ref(null);
-
-const data = [
-    {
-        image: "https://bit.ly/3G5JXJZ",
-        icon: "touch_app",
-        title: "Feel the <br /> Material Kit",
-        description: "All the Bootstrap components that you need in a development have been re-design with the new look.",
-        action: [
-            {
-                route: "/",
-                label: "Start with Headers",
-            },
-        ],
-    },
-    {
-        image: "https://bit.ly/32ZoTGx",
-        title: "Discover More",
-        description: "You will save a lot of time going from prototyping to full-functional code because all elements are implemented.",
-        action: [
-            {
-                route: "/",
-                label: "Start with Headers",
-            },
-        ],
-    },
-];
+const cardinfo = {
+    image: "https://www.uicbc.com/upload/service/c.jpg",
+    icon: "touch_app",
+    title: "成功大學",
+    description: "All the Bootstrap components that you need in a development have been re-design with the new look.",
+    action: [
+        {
+            route: "/",
+            label: "Start with Headers",
+        },
+    ],
+}
+const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
 
 const markers = [
     { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
@@ -97,24 +82,19 @@ onMounted(() => {
             </div>
         </div>
     </header>
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col-6 gy-8 space-wrapper">
-                <Breadcrumbs :routes="[
-                    { label: 'Home', route: '/some-route' },
-                    { label: 'Library', route: '/some-route' },
-                    { label: 'Data' },
-                ]" />
-                <div class="space-wrapper__list">
-                    <RotatingCard v-for="(item, index) in data" :key="index">
-                        <RotatingCardFront :image="item.image" :icon="item.icon" :title="item.title"
+            <div class="col-6 space-wrapper">
+                <div class="space-wrapper__list grid">
+                    <RotatingCardForRoom v-for="(item, index) in data" :key="index">
+                        <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
                             :description="item.description" />
-                        <RotatingCardBack :image="item.image" :title="item.title" :description="item.description"
+                        <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description"
                             :action="item.action" />
-                    </RotatingCard>
+                    </RotatingCardForRoom>
                 </div>
             </div>
-            <div class="col-6 gy-8 space-wrapper">
+            <div class="col-6 space-wrapper">
                 <div class="mapContainer" ref="mapContainer"></div>
             </div>
         </div>
@@ -139,18 +119,19 @@ onMounted(() => {
 }
 
 .space-wrapper__list {
-    padding: 0 20px;
+    padding: 20px 20px;
     margin: 0;
-    width: 100%;
+    width: 900px;
+    height: 900px;
     overflow-y: scroll;
 }
 
-/* .grid {
+.grid {
     width: 100%;
     display: grid;
     grid-gap: 24px;
     grid-template-columns: repeat(2, 1fr);
-} */
+}
 
 /* 過濾器 */
 .filter-bar {
@@ -165,7 +146,7 @@ onMounted(() => {
 }
 
 .filter-wrapper {
-    margin: 18px auto 0;
+    margin: 18px 24px 0;
 }
 
 .filter-bar.focus {
