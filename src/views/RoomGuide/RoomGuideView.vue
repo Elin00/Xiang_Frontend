@@ -27,8 +27,8 @@ const cardinfo = {
     description: "All the Bootstrap components that you need in a development have been re-design with the new look.",
     action: [
         {
-            route: "/",
-            label: "Start with Headers",
+            route: "/views/rentroomview",
+            label: "現在就訂房",
         },
     ],
 }

@@ -12,7 +12,7 @@ const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
 export default {
   data() {
     return {
-      imageUrls: photos.map((photo) => ({ src: photo, link: "/views/roomguide" })),
+      imageUrls: photos.map((photo) => ({ src: photo, link: "/views/rentroomview" })),
       intervalId: null,
       scrollPosition: 0,
       scrollStep: 2,
