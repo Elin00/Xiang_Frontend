@@ -1,6 +1,12 @@
 <script setup>
 //Naive
-import { NCard, NButton } from "naive-ui";
+import { NCard, NButton, NDatePicker} from "naive-ui";
+
+import { defineComponent, ref } from "vue";
+
+defineComponent({
+      range: ref([118313526e4, Date.now()])
+});
 </script>
 
 <template>
@@ -19,14 +25,16 @@ import { NCard, NButton } from "naive-ui";
             <section>
                <div>
                   <h5>➤ 日期</h5>
-                  <NButton type="primary" dashed>
+                  <!-- <NButton type="primary" dashed>
                      編輯
-                  </NButton>
+                  </NButton> -->
                   <!-- <button style="primary" dashed>編輯</button> -->
                </div>
-               <span>2023年03月15日 週三</span>
+               <NDatePicker v-model:value="range" type="datetimerange" clearable />
+               <pre>{{ JSON.stringify(range) }}</pre>
+               <!-- <span>2023年03月15日 週三</span>
                <br>
-               <span>10:00 → 18:00</span>
+               <span>10:00 → 18:00</span> -->
             </section>
             <hr class="style-two">
             <div>
@@ -65,7 +73,7 @@ import { NCard, NButton } from "naive-ui";
             </section>
             <hr class="style-two">
             <NButton type="success">
-               ---------------------------------------------------付款---------------------------------------------------
+               -----------------------------------------------------付款-------------------------------------------------------
             </NButton>
          </div>
       </div>
