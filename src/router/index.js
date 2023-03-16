@@ -213,6 +213,11 @@ const router = createRouter({
           name: "member-orders-finish",
           component: () => import('../views/Members/Orders/Sections/Finish.vue'),
         },
+        {
+          path: "test",
+          name: "member-orders-test",
+          component: () => import('../views/Members/Orders/Sections/test.vue'),
+        },
       ]
     },
     {

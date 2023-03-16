@@ -24,58 +24,57 @@ defineComponent({
          <div class="col-6">
             <section>
                <div>
-                  <h5>➤ 訂單編號</h5>
-                  <p>OrderID666666</p>
-               </div>
-               <hr class="style-two">
-               <div>
                   <h5>➤ 日期</h5>
                   <!-- <NButton type="primary" dashed>
                      編輯
                   </NButton> -->
                   <!-- <button style="primary" dashed>編輯</button> -->
                </div>
-               <!-- <NDatePicker v-model:value="range" type="datetimerange" clearable />
-               <pre>{{ JSON.stringify(range) }}</pre> -->
-               <span>2023年03月15日 週三</span>
+               <NDatePicker v-model:value="range" type="datetimerange" clearable />
+               <pre>{{ JSON.stringify(range) }}</pre>
+               <!-- <span>2023年03月15日 週三</span>
                <br>
-               <span>10:00 → 18:00</span>
+               <span>10:00 → 18:00</span> -->
             </section>
             <hr class="style-two">
             <div>
                <h5>➤ 優惠券</h5>
-               <span>已使用 10%off</span>
-               <!-- <NButton type="info" dashed>
+               <NButton type="info" dashed>
                   選擇使用
-               </NButton> -->
+               </NButton>
             </div>
             <hr class="style-two">
             <div>
-               <h5>➤ 付款方式</h5>
-               <span>信用卡/ 一次付清</span>
-               <!-- <NButton type="warning">
+               <h5>➤ 選擇付款方式</h5>
+               <NButton type="warning">
                   信用卡/ 簽帳卡
                </NButton>
                <br>
                <NButton type="info">
                   巷口支付
-               </NButton> -->
+               </NButton>
             </div>
             <hr class="style-two">
             <div>
                <h5>➤ 發票</h5>
-               <input type="radio" checked>公司
+               <input type="radio" name="invoice" value="personal" required>個人
+               <input type="radio" name="invoice" value="company">公司
+               <input type="radio" name="invoice" value="donation">捐贈
                <br>
-               <span>載具/統編：12345678</span>
+               載具/統編：<input type="number">
             </div>
             <hr class="style-two">
             <section>
-               <p style="color:cadetblue; font-weight: 400;">
-                  訂單已成功取消，退刷款項約需7-10個工作天 <br>
-                  若有任何疑問或指教請不吝與我們聯繫。
+               <h5>➤ 租用退款政策</h5>
+               <p style="color: darkred; font-weight: 400;">
+                  預訂開始時間 48 小時前可全額退款，<br>
+                  預訂開始時間 48 小時內即無法更改或取消訂單。
                </p>
             </section>
             <hr class="style-two">
+            <NButton type="success">
+               -----------------------------------------------------付款-------------------------------------------------------
+            </NButton>
          </div>
       </div>
    </div>
