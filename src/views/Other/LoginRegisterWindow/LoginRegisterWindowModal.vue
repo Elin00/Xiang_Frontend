@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref, reactive} from "vue";
 import axios from 'axios'
 import { useCustomerStore } from '../../../stores/CustomerData.js';
 
@@ -37,37 +37,30 @@ const Supplier = reactive({
 })
 
 const register = async () => {
-  try 
-  {
-    const response = 
-    await axios.post('https://localhost:7073/api/Client/Register', registerCustomer, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+  try {
+    const response =
+      await axios.post('https://localhost:7073/api/Client/Register', registerCustomer, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
     console.log(response);
   } catch (error) {
     console.log(error)
   }
 }
-const LoginCustomer={
+const LoginCustomer = {
   Email: '',
   Password: '',
 };
 const Customer = useCustomerStore();
-const handleCloseModal = () => {
-  if (Customer.loggedIn) {
-    const modal = document.getElementById('Login')
-    console.log(modal);
-  }
-}
 
 </script>
 
 
 <template>
   <!-- 登入彈出視窗 -->
-  <div class="modal fade" id="Login">
+  <div class="modal fade" id="Login"  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="container my-auto">
@@ -84,8 +77,9 @@ const handleCloseModal = () => {
                 <div class="card-body">
                   <form role="form" class="text-start" @submit.prevent="Customer.Login">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input v-model="Customer.Email"
-                        type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input
+                        v-model="Customer.Email" type="email" class="form-control form-control-md" placeholder=""
+                        isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">密碼</label><!--v-if--><input v-model="Customer.Password" type="password"
@@ -96,7 +90,7 @@ const handleCloseModal = () => {
                     </div>
 
                     <div class="text-center">
-                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2" @click="handleCloseModal">
+                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"   >
                         登入
                       </button>
                     </div>

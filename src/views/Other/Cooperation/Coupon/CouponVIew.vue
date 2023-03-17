@@ -27,7 +27,7 @@ const underlineRef = ref(null);
       <div class="coupon-record mt-5 ">
         <h6>我的優惠券</h6>
         <ul class="d-flex  " style="border-bottom: 1px solid black; list-style: none;">
-          <li class="mb-2 ml-2" style="padding-right: 25px; margin-left: -40px;"><a>可使用</a></li>
+          <li class="mb-2 ml-2" style="padding-right: 25px; margin-left: -32px;"><a>可使用</a></li>
           <li><a>已使用</a></li>
         </ul>
         <div style="border-bottom: solid 2px #e0e0e0; padding-bottom">你還沒有可使用的優惠卷</div>
