@@ -27,7 +27,7 @@ import RentRoomView from "../views/RoomGuide/RentRoomView.vue";
 import RoomGuideView from "../views/RoomGuide/RoomGuideView.vue";
 import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
 import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
-
+import  CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 
 
 const router = createRouter({
@@ -51,6 +51,11 @@ const router = createRouter({
 
 
       ]
+    },
+    {
+      path: "/CouponView",
+      name: "CouponView",
+      component: CouponView,
     },
     {
       path: "/",

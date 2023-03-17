@@ -1,5 +1,7 @@
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref, reactive } from "vue";
+import axios from 'axios'
+import { useCustomerStore } from '../../../stores/CustomerData.js';
 
 //Naive
 import { NTimeline, NTimelineItem, NIcon, NSpace, NButton } from "naive-ui";
@@ -19,6 +21,47 @@ import setMaterialInput from "@/assets/js/material-input";
 onMounted(() => {
   setMaterialInput();
 });
+
+
+const registerCustomer = reactive({
+  Name: '',
+  Email: '',
+  Phone: '',
+  Password: '',
+})
+const Supplier = reactive({
+  Name: '',
+  Email: '',
+  Phone: '',
+  Password: '',
+})
+
+const register = async () => {
+  try 
+  {
+    const response = 
+    await axios.post('https://localhost:7073/api/Client/Register', registerCustomer, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(response);
+  } catch (error) {
+    console.log(error)
+  }
+}
+const LoginCustomer={
+  Email: '',
+  Password: '',
+};
+const Customer = useCustomerStore();
+const handleCloseModal = () => {
+  if (Customer.loggedIn) {
+    const modal = document.getElementById('Login')
+    console.log(modal);
+  }
+}
+
 </script>
 
 
@@ -39,13 +82,13 @@ onMounted(() => {
                   </div>
                 </div>
                 <div class="card-body">
-                  <form role="form" class="text-start">
+                  <form role="form" class="text-start" @submit.prevent="Customer.Login">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input v-model="Customer.Email"
                         type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                      <label class="form-label">密碼</label><!--v-if--><input v-model="Customer.Password" type="password"
                         class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0px">
@@ -53,7 +96,7 @@ onMounted(() => {
                     </div>
 
                     <div class="text-center">
-                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
+                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2" @click="handleCloseModal">
                         登入
                       </button>
                     </div>
@@ -102,23 +145,25 @@ onMounted(() => {
                 <div class="card-body">
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input id="name" type="name"
-                        class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input v-model="Supplier.Name"
+                        type="name" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
-                        type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input
+                        v-model="Supplier.Email" type="email" class="form-control form-control-md" placeholder=""
+                        isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input id="phone" type="phone"
-                        class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input
+                        v-model="Supplier.Phone" type="phone" class="form-control form-control-md" placeholder=""
+                        isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                      <label class="form-label">密碼</label><!--v-if--><input v-model="Supplier.Password" type="password"
                         class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0;">
-                      <MaterialCheckbox id="terms" style="padding-left: 0;" checked>我已閱讀並同意 想享<a href="#"
+                      <MaterialCheckbox style="padding-left: 0;" checked>我已閱讀並同意 想享<a href="#"
                           style="color: green">各項條款</a>
                       </MaterialCheckbox>
                     </div>
@@ -171,22 +216,25 @@ onMounted(() => {
                   </div>
                 </div>
                 <div class="card-body">
-                  <form role="form" class="text-start">
+                  <form role="form" class="text-start" @submit.prevent="register">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input id="name" type="name"
-                        class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input
+                        v-model="registerCustomer.Name" type="name" class="form-control form-control-md" placeholder=""
+                        isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
-                        type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input
+                        v-model="registerCustomer.Email" type="email" class="form-control form-control-md" placeholder=""
+                        isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input id="phone" type="phone"
-                        class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input
+                        v-model="registerCustomer.Phone" type="phone" class="form-control form-control-md" placeholder=""
+                        isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
-                        class="form-control form-control-md" placeholder="" isrequired="true" />
+                      <label class="form-label">密碼</label><!--v-if--><input v-model="registerCustomer.Password"
+                        type="password" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0px">
                       <MaterialCheckbox id="terms" style="padding-left: 0;" checked>我已閱讀並同意 想享<a href="#"

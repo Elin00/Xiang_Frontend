@@ -17,6 +17,26 @@ import { RouterView } from "vue-router";
 import NavbarDefault from "../src/examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../src/examples/footers/FooterDefault.vue";
 import LoginRegisterWindowModal from "../src/views/Other/LoginRegisterWindow/LoginRegisterWindowModal.vue";
+import { createStore } from 'vuex';
+
+function useStore() {
+  const store = createStore({
+    state() {
+      return {
+        user: null
+      };
+    },
+    mutations: {
+      setUser(state, payload) {
+        state.user = payload;
+      }
+    }
+  });
+
+  return {
+    store
+  };
+}
 </script>
 
 <template>
