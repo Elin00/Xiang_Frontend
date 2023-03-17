@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 
 //Naive
-import { NTimeline, NTimelineItem, NIcon, NSpace, NButton } from "naive-ui";
+import { NTimeline, NTimelineItem, NIcon } from "naive-ui";
 
 // image
 import team4 from "@/assets/img/team-2.jpg";
@@ -10,11 +10,7 @@ import vueMkHeader from "@/assets/img/office-dark.jpg";
 import Cooperation from "@/assets/img/Cooperation.jpg";
 
 //Vue Material Kit 2 components
-import MaterialAvatar from "@/components/MaterialAvatar.vue";
-import MaterialInput from "@/components/MaterialInput.vue";
-import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
-import MaterialCheckbox from "@/components/MaterialCheckbox.vue";
 import setMaterialInput from "@/assets/js/material-input";
 onMounted(() => {
   setMaterialInput();
@@ -23,6 +19,7 @@ onMounted(() => {
 
 
 <template>
+<<<<<<< HEAD
   <div class="container">=
     <div class="row">
       <div class="process">
@@ -34,6 +31,23 @@ onMounted(() => {
               data-bs-target="#CooperationRegister">立即註冊</n-button>
           </n-space>
         </div>
+=======
+  <div class="process" id="JoinUs">
+    <div class="process-box" style="margin-left: auto">
+      <h2>與我們合作</h2>
+
+      <MaterialButton
+        variant="gradient"
+        color="warning"
+        class="w-auto me-2"
+        size="lg"
+        data-bs-toggle="modal"
+        data-bs-target="#CooperationRegister"
+        >立即註冊</MaterialButton
+      >
+      <a href="#">聯絡我們</a>
+    </div>
+>>>>>>> 332ccf37473beda1cbd42f319cbf6e799ae46342
 
         <div class="process-box col-sm-6 mt-sm-3">
           <n-timeline :icon-size="20">
@@ -122,6 +136,7 @@ onMounted(() => {
   grid-template-columns: auto auto;
 }
 
+<<<<<<< HEAD
 /* .process-box {
   border: 1px solid red;
   padding-left: 20%;
@@ -142,5 +157,10 @@ onMounted(() => {
 .order .txt {
   color: #686868;
   vertical-align: middle;
+=======
+.process-box {
+  /* border: 1px solid red; */
+  margin-right: 150px;
+>>>>>>> 332ccf37473beda1cbd42f319cbf6e799ae46342
 }
 </style>
