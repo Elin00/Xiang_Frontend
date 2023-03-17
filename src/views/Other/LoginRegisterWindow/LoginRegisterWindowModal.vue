@@ -70,7 +70,7 @@ const textOn = "業者";
                     <div>
                       <div v-if="isChecked">
                         <!-- 業者的登入畫面 -->
-                        會
+                        ya
                         <div class="input-group input-group-outline my-3">
                           <label class="form-label" data-bs-toggle="modal"
                             >電子信箱</label
@@ -106,7 +106,7 @@ const textOn = "業者";
                       </div>
                       <div v-else>
                         <!-- 會員的登入畫面 -->
-                        ya
+                        會
                         <div class="input-group input-group-outline my-3">
                           <label class="form-label" data-bs-toggle="modal"
                             >電子信箱</label
@@ -500,7 +500,7 @@ const textOn = "業者";
   transform: rotateY(-180deg);
 }
 .checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
-  background: #ff3a19;
+  background: #53565c;
   content: attr(data-tg-off);
 }
 .checkbox-wrapper-10 .tgl-flip + .tgl-btn:active:before {
