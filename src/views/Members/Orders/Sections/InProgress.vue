@@ -12,7 +12,7 @@ defineComponent({
 <template>
    <div class="container">
       <div class="row">
-         <div class="col-6">
+         <div class="col-5">
             <NCard title="HEADSHOT OF CHENGBAO 2023MARCH ">
                <template #cover>
                   <img src="../../../../assets/img/202303chengbao.jpg">
@@ -21,7 +21,7 @@ defineComponent({
             </NCard>
             <h4>BUY 1 GET 1 FREE !!!!<br>call now 0963177377</h4>
          </div>
-         <div class="col-6">
+         <div class="col-7">
             <section>
                <div>
                   <h5>➤ 訂單編號</h5>
@@ -68,7 +68,8 @@ defineComponent({
                <input type="radio" name="invoice" value="company" checked>公司
                <input type="radio" name="invoice" value="donation">捐贈
                <br>
-               載具/統編：<input type="number">
+               載具/統編：12345678
+               <!-- <input type="number"> -->
             </div>
             <hr class="style-two">
             <section>
