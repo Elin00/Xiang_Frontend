@@ -1,8 +1,7 @@
 
 <script setup>
 // image
-import vueMkHeader from "@/assets/img/office-dark.jpg";
-import team4 from "@/assets/img/team-2.jpg";
+
 import Icon1 from "@/assets/img/strength-Icon1.png";
 import Icon2 from "@/assets/img/strength-Icon2.png";
 import Icon3 from "@/assets/img/Icon3.png";
