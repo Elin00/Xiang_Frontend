@@ -59,7 +59,7 @@
         top: 0;
         content: "";
         border-radius: $border-radius-lg;
-        background-image: $text-gradient-bg-success;
+        // background-image: $text-gradient-bg-success; 去除卡片背景綠幕
         opacity: 0.85;
       }
     }

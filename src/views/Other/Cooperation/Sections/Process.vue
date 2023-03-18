@@ -19,19 +19,6 @@ onMounted(() => {
 
 
 <template>
-<<<<<<< HEAD
-  <div class="container">=
-    <div class="row">
-      <div class="process">
-        <div class="process-box col-sm-6 pt-sm-3">
-          <h2>與我們合作</h2>
-          <a href="#">聯絡我們</a>
-          <n-space>
-            <n-button type="warning" size="large" data-bs-toggle="modal"
-              data-bs-target="#CooperationRegister">立即註冊</n-button>
-          </n-space>
-        </div>
-=======
   <div class="process" id="JoinUs">
     <div class="process-box" style="margin-left: auto">
       <h2>與我們合作</h2>
@@ -47,7 +34,6 @@ onMounted(() => {
       >
       <a href="#">聯絡我們</a>
     </div>
->>>>>>> 332ccf37473beda1cbd42f319cbf6e799ae46342
 
         <div class="process-box col-sm-6 mt-sm-3">
           <n-timeline :icon-size="20">
@@ -119,8 +105,6 @@ onMounted(() => {
           </n-timeline>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <style>
@@ -136,31 +120,8 @@ onMounted(() => {
   grid-template-columns: auto auto;
 }
 
-<<<<<<< HEAD
-/* .process-box {
-  border: 1px solid red;
-  padding-left: 20%;
-} */
-
-.order {
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-}
-
-.order .line {
-  display: inline-block;
-  width: 150px;
-  border-top: 1px solid #ccc;
-}
-
-.order .txt {
-  color: #686868;
-  vertical-align: middle;
-=======
 .process-box {
   /* border: 1px solid red; */
   margin-right: 150px;
->>>>>>> 332ccf37473beda1cbd42f319cbf6e799ae46342
 }
 </style>

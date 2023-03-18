@@ -173,7 +173,7 @@ const CustomerStore = useCustomerStore();
               <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'rentroomView' }"
                 class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" :href="action.route">我的預定
               </RouterLink>
-              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'rentroomView' }"
+              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'member-memberdetail' }"
                 class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" :href="action.route">我的帳戶
               </RouterLink>
               <RouterLink :to="{ name: 'CouponView' }" class="dropdown-item py-3 ps-3 border-radius-md"
