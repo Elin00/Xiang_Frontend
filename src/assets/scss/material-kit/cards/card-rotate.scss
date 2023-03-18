@@ -59,7 +59,11 @@
         top: 0;
         content: "";
         border-radius: $border-radius-lg;
+<<<<<<< HEAD
         // background-image: $text-gradient-bg-success; 去除卡片背景綠幕
+=======
+        // background-image: $text-gradient-bg-success;
+>>>>>>> feature/roomguide2.0
         opacity: 0.85;
       }
     }
@@ -124,7 +128,9 @@
 }
 
 /*       Fix bug for IE      */
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+@media screen and (-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+
   .rotating-card-container .card .back,
   .rotating-card-container .card .front {
     -ms-backface-visibility: visible;

@@ -12,7 +12,7 @@ const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
 export default {
   data() {
     return {
-      imageUrls: photos.map((photo) => ({ src: photo, link: "/product1" })),
+      imageUrls: photos.map((photo) => ({ src: photo, link: "/views/rentroomview" })),
       intervalId: null,
       scrollPosition: 0,
       scrollStep: 2,
@@ -60,21 +60,14 @@ export default {
   <div class="promote-container">
     <div class="row">
       <div class="promote-main d-flex justify-content-center">
-        <img
-          src="../../../assets/img/下載.jpg"
-          class="promote-main__img"
-          alt=""
-        />
+        <img src="../../../assets/img/下載.jpg" class="promote-main__img" alt="" />
         <div style="margin-left: 120px">
           <h1 class="content-title">
             鄭仲智皮包 共享中....
             <br />
             歡迎各位！
           </h1>
-          <a
-            href="https://thehapp.com/space/result?lat=25.008323165610395&lng=121.45451073244777"
-            class="content-link"
-          >
+          <a href="https://thehapp.com/space/result?lat=25.008323165610395&lng=121.45451073244777" class="content-link">
             一起共襄盛舉
           </a>
         </div>
@@ -83,12 +76,7 @@ export default {
     <div class="promote-list item-4x" ref="promoteList">
       <div v-for="(imageUrl, index) in imageUrls" :key="index">
         <a :href="imageUrl.link">
-          <img
-            class="space-item"
-            :src="imageUrl.src"
-            @mouseover="stopAutoScroll"
-            @mouseout="startAutoScroll"
-          />
+          <img class="space-item" :src="imageUrl.src" @mouseover="stopAutoScroll" @mouseout="startAutoScroll" />
         </a>
       </div>
     </div>
@@ -100,21 +88,25 @@ export default {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-344px);
   }
 }
+
 .promote-list.item-4x {
   flex-wrap: nowrap;
   max-width: unset;
   overflow-x: hidden;
   padding: 20px 0;
 }
+
 .promote-list.item-4x .space-item {
   flex: 0 0 auto;
   width: 344px;
   margin-right: 24px;
 }
+
 .promote-list {
   display: flex;
   width: 100%;
@@ -122,6 +114,7 @@ export default {
   margin: 42px auto -20px;
   padding: 20px;
 }
+
 .space-item {
   position: relative;
   width: 566px;
@@ -134,9 +127,11 @@ export default {
   cursor: pointer;
   transition: transform 0.5s;
 }
+
 .space-item:hover {
   transform: scale(1.05);
 }
+
 .content-link {
   display: flex;
   align-items: center;

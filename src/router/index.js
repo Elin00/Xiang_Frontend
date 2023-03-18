@@ -36,7 +36,7 @@ const router = createRouter({
     {
       path: "/userview",
       name: "userview",
-      component: ()=>import ("../views/Other/UserTerms/UserView.vue"),
+      component: () => import("../views/Other/UserTerms/UserView.vue"),
       children: [
         {
           path: "userterms",
@@ -74,7 +74,7 @@ const router = createRouter({
       component: CooperationView,
     },
     {
-      path: "/views/roomguide",
+      path: "/views/rentroomview",
       name: "rentroomView",
       component: RentRoomView,
     },
