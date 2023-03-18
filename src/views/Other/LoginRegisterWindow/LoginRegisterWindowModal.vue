@@ -6,6 +6,7 @@ import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import setMaterialInput from "@/assets/js/material-input";
+import MaterialCheckbox from "@/components/MaterialCheckbox.vue";
 
 import { useSuppliersDataStore } from "../../../stores/SuppliersData.js";
 
@@ -15,16 +16,17 @@ onMounted(() => {
 
 const Suppliersstore = useSuppliersDataStore();
 const isChecked = ref(false);
-const textOff = "會員";
-const textOn = "業者";
+const textOff = "我是會員";
+const textOn = "我是業者";
+const title = ref('會員登入');
 
-// watch(isChecked, (value) => {
-//   if (value) {
-//     console.log("現在的資料屬於業者");
-//   } else {
-//     console.log("現在的資料屬於會員");
-//   }
-// });
+watch(isChecked, (newValue) => {
+  if (newValue) {
+    title.value = '業者登入';
+  } else {
+    title.value = '會員登入';
+  }
+});
 </script>
 
 
@@ -37,105 +39,60 @@ const textOn = "業者";
           <div class="row">
             <div class="col-12 mx-auto">
               <div class="card z-index-0 fadeIn3 fadeInBottom">
-                <div
-                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-                >
-                  <div
-                    class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1"
-                  >
-                    <h4
-                      class="text-white font-weight-bolder text-center mt-2 mb-0"
-                    >
-                      登入
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                  <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
+                      <p style="font-weight: bold;font-size: 26px;">{{ title }}</p>
+
                     </h4>
                   </div>
                 </div>
                 <div class="card-body">
                   <form role="form" class="text-start">
+                    <!-- 切換按鈕 -->
                     <div class="checkbox-wrapper-10">
-                      <input
-                        class="tgl tgl-flip"
-                        id="cb5"
-                        type="checkbox"
-                        v-model="isChecked"
-                      />
-                      <label
-                        class="tgl-btn"
-                        :data-tg-off="textOff"
-                        :data-tg-on="textOn"
-                        for="cb5"
-                      ></label>
+                      <input class="tgl tgl-flip" id="cb5" type="checkbox" v-model="isChecked" />
+                      <label class="tgl-btn" :data-tg-off="textOff" :data-tg-on="textOn" for="cb5"></label>
                     </div>
 
                     <div>
+                      <!-- 業者的登入畫面 -->
                       <div v-if="isChecked">
-                        <!-- 業者的登入畫面 -->
-                        ya
                         <div class="input-group input-group-outline my-3">
-                          <label class="form-label" data-bs-toggle="modal"
-                            >電子信箱</label
-                          ><!--v-if--><input
-                            id="email"
-                            type="email"
-                            class="form-control form-control-md"
-                            placeholder=""
-                            isrequired="true"
-                          />
+                          <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
+                            type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                          <label class="form-label">密碼</label
-                          ><!--v-if--><input
-                            id="password"
-                            type="password"
-                            class="form-control form-control-md"
-                            placeholder=""
-                            isrequired="true"
-                          />
+                          <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                            class="form-control form-control-md" placeholder="" isrequired="true" />
                         </div>
                         <div class="form-check" style="padding-left: 0px">
                           <a href="#" style="color: green">忘記密碼?</a>
                         </div>
 
                         <div class="text-center">
-                          <button
-                            class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                          >
+                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
                             登入
                           </button>
                         </div>
                       </div>
+
+                      <!-- 會員的登入畫面 -->
                       <div v-else>
-                        <!-- 會員的登入畫面 -->
-                        會
                         <div class="input-group input-group-outline my-3">
-                          <label class="form-label" data-bs-toggle="modal"
-                            >電子信箱</label
-                          ><!--v-if--><input
-                            id="email"
-                            type="email"
-                            class="form-control form-control-md"
-                            placeholder=""
-                            isrequired="true"
-                          />
+                          <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
+                            type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                          <label class="form-label">密碼</label
-                          ><!--v-if--><input
-                            id="password"
-                            type="password"
-                            class="form-control form-control-md"
-                            placeholder=""
-                            isrequired="true"
-                          />
+                          <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                            class="form-control form-control-md" placeholder="" isrequired="true" />
                         </div>
                         <div class="form-check" style="padding-left: 0px">
                           <a href="#" style="color: green">忘記密碼?</a>
                         </div>
 
                         <div class="text-center">
-                          <button
-                            class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                          >
+                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
                             登入
                           </button>
                         </div>
@@ -177,15 +134,9 @@ const textOn = "業者";
           <div class="row">
             <div class="col-12 mx-auto">
               <div class="card z-index-0 fadeIn3 fadeInBottom">
-                <div
-                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-                >
-                  <div
-                    class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1"
-                  >
-                    <h4
-                      class="text-white font-weight-bolder text-center mt-2 mb-0"
-                    >
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                  <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                       立即註冊成為想享夥伴
                     </h4>
                   </div>
@@ -193,64 +144,33 @@ const textOn = "業者";
                 <div class="card-body">
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >姓名</label
-                      ><!--v-if--><input
-                        v-model="Suppliersstore.name.value"
-                        type="name"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input
+                        v-model="Suppliersstore.name.value" type="name" class="form-control form-control-md"
+                        placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電子信箱</label
-                      ><!--v-if--><input
-                        v-model="Suppliersstore.email.value"
-                        type="email"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input
+                        v-model="Suppliersstore.email.value" type="email" class="form-control form-control-md"
+                        placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電話</label
-                      ><!--v-if--><input
-                        v-model="Suppliersstore.phone.value"
-                        type="phone"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input
+                        v-model="Suppliersstore.phone.value" type="phone" class="form-control form-control-md"
+                        placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label
-                      ><!--v-if--><input
-                        v-model="Suppliersstore.password.value"
-                        type="password"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label">密碼</label><!--v-if--><input v-model="Suppliersstore.password.value"
+                        type="password" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0">
-                      <MaterialCheckbox
-                        id="terms"
-                        style="padding-left: 0"
-                        checked
-                        >我已閱讀並同意 想享<a href="#" style="color: green"
-                          >各項條款</a
-                        >
+                      <MaterialCheckbox id="terms" style="padding-left: 0" checked>我已閱讀並同意 想享<a href="#"
+                          style="color: green">各項條款</a>
                       </MaterialCheckbox>
                     </div>
 
                     <div class="text-center">
-                      <button
-                        class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                        @click.prevent="Suppliersstore.SuppliersLogin"
-                      >
+                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
+                        @click.prevent="Suppliersstore.SupplierRegister">
                         註冊
                       </button>
                     </div>
@@ -289,15 +209,9 @@ const textOn = "業者";
           <div class="row">
             <div class="col-12 mx-auto">
               <div class="card z-index-0 fadeIn3 fadeInBottom">
-                <div
-                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
-                >
-                  <div
-                    class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1"
-                  >
-                    <h4
-                      class="text-white font-weight-bolder text-center mt-2 mb-0"
-                    >
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                  <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                       註冊成為會員
                     </h4>
                   </div>
@@ -305,63 +219,29 @@ const textOn = "業者";
                 <div class="card-body">
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >姓名</label
-                      ><!--v-if--><input
-                        id="name"
-                        type="name"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">姓名</label><!--v-if--><input id="name" type="name"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電子信箱</label
-                      ><!--v-if--><input
-                        id="email"
-                        type="email"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
+                        type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label" data-bs-toggle="modal"
-                        >電話</label
-                      ><!--v-if--><input
-                        id="phone"
-                        type="phone"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label" data-bs-toggle="modal">電話</label><!--v-if--><input id="phone" type="phone"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">密碼</label
-                      ><!--v-if--><input
-                        id="password"
-                        type="password"
-                        class="form-control form-control-md"
-                        placeholder=""
-                        isrequired="true"
-                      />
+                      <label class="form-label">密碼</label><!--v-if--><input id="password" type="password"
+                        class="form-control form-control-md" placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0px">
-                      <MaterialCheckbox
-                        id="terms"
-                        style="padding-left: 0"
-                        checked
-                        >我已閱讀並同意 想享<a href="#" style="color: green"
-                          >各項條款</a
-                        >
+                      <MaterialCheckbox id="terms" style="padding-left: 0" checked>我已閱讀並同意 想享<a href="#"
+                          style="color: green">各項條款</a>
                       </MaterialCheckbox>
                     </div>
 
                     <div class="text-center">
-                      <button
-                        class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                      >
+                      <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
                         註冊
                       </button>
                     </div>
@@ -416,32 +296,35 @@ const textOn = "業者";
 .checkbox-wrapper-10 .tgl {
   display: none;
 }
+
 .checkbox-wrapper-10 .tgl,
 .checkbox-wrapper-10 .tgl:after,
 .checkbox-wrapper-10 .tgl:before,
 .checkbox-wrapper-10 .tgl *,
 .checkbox-wrapper-10 .tgl *:after,
 .checkbox-wrapper-10 .tgl *:before,
-.checkbox-wrapper-10 .tgl + .tgl-btn {
+.checkbox-wrapper-10 .tgl+.tgl-btn {
   box-sizing: border-box;
 }
+
 .checkbox-wrapper-10 .tgl::-moz-selection,
 .checkbox-wrapper-10 .tgl:after::-moz-selection,
 .checkbox-wrapper-10 .tgl:before::-moz-selection,
 .checkbox-wrapper-10 .tgl *::-moz-selection,
 .checkbox-wrapper-10 .tgl *:after::-moz-selection,
 .checkbox-wrapper-10 .tgl *:before::-moz-selection,
-.checkbox-wrapper-10 .tgl + .tgl-btn::-moz-selection,
+.checkbox-wrapper-10 .tgl+.tgl-btn::-moz-selection,
 .checkbox-wrapper-10 .tgl::selection,
 .checkbox-wrapper-10 .tgl:after::selection,
 .checkbox-wrapper-10 .tgl:before::selection,
 .checkbox-wrapper-10 .tgl *::selection,
 .checkbox-wrapper-10 .tgl *:after::selection,
 .checkbox-wrapper-10 .tgl *:before::selection,
-.checkbox-wrapper-10 .tgl + .tgl-btn::selection {
+.checkbox-wrapper-10 .tgl+.tgl-btn::selection {
   background: none;
 }
-.checkbox-wrapper-10 .tgl + .tgl-btn {
+
+.checkbox-wrapper-10 .tgl+.tgl-btn {
   outline: 0;
   display: block;
   width: 4em;
@@ -453,32 +336,37 @@ const textOn = "業者";
   -ms-user-select: none;
   user-select: none;
 }
-.checkbox-wrapper-10 .tgl + .tgl-btn:after,
-.checkbox-wrapper-10 .tgl + .tgl-btn:before {
+
+.checkbox-wrapper-10 .tgl+.tgl-btn:after,
+.checkbox-wrapper-10 .tgl+.tgl-btn:before {
   position: relative;
   display: block;
   content: "";
   width: 50%;
   height: 100%;
 }
-.checkbox-wrapper-10 .tgl + .tgl-btn:after {
+
+.checkbox-wrapper-10 .tgl+.tgl-btn:after {
   left: 0;
 }
-.checkbox-wrapper-10 .tgl + .tgl-btn:before {
+
+.checkbox-wrapper-10 .tgl+.tgl-btn:before {
   display: none;
 }
-.checkbox-wrapper-10 .tgl:checked + .tgl-btn:after {
+
+.checkbox-wrapper-10 .tgl:checked+.tgl-btn:after {
   left: 50%;
 }
 
-.checkbox-wrapper-10 .tgl-flip + .tgl-btn {
+.checkbox-wrapper-10 .tgl-flip+.tgl-btn {
   padding: 2px;
   transition: all 0.2s ease;
   font-family: sans-serif;
   perspective: 100px;
 }
-.checkbox-wrapper-10 .tgl-flip + .tgl-btn:after,
-.checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
+
+.checkbox-wrapper-10 .tgl-flip+.tgl-btn:after,
+.checkbox-wrapper-10 .tgl-flip+.tgl-btn:before {
   display: inline-block;
   transition: all 0.4s ease;
   width: 100%;
@@ -494,27 +382,33 @@ const textOn = "業者";
   backface-visibility: hidden;
   border-radius: 4px;
 }
-.checkbox-wrapper-10 .tgl-flip + .tgl-btn:after {
+
+.checkbox-wrapper-10 .tgl-flip+.tgl-btn:after {
   content: attr(data-tg-on);
-  background: #02c66f;
+  background: #586D80;
   transform: rotateY(-180deg);
 }
-.checkbox-wrapper-10 .tgl-flip + .tgl-btn:before {
-  background: #53565c;
+
+.checkbox-wrapper-10 .tgl-flip+.tgl-btn:before {
+  background: #E4745E;
   content: attr(data-tg-off);
 }
-.checkbox-wrapper-10 .tgl-flip + .tgl-btn:active:before {
+
+.checkbox-wrapper-10 .tgl-flip+.tgl-btn:active:before {
   transform: rotateY(-20deg);
 }
-.checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:before {
+
+.checkbox-wrapper-10 .tgl-flip:checked+.tgl-btn:before {
   transform: rotateY(180deg);
 }
-.checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:after {
+
+.checkbox-wrapper-10 .tgl-flip:checked+.tgl-btn:after {
   transform: rotateY(0);
   left: 0;
-  background: #7fc6a6;
+  background: #66828E;
 }
-.checkbox-wrapper-10 .tgl-flip:checked + .tgl-btn:active:after {
+
+.checkbox-wrapper-10 .tgl-flip:checked+.tgl-btn:active:after {
   transform: rotateY(20deg);
 }
 </style>

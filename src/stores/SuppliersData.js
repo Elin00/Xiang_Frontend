@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from "vue";
 import axios from "axios";
-import { c } from 'naive-ui';
+
 
 export const useSuppliersDataStore = ('SuppliersData', () => {
     const name = ref('');
@@ -9,7 +9,7 @@ export const useSuppliersDataStore = ('SuppliersData', () => {
     const email = ref('');
     const password = ref('');
 
-    const SuppliersLogin = async () => {
+    const SupplierRegister = async () => {
         try {
             const response =
                 await axios.post('https://localhost:7073/api/TSuppliers', { name: name.value, phone: phone.value, email: email.value, password: password.value }, {
@@ -24,5 +24,5 @@ export const useSuppliersDataStore = ('SuppliersData', () => {
 
     }
 
-    return { name, phone, email, password, SuppliersLogin }
+    return { name, phone, email, password, SupplierRegister }
 })
