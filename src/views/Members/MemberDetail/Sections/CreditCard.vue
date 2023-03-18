@@ -11,7 +11,7 @@ const years = new Date().getFullYear();
 const cardNum = reactive(['', '', '', ''])
 const cardDate = reactive({ year: years, month: 1 })
 const cardCodeNum = ref(0);
-let testModal = null;
+let cardModal = null;
 
 //正則驗證
 const cardNumRule = /[0-9]{4}/;
@@ -23,7 +23,7 @@ const saveCard = () => {
    } else {
       if (cardNumRule.test(cardNum[0]) && cardNumRule.test(cardNum[1]) && cardNumRule.test(cardNum[2]) && cardNumRule.test(cardNum[3]) && cardCodeRule.test(cardCodeNum.value)) {
          memberDataStore.addCreditCard(cardNum.toString());
-         testModalClose();
+         cardModalClose();
       } else {
          alert('輸入內容不正確，請輸入16位數字');
       }
@@ -34,17 +34,17 @@ const saveCard = () => {
    cardNum[3] = '';
 
 }
-const testModalOpen = () => {
-   testModal.show();
-   console.log(testModal.show);
+const cardModalOpen = () => {
+   cardModal.show();
+   console.log(cardModal.show);
 }
-const testModalClose = () => {
-   testModal.hide();
-   console.log(testModal.hide);
+const cardModalClose = () => {
+   cardModal.hide();
+   console.log(cardModal.hide);
 }
 
 onMounted(() => {
-   testModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+   cardModal = new bootstrap.Modal(document.getElementById('exampleModal'));
 })
 
 </script>
@@ -65,7 +65,7 @@ onMounted(() => {
       <div class="row mb-5">
          <div class="col d-flex">
             <!-- Button trigger modal -->
-            <button class="btn btn-success" @click="testModalOpen">新增信用卡</button>
+            <button class="btn btn-success" @click="cardModalOpen">新增信用卡</button>
          </div>
       </div>
    </div>
@@ -113,7 +113,7 @@ onMounted(() => {
                   v-model="cardCodeNum">
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" @click="testModalClose">關閉</button>
+               <button type="button" class="btn btn-secondary" @click="cardModalClose">關閉</button>
                <button type="button" id="aa" class="btn btn-primary" @click="saveCard">儲存更新</button>
             </div>
          </div>
@@ -122,35 +122,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.emptyCard {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   border-radius: 30px;
-   background-color: #DCDCDC;
-   width: 300px;
-   height: 200px;
-}
-
-.emptyCard>h6 {
-   color: white;
-}
-
-.haveCard {
-   position: relative;
-   background: linear-gradient(145deg, #6495ED, #E0FFFF);
-   border-radius: 30px;
-   width: 300px;
-   height: 200px;
-}
-
-.haveCard>h6 {
-   position: absolute;
-   right: 20px;
-   bottom: 15px;
-   color: #4682B4;
-}
-
 .creditCardText {
    width: 60px;
    text-align: center;
