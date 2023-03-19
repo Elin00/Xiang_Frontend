@@ -1,13 +1,17 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { useMemberDataStore } from "../../../../stores/memberData.js";
 import CreditCard from '../../Components/CreditCard.vue'
+//下面二擇一
+// import "../../../../assets/js/core/bootstrap.bundle.min.js";
+import "../../../../assets/js/core/bootstrap.min.js";
 
 const memberDataStore = useMemberDataStore();
 const years = new Date().getFullYear();
 const cardNum = reactive(['', '', '', ''])
 const cardDate = reactive({ year: years, month: 1 })
 const cardCodeNum = ref(0);
+let testModal = null;
 
 //正則驗證
 const cardNumRule = /[0-9]{4}/;
@@ -19,6 +23,7 @@ const saveCard = () => {
    } else {
       if (cardNumRule.test(cardNum[0]) && cardNumRule.test(cardNum[1]) && cardNumRule.test(cardNum[2]) && cardNumRule.test(cardNum[3]) && cardCodeRule.test(cardCodeNum.value)) {
          memberDataStore.addCreditCard(cardNum.toString());
+         testModalClose();
       } else {
          alert('輸入內容不正確，請輸入16位數字');
       }
@@ -27,7 +32,20 @@ const saveCard = () => {
    cardNum[1] = '';
    cardNum[2] = '';
    cardNum[3] = '';
+
 }
+const testModalOpen = () => {
+   testModal.show();
+   console.log(testModal.show);
+}
+const testModalClose = () => {
+   testModal.hide();
+   console.log(testModal.hide);
+}
+
+onMounted(() => {
+   testModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+})
 
 </script>
 <template>
@@ -47,7 +65,7 @@ const saveCard = () => {
       <div class="row mb-5">
          <div class="col d-flex">
             <!-- Button trigger modal -->
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">新增信用卡</button>
+            <button class="btn btn-success" @click="testModalOpen">新增信用卡</button>
          </div>
       </div>
    </div>
@@ -95,8 +113,8 @@ const saveCard = () => {
                   v-model="cardCodeNum">
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-               <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="saveCard">儲存更新</button>
+               <button type="button" class="btn btn-secondary" @click="testModalClose">關閉</button>
+               <button type="button" id="aa" class="btn btn-primary" @click="saveCard">儲存更新</button>
             </div>
          </div>
       </div>
