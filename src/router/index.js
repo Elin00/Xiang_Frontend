@@ -28,6 +28,9 @@ import RoomGuideView from "../views/RoomGuide/RoomGuideView.vue";
 import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
 import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
 import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
+import AddRoomView from "../views/Suppliers/AddRoomView.vue";
+import EditRoomView from "../views/Suppliers/EditRoomView.vue";
+
 
 
 
@@ -64,7 +67,16 @@ const router = createRouter({
       name: "questions",
       component: QuestionsView,
     },
-
+    {
+      path: "/addRoom",
+      name: "addRoom",
+      component: AddRoomView,
+    },
+    {
+      path: "/editRoom",
+      name: "editRoom",
+      component: EditRoomView,
+    },
     {
       path: "/supplierDetails",
       name: "supplierDetails",
