@@ -27,6 +27,7 @@ import RentRoomView from "../views/RoomGuide/RentRoomView.vue";
 import RoomGuideView from "../views/RoomGuide/RoomGuideView.vue";
 import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
 import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
+import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
 
 
 
@@ -36,7 +37,7 @@ const router = createRouter({
     {
       path: "/userview",
       name: "userview",
-      component: ()=>import ("../views/Other/UserTerms/UserView.vue"),
+      component: () => import("../views/Other/UserTerms/UserView.vue"),
       children: [
         {
           path: "userterms",
@@ -57,12 +58,18 @@ const router = createRouter({
       name: "presentation",
       component: PresentationView,
     },
+
     {
       path: "/questions",
       name: "questions",
       component: QuestionsView,
     },
 
+    {
+      path: "/supplierDetails",
+      name: "supplierDetails",
+      component: SupplierDetailsView,
+    },
     {
       path: "/cooperation",
       name: "cooperation",

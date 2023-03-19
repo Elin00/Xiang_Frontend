@@ -48,16 +48,16 @@ watch(isChecked, (newValue) => {
                   </div>
                 </div>
                 <div class="card-body">
-                  <form role="form" class="text-start">
-                    <!-- 切換按鈕 -->
-                    <div class="checkbox-wrapper-10">
-                      <input class="tgl tgl-flip" id="cb5" type="checkbox" v-model="isChecked" />
-                      <label class="tgl-btn" :data-tg-off="textOff" :data-tg-on="textOn" for="cb5"></label>
-                    </div>
+                  <!-- 切換按鈕 -->
+                  <div class="checkbox-wrapper-10">
+                    <input class="tgl tgl-flip" id="cb5" type="checkbox" v-model="isChecked" />
+                    <label class="tgl-btn" :data-tg-off="textOff" :data-tg-on="textOn" for="cb5"></label>
+                  </div>
 
-                    <div>
-                      <!-- 業者的登入畫面 -->
-                      <div v-if="isChecked">
+                  <div>
+                    <!-- 業者的登入畫面 -->
+                    <div v-if="isChecked">
+                      <form role="form" class="text-start">
                         <div class="input-group input-group-outline my-3">
                           <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
                             type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
@@ -75,10 +75,29 @@ watch(isChecked, (newValue) => {
                             登入
                           </button>
                         </div>
-                      </div>
+                        <div class="order">
+                          <span class="line"></span>
+                          <span class="txt">或</span>
+                          <span class="line"></span>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-2 text-center ms-auto">
+                            <a class="btn btn-link px-3" href="javascript:;">
+                              <i class="fa fa-facebook text-info text-lg"></i>
+                            </a>
+                          </div>
+                          <div class="col-2 text-center me-auto">
+                            <a class="btn btn-link px-3" href="javascript:;">
+                              <i class="fa fa-google text-warning text-lg"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
 
-                      <!-- 會員的登入畫面 -->
-                      <div v-else>
+                    <!-- 會員的登入畫面 -->
+                    <div v-else>
+                      <form role="form" class="text-start">
                         <div class="input-group input-group-outline my-3">
                           <label class="form-label" data-bs-toggle="modal">電子信箱</label><!--v-if--><input id="email"
                             type="email" class="form-control form-control-md" placeholder="" isrequired="true" />
@@ -96,27 +115,27 @@ watch(isChecked, (newValue) => {
                             登入
                           </button>
                         </div>
-                      </div>
+                        <div class="order">
+                          <span class="line"></span>
+                          <span class="txt">或</span>
+                          <span class="line"></span>
+                        </div>
+                        <div class="row mt-3">
+                          <div class="col-2 text-center ms-auto">
+                            <a class="btn btn-link px-3" href="javascript:;">
+                              <i class="fa fa-facebook text-info text-lg"></i>
+                            </a>
+                          </div>
+                          <div class="col-2 text-center me-auto">
+                            <a class="btn btn-link px-3" href="javascript:;">
+                              <i class="fa fa-google text-warning text-lg"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </form>
                     </div>
+                  </div>
 
-                    <div class="order">
-                      <span class="line"></span>
-                      <span class="txt">或</span>
-                      <span class="line"></span>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-2 text-center ms-auto">
-                        <a class="btn btn-link px-3" href="javascript:;">
-                          <i class="fa fa-facebook text-info text-lg"></i>
-                        </a>
-                      </div>
-                      <div class="col-2 text-center me-auto">
-                        <a class="btn btn-link px-3" href="javascript:;">
-                          <i class="fa fa-google text-warning text-lg"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>

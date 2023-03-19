@@ -24,5 +24,7 @@ export const useSuppliersDataStore = ('SuppliersData', () => {
 
     }
 
+
+
     return { name, phone, email, password, SupplierRegister }
 })
