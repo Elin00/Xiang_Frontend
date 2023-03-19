@@ -1,11 +1,11 @@
 <script setup>
 //Naive
-import { NCard, NButton, NDatePicker} from "naive-ui";
+import { NCard, NButton, NDatePicker } from "naive-ui";
 
 import { defineComponent, ref } from "vue";
 
 defineComponent({
-      range: ref([118313526e4, Date.now()])
+   range: ref([118313526e4, Date.now()])
 });
 </script>
 
@@ -20,22 +20,22 @@ defineComponent({
                NTD$50/piece
             </NCard>
             <h4>BUY 1 GET 1 FREE !!!!<br>call now 0963177377</h4>
-         </div>
-         <div class="col-7">
+      </div>
+      <div class="col-7">
             <section>
                <div>
                   <h5>➤ 訂單編號</h5>
-                  <p>OrderID666666</p>
+               <p>OrderID666666</p>
                </div>
                <hr class="style-two">
                <div>
                   <h5>➤ 日期</h5>
                   <!-- <NButton type="primary" dashed>
-                     編輯
-                  </NButton> -->
+                        編輯
+                     </NButton> -->
                   <!-- <button style="primary" dashed>編輯</button> -->
                </div>
-               <!-- <NDatePicker v-model:value="range" type="datetimerange" clearable />
+            <!-- <NDatePicker v-model:value="range" type="datetimerange" clearable />
                <pre>{{ JSON.stringify(range) }}</pre> -->
                <span>2023年03月15日 週三</span>
                <br>
@@ -43,23 +43,23 @@ defineComponent({
             </section>
             <hr class="style-two">
             <div>
-               <h5>➤ 優惠券</h5>
-               <span>已使用 10%off</span>
-               <!-- <NButton type="info" dashed>
+            <h5>➤ 優惠券</h5>
+            <span>已使用 10%off</span>
+            <!-- <NButton type="info" dashed>
                   選擇使用
                </NButton> -->
-            </div>
+         </div>
             <hr class="style-two">
             <div>
                <h5>➤ 付款方式</h5>
                <span>信用卡/ 一次付清</span>
                <!-- <NButton type="warning">
-                  信用卡/ 簽帳卡
-               </NButton>
-               <br>
-               <NButton type="info">
-                  巷口支付
-               </NButton> -->
+                     信用卡/ 簽帳卡
+                  </NButton>
+                  <br>
+                  <NButton type="info">
+                     巷口支付
+                  </NButton> -->
             </div>
             <hr class="style-two">
             <div>
@@ -73,19 +73,19 @@ defineComponent({
             </div>
             <hr class="style-two">
             <section>
-               <h5>➤ 租用退款政策</h5>
-               <p style="color: darkred; font-weight: 400;">
+            <h5>➤ 租用退款政策</h5>
+            <p style="color: darkred; font-weight: 400;">
                   預訂開始時間 48 小時前可全額退款，<br>
                   預訂開始時間 48 小時內即無法更改或取消訂單。
                </p>
                <NButton type="error">
-               ---------------------------------------------取消訂單-----------------------------------------------
-            </NButton>
+                  -----------------------------------------取消訂單-------------------------------------------
+               </NButton>
             </section>
             <hr class="style-two">
             <!-- <NButton type="success">
-               -----------------------------------------------------付款-------------------------------------------------------
-            </NButton> -->
+                  -----------------------------------------------------付款-------------------------------------------------------
+               </NButton> -->
          </div>
       </div>
    </div>

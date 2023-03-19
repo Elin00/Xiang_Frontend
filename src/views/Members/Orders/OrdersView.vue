@@ -3,6 +3,10 @@ import { RouterLink, RouterView } from "vue-router";
 
 import MemberHeader from "../Components/MemberHeader.vue";
 
+import { useOrdersDataStore } from "../../../stores/ordersData.js";
+
+const store = useOrdersDataStore()
+
 </script>
 
 <template>
