@@ -8,6 +8,7 @@ import MaterialButton from "@/components/MaterialButton.vue";
 import setMaterialInput from "@/assets/js/material-input";
 import MaterialCheckbox from "@/components/MaterialCheckbox.vue";
 
+
 import { useSuppliersDataStore } from "../../../stores/SuppliersData.js";
 
 onMounted(() => {

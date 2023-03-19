@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useSuppliersDataStore } from "../../stores/SuppliersData.js";
+import MaterialInput from "@/components/MaterialInput.vue";
+import MaterialButton from "@/components/MaterialButton.vue";
+
 
 
 const Suppliersstore = useSuppliersDataStore();
@@ -8,26 +11,28 @@ const Suppliersstore = useSuppliersDataStore();
 </script>
 
 <template>
-    <div>
+    <div style="margin-left: 10%;">
         <h4>個人資料修改</h4>
         <form @submit.prevent="submitForm">
-            <div>
-                <label for="name">名字</label>
-                <input type="text" id="name" v-model="Suppliersstore.name.value">
+
+            <div class="col-lg-4 ">
+                <MaterialInput class="input-group-static mb-4" label="姓名" type="text" placeholder="{{}}"
+                    v-model="Suppliersstore.name.value" />
             </div>
-            <div>
-                <label for="phone">電話</label>
-                <input type="text" id="phone" v-model="Suppliersstore.phone.value">
+            <div class="col-lg-4 ">
+                <MaterialInput class="input-group-static mb-4" label="電話" type="text" placeholder="{{}}"
+                    v-model="Suppliersstore.phone.value" />
             </div>
-            <div>
-                <label for="email">Email</label>
-                <input type="email" id="email" v-model="Suppliersstore.email.value">
+            <div class="col-lg-4 ">
+                <MaterialInput class="input-group-static mb-4" label="Email" type="text" placeholder="{{}}"
+                    v-model="Suppliersstore.email.value" />
             </div>
-            <div>
-                <label for="password">密碼</label>
-                <input type="password" id="password" v-model="Suppliersstore.password.value">
+            <div class="col-lg-4 ">
+                <MaterialInput class="input-group-static mb-4" label="密碼" type="password" placeholder="{{}}"
+                    v-model="Suppliersstore.password.value" />
             </div>
-            <button type="submit">確認修改</button>
+            <MaterialButton variant="outline" color="success" class="w-auto me-2" size="sm">確認修改</MaterialButton>
         </form>
     </div>
 </template>
+<style></style>
