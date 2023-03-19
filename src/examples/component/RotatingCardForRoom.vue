@@ -13,4 +13,5 @@
   grid-gap: 24px;
   grid-template-columns: repeat(2, 1fr);
 } */
+
 </style>

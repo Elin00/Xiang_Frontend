@@ -29,6 +29,7 @@ import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
 import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
 import  CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 
+import testproductapi from "../views/RoomGuide/testproductapi.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +52,11 @@ const router = createRouter({
 
 
       ]
+    },
+    {
+      path:"/testproductapi",
+      name:"testproductapi",
+      component:testproductapi,
     },
     {
       path: "/CouponView",
