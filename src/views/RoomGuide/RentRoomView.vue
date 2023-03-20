@@ -1,7 +1,8 @@
 <script setup>
 import datepickerDesign from "../RoomGuide/datepickerDailyrentalDesign.vue";
 import datepickerDesign2 from "../RoomGuide/datepickerhourlyrentalDesign.vue";
-import { ref } from "vue";
+import Evaluation from "../Suppliers/ProductsmessageView.vue"
+import { ref ,onMounted } from "vue";
 import { Navigation, Pagination, Autoplay, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -13,6 +14,17 @@ import photo2 from "../../assets/img/5.jpg";
 import photo3 from "../../assets/img/6.jpg";
 import photo4 from "../../assets/img/7.jpg";
 
+import { useEvaluationDataStore } from '../../stores/EvaluationData.js';
+
+const evaluationStore = useEvaluationDataStore();
+onMounted(async () => {
+  try {
+    await evaluationStore.EvaluationData();
+    console.log(evaluationStore.numberOfReviews.value); // 確認是否有取到值
+  } catch (error) {
+    console.error(error);
+  }
+});
 const swiperTextBase = [
   { Title: "這是第一間房", Address: "高雄市內湖區", img: photo1 },
   { Title: "這是第二間房", Address: "高雄市內湖區", img: photo2 },
@@ -60,7 +72,7 @@ const showModal = ref(false);
             <div class="locationComment">
               <div class="material-icons">feedback</div>
               <div class="text">
-                <p>0則評論</p>
+                <p>{{evaluationStore.numberOfReviews}}則評論</p>
               </div>
             </div>
           </div>
@@ -256,7 +268,7 @@ const showModal = ref(false);
           <div class="infoSection d-flex justify-content-center js-daily-rule mt-3">
             <div class="infoTitle" style="padding: 0px 20px">近期評價</div>
             <div class="infoDetail rules">
-
+                  <Evaluation />
             </div>
           </div>
           <!-- 使用規範-->

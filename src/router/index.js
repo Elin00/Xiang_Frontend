@@ -27,9 +27,7 @@ import RentRoomView from "../views/RoomGuide/RentRoomView.vue";
 import RoomGuideView from "../views/RoomGuide/RoomGuideView.vue";
 import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
 import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
-import  CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
-
-import testproductapi from "../views/RoomGuide/testproductapi.vue"
+import CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,19 +47,7 @@ const router = createRouter({
           name: "userview-privacy",
           component: () => import('../views/Other/UserTerms/Section/privacy.vue'),
         },
-
-
       ]
-    },
-    {
-      path:"/testproductapi",
-      name:"testproductapi",
-      component:testproductapi,
-    },
-    {
-      path: "/CouponView",
-      name: "CouponView",
-      component: CouponView,
     },
     {
       path: "/",
@@ -248,7 +234,23 @@ const router = createRouter({
         },
       ]
     },
+    {
+      path: "/other/CouponView",
+      name: "other-CouponView",
+      component: CouponView,
+      children: [
+        {
+          path: "pointstableView",
+          name: "other-CouponView-pointstable",
+          component: () => import('../views/Other/Cooperation/Coupon/pointstableView.vue'),
+        },
+        {
+          path: "UseCouponView",
+          name: "other-CouponView-UseCouponView",
+          component: () => import('../views/Other/Cooperation/Coupon/UseCouponView.vue'),
+        },
+      ]
+    },
   ],
 });
-
 export default router;

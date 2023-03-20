@@ -1,4 +1,5 @@
-<script>
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 import photo1 from "../../../assets/img/1.jpg";
 import photo2 from "../../../assets/img/2.jpg";
 import photo3 from "../../../assets/img/3.jpg";
@@ -8,53 +9,71 @@ import photo6 from "../../../assets/img/6.jpg";
 import photo7 from "../../../assets/img/7.jpg";
 
 const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
+const imageUrls = ref([...photos.map((photo) => ({ src: photo, link: "/views/roomguide" })), ...photos.map((photo) => ({ src: photo, link: "/views/roomguide" }))]);
+const scrollPosition = ref(0);
+const scrollStep = 4;
+const itemWidth = ref(0);
+const containerWidth = ref(0);
+const promoteList = ref(null);
+let animationFrameId;
+let startTimestamp;
 
-export default {
-  data() {
-    return {
-      imageUrls: photos.map((photo) => ({ src: photo, link: "/views/rentroomview" })),
-      intervalId: null,
-      scrollPosition: 0,
-      scrollStep: 2,
-      itemWidth: 0,
-      containerWidth: 0,
-    };
-  },
-  mounted() {
-    this.startAutoScroll();
-    this.getItemAndContainerWidth();
-  },
-  methods: {
-    startAutoScroll() {
-      this.intervalId = setInterval(this.scrollRight, 20);
-    },
-    stopAutoScroll() {
-      clearInterval(this.intervalId);
-    },
-    scrollRight() {
-      const maxScrollPosition =
-        this.itemWidth * this.imageUrls.length - this.containerWidth;
-      if (this.scrollPosition >= this.itemWidth) {
-        const firstItem = this.imageUrls[0];
-        const newImageUrls = this.imageUrls.slice(1).concat([firstItem]);
-        this.imageUrls = newImageUrls;
-        this.scrollPosition -= this.itemWidth;
-      }
-      this.scrollPosition += this.scrollStep;
-      if (this.scrollPosition > maxScrollPosition) {
-        this.scrollPosition = maxScrollPosition;
-      }
-      if (this.$refs.promoteList) {
-        this.$refs.promoteList.scrollTo(this.scrollPosition, 0);
-      }
-    },
-    getItemAndContainerWidth() {
-      const item = this.$refs.promoteList.querySelector("img");
-      this.itemWidth = item.offsetWidth;
-      this.containerWidth = this.$refs.promoteList.offsetWidth;
-    },
-  },
-};
+onMounted(() => {
+  startAutoScroll();
+  getItemAndContainerWidth();
+});
+
+onUnmounted(() => {
+  stopAutoScroll();
+});
+
+function step(timestamp) {
+  if (!startTimestamp) {
+    startTimestamp = timestamp;
+  }
+
+  const progress = timestamp - startTimestamp;
+
+  if (progress >= 20) {
+    scrollRight();
+    startTimestamp = timestamp;
+  }
+
+  animationFrameId = requestAnimationFrame(step);
+}
+
+function startAutoScroll() {
+  if (!animationFrameId) {
+    animationFrameId = requestAnimationFrame(step);
+  }
+}
+
+function stopAutoScroll() {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+}
+
+function scrollRight() {
+  const maxScrollPosition = itemWidth.value * (photos.length - 1);
+
+  scrollPosition.value += scrollStep;
+  if (scrollPosition.value > maxScrollPosition) {
+    scrollPosition.value = 0;
+  }
+
+  if (promoteList.value) {
+    promoteList.value.scrollTo(scrollPosition.value, 0);
+  }
+}
+
+
+function getItemAndContainerWidth() {
+  const item = promoteList.value.querySelector("img");
+  itemWidth.value = item.offsetWidth;
+  containerWidth.value = promoteList.value.offsetWidth;
+}
 </script>
 <template>
   <div class="promote-container">
