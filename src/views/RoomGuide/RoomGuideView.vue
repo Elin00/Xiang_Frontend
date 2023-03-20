@@ -1,25 +1,25 @@
 <script setup>
 // Vue Material Kit 2 components
+import axios from "axios";
 import RotatingCardForRoom from "@/examples/component/RotatingCardForRoom.vue";
 import RotatingCardFrontForRoom from "@/examples/component/RotatingCardFrontForRoom.vue";
 import RotatingCardBackForRoom from "@/examples/component/RotatingCardBackForRoom.vue";
 
 //leaflet
-import L from "leaflet";
+import L, { Class } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, reactive } from "vue";
 
 //import pinia
 
 
+
+//data
 const currentFilter = ref('location');
-
-function selectFilter(filterName) {
-    currentFilter.value = filterName;
-    store.selectFilter(filterName);
-}
-
 const mapContainer = ref(null);
+const axiosData = ref(null);
+const productDetail = reactive();
+
 const cardinfo = {
     image: "https://www.uicbc.com/upload/service/c.jpg",
     icon: "touch_app",
@@ -33,13 +33,42 @@ const cardinfo = {
     ],
 }
 const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
-
 const markers = [
     { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
     { lat: 22.6273, lng: 120.3014, name: "高雄市立圖書館總館", description: "這是高雄市立圖書館總館" },
     { lat: 22.6746, lng: 120.4899, name: "旗津渡輪", description: "這是旗津渡輪" },
 ];
 
+//建立class
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
+
+    getFrom() {
+        const state = 'Taiwan';
+        return `${this.name} from ${state}.`;
+    }
+}
+
+
+//function
+const selectFilter = (filterName) => {
+    currentFilter.value = filterName;
+    store.selectFilter(filterName);
+}
+const axiosInit = async () => {
+    try {
+        const res = await axios.get("https://localhost:7073/api/Products");
+        axiosData.value = res.data;
+        console.log(axiosData.value[0].name);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
+//hook
 onMounted(() => {
     const map = L.map(mapContainer.value, {
         center: [22.8, 120.5],
@@ -66,6 +95,9 @@ onMounted(() => {
             }
         });
     });
+
+    axiosInit();
+
 });
 
 </script>
