@@ -2,12 +2,14 @@
 import { RouterLink, RouterView } from "vue-router";
 
 import MemberHeader from "../Components/MemberHeader.vue";
-import NavbarDefault from "../../../examples/navbars/NavbarDefault.vue";
+
+import { useOrdersDataStore } from "../../../stores/ordersData.js";
+
+const store = useOrdersDataStore()
 
 </script>
 
 <template>
-   <NavbarDefault :sticky="false" :transparent="false" class="mb-5" />
    <MemberHeader labelString="我的預定" />
    <div class="container">
       <div class="row">
