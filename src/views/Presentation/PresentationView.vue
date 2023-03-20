@@ -37,7 +37,7 @@ onUnmounted(() => {
             <presentationHeader打字效果 />
             <div class="container">
               <div class="row">
-                <test />
+
               </div>
             </div>
           </div>
@@ -51,7 +51,6 @@ onUnmounted(() => {
       <presentationcarousel />
     </div>
   </div>
-
   <presentation跑馬燈 />
   <PresentationTestimonials />
   <presentation使用者操作 />

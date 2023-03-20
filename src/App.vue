@@ -17,7 +17,6 @@ import { RouterView } from "vue-router";
 import NavbarDefault from "../src/examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../src/examples/footers/FooterDefault.vue";
 import LoginRegisterWindowModal from "../src/views/Other/LoginRegisterWindow/LoginRegisterWindowModal.vue";
-
 </script>
 
 <template>

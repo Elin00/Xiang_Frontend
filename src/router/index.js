@@ -50,14 +50,7 @@ const router = createRouter({
           name: "userview-privacy",
           component: () => import('../views/Other/UserTerms/Section/privacy.vue'),
         },
-
-
       ]
-    },
-    {
-      path: "/CouponView",
-      name: "CouponView",
-      component: CouponView,
     },
     {
       path: "/",
@@ -259,7 +252,23 @@ const router = createRouter({
         },
       ]
     },
+    {
+      path: "/other/CouponView",
+      name: "other-CouponView",
+      component: CouponView,
+      children: [
+        {
+          path: "pointstableView",
+          name: "other-CouponView-pointstable",
+          component: () => import('../views/Other/Cooperation/Coupon/pointstableView.vue'),
+        },
+        {
+          path: "UseCouponView",
+          name: "other-CouponView-UseCouponView",
+          component: () => import('../views/Other/Cooperation/Coupon/UseCouponView.vue'),
+        },
+      ]
+    },
   ],
 });
-
 export default router;
