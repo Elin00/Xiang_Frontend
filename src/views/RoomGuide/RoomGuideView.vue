@@ -33,11 +33,7 @@ const cardinfo = {
 }
 const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
 
-const markers = [
-    { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
-    { lat: 22.6273, lng: 120.3014, name: "高雄市立圖書館總館", description: "這是高雄市立圖書館總館" },
-    { lat: 22.6746, lng: 120.4899, name: "旗津渡輪", description: "這是旗津渡輪" },
-];
+const markers = [];
 
 //建立class
 class PAndS {
@@ -88,10 +84,19 @@ const axiosInit = async () => {
                     const troom = new Room(product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
                     productRoom.push(troom);
                 })
-            })
+            })            
         });
         console.log(productPAndS);
-        console.log(productRoom);
+        // console.log(productRoom); 
+        productPAndS.forEach((pands) => {
+            const marker = {
+                lat: parseFloat(pands.sLatitude),
+                lng: parseFloat(pands.sLongitude),
+                name: pands.sName,
+                description: pands.sDescription};
+                markers.push(marker);
+            });
+            console.log(markers);      
     } catch (error) {
         console.log(error.message);
     }
@@ -112,22 +117,14 @@ onMounted(() => {
 
     const markersLayer = L.layerGroup().addTo(map);
 
-    markers.forEach((marker) => {
-        const { lat, lng, name, description } = marker;
-        const newMarker = L.marker([lat, lng]).addTo(markersLayer);
-        newMarker.bindPopup(`<b>${name}</b><br>${description}`).on("click", () => {
-            const card = document.getElementById(`card-${name}`);
-            if (card) {
-                card.classList.add("rotate-card-up");
-                setTimeout(() => {
-                    card.classList.remove("rotate-card-up");
-                }, 2000);
-            }
-        });
-    });
-
-    axiosInit();
-
+    axiosInit().then(()=>{
+        markers.forEach((marker) => {
+            const { lat, lng, name, description } = marker;
+            console.log(lat, lng);
+            const newMarker = L.marker([lat, lng]).addTo(markersLayer);
+            newMarker.bindPopup(`<b>${name}</b><br>${description}`)
+        })});
+    markersLayer.addTo(map);
 });
 
 </script>
