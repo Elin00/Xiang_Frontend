@@ -101,23 +101,23 @@ async function submitRegister() {
                   <div>
                     <!-- 業者的登入畫面 -->
                     <div v-if="isChecked">
-                      <form role="form" class="text-start">
+                      <form role="form" class="text-start" @submit.prevent="submitLogin">
                         <div class="input-group input-group-outline my-3">
-                          <label class="form-label" data-bs-toggle="modal">電子信箱</label>
-                          <input id="email" type="email" class="form-control form-control-md" placeholder=""
-                            isrequired="true" />
+                          <label class="form-label" data-bs-toggle="modal"></label>
+                          <input v-model="Suppliersstore.email" type="email" class="form-control form-control-md"
+                            placeholder="電子信箱" isrequired="true" />
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                          <label class="form-label">密碼</label>
-                          <input id="password" type="password" class="form-control form-control-md" placeholder=""
-                            isrequired="true" />
+                          <label class="form-label"></label>
+                          <input v-model="Suppliersstore.password" type="password" class="form-control form-control-md"
+                            placeholder="密碼" isrequired="true" />
                         </div>
                         <div class="form-check" style="padding-left: 0px">
                           <a href="#" style="color: green">忘記密碼?</a>
                         </div>
 
                         <div class="text-center">
-                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
+                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2" @click="submitLogin">
                             登入
                           </button>
                         </div>
@@ -150,9 +150,9 @@ async function submitRegister() {
                             placeholder="電子信箱" isrequired="true" />
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                          <label class="form-label">密碼</label>
+                          <label class="form-label"></label>
                           <input v-model="Customer.Password" type="password" class="form-control form-control-md"
-                            placeholder="" isrequired="true" />
+                            placeholder="密碼" isrequired="true" />
                         </div>
                         <div class="form-check" style="padding-left: 0px">
                           <a href="#" style="color: green">忘記密碼?</a>
@@ -212,22 +212,22 @@ async function submitRegister() {
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label" data-bs-toggle="modal">姓名</label>
-                      <input v-model="Suppliersstore.name.value" type="name" class="form-control form-control-md"
-                        placeholder="" isrequired="true" />
+                      <input v-model="Suppliersstore.name" type="name" class="form-control form-control-md" placeholder=""
+                        isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label" data-bs-toggle="modal">電子信箱</label>
-                      <input v-model="Suppliersstore.email.value" type="email" class="form-control form-control-md"
+                      <input v-model="Suppliersstore.email" type="email" class="form-control form-control-md"
                         placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label" data-bs-toggle="modal">電話</label>
-                      <input v-model="Suppliersstore.phone.value" type="phone" class="form-control form-control-md"
+                      <input v-model="Suppliersstore.phone" type="phone" class="form-control form-control-md"
                         placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">密碼</label>
-                      <input v-model="Suppliersstore.password.value" type="password" class="form-control form-control-md"
+                      <input v-model="Suppliersstore.password" type="password" class="form-control form-control-md"
                         placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0">
