@@ -32,11 +32,7 @@ const cardinfo = {
 }
 const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
 
-const markers = [
-    { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
-    { lat: 22.6273, lng: 120.3014, name: "高雄市立圖書館總館", description: "這是高雄市立圖書館總館" },
-    { lat: 22.6746, lng: 120.4899, name: "旗津渡輪", description: "這是旗津渡輪" },
-];
+
 
 //建立class
 class Person {
@@ -49,7 +45,15 @@ class Person {
         return `${this.name} from ${state}.`;
     }
 }
+//建立filter城市選擇事件
 
+
+//maker生成功能
+const markers = [
+    { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
+    { lat: 22.6273, lng: 120.3014, name: "高雄市立圖書館總館", description: "這是高雄市立圖書館總館" },
+    { lat: 22.6746, lng: 120.4899, name: "旗津渡輪", description: "這是旗津渡輪" },
+];
 
 //function
 const selectFilter = (filterName) => {
@@ -65,6 +69,7 @@ const axiosInit = async () => {
         console.log(error.message);
     }
 }
+
 
 
 //hook
@@ -93,8 +98,7 @@ onMounted(() => {
                 }, 2000);
             }
         });
-    });
-
+    });   
     axiosInit();
 
 });
@@ -104,9 +108,18 @@ onMounted(() => {
     <!-- 過濾器 -->
     <header>
         <div class="filter-bar filter-wrapper mt-3 ml-3">
-            <div class="filter-group location" @click="selectFilter('location')">
+            <!-- <div class="filter-group location">
                 <span :class="{ focus: currentFilter === 'location' }">城市</span>
+            </div>   -->
+            <div class="dropdown dropdown-hover" data-bs-toggle="dropdown">
+                <span>城市</span>
             </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" @click="moveToCity([23.5, 120.6839],11)">全部區域</a>
+                <a class="dropdown-item" href="#" @click="moveToCity([25.0339639, 121.5644722],12)">台北</a>
+                <a class="dropdown-item" href="#" @click="moveToCity([24.1469, 120.6839],12)">台中</a>
+                <a class="dropdown-item" href="#" @click="moveToCity([22.9997, 120.227],12)">台南</a>
+            </div>         
             <div class="divider"></div>
             <div class="filter-group hourlyTime" @click="selectFilter('hourlyTime')">
                 <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
