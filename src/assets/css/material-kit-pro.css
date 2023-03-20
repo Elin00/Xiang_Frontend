@@ -21418,8 +21418,8 @@ fieldset:disabled .btn {
 .rotating-card-container .card .front:after {
   position: absolute;
   z-index: 1;
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   display: block;
   left: 0;
   top: 0;

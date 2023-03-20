@@ -12,7 +12,9 @@ import PresentationTestimonials from "./Sections/PresentationTestimonials.vue";
 import presentationcarousel from "./Sections/presentationcarousel.vue";
 import presentation跑馬燈 from "./Sections/presentation跑馬燈.vue";
 import presentation使用者操作 from "./Sections/presentation使用者操作.vue";
+import presentationHeader打字效果 from "./Sections/presentationHeader打字效果.vue";
 import test from "../RoomGuide/test.vue";
+
 //images
 import vueMkHeader from "@/assets/img/office-dark.jpg";
 
@@ -39,16 +41,9 @@ onUnmounted(() => {
       <div class="container">
         <div class="row">
           <div class="col-lg-7 text-center mx-auto position-relative">
-            <h3
-              class="text-black pt-3 mt-n5 me-2"
-              style="font-weight: bold"
-              :style="{ display: 'inline-block ' }"
-            >
-              在這個充滿緊張與焦慮的世界中，我們致力於為您創造一個放鬆、交流、學習與成長的共享空間。
-            </h3>
+            <presentationHeader打字效果 />
             <div class="container">
               <div class="row">
-                <!-- 放下拉選擇器 -->
                 <test />
               </div>
             </div>
@@ -65,7 +60,6 @@ onUnmounted(() => {
   </div>
 
   <presentation跑馬燈 />
-
   <PresentationTestimonials />
   <presentation使用者操作 />
   <div class="container-fluid">

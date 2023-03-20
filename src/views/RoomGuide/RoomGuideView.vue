@@ -113,17 +113,19 @@ onMounted(() => {
                 <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
             </div>
         </div>
-    </header>
+    </header> 
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-6 space-wrapper">
-                <div class="space-wrapper__list grid">
-                    <RotatingCardForRoom v-for="(item, index) in data" :key="index">
-                        <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
-                            :description="item.description" />
-                        <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description"
-                            :action="item.action" />
-                    </RotatingCardForRoom>
+                <div class="space-wrapper__list">
+                    <div class="grid">
+                        <RotatingCardForRoom v-for="(item, index) in data" :key="index">
+                            <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
+                              :description="item.description" />
+                            <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description"
+                               :action="item.action" />
+                        </RotatingCardForRoom>                   
+                    </div>
                 </div>
             </div>
             <div class="col-6 space-wrapper">
@@ -153,17 +155,20 @@ onMounted(() => {
 .space-wrapper__list {
     padding: 20px 20px;
     margin: 0;
-    width: 900px;
-    height: 900px;
+    width: 100%;
+    height: 700px;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .grid {
     width: 100%;
+    height: 400px;
     display: grid;
     grid-gap: 24px;
     grid-template-columns: repeat(2, 1fr);
 }
+
 
 /* 過濾器 */
 .filter-bar {

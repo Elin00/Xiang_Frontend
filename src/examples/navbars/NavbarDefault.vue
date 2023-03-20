@@ -2,6 +2,8 @@
 import { RouterLink } from "vue-router";
 import { ref, watch } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
+import { useCustomerStore } from "../../stores/CustomerData.js";
+
 // images
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
@@ -80,6 +82,9 @@ watch(
     }
   }
 );
+
+const CustomerStore = useCustomerStore();
+
 </script>
 <template>
   <nav class="navbar navbar-expand-lg top-0 p-0" style="margin: 0px -24px" :class="{
@@ -110,8 +115,6 @@ watch(
       " to="/" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
         想享Xiang
       </RouterLink>
-      <!-- <a href="https://www.creative-tim.com/product/vue-material-kit-pro"
-                    class="btn btn-sm bg-gradient-success mb-0 ms-auto d-lg-none d-block">Buy Now</a> -->
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation"
         aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">
@@ -140,9 +143,9 @@ watch(
             <a id="menu" class="nav-link d-flex align-items-center cursor-pointer" data-bs-toggle="dropdown"
               aria-expanded="false" data-bs-offset="10,20">
               <div style="
-                    border-radius: 40%;
-                    background-color: rgba(255, 255, 255, 0.7);
-                  ">
+                        border-radius: 40%;
+                        background-color: rgba(255, 255, 255, 0.7);
+                      ">
                 <span class="material-icons" style="font-size: 3em">
                   manage_accounts
                 </span>
@@ -150,19 +153,47 @@ watch(
             </a>
             <div id="dropdown" class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
               style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
-              <RouterLink :to="{ name: 'about' }" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
-                :href="action.route"><span>{{ action.label1 }}</span></RouterLink>
-              <RouterLink :to="{ name: 'rentroomView' }" class="dropdown-item py-3 ps-3 border-radius-md"
-                :style="action.color" :href="action.route">註冊</RouterLink>
-              <a class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" href="#pricing-soft-ui"
-                onclick="smoothToPricing('pricing-soft-ui')">領取優惠</a>
+              <!-- 登入時換取顧客帳戶 -->
+              <router-link v-if="!CustomerStore.loggedIn" :to="{ name: 'about' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" :href="action.route"
+                data-bs-toggle="modal" data-bs-target="#Login">
+                <span>登入</span>
+              </router-link>
+
+              <RouterLink v-if="!CustomerStore.loggedIn" :to="{ name: 'rentroomView' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" :href="action.route"
+                data-bs-toggle="modal" data-bs-target="#Register">註冊
+              </RouterLink>
+              <div v-if="CustomerStore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md"
+                  style="color: green; border-bottom: 1px solid grey">
+                  {{ CustomerStore.Name }}
+                </span>
+              </div>
+              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'rentroomView' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" :href="action.route">我的預定
+              </RouterLink>
+              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'member-memberdetail' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" :href="action.route">我的帳戶
+              </RouterLink>
+              <RouterLink :to="{ name: 'CouponView' }" class="dropdown-item py-3 ps-3 border-radius-md"
+                :style="action.color" :href="action.route">領取優惠卷
+              </RouterLink>
               <RouterLink :to="{ name: 'questions' }" class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color" onclick="smoothToPricing('pricing-soft-ui')">常見問答</RouterLink>
+              <div v-if="CustomerStore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md" @click="CustomerStore.logout"
+                  :style="action.color">
+                  登出
+                </span>
+              </div>
             </div>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
   <!-- End Navbar -->
 </template>
+<style></style>
