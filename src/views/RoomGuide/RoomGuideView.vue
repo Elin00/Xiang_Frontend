@@ -6,18 +6,16 @@ import RotatingCardFrontForRoom from "@/examples/component/RotatingCardFrontForR
 import RotatingCardBackForRoom from "@/examples/component/RotatingCardBackForRoom.vue";
 
 //leaflet
-import L, { Class } from "leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { onMounted, ref, reactive } from "vue";
 
 //import pinia
 
 
-
 //data
 const currentFilter = ref('location');
 const mapContainer = ref(null);
-const axiosData = ref(null);
 const productDetail = reactive();
 
 const cardinfo = {
@@ -33,6 +31,7 @@ const cardinfo = {
     ],
 }
 const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
+
 const markers = [
     { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
     { lat: 22.6273, lng: 120.3014, name: "高雄市立圖書館總館", description: "這是高雄市立圖書館總館" },
@@ -113,7 +112,7 @@ onMounted(() => {
                 <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
             </div>
         </div>
-    </header> 
+    </header>
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-6 space-wrapper">
@@ -121,10 +120,10 @@ onMounted(() => {
                     <div class="grid">
                         <RotatingCardForRoom v-for="(item, index) in data" :key="index">
                             <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
-                              :description="item.description" />
+                                :description="item.description" />
                             <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description"
-                               :action="item.action" />
-                        </RotatingCardForRoom>                   
+                                :action="item.action" />
+                        </RotatingCardForRoom>
                     </div>
                 </div>
             </div>
@@ -135,10 +134,6 @@ onMounted(() => {
     </div>
 </template>
 <style>
-/* div {
-    border: 1px solid red;
-    display: block;
-} */
 .ml-3 {
     margin-left: 30px;
 }
@@ -168,7 +163,6 @@ onMounted(() => {
     grid-gap: 24px;
     grid-template-columns: repeat(2, 1fr);
 }
-
 
 /* 過濾器 */
 .filter-bar {
@@ -220,16 +214,6 @@ onMounted(() => {
     min-width: 252px;
 }
 
-/* .filter-bar .filter-group{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    position: relative;
-    padding: 15px 15px 20px 25px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all .3s ease;
-} */
 
 .filter-bar .filter-group.focus {
     background: #fff;
@@ -237,6 +221,3 @@ onMounted(() => {
     transform: scale(1.02);
 }
 </style>
-<script>
-</script>
-  
