@@ -8,6 +8,7 @@ export const useOrdersDataStore = defineStore('ordersData', () => {
    const ReturnDate = ref('');
    const CouponID = ref('');
    const Discount = ref('');
+   const Cancel = reactive([]);
    // const creditCard = reactive([]);
 
    // const addCreditCard = (newCardData) => {
