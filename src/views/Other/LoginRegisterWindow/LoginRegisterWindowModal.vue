@@ -145,9 +145,9 @@ async function submitRegister() {
                     <div v-else>
                       <form role="form" class="text-start" @submit.prevent="submitLogin">
                         <div class="input-group input-group-outline my-3">
-                          <label class="form-label" data-bs-toggle="modal">電子信箱</label>
-                          <input v-model="Customer.Email" type="email" class="form-control form-control-md" placeholder=""
-                            isrequired="true" />
+                          <label class="form-label" data-bs-toggle="modal"></label>
+                          <input v-model="Customer.Email" type="email" class="form-control form-control-md"
+                            placeholder="電子信箱" isrequired="true" />
                         </div>
                         <div class="input-group input-group-outline mb-3">
                           <label class="form-label">密碼</label>

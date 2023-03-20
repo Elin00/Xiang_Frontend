@@ -152,7 +152,7 @@ watch(
               style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
               <!-- 登入時換取顧客帳戶 -->
               <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
-                data-bs-toggle="modal" data-bs-target="#Login">
+                data-bs-toggle="modal" data-bs-target="#Login">登入
               </div>
 
               <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
