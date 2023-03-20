@@ -93,17 +93,14 @@ hr.style-two {
 
 .my-table {
    border-color: gray;
-   /* text-align: center; */
 }
 
 .my-table-header th {
    background-color: lightgray;
    border-color: gray;
-   /* text-align: left; */
 }
 
 .my-table-tbody tr td {
    border-color: gray;
-   /* text-align: left; */
 }
 </style>

@@ -36,7 +36,7 @@ const router = createRouter({
     {
       path: "/userview",
       name: "userview",
-      component: ()=>import ("../views/Other/UserTerms/UserView.vue"),
+      component: () => import("../views/Other/UserTerms/UserView.vue"),
       children: [
         {
           path: "userterms",
@@ -212,11 +212,6 @@ const router = createRouter({
           path: "finish",
           name: "member-orders-finish",
           component: () => import('../views/Members/Orders/Sections/Finish.vue'),
-        },
-        {
-          path: "test",
-          name: "member-orders-test",
-          component: () => import('../views/Members/Orders/Sections/test.vue'),
         },
       ]
     },

@@ -1,6 +1,6 @@
 <script setup>
 //Naive
-import { NCard, NButton, NDatePicker, NTable } from "naive-ui";
+import { NCard, NTable } from "naive-ui";
 
 import { defineComponent, ref } from "vue";
 
