@@ -16,7 +16,8 @@ import { onMounted, ref, reactive } from "vue";
 //data
 const currentFilter = ref('location');
 const mapContainer = ref(null);
-const productDetail = reactive();
+const productPAndS = reactive([]);
+const productRoom = reactive([]);
 
 const cardinfo = {
     image: "https://www.uicbc.com/upload/service/c.jpg",
@@ -32,28 +33,40 @@ const cardinfo = {
 }
 const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
 
-
-
-//建立class
-class Person {
-    constructor(name) {
-        this.name = name;
-    }
-
-    getFrom() {
-        const state = 'Taiwan';
-        return `${this.name} from ${state}.`;
-    }
-}
-//建立filter城市選擇事件
-
-
-//maker生成功能
 const markers = [
     { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
     { lat: 22.6273, lng: 120.3014, name: "高雄市立圖書館總館", description: "這是高雄市立圖書館總館" },
     { lat: 22.6746, lng: 120.4899, name: "旗津渡輪", description: "這是旗津渡輪" },
 ];
+
+//建立class
+class PAndS {
+    constructor(pName, sName, sImage, sOpenTime, sLatitude, sLongitude, sAddress, sDescription, rNum) {
+        this.pName = pName;
+        this.sName = sName;
+        this.sImage = sImage;
+        this.sOpenTime = sOpenTime;
+        this.sLatitude = sLatitude;
+        this.sLongitude = sLongitude;
+        this.sAddress = sAddress;
+        this.sDescription = sDescription;
+        this.rNum = rNum;
+    }
+}
+class Room {
+    constructor(pName, sName, rCategoryId, rHourPrice, rDatePrice, rPing, rImage, rStatus, rDescription) {
+        this.pName = pName;
+        this.sName = sName;
+        this.rCategoryId = rCategoryId;
+        this.rHourPrice = rHourPrice;
+        this.rDatePrice = rDatePrice;
+        this.rPing = rPing;
+        this.rImage = rImage;
+        this.rStatus = rStatus;
+        this.rDescription = rDescription;
+    }
+}
+
 
 //function
 const selectFilter = (filterName) => {
@@ -63,13 +76,26 @@ const selectFilter = (filterName) => {
 const axiosInit = async () => {
     try {
         const res = await axios.get("https://localhost:7073/api/Products");
-        axiosData.value = res.data;
-        console.log(axiosData.value[0].name);
+        res.data.forEach((product, pidx) => {
+
+            //抓PAndS資料
+            product.psite.forEach((site, sidx) => {
+                const tpands = new PAndS(product.name, site.name, site.image, site.openTime, site.latitude, site.longitude, site.address, site.siteDescription, site.psiteRoom.length)
+                productPAndS.push(tpands);
+
+                //抓Room資料
+                site.psiteRoom.forEach((room, ridx) => {
+                    const troom = new Room(product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
+                    productRoom.push(troom);
+                })
+            })
+        });
+        console.log(productPAndS);
+        console.log(productRoom);
     } catch (error) {
         console.log(error.message);
     }
 }
-
 
 
 //hook
@@ -98,7 +124,8 @@ onMounted(() => {
                 }, 2000);
             }
         });
-    });   
+    });
+
     axiosInit();
 
 });
@@ -108,18 +135,9 @@ onMounted(() => {
     <!-- 過濾器 -->
     <header>
         <div class="filter-bar filter-wrapper mt-3 ml-3">
-            <!-- <div class="filter-group location">
+            <div class="filter-group location" @click="selectFilter('location')">
                 <span :class="{ focus: currentFilter === 'location' }">城市</span>
-            </div>   -->
-            <div class="dropdown dropdown-hover" data-bs-toggle="dropdown">
-                <span>城市</span>
             </div>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" @click="moveToCity([23.5, 120.6839],11)">全部區域</a>
-                <a class="dropdown-item" href="#" @click="moveToCity([25.0339639, 121.5644722],12)">台北</a>
-                <a class="dropdown-item" href="#" @click="moveToCity([24.1469, 120.6839],12)">台中</a>
-                <a class="dropdown-item" href="#" @click="moveToCity([22.9997, 120.227],12)">台南</a>
-            </div>         
             <div class="divider"></div>
             <div class="filter-group hourlyTime" @click="selectFilter('hourlyTime')">
                 <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
