@@ -1,12 +1,15 @@
 <script setup>
 //Naive
-import { NCard, NButton, NDatePicker } from "naive-ui";
+import { NCard,NButton} from "naive-ui";
 
-import { defineComponent, ref } from "vue";
+// import { defineComponent, ref } from "vue";
+import { useOrdersDataStore } from "../../../../stores/ordersData.js";
 
-defineComponent({
-   range: ref([118313526e4, Date.now()])
-});
+const storeOrdersData = useOrdersDataStore()
+
+// defineComponent({
+//    range: ref([118313526e4, Date.now()])
+// });
 </script>
 
 <template>
@@ -25,15 +28,11 @@ defineComponent({
             <section>
                <div>
                   <h5>➤ 訂單編號</h5>
-               <p>OrderID666666</p>
+               <p>{{storeOrdersData.OrderID}}</p>
                </div>
                <hr class="style-two">
                <div>
                   <h5>➤ 日期</h5>
-                  <!-- <NButton type="primary" dashed>
-                        編輯
-                     </NButton> -->
-                  <!-- <button style="primary" dashed>編輯</button> -->
                </div>
             <!-- <NDatePicker v-model:value="range" type="datetimerange" clearable />
                <pre>{{ JSON.stringify(range) }}</pre> -->
@@ -45,9 +44,6 @@ defineComponent({
             <div>
             <h5>➤ 優惠券</h5>
             <span>已使用 10%off</span>
-            <!-- <NButton type="info" dashed>
-                  選擇使用
-               </NButton> -->
          </div>
             <hr class="style-two">
             <div>
@@ -69,16 +65,15 @@ defineComponent({
                <input type="radio" name="invoice" value="donation">捐贈
                <br>
                載具/統編：12345678
-               <!-- <input type="number"> -->
             </div>
             <hr class="style-two">
             <section>
-            <h5>➤ 租用退款政策</h5>
+            <!-- <h5>➤ 租用退款政策</h5>
             <p style="color: darkred; font-weight: 400;">
                   預訂開始時間 48 小時前可全額退款，<br>
                   預訂開始時間 48 小時內即無法更改或取消訂單。
-               </p>
-               <NButton type="error">
+               </p> -->
+               <NButton type="error" @click="storeOrdersData.CancelDate">
                   -----------------------------------------取消訂單-------------------------------------------
                </NButton>
             </section>
