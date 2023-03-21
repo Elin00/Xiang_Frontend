@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import axios from 'axios';
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 
 export const useProductStore = defineStore('ProductsAxios', () => {
     const productPAndS = reactive([]);
     const productRoom = reactive([]);
-    const markers = ref([]);
+    const markers = reactive([]);
 
 
     //建立class
@@ -53,7 +53,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
                     })
                 })
             });
-            // console.log(productPAndS);
+            console.log(productPAndS);
             // console.log(productRoom);
             productPAndS.forEach((pands) => {
                 const marker = {

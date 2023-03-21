@@ -11,13 +11,21 @@ import "leaflet/dist/leaflet.css";
 import { onMounted, ref, reactive } from "vue";
 
 //import pinia
+import { useProductStore } from "../../stores/ProductsAxios.js"
+
+
+
+const Productspinia = useProductStore();
 
 
 //data
 const currentFilter = ref('location');
 const mapContainer = ref(null);
-const productPAndS = reactive([]);
-const productRoom = reactive([]);
+
+
+// const productPAndS = reactive([]);
+// const productRoom = reactive([]);
+
 
 const cardinfo = {
     image: "https://www.uicbc.com/upload/service/c.jpg",
@@ -33,35 +41,34 @@ const cardinfo = {
 }
 const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
 
-const markers = [];
 
 //建立class
-class PAndS {
-    constructor(pName, sName, sImage, sOpenTime, sLatitude, sLongitude, sAddress, sDescription, rNum) {
-        this.pName = pName;
-        this.sName = sName;
-        this.sImage = sImage;
-        this.sOpenTime = sOpenTime;
-        this.sLatitude = sLatitude;
-        this.sLongitude = sLongitude;
-        this.sAddress = sAddress;
-        this.sDescription = sDescription;
-        this.rNum = rNum;
-    }
-}
-class Room {
-    constructor(pName, sName, rCategoryId, rHourPrice, rDatePrice, rPing, rImage, rStatus, rDescription) {
-        this.pName = pName;
-        this.sName = sName;
-        this.rCategoryId = rCategoryId;
-        this.rHourPrice = rHourPrice;
-        this.rDatePrice = rDatePrice;
-        this.rPing = rPing;
-        this.rImage = rImage;
-        this.rStatus = rStatus;
-        this.rDescription = rDescription;
-    }
-}
+// class PAndS {
+//     constructor(pName, sName, sImage, sOpenTime, sLatitude, sLongitude, sAddress, sDescription, rNum) {
+//         this.pName = pName;
+//         this.sName = sName;
+//         this.sImage = sImage;
+//         this.sOpenTime = sOpenTime;
+//         this.sLatitude = sLatitude;
+//         this.sLongitude = sLongitude;
+//         this.sAddress = sAddress;
+//         this.sDescription = sDescription;
+//         this.rNum = rNum;
+//     }
+// }
+// class Room {
+//     constructor(pName, sName, rCategoryId, rHourPrice, rDatePrice, rPing, rImage, rStatus, rDescription) {
+//         this.pName = pName;
+//         this.sName = sName;
+//         this.rCategoryId = rCategoryId;
+//         this.rHourPrice = rHourPrice;
+//         this.rDatePrice = rDatePrice;
+//         this.rPing = rPing;
+//         this.rImage = rImage;
+//         this.rStatus = rStatus;
+//         this.rDescription = rDescription;
+//     }
+// }
 
 
 //function
@@ -69,62 +76,80 @@ const selectFilter = (filterName) => {
     currentFilter.value = filterName;
     store.selectFilter(filterName);
 }
-const axiosInit = async () => {
-    try {
-        const res = await axios.get("https://localhost:7073/api/Products");
-        res.data.forEach((product, pidx) => {
+// const axiosInit = async () => {
+//     try {
+//         const res = await axios.get("https://localhost:7073/api/Products");
+//         res.data.forEach((product, pidx) => {
 
-            //抓PAndS資料
-            product.psite.forEach((site, sidx) => {
-                const tpands = new PAndS(product.name, site.name, site.image, site.openTime, site.latitude, site.longitude, site.address, site.siteDescription, site.psiteRoom.length)
-                productPAndS.push(tpands);
+//             //抓PAndS資料
+//             product.psite.forEach((site, sidx) => {
+//                 const tpands = new PAndS(product.name, site.name, site.image, site.openTime, site.latitude, site.longitude, site.address, site.siteDescription, site.psiteRoom.length)
+//                 productPAndS.push(tpands);
 
-                //抓Room資料
-                site.psiteRoom.forEach((room, ridx) => {
-                    const troom = new Room(product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
-                    productRoom.push(troom);
-                })
-            })            
-        });
-        console.log(productPAndS);
-        // console.log(productRoom); 
-        productPAndS.forEach((pands) => {
-            const marker = {
-                lat: parseFloat(pands.sLatitude),
-                lng: parseFloat(pands.sLongitude),
-                name: pands.sName,
-                description: pands.sDescription};
-                markers.push(marker);
-            });
-            console.log(markers);      
-    } catch (error) {
-        console.log(error.message);
-    }
-}
+//                 //抓Room資料
+//                 site.psiteRoom.forEach((room, ridx) => {
+//                     const troom = new Room(product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
+//                     productRoom.push(troom);
+//                 })
+//             })
+//         });
+//         console.log(productPAndS);
+//         // console.log(productRoom); 
+//         productPAndS.forEach((pands) => {
+//             const marker = {
+//                 lat: parseFloat(pands.sLatitude),
+//                 lng: parseFloat(pands.sLongitude),
+//                 name: pands.sName,
+//                 description: pands.sDescription
+//             };
+//             markers.push(marker);
+//         });
+//         console.log(markers);
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
 
 
 //hook
+
+let markersLayer;
 onMounted(() => {
+    // 初始化 Leaflet 地圖
     const map = L.map(mapContainer.value, {
         center: [22.8, 120.5],
         zoom: 10,
     });
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    // 添加瓷磚圖層到地圖
+    const tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    const markersLayer = L.layerGroup().addTo(map);
+    markersLayer = markersLayer.addTo(map);
 
-    axiosInit().then(()=>{
-        markers.forEach((marker) => {
+    //加入marker
+    const { markers } = useProductStore();
+    // console.log(markers);
+    markers.forEach((marker) => {
+        const { lat, lng, name, description } = marker;
+        const newMarker = L.marker([lat, lng]).addTo(markersLayer);
+        newMarker.bindPopup(`<b>${name}</b><br>${description}`)
+    });
+    console.log(markers)
+
+
+    Productspinia.axiosInit().then(() => {
+        Productspinia.markers.forEach((marker) => {
             const { lat, lng, name, description } = marker;
-            console.log(lat, lng);
-            const newMarker = L.marker([lat, lng]).addTo(markersLayer);
+            const newMarker = L.marker([lat, lng]).addTo(markersLayer.value);
             newMarker.bindPopup(`<b>${name}</b><br>${description}`)
-        })});
+        });
+    });
+
     markersLayer.addTo(map);
+
 });
 
 </script>
@@ -156,7 +181,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="col-6 space-wrapper">
-                <div class="mapContainer" ref="mapContainer"></div>
+                <div class="map-container" ref="mapContainer"></div>
             </div>
         </div>
     </div>
