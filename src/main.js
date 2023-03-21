@@ -31,7 +31,7 @@ if (user) {
 }
 
 
-app.use(pinia);
+// app.use(pinia);
 app.use(ElementPlus);
 app.use(router);
 app.use(materialKit);

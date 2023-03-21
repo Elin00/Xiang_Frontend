@@ -2,13 +2,18 @@
 import { reactive, onMounted } from 'vue'
 
 const props = defineProps({
+    Image: {
+        type: String,
+        default: '',
+        require: true,
+    },
     Name: {
         type: String,
         default: '崇明店',
     },
     OpenTime: {
         type: String,
-        default: '08:00~12:00,13:00~17:00',
+        default: '08:00~22:00',
     },
     Address: {
         type: String,
@@ -21,6 +26,7 @@ const props = defineProps({
 })
 
 const ot = reactive(['', '']);
+const imgele = null;
 
 onMounted(() => {
     let ar = props.OpenTime.split(',');
@@ -30,9 +36,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="row">
+    <div class="row border-bottom mb-3">
         <div class="col-4">
-            <img class="w-100" src="../../../assets/img/SiteImg/bg9.jpg" alt="SiteImg">
+            <img name="siteImg" :src="Image" class="w-100" alt="SiteImg">
         </div>
         <div class="col-2">
             <h6>站點名稱</h6>
@@ -50,6 +56,8 @@ onMounted(() => {
             <button class="btn btn-dark btn-sm" @click="">修改</button>
             <br />
             <button class="btn btn-danger btn-sm" @click="">刪除</button>
+            <br />
+            <button class="btn btn-info btn-sm" @click="">房管</button>
         </div>
     </div>
 </template>

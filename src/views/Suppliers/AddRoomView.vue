@@ -1,25 +1,48 @@
 <script setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
+import { useSuppliersDataStore } from '../../stores/SuppliersData.js'
+import axios from "axios";
 import SupplierHeader from './Components/SupplierHeader.vue'
-import "../../assets/js/core/bootstrap.min.js";
 import PSite from './Components/PSite.vue'
+import "../../assets/js/core/bootstrap.min.js";
 
+//data
+const suppliersDataStore = useSuppliersDataStore();
 let AddSiteModal = null;
+const addSiteDate = reactive({
+    ProductId: 3,
+    Name: '',
+    Image: '',
+    OpenTime: '',
+    Address: '',
+    Latitude: '',
+    Longitude: '',
+    siteDescription: '',
+})
 
-const savePSite = () => {
-
+//function
+const savePSite = async () => {
+    try {
+        const res = await axios.post('https://localhost:7073/api/Products/PSite', addSiteDate, { headers: { 'Content-Type': 'application/json' } });
+        console.log(res);
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 const addSiteModalOpen = () => {
     AddSiteModal.show();
-    console.log(AddSiteModal.show);
+    // console.log(AddSiteModal.show);
 }
 const addSiteModalClose = () => {
     AddSiteModal.hide();
-    console.log(AddSiteModal.hide);
+    // console.log(AddSiteModal.hide);
 }
 
+//hook
 onMounted(() => {
     AddSiteModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    suppliersDataStore.getProduct();
 })
 </script>
 
@@ -37,7 +60,8 @@ onMounted(() => {
                 </li>
             </ul>
         </div>
-        <PSite />
+        <PSite v-for="site in suppliersDataStore.siteAndRoom" :Name="site.name" :Image="site.image"
+            :OpenTime="site.openTime" :Address="site.address" :Description="site.siteDescription" />
     </div>
 
 
@@ -57,7 +81,8 @@ onMounted(() => {
                     </h5>
                     <p>站點名稱</p>
                     <div class="d-flex mb-3">
-                        <input type="text" class="form-control btn-light creditCardText" placeholder="請填入站點名字">
+                        <input type="text" class="form-control btn-light creditCardText" placeholder="請填入站點名字"
+                            v-model="addSiteDate.Name">
                     </div>
                     <p>圖片</p>
                     <div class="d-flex mb-3">
@@ -65,16 +90,25 @@ onMounted(() => {
                     </div>
                     <p>開放時間</p>
                     <div class="d-flex mb-3">
-                        <input type="text" class="form-control btn-light creditCardText"
-                            placeholder="08:00~12:00,13:00~17:00">
+                        <input type="text" class="form-control btn-light creditCardText" placeholder="08:00~22:00"
+                            v-model="addSiteDate.OpenTime">
                     </div>
                     <p>地點</p>
                     <div class="d-flex mb-3">
-                        <input type="text" class="form-control btn-light creditCardText" placeholder="請填入地址">
+                        <input type="text" class="form-control btn-light creditCardText" placeholder="請填入地址"
+                            v-model="addSiteDate.Address">
+                    </div>
+                    <p>經緯度</p>
+                    <div class="d-flex mb-3">
+                        <input type="text" class="form-control btn-light creditCardText me-3" placeholder="緯度(latitude) S、N"
+                            v-model="addSiteDate.Latitude">
+                        <input type="text" class="form-control btn-light creditCardText ms-3"
+                            placeholder="經度(longitude) E、W" v-model="addSiteDate.Longitude">
                     </div>
                     <p>描述</p>
                     <div class="d-flex mb-3">
-                        <input type="text" class="form-control btn-light creditCardText" placeholder="簡述介紹這個站點">
+                        <input type="text" class="form-control btn-light creditCardText" placeholder="簡述介紹這個站點"
+                            v-model="addSiteDate.siteDescription">
                     </div>
 
                 </div>
