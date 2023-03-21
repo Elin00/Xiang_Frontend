@@ -44,7 +44,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
   //登出
   const SLogout = async () => {
     try {
-      const token = JSON.parse(localStorage.getItem("user")).token;
+      const token = JSON.parse(localStorage.getItem("SUser")).token;
       const response = await axios.post(
         "https://localhost:7073/api/TSuppliers/logout",
         {},
@@ -55,7 +55,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
         }
       );
       // 清除用戶資訊
-      localStorage.removeItem("user");
+      localStorage.removeItem("er");
       name.value = "";
       loggedIn.value = false;
     } catch (error) {

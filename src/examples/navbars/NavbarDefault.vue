@@ -3,12 +3,15 @@ import { RouterLink } from "vue-router";
 import { ref, watch } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 import { useCustomerStore } from "../../stores/CustomerData.js";
+import { useSuppliersDataStore } from "../../stores/SuppliersData.js";
 
 // images
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
 
 const CustomerStore = useCustomerStore();
+const Suppliersstore = useSuppliersDataStore();
+
 
 const props = defineProps({
   action: {
@@ -120,12 +123,12 @@ watch(
         <span class="navbar-toggler-icon mt-2">
           <span class="navbar-toggler-bar bar1"></span>
           <span class="navbar-toggler-bar bar2"></span>
-          <span class="navbar-toggler-bar bar3"></span>
-        </span>
-      </button>
-      <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
-        <ul class="navbar-nav navbar-nav-hover ms-auto">
-          <RouterLink :to="{ name: 'RoomGuideView' }" class="py-3 ps-3 d-flex" id="title"
+        <span class="navbar-toggler-bar bar3"></span>
+      </span>
+    </button>
+    <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+      <ul class="navbar-nav navbar-nav-hover ms-auto">
+        <RouterLink :to="{ name: 'RoomGuideView' }" class="py-3 ps-3 d-flex" id="title"
             style="padding-right: 15px; color: aliceblue; font-size: 24px" :class="[
               (props.transparent && textDark.value) || !props.transparent
                 ? 'text-dark font-weight-bolder ms-sm-3'
@@ -148,16 +151,38 @@ watch(
                 </span>
               </div>
             </a>
+
             <div id="dropdown" class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
               style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
-              <!-- 登入時換取顧客帳戶 -->
-              <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
-                data-bs-toggle="modal" data-bs-target="#Login">登入
+
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" data-bs-toggle="modal"
+                data-bs-target="#Login">登入
               </div>
 
-              <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
-                data-bs-toggle="modal" data-bs-target="#Register">註冊
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" data-bs-toggle="modal"
+                data-bs-target="#Register">註冊
               </div>
+
+              <RouterLink :to="{ name: 'other-CouponView' }" class="dropdown-item py-3 ps-3 border-radius-md"
+                :style="action.color" :href="action.route">領取優惠卷
+              </RouterLink>
+              <RouterLink :to="{ name: 'questions' }" class="dropdown-item py-3 ps-3 border-radius-md"
+                :style="action.color">常見問答</RouterLink>
+              <div v-if="CustomerStore.loggedIn">
+              </div>
+            </div>
+
+            <div v-if="CustomerStore.loggedIn" id="dropdown"
+              class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
+              style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
+              <!-- 登入時換取顧客帳戶 -->
+              <!-- <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                  data-bs-toggle="modal" data-bs-target="#Login">登入
+                </div>
+
+                <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                  data-bs-toggle="modal" data-bs-target="#Register">註冊
+                </div> -->
               <div v-if="CustomerStore.loggedIn">
                 <span class="dropdown-item py-3 ps-3 border-radius-md"
                   style="color: green; border-bottom: 1px solid grey">
@@ -177,6 +202,38 @@ watch(
                 :style="action.color">常見問答</RouterLink>
               <div v-if="CustomerStore.loggedIn">
                 <span class="dropdown-item py-3 ps-3 border-radius-md" @click="CustomerStore.logout"
+                  :style="action.color">
+                  登出
+                </span>
+              </div>
+            </div>
+
+
+            <div v-if="Suppliersstore.loggedIn" id="dropdown"
+              class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
+              style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
+              <!-- 業者登入時換取業者帳戶 -->
+              <!-- <div v-if="!Suppliersstore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                      data-bs-toggle="modal" data-bs-target="#Login">登入
+                    </div>
+
+                    <div v-if="!Suppliersstore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                      data-bs-toggle="modal" data-bs-target="#Register">註冊
+                    </div> -->
+              <div v-if="Suppliersstore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md"
+                  style="color: green; border-bottom: 1px solid grey">
+                  {{ Suppliersstore.name }}
+                </span>
+              </div>
+              <RouterLink v-if="Suppliersstore.loggedIn" :to="{ name: 'supplierDetails' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的帳戶
+              </RouterLink>
+              <RouterLink v-if="Suppliersstore.loggedIn" :to="{ name: 'addRoom' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的空間
+              </RouterLink>
+              <div v-if="Suppliersstore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md" @click="Suppliersstore.SLogout"
                   :style="action.color">
                   登出
                 </span>
