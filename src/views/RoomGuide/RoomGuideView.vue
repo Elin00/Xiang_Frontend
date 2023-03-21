@@ -27,25 +27,52 @@ const mapContainer = ref(null);
 // const productRoom = reactive([]);
 
 
-const cardinfo = {
-    image: "https://www.uicbc.com/upload/service/c.jpg",
-    icon: "touch_app",
-    title: "成功大學",
-    description: "All the Bootstrap components that you need in a development have been re-design with the new look.",
-    action: [
-        {
-            route: "/views/rentroomview",
-            label: "現在就訂房",
-        },
-    ],
-}
-const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
+// const cardinfo = {
+//     image: "https://www.uicbc.com/upload/service/c.jpg",
+//     icon: "touch_app",
+//     title: "成功大學",
+//     description: "All the Bootstrap components that you need in a development have been re-design with the new look.",
+//     action: [
+//         {
+//             route: "/views/rentroomview",
+//             label: "現在就訂房",
+//         },
+//     ],
+// }
+// const data = [];
 
 //function
 const selectFilter = (filterName) => {
     currentFilter.value = filterName;
     store.selectFilter(filterName);
 }
+
+
+const selectedCard = computed(() => {
+  if (!selectedMarker.value) return null;
+
+  const room = productRoom.value.find(
+    (room) =>
+      room.sName === selectedMarker.value.name && room.rStatus === "available"
+  );
+
+  if (!room) return null;
+
+  return {
+    icon: "touch_app",
+    title: room.rDescription,
+    image: `./src/assets/img/${room.rImage}`,
+    description: room.rDescription,
+    action: [
+      {
+        route: "/views/rentroomview",
+        label: "現在就訂房",
+      },
+    ],
+  };
+});
+
+
 
 const markersLayer = L.layerGroup();
 //hook
@@ -63,18 +90,23 @@ onMounted(() => {
 
     markersLayer.addTo(map);
 
-
+    const selectedMarker = reactive(null);
     Productspinia.axiosInit().then(() => {
-
+        //加入卡片
+        const {cardinfo} = useProductStore();             
         //加入marker
         const { markers } = useProductStore();
-        console.log(markers)
+        // console.log(markers)
         markers.forEach((marker) => {
             const { lat, lng, name, description } = marker;
             const newMarker = L.marker([lat, lng]).addTo(markersLayer);
             newMarker.bindPopup(`<b>${name}</b><br>${description}`)
+            newMarker.on("click", () => {
+                selectedMarker.value = marker;
+            });
         });
     })
+    
 });
 
 </script>
@@ -96,7 +128,7 @@ onMounted(() => {
             <div class="col-6 space-wrapper">
                 <div class="space-wrapper__list">
                     <div class="grid">
-                        <RotatingCardForRoom v-for="(item, index) in data" :key="index">
+                        <RotatingCardForRoom v-for="(item, index) in Productspinia.cardinfo" :key="index">
                             <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
                                 :description="item.description" />
                             <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description"
