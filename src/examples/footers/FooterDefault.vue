@@ -67,8 +67,10 @@ defineProps({
       {
         name: "攜手Xiang",
         items: [
-          { name: "供應商登入",
-            path: "/cooperation" },
+          {
+            name: "供應商登入",
+            path: "/cooperation"
+          },
           {
             name: "合作夥伴",
             path: "/cooperation"
@@ -78,8 +80,10 @@ defineProps({
       {
         name: "使用條款",
         items: [
-          { name: "使用條款",
-            path: "/userview/userterms" },
+          {
+            name: "使用條款",
+            path: "/userview/userterms"
+          },
           {
             name: "隱私政策",
             path: "/userview/privacy"
@@ -137,9 +141,9 @@ defineProps({
 </template>
 
 <style>
-#link :hover{
-background-color: #ccc;
- cursor: pointer;
+#link :hover {
+  color: #FFBF00;
+  /* background-color: #ccc; */
+  cursor: pointer;
 }
-
 </style>

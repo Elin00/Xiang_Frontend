@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, reactive } from "vue";
 import axios from "axios";
-import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
+// import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 
 export const useSuppliersDataStore = defineStore('SuppliersData', () => {
@@ -25,7 +25,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
         }
       );
       // 解碼JWT檔案
-      const decodedToken = jwt_decode(response.data);
+      // const decodedToken = jwt_decode(response.data);
       // 設置Email的值
       name.value = decodedToken.Name;
       loggedIn.value = true; // 登入成功

@@ -1,7 +1,7 @@
-import { reactive, ref,computed  } from "vue";
+import { reactive, ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
+// import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 export const useCustomerStore = defineStore("CustomerData", () => {
   const id = ref("")
@@ -24,7 +24,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
         }
       );
       // 解碼JWT檔案
-      const decodedToken = jwt_decode(response.data);
+      // const decodedToken = jwt_decode(response.data);
       // 設置Email的值
       Name.value = decodedToken.Name;
       id.value = decodedToken.sub;
@@ -34,7 +34,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
         "user",
         JSON.stringify({
           token: response.data, // 存储 JWT
-          id :  decodedToken.sub,
+          id: decodedToken.sub,
           Name: decodedToken.Name,
         })
       );
@@ -104,7 +104,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
     }
   });
   return {
-    Email,id,
+    Email, id,
     Password,
     Name,
     Phone,
