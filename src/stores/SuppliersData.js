@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 
 export const useSuppliersDataStore = defineStore('SuppliersData', () => {
+  const id = ref('');
   const name = ref('');
-  const SName = ref('')
   const phone = ref('');
   const email = ref('');
   const password = ref('');
@@ -27,19 +27,20 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
       // 解碼JWT檔案
       const decodedToken = jwt_decode(response.data);
       // 設置Email的值
-      name.value = decodedToken.Name;
+      name.value = decodedToken.name;
+      id.value = decodedToken.sub;
       loggedIn.value = true; // 登入成功
 
       localStorage.setItem(
         "SUser",
         JSON.stringify({
           token: response.data, // 存储 JWT
-          name: decodedToken.Name,
+          name: decodedToken.name,
+          id: decodedToken.sub,
         })
       );
       return true; // 登录成功
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
       return false;
     }
@@ -58,9 +59,10 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
         }
       );
       // 清除用戶資訊
-      localStorage.removeItem("er");
+      localStorage.removeItem("SUser");
       name.value = "";
       loggedIn.value = false;
+      window.location.href = 'http://localhost:3000/'
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +92,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
           }
         }
       );
-      console.log(response);
+      //console.log(response);
       return true;
     }
     catch (error) {
@@ -98,9 +100,17 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
       return false;
     }
 
-  }
+  };
+  const token = computed(() => {
+    const SUser = JSON.parse(localStorage.getItem("SUser"));
+    if (SUser) {
+      return SUser.token;
+    } else {
+      return null;
+    }
+  });
 
 
 
-  return { name, phone, email, password, SupplierRegister, SLogin, loggedIn, SLogout, registerSupplier, address };
+  return { name, phone, email, password, address, id, SupplierRegister, SLogin, loggedIn, SLogout, registerSupplier, token };
 });
