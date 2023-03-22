@@ -76,7 +76,7 @@ async function SupplierRegister() {
   const isregisterSuccess = await Suppliersstore.SupplierRegister();
   console.log(isregisterSuccess);
   if (isregisterSuccess) {
-    const modalElement = document.getElementById("SupplierRegister");
+    const modalElement = document.getElementById("CooperationRegister");
     console.log(modalElement);
     modalElement.classList.remove("show");
     modalElement.style.display = "none";
@@ -346,6 +346,18 @@ async function submitRegister() {
                       <input
                         v-model="Suppliersstore.registerSupplier.phone"
                         type="phone"
+                        class="form-control form-control-md"
+                        placeholder=""
+                        isrequired="true"
+                      />
+                    </div>
+                    <div class="input-group input-group-outline my-3">
+                      <label class="form-label" data-bs-toggle="modal"
+                        >聯絡地址</label
+                      >
+                      <input
+                        v-model="Suppliersstore.registerSupplier.address"
+                        type="address"
                         class="form-control form-control-md"
                         placeholder=""
                         isrequired="true"

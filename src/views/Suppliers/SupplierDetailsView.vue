@@ -8,7 +8,7 @@ const Suppliersstore = useSuppliersDataStore();
 </script>
 
 <template>
-  <div style="margin-left: 10%">
+  <div style="margin: 50px 200px 10%">
     <h4>個人資料修改</h4>
     <form @submit.prevent="submitForm">
       <div class="col-lg-4">
@@ -36,6 +36,15 @@ const Suppliersstore = useSuppliersDataStore();
           type="text"
           placeholder="{{}}"
           v-model="Suppliersstore.email"
+        />
+      </div>
+      <div class="col-lg-4">
+        <MaterialInput
+          class="input-group-static mb-4"
+          label="聯絡地址"
+          type="text"
+          placeholder="{{}}"
+          v-model="Suppliersstore.address"
         />
       </div>
       <div class="col-lg-4">

@@ -10,6 +10,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
   const phone = ref('');
   const email = ref('');
   const password = ref('');
+  const address = ref('');
   const loggedIn = ref(false);
   //登入
   const SLogin = async () => {
@@ -69,6 +70,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     email: "",
     phone: "",
     password: "",
+    address: "",
   });
   //註冊
   const SupplierRegister = async () => {
@@ -80,6 +82,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
           phone: registerSupplier.phone,
           email: registerSupplier.email,
           password: registerSupplier.password,
+          address: registerSupplier.address,
         },
         {
           headers: {
@@ -99,5 +102,5 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
 
 
 
-  return { name, phone, email, password, SupplierRegister, SLogin, loggedIn, SLogout, registerSupplier, };
+  return { name, phone, email, password, SupplierRegister, SLogin, loggedIn, SLogout, registerSupplier, address };
 });
