@@ -164,7 +164,7 @@ watch(
                   {{ CustomerStore.Name }}
                 </span>
               </div>
-              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'rentroomView' }"
+              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'member-orders' }"
                 class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的預定
               </RouterLink>
               <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'member-memberdetail' }"

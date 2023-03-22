@@ -45,23 +45,7 @@ const storeOrdersData = useOrdersDataStore();
                         <td>{{ storeOrdersData.EndDate }}</td>
                         <td>{{ storeOrdersData.Discount }}</td>
                         <td>{{ storeOrdersData.Price }}</td>
-                     </tr>
-                     <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                     </tr>
-                     <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                     </tr>
+                     </tr>   
                   </tbody>
                </NTable>
                <hr class="style-two">
