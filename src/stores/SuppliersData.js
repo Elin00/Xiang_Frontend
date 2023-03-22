@@ -9,8 +9,9 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     const email = ref('');
     const password = ref('');
     const siteAndRoom = reactive([]);
-    const path = '../../../assets/img/PSite'
-
+    const orderBy = [];
+    const currentSiteId = ref(null);
+    const currentProductId = ref(3);
 
     const SupplierRegister = async () => {
         try {
@@ -28,15 +29,19 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
 
     const getProduct = async () => {
         try {
-            const res = await axios.get('https://localhost:7073/api/Products/3');
+            siteAndRoom.splice(0);
+            orderBy.splice(0);
+            const res = await axios.get(`https://localhost:7073/api/Products/${currentProductId.value}`);
             res.data.psite.forEach(site => {
-                site.image = path + site.image
-                siteAndRoom.push(site)
+                siteAndRoom.push(site);
+                orderBy.push(`${site.siteId}`);
             });
+            // console.log(siteAndRoom);
         }
         catch (error) {
             console.log(error)
         }
     }
-    return { name, phone, email, password, siteAndRoom, SupplierRegister, getProduct }
+
+    return { name, phone, email, password, siteAndRoom, currentSiteId, currentProductId, orderBy, SupplierRegister, getProduct }
 })

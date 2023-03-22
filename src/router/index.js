@@ -29,8 +29,8 @@ import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
 import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
 import CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
-import AddRoomView from "../views/Suppliers/AddRoomView.vue";
-import EditRoomView from "../views/Suppliers/EditRoomView.vue";
+import SiteView from "../views/Suppliers/SiteView.vue";
+import RoomView from "../views/Suppliers/RoomView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,14 +64,14 @@ const router = createRouter({
       component: QuestionsView,
     },
     {
-      path: "/addRoom",
-      name: "addRoom",
-      component: AddRoomView,
+      path: "/addSite",
+      name: "addSite",
+      component: SiteView,
     },
     {
-      path: "/editRoom",
-      name: "editRoom",
-      component: EditRoomView,
+      path: "/addRoom",
+      name: "addRoom",
+      component: RoomView,
     },
     {
       path: "/supplierDetails",

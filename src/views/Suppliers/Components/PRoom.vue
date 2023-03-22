@@ -5,7 +5,6 @@ import { useSuppliersDataStore } from '../../../stores/SuppliersData.js'
 
 const suppliersDataStore = useSuppliersDataStore();
 
-const emit = defineEmits(['funcModify'])
 const props = defineProps({
     Id: {
         type: Number,
@@ -37,12 +36,7 @@ const ot = reactive(['', '']);
 const pathPSite = ref('/src/assets/img/PSite/')
 
 const goRoomView = (e) => {
-    suppliersDataStore.currentSiteId = e.target.name;
-}
-const ClickModify = (e) => {
-    const clickSiteId = e.target.parentNode.getAttribute('name');
-    const clickfunc = e.target.getAttribute('name');
-    emit('funcModify', clickfunc, clickSiteId);
+    suppliersDataStore.currentSiteId = e.target.id;
 }
 
 onMounted(() => {
@@ -69,12 +63,12 @@ onMounted(() => {
             <h6>描述</h6>
             <p class="mb-0">{{ props.Description }}</p>
         </div>
-        <div class="col-2" :name="props.Id">
-            <button name="modify" class="btn btn-dark btn-sm" @click="ClickModify">修改</button>
+        <div class="col-2">
+            <button class="btn btn-dark btn-sm" @click="">修改</button>
             <br />
-            <button name="delete" class="btn btn-danger btn-sm" @click="ClickModify">刪除</button>
+            <button class="btn btn-danger btn-sm" @click="">刪除</button>
             <br />
-            <RouterLink :to="{ name: 'addRoom' }"><button :name="props.Id" @click="goRoomView"
+            <RouterLink :to="{ name: 'addRoom' }"><button :id="props.Id" @click="goRoomView"
                     class="btn btn-info btn-sm">房管</button>
             </RouterLink>
         </div>
