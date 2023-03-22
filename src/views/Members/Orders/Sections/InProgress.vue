@@ -50,43 +50,12 @@ const storeOrdersData = useOrdersDataStore()
                            <NButton type="error" @click="storeOrdersData.CancelDate">取消</NButton>
                         </td>
                      </tr>
-                     <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>
-                           <NButton type="error" @click="storeOrdersData.CancelDate">取消</NButton>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                     <td>...</td>
-                     <td>
-                        <NButton type="error" @click="storeOrdersData.CancelDate">取消</NButton>
-                     </td>
-                     </tr>
+                     
 
                   </tbody>
             </NTable>
-            <hr class="style-two">
-               <p style="color:blue; font-weight: 400;">
-                  AAA <br>
-                  BBB
-               </p>
-               <!-- <h5>➤ 租用退款政策</h5>
-                  <p style="color: darkred; font-weight: 400;">
-                     預訂開始時間 48 小時前可全額退款，<br>
-                     預訂開始時間 48 小時內即無法更改或取消訂單。
-                  </p> -->
+            
             </section>
-            <hr class="style-two">
             <!-- <NButton type="success">
                                     -----------------------------------------------------付款-------------------------------------------------------
                                  </NButton> -->
