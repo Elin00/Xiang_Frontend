@@ -22,13 +22,10 @@ const modalText = ref("");
 
 const emit = defineEmits(["modifyText"]);
 
-const save = () => {
-  emit("modifyText", modalText.value);
-  modalText.value = "";
-};
-const save1 =async () => {
+
+const save1 = async () => {
     emit("modifyText", modalText.value);
-  modalText.value = "";
+    modalText.value = "";
   try {
     const response = await axios.put(
       `https://localhost:7073/api/Client/id?id=${CustomerData.id}`,
@@ -44,7 +41,7 @@ const save1 =async () => {
         },
       }
     );
-    // console.log(response);
+    console.log(response);
     if (response.status === 200) {
       // 更新成功
       // 更新本地存儲中的名稱
