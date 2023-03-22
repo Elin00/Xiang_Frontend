@@ -1,22 +1,8 @@
 <script setup>
-import { reactive, onMounted } from "vue";
-import axios from "axios";
+import { useCouponDataStore } from "../../../../stores/CouponData.js";
 
-const result = reactive([]);
+const CouponData = useCouponDataStore();
 
-const fetchData = async () => {
-  try {
-    const response = await axios.get(
-      "https://localhost:7073/api/Client/ListCoupon"
-    );
-    result.push(...response.data);
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-onMounted(fetchData);
 </script>
 
 <template>
@@ -32,7 +18,7 @@ onMounted(fetchData);
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in result" :key="index">
+          <tr v-for="(item, index) in CouponData.result" :key="index">
             <th scope="row">{{ item.couponId }}</th>
             <td>{{ item.code }}</td>
             <td>{{ item.howPoint }}</td>

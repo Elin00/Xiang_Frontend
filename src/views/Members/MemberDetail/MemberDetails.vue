@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-
 import MemberHeader from "../Components/MemberHeader.vue";
 
 </script>
@@ -11,8 +10,8 @@ import MemberHeader from "../Components/MemberHeader.vue";
       <div class="row">
          <ul class="list-unstyled d-flex border-bottom">
             <li class="me-4">
-               <RouterLink :to="{ name: 'member-memberdetail-information' }">
-                  <h5 class="linkstring" id="info">基本資料</h5>
+               <RouterLink :to="{ name: 'member-memberdetail-information' }" >
+                  <h5 class="linkstring" id="info" >基本資料</h5>
                </RouterLink>
             </li>
             <li class="me-4">

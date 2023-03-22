@@ -1,13 +1,16 @@
-import { reactive, ref } from "vue";
+import { reactive, ref,computed  } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 export const useCustomerStore = defineStore("CustomerData", () => {
+  const id = ref("")
   const Email = ref("");
   const Name = ref("");
+  const Phone = ref("");
   const Password = ref("");
   const loggedIn = ref(false);
+  const EditEmail = ref('')
   //登入
   const Login = async () => {
     try {
@@ -24,12 +27,14 @@ export const useCustomerStore = defineStore("CustomerData", () => {
       const decodedToken = jwt_decode(response.data);
       // 設置Email的值
       Name.value = decodedToken.Name;
+      id.value = decodedToken.sub;
       loggedIn.value = true; // 登入成功
 
       localStorage.setItem(
         "user",
         JSON.stringify({
           token: response.data, // 存储 JWT
+          id :  decodedToken.sub,
           Name: decodedToken.Name,
         })
       );
@@ -56,6 +61,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
       localStorage.removeItem("user");
       Name.value = "";
       loggedIn.value = false;
+      window.location.href = 'http://localhost:3000/'
     } catch (error) {
       console.log(error);
     }
@@ -83,21 +89,29 @@ export const useCustomerStore = defineStore("CustomerData", () => {
           },
         }
       );
-      console.log(response);
       return true;
     } catch (error) {
       console.log(error);
       return false;
     }
   };
-
+  const token = computed(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      return user.token;
+    } else {
+      return null;
+    }
+  });
   return {
-    Email,
+    Email,id,
     Password,
     Name,
+    Phone,
     Login,
+    token,
     loggedIn,
     logout,
-    register, registerCustomer
+    register, registerCustomer,
   };
 });

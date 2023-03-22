@@ -39,7 +39,6 @@ async function submitLogin() {
   const isLoginSuccess = await Customer.Login();
   if (isLoginSuccess) {
     const modalElement = document.getElementById("Login");
-    console.log(modalElement);
     modalElement.classList.remove("show");
     modalElement.style.display = "none";
     document.body.classList.remove("modal-open");
@@ -55,10 +54,8 @@ async function submitLogin() {
 }
 async function submitRegister() {
   const isregisterSuccess = await Customer.register();
-  console.log(isregisterSuccess);
   if (isregisterSuccess) {
     const modalElement = document.getElementById("Register");
-    console.log(modalElement);
     modalElement.classList.remove("show");
     modalElement.style.display = "none";
     document.body.classList.remove("modal-open");
@@ -212,22 +209,22 @@ async function submitRegister() {
                   <form role="form" class="text-start">
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label" data-bs-toggle="modal">姓名</label>
-                      <input v-model="Suppliersstore.name.value" type="name" class="form-control form-control-md"
+                      <input v-model="Suppliersstore.name" type="name" class="form-control form-control-md"
                         placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label" data-bs-toggle="modal">電子信箱</label>
-                      <input v-model="Suppliersstore.email.value" type="email" class="form-control form-control-md"
+                      <input v-model="Suppliersstore.email" type="email" class="form-control form-control-md"
                         placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label" data-bs-toggle="modal">電話</label>
-                      <input v-model="Suppliersstore.phone.value" type="phone" class="form-control form-control-md"
+                      <input v-model="Suppliersstore.phone" type="phone" class="form-control form-control-md"
                         placeholder="" isrequired="true" />
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">密碼</label>
-                      <input v-model="Suppliersstore.password.value" type="password" class="form-control form-control-md"
+                      <input v-model="Suppliersstore.password" type="password" class="form-control form-control-md"
                         placeholder="" isrequired="true" />
                     </div>
                     <div class="form-check" style="padding-left: 0">
