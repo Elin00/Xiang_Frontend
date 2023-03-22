@@ -1,5 +1,12 @@
 <script setup>
+import { RouterLink, RouterView, useRouter } from "vue-router";
 import logoDark from "@/assets/img/logo-ct-dark.png";
+const router = useRouter();
+
+const navigateTo = (path) => {
+  router.push(path);
+};
+
 defineProps({
   brand: {
     type: Object,
@@ -53,49 +60,40 @@ defineProps({
         items: [
           {
             name: "關於我們",
-            href: "http://localhost:3000//pages/landing-pages/about-us"
+            path: "/pages/landing-pages/about-us"
           },
         ]
       },
       {
         name: "攜手Xiang",
         items: [
-          { name: "供應商登入", href: "https://iradesign.io/" },
+          { name: "供應商登入",
+            path: "/cooperation" },
           {
             name: "合作夥伴",
-            href: "http://localhost:3000/cooperation"
+            path: "/cooperation"
           },
-
         ]
       },
       {
         name: "使用條款",
         items: [
-          {
-            name: "使用條款",
-            href: "https://www.creative-tim.com/contact-us"
-          },
+          { name: "使用條款",
+            path: "/userview/userterms" },
           {
             name: "隱私政策",
-            href: "https://www.creative-tim.com/knowledge-center"
+            path: "/userview/privacy"
           },
-          {
-            name: "Cookie政策",
-            href: "https://services.creative-tim.com/"
-          },
-          {
-            name: "技術問題",
-            href: "https://www.creative-tim.com/sponsorships"
-          }
         ]
       },
+      // ...
     ]
   }
 });
 </script>
 <template>
   <footer class="footer py-5">
-    <div class="container p-0" >
+    <div class="container p-0">
       <div class="row">
         <div class="col-4  ">
           <div>
@@ -109,8 +107,8 @@ defineProps({
         <div class="col-lg-1 col-sm-6 col-md-2 mb-4 offset-1" v-for="{ name, items } of menus" :key="name">
           <h6 class="text-sm">{{ name }}</h6>
           <ul class="flex-column ms-n3 nav">
-            <li class="nav-item" v-for="item of items" :key="item.name">
-              <a class="nav-link" :href="item.href" target="_blank">{{ item.name }}</a>
+            <li id="link" class="nav-item" v-for="item of items" :key="item.name">
+              <a class="nav-link" @click="navigateTo(item.path)">{{ item.name }}</a>
             </li>
           </ul>
         </div>
@@ -119,8 +117,7 @@ defineProps({
           <ul class="flex-column ms-n3 nav">
             <li class="nav-item">
               <span class="nav-link" href="#">
-                <img src="../../assets/img/logo100x60.png" alt="綠界信用卡支付"
-                  style="max-height: 30px;"></span>
+                <img src="../../assets/img/logo100x60.png" alt="綠界信用卡支付" style="max-height: 30px;"></span>
             </li>
           </ul>
         </div>
@@ -128,7 +125,7 @@ defineProps({
           <hr style="border-color: #ddd;">
           <div class="text-center">
             <p class="text-dark my-4 text-sm font-weight-normal">
-              僅作第四組專題使用 &copy; {{ new Date().getFullYear() }} 台南全端班 All rights reserved
+              僅作FUEN23第四組專題使用 &copy; {{ new Date().getFullYear() }} 台南全端班 All rights reserved
             </p>
           </div>
         </div>
@@ -137,3 +134,10 @@ defineProps({
   </footer>
 </template>
 
+<style>
+#link :hover{
+background-color: #ccc;
+ cursor: pointer;
+}
+
+</style>
