@@ -56,7 +56,7 @@ onMounted(async () => {
 
 
 
-
+//將圖片資料註傳入這裡
 const swiperTextBase = [
   { Title: "這是第一間房", Address: "高雄市內湖區", img: photo1 },
   { Title: "這是第二間房", Address: "高雄市內湖區", img: photo2 },
@@ -72,6 +72,7 @@ const showModal = ref(false);
 </script>
 
 <template>
+  <!-- 跑馬燈 -->
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
@@ -95,6 +96,7 @@ const showModal = ref(false);
       </div>
     </div>
   </div>
+  <!-- 評論 -->
   <section>
     <div class="container-wrapper">
       <div class="locationTitle">
@@ -115,6 +117,7 @@ const showModal = ref(false);
       </div>
     </div>
   </section>
+  <!-- 出租規則 -->
   <section class="border-bottom">
     <div class="container">
       <div class="row">
@@ -176,6 +179,7 @@ const showModal = ref(false);
       </div>
     </div>
   </section>
+  <!-- 房型內容 -->
   <section>
     <div class="container mt-5">
       <div class="row">
@@ -337,6 +341,7 @@ const showModal = ref(false);
       </div>
     </div>
   </section>
+  
   <!-- 秀出圖片檔案 -->
   <div v-if="showModal" class="floor-mask" @click.self="showModal = false">
     <div class="floor-container floor">
