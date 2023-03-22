@@ -1,5 +1,5 @@
 import { reactive, ref } from 'vue'
-import { defineStore, useStore } from 'pinia'
+import { defineStore } from 'pinia'
 import router from './../router/index.js'
 // import { fetchDataFromDatabase } from '@/api/database'
 
@@ -7,11 +7,14 @@ import router from './../router/index.js'
 //第一個參數就是 id 名稱，餵給 pinia 使用的
 export const useOrdersDataStore = defineStore('ordersData', () => {
    const OrderID = ref('');
-   const OrderDate = ref('');
-   const ReturnDate = ref('');
+   const StartDate = ref('');
+   const EndDate = ref('');
    const CouponID = ref('');
    const Discount = ref('');
    const Cancel = ref(false);
+   const Price = ref(''); //COrderDetail
+   const CategoryName = ref('');
+
 
    const CancelDate = () => {
       if (confirm('是否要取消預定?')) {
@@ -26,7 +29,7 @@ export const useOrdersDataStore = defineStore('ordersData', () => {
       }
    }
 
-   return { OrderID, OrderDate, ReturnDate, CouponID, Discount, CancelDate }
+   return { OrderID, StartDate, EndDate, CouponID, Discount, Cancel, CancelDate, Price, CategoryName }
 })
 
 // export default defineComponent({

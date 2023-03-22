@@ -1,18 +1,21 @@
 <script setup>
 //Naive
-import { NCard, NButton, NDatePicker, NTable } from "naive-ui";
+import { NCard, NTable } from "naive-ui";
 
 import { defineComponent, ref } from "vue";
+import { useOrdersDataStore } from '../../../../stores/ordersData.js'
 
-defineComponent({
-   range: ref([118313526e4, Date.now()])
-});
+const storeOrdersData = useOrdersDataStore()
+
+// defineComponent({
+//    range: ref([118313526e4, Date.now()])
+// });
 </script>
 
 <template>
    <div class="container">
       <div class="row">
-         <div class="col-5">
+         <!-- <div class="col-5">
             <NCard title="HEADSHOT OF CHENGBAO 2023MARCH ">
                <template #cover>
                   <img src="../../../../assets/img/202303chengbao.jpg">
@@ -20,28 +23,28 @@ defineComponent({
                NTD$50/piece
             </NCard>
             <h4>BUY 1 GET 1 FREE !!!!<br>call now 0963177377</h4>
-         </div>
-         <div class="col-7">
+         </div> -->
+         <div class="col-10">
             <section>
                <NTable :bordered="true" :single-line="false" class="my-table">
                   <thead class="my-table-header">
                      <tr>
                         <th>訂單編號</th>
-                        <th>預約日期</th>
+                        <th>房型種類</th>
+                        <th>開始時間</th>
+                        <th>結束時間</th>
                         <th>優惠券</th>
-                        <th>付款方式</th>
-                        <th>發票類型</th>
+                        <th>總價</th>
                      </tr>
                   </thead>
                   <tbody class="my-table-tbody">
                      <tr>
-                        <td>OrderID666666</td>
-                        <td>2023年03月15日 週三<br>
-                           10:00 → 18:00</td>
-                        <td>已使用 10%off</td>
-                        <td>信用卡/ 一次付清</td>
-                        <td>公司<br>
-                           載具/統編：12345678</td>
+                        <td>{{ storeOrdersData.OrderID }}</td>
+                        <td>{{ storeOrdersData.CategoryName }}</td>
+                        <td>{{ storeOrdersData.StartDate }}</td>
+                        <td>{{ storeOrdersData.EndDate }}</td>
+                        <td>{{ storeOrdersData.Discount }}</td>
+                        <td>{{ storeOrdersData.Price }}</td>
                      </tr>
                      <tr>
                         <td>...</td>
@@ -49,8 +52,10 @@ defineComponent({
                         <td>...</td>
                         <td>...</td>
                         <td>...</td>
+                        <td>...</td>
                      </tr>
                      <tr>
+                        <td>...</td>
                         <td>...</td>
                         <td>...</td>
                         <td>...</td>
@@ -62,7 +67,7 @@ defineComponent({
                <hr class="style-two">
                <p style="color:blue; font-weight: 400;">
                   感謝光臨，期待再次與您見面 <br>
-                  若有任何指教請不吝與我們聯繫喲~
+                  若有任何指教請不吝與我們聯繫~
                </p>
             </section>
             <hr class="style-two">
