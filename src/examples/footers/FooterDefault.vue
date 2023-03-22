@@ -92,6 +92,8 @@ defineProps({
     ]
   }
 });
+
+
 </script>
 <template>
   <footer class="footer py-5">
