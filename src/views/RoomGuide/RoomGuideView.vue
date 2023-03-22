@@ -16,30 +16,10 @@ import { useProductStore } from "../../stores/ProductsAxios.js"
 
 
 const Productspinia = useProductStore();
-
-
 //data
 const currentFilter = ref('location');
 const mapContainer = ref(null);
 
-
-// const productPAndS = reactive([]);
-// const productRoom = reactive([]);
-
-
-// const cardinfo = {
-//     image: "https://www.uicbc.com/upload/service/c.jpg",
-//     icon: "touch_app",
-//     title: "成功大學",
-//     description: "All the Bootstrap components that you need in a development have been re-design with the new look.",
-//     action: [
-//         {
-//             route: "/views/rentroomview",
-//             label: "現在就訂房",
-//         },
-//     ],
-// }
-// const data = [];
 
 //function
 const selectFilter = (filterName) => {
@@ -48,29 +28,29 @@ const selectFilter = (filterName) => {
 }
 
 
-const selectedCard = computed(() => {
-  if (!selectedMarker.value) return null;
+// const selectedCard = computed(() => {
+//   if (!selectedMarker.value) return null;
 
-  const room = productRoom.value.find(
-    (room) =>
-      room.sName === selectedMarker.value.name && room.rStatus === "available"
-  );
+//   const room = productRoom.value.find(
+//     (room) =>
+//       room.sName === selectedMarker.value.name && room.rStatus === "available"
+//   );
 
-  if (!room) return null;
+//   if (!room) return null;
 
-  return {
-    icon: "touch_app",
-    title: room.rDescription,
-    image: `./src/assets/img/${room.rImage}`,
-    description: room.rDescription,
-    action: [
-      {
-        route: "/views/rentroomview",
-        label: "現在就訂房",
-      },
-    ],
-  };
-});
+//   return {
+//     icon: "touch_app",
+//     title: room.rDescription,
+//     image: `./src/assets/img/${room.rImage}`,
+//     description: room.rDescription,
+//     action: [
+//       {
+//         route: "/views/rentroomview",
+//         label: "現在就訂房",
+//       },
+//     ],
+//   };
+// });
 
 
 
@@ -93,7 +73,7 @@ onMounted(() => {
     const selectedMarker = reactive(null);
     Productspinia.axiosInit().then(() => {
         //加入卡片
-        const {cardinfo} = useProductStore();             
+        const { cardinfo } = useProductStore();
         //加入marker
         const { markers } = useProductStore();
         // console.log(markers)
@@ -106,7 +86,7 @@ onMounted(() => {
             });
         });
     })
-    
+
 });
 
 </script>

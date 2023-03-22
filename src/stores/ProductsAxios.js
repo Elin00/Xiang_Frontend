@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia'
 import axios from 'axios';
 import { reactive } from "vue";
-// import photo from "../assets/img/202303chengbao.jpg"
+import photo from "../assets/img/202303chengbao.jpg"
 
 export const useProductStore = defineStore('ProductsAxios', () => {
     const productPAndS = reactive([]);
     const productRoom = reactive([]);
     const markers = reactive([]);
     const cardinfo = reactive([]);
-    
+
 
     //建立class
     class PAndS {
@@ -55,8 +55,8 @@ export const useProductStore = defineStore('ProductsAxios', () => {
                     })
                 })
             });
-           
-            // console.log(productPAndS);
+
+            console.log(productPAndS);
             console.log(productRoom);
             //加載資料到marker中
             productPAndS.forEach((pands) => {
@@ -68,27 +68,27 @@ export const useProductStore = defineStore('ProductsAxios', () => {
                 };
                 markers.push(marker);
             });
-            // console.log(markers);
+            console.log(markers);
 
             const path = "/src/assets/img/"
             // 加入資料到cardinfo
-            productRoom.forEach((room)=>{
+            productRoom.forEach((room) => {
                 const carditem = {
-                    icon : "touch_app",                   
-                    title: room.sName, 
-                    image: path+room.rImage,
+                    icon: "touch_app",
+                    title: room.sName,
+                    image: path + room.rImage,
                     description: room.rDescription,
                     action: [
                         {
-                            route: "/views/rentroomview",
+                            route: `/views/rentroomview/${id}`,
                             label: "現在就訂房",
                         },
                     ],
                 }
-                cardinfo.push(carditem)               
+                cardinfo.push(carditem)
             })
             console.log(cardinfo)
-            
+
 
 
         } catch (error) {
