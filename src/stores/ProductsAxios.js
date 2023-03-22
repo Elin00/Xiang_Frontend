@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios';
 import { reactive } from "vue";
-import photo from "../assets/img/202303chengbao.jpg"
+
 
 export const useProductStore = defineStore('ProductsAxios', () => {
     const productPAndS = reactive([]);
@@ -25,7 +25,8 @@ export const useProductStore = defineStore('ProductsAxios', () => {
         }
     }
     class Room {
-        constructor(pName, sName, rCategoryId, rHourPrice, rDatePrice, rPing, rImage, rStatus, rDescription) {
+        constructor(roomId, pName, sName, rCategoryId, rHourPrice, rDatePrice, rPing, rImage, rStatus, rDescription) {
+            this.roomId = roomId
             this.pName = pName;
             this.sName = sName;
             this.rCategoryId = rCategoryId;
@@ -50,14 +51,14 @@ export const useProductStore = defineStore('ProductsAxios', () => {
 
                     //抓Room資料
                     site.psiteRoom.forEach((room, ridx) => {
-                        const troom = new Room(product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
+                        const troom = new Room(room.roomId, product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
                         productRoom.push(troom);
                     })
                 })
             });
 
-            console.log(productPAndS);
-            console.log(productRoom);
+            // console.log(productPAndS);
+            // console.log(productRoom);
             //加載資料到marker中
             productPAndS.forEach((pands) => {
                 const marker = {
@@ -80,7 +81,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
                     description: room.rDescription,
                     action: [
                         {
-                            route: `/views/rentroomview/${id}`,
+                            route: `/views/rentroomview/${room.roomId}`,
                             label: "現在就訂房",
                         },
                     ],
@@ -96,8 +97,20 @@ export const useProductStore = defineStore('ProductsAxios', () => {
         }
     }
 
+    //axios get{id} ${productId}
+    const axiosKey = async (id) => {
+        try {
+            const { data } = await axios.get(`https://localhost:7073/api/PsiteRooms/${id}`)
+            const product = data;
+            //抓Room資料
+            console.log(product)
+        }
+        catch (error) {
+            console.log(error.message)
+        }
+    }
     return {
-        axiosInit, productPAndS, productRoom, markers, cardinfo
+        axiosInit, axiosKey, productPAndS, productRoom, markers, cardinfo
     }
 });
 

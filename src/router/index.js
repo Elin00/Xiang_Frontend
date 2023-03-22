@@ -84,7 +84,7 @@ const router = createRouter({
       component: CooperationView,
     },
     {
-      path: "/views/rentroomview",
+      path: "/views/rentroomview/:id",
       name: "rentroomView",
       component: RentRoomView,
     },
