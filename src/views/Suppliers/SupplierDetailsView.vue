@@ -3,13 +3,14 @@ import { onMounted, ref, watch } from "vue";
 import { useSuppliersDataStore } from "../../stores/SuppliersData.js";
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
+import MemberHeader from "../../views/Members/Components/MemberHeader.vue";
 
 const Suppliersstore = useSuppliersDataStore();
 </script>
 
 <template>
-  <div style="margin: 50px 200px 10%">
-    <h4>個人資料修改</h4>
+  <div style="margin-left: 10%; margin-bottom: 15%">
+    <MemberHeader labelString="個人資料修改" />
     <form @submit.prevent="submitForm">
       <div class="col-lg-4">
         <MaterialInput
@@ -66,4 +67,5 @@ const Suppliersstore = useSuppliersDataStore();
     </form>
   </div>
 </template>
-<style></style>
+<style scoped>
+</style>
