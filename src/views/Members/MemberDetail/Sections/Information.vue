@@ -74,18 +74,20 @@ const modalHandler = async (text) => {
             },
           }
         );
-    
+        console.log(response);
         if (response.status === 200) {
           EditCustomer.user.email = text;
+          // console.log(EditCustomer.user.email);
         }
       } catch (error) {
-        if (error.response && error.response.status === 400) {
-          alert("已有相同的信箱")
-        } 
+        if (error.response.status === 400) {
+          // console.log(error.response.data);
+          alert("已有相同的電話");
+        }
       }
       break;
     case "phone":
-    try {
+      try {
         const response = await axios.post(
           `https://localhost:7073/api/Client/check-information/${CustomerData.id}`,
           { KeyWord: text },
@@ -96,15 +98,15 @@ const modalHandler = async (text) => {
             },
           }
         );
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
           EditCustomer.user.phone = text;
         }
       } catch (error) {
-        if ( error.response.status === 400) {
+        if (error.response.status === 400) {
           // console.log(error.response.data);
-          alert("已有相同的電話")
-        } 
+          alert("已有相同的電話");
+        }
       }
       break;
     default:

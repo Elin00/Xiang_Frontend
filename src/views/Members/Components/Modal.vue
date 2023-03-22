@@ -26,8 +26,8 @@ const save = () => {
   emit("modifyText", modalText.value);
   modalText.value = "";
 };
-const save1 =async () => {
-    emit("modifyText", modalText.value);
+const save1 = async () => {
+  emit("modifyText", modalText.value);
   modalText.value = "";
   try {
     const response = await axios.put(
@@ -44,14 +44,14 @@ const save1 =async () => {
         },
       }
     );
-    // console.log(response);
+    console.log(response);
     if (response.status === 200) {
       // 更新成功
       // 更新本地存儲中的名稱
-      const currentUser = JSON.parse(localStorage.getItem("user"));  
+      const currentUser = JSON.parse(localStorage.getItem("user"));
       // console.log(currentUser);
       currentUser.Name = EditCustomerData.user.name;
-      currentUser.token = response.data;  //把token資料換新的
+      currentUser.token = response.data; //把token資料換新的
       localStorage.setItem("user", JSON.stringify(currentUser));
 
       // 更新 CustomerData 中的名稱
