@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 export const useSuppliersDataStore = defineStore('SuppliersData', () => {
   const name = ref('');
+  const SName = ref('')
   const phone = ref('');
   const email = ref('');
   const password = ref('');
@@ -25,18 +26,19 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
       // 解碼JWT檔案
       const decodedToken = jwt_decode(response.data);
       // 設置Email的值
-      name.value = decodedToken.name;
+      name.value = decodedToken.Name;
       loggedIn.value = true; // 登入成功
 
       localStorage.setItem(
-        "user",
+        "SUser",
         JSON.stringify({
           token: response.data, // 存储 JWT
-          name: decodedToken.name,
+          name: decodedToken.Name,
         })
       );
       return true; // 登录成功
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error);
       return false;
     }
@@ -97,5 +99,5 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
 
 
 
-  return { name, phone, email, password, SupplierRegister, SLogin, loggedIn, SLogout, registerSupplier };
+  return { name, phone, email, password, SupplierRegister, SLogin, loggedIn, SLogout, registerSupplier, };
 });
