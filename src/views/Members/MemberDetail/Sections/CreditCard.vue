@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref, onMounted } from "vue";
 import { useMemberDataStore } from "../../../../stores/memberData.js";
-import CreditCard from '../../Components/CreditCard1.vue'
+import CreditCard from '../../Components/CreditCardcard.vue'
 //下面二擇一
 // import "../../../../assets/js/core/bootstrap.bundle.min.js";
 import "../../../../assets/js/core/bootstrap.min.js";
