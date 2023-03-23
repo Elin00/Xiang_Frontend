@@ -24,49 +24,49 @@ const updateName = () => {
     <form @submit.prevent="submitForm">
       <div class="row">
         <div class="col-6 border-bottom mb-5">
-          <h5>電子信箱</h5>
-          <div class="d-flex justify-content-between">
-            <p>{{ Suppliersstore.email }}</p>
-            <!-- <h6
+        <h5>電子信箱</h5>
+        <div class="d-flex justify-content-between">
+          <p>{{ Suppliersstore.email }}</p>
+          <!-- <h6
               id="email"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              @click="modalTitleBody"
-            >
-              編輯
-            </h6> -->
+                    @click="modalTitleBody"
+                  >
+                    編輯
+                  </h6> -->
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-6 border-bottom mb-5">
-          <h5>姓名</h5>
-          <div class="d-flex justify-content-between">
-            <p>{{ Suppliersstore.name }}</p>
-            <!-- <h6
+        <h5>姓名</h5>
+        <div class="d-flex justify-content-between">
+          <p>{{ Suppliersstore.name }}</p>
+          <!-- <h6
               id="email"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              @click="modalTitleBody"
-            >
-              編輯
-            </h6> -->
+                    @click="modalTitleBody"
+                  >
+                    編輯
+                  </h6> -->
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-6 border-bottom mb-5">
-          <h5>電話號碼</h5>
-          <div class="d-flex justify-content-between">
-            <p>{{ Suppliersstore.phone }}</p>
-            <!-- <h6
+        <h5>電話號碼</h5>
+        <div class="d-flex justify-content-between">
+          <p>{{ Suppliersstore.phone }}</p>
+          <!-- <h6
               id="email"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
-              @click="modalTitleBody"
-            >
-              編輯
-            </h6> -->
+                    @click="modalTitleBody"
+                  >
+                    編輯
+                  </h6> -->
           </div>
         </div>
       </div>
@@ -76,74 +76,41 @@ const updateName = () => {
           <div class="d-flex justify-content-between">
             <p>{{ Suppliersstore.address }}</p>
             <!-- <h6
-              id="email"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              @click="modalTitleBody"
-            >
-              編輯
-            </h6> -->
+                    id="email"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    @click="modalTitleBody"
+                  >
+                    編輯
+                  </h6> -->
           </div>
         </div>
       </div>
 
       <div class="col-lg-4">
-        <MaterialInput
-          class="input-group-static mb-4"
-          label="姓名"
-          type="text"
-          placeholder="欸另"
-          v-model="Suppliersstore.name"
-        />
+        <MaterialInput class="input-group-static mb-4" label="姓名" type="text" placeholder="欸另"
+          v-model="Suppliersstore.name" />
       </div>
       <div>
         <input type="text" value="Othani">
       </div>
       <div class="col-lg-4">
-        <MaterialInput
-          class="input-group-static mb-4"
-          label="電話"
-          type="text"
-          placeholder="{{}}"
-          value={{
-          Suppliersstore.name}}
-          v-model="Suppliersstore.phone"
-        />
+        <MaterialInput class="input-group-static mb-4" label="電話" type="text" placeholder="{{}}"
+          v-model="Suppliersstore.phone" />
       </div>
       <div class="col-lg-4">
-        <MaterialInput
-          class="input-group-static mb-4"
-          label="Email"
-          type="text"
-          placeholder="{{}}"
-          v-model="Suppliersstore.email"
-        />
+        <MaterialInput class="input-group-static mb-4" label="Email" type="text" placeholder="{{}}"
+          v-model="Suppliersstore.email" />
       </div>
       <div class="col-lg-4">
-        <MaterialInput
-          class="input-group-static mb-4"
-          label="聯絡地址"
-          type="text"
-          placeholder="{{}}"
-          v-model="Suppliersstore.address"
-        />
+        <MaterialInput class="input-group-static mb-4" label="聯絡地址" type="text" placeholder="{{}}"
+          v-model="Suppliersstore.address" />
       </div>
       <div class="col-lg-4">
-        <MaterialInput
-          class="input-group-static mb-4"
-          label="密碼"
-          type="password"
-          placeholder="{{}}"
-          v-model="Suppliersstore.password"
-        />
+        <MaterialInput class="input-group-static mb-4" label="密碼" type="password" placeholder="{{}}"
+          v-model="Suppliersstore.password" />
       </div>
-      <MaterialButton
-        variant="outline"
-        color="success"
-        class="w-auto me-2"
-        size="sm"
-        >確認修改</MaterialButton
-      >
+      <MaterialButton variant="outline" color="success" class="w-auto me-2" size="sm">確認修改</MaterialButton>
     </form>
   </div>
 </template>

@@ -8,7 +8,7 @@ import AboutUs1 from "@/assets/img/AboutUs4.jpg";
 import MaterialAvatar from "@/components/MaterialAvatar.vue";
 
 // image
-import team1 from "@/assets/img/team1.jpg";
+import team1 from "@/assets/img/team-8.jpg";
 import team2 from "@/assets/img/team2.jpg";
 import team3 from "@/assets/img/team3.jpg";
 
@@ -70,6 +70,7 @@ import team3 from "@/assets/img/team3.jpg";
   padding: 0;
   list-style: none;
 }
+
 .section1 {
   width: 100%;
   height: 100vh;
@@ -84,6 +85,7 @@ import team3 from "@/assets/img/team3.jpg";
   font-weight: bold;
   opacity: 0.6;
 }
+
 .section2 {
   width: 100%;
   height: 160vh;
@@ -97,6 +99,7 @@ import team3 from "@/assets/img/team3.jpg";
   background-size: cover;
   background-attachment: fixed;
 }
+
 .p-box {
   width: 1000px;
   position: relative;
@@ -111,8 +114,8 @@ import team3 from "@/assets/img/team3.jpg";
   margin-bottom: 2rem;
   text-indent: 44px;
 }
+
 .team {
   margin-top: 5%;
   border-top: 1px solid #888;
-}
-</style>
+}</style>
