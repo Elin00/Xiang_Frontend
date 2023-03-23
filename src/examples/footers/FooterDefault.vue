@@ -60,7 +60,7 @@ defineProps({
         items: [
           {
             name: "關於我們",
-            path: "/pages/landing-pages/about-us"
+            path: "/pages/landing-pages/AboutUs"
           },
         ]
       },
