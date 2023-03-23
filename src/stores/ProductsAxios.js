@@ -8,7 +8,13 @@ export const useProductStore = defineStore('ProductsAxios', () => {
     const productRoom = reactive([]);
     const markers = reactive([]);
     const cardinfo = reactive([]);
-
+    const roominfo = reactive({
+        roomId: "",
+        datePrice: "",
+        image: "",
+        openTime: "",
+        ping: "",
+    })
 
     //建立class
     class PAndS {
@@ -77,6 +83,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
                 const carditem = {
                     icon: "touch_app",
                     title: room.sName,
+
                     image: path + room.rImage,
                     description: room.rDescription,
                     action: [
@@ -102,15 +109,20 @@ export const useProductStore = defineStore('ProductsAxios', () => {
         try {
             const { data } = await axios.get(`https://localhost:7073/api/PsiteRooms/${id}`)
             const product = data;
-            //抓Room資料
-            console.log(product)
+            // 抓Room資料
+            // console.log(product)
+            // console.log(product.image)
+            roominfo.image = product.image
+            roominfo.openTime = product.openTime
+            roominfo.ping = product.ping
+            console.log(roominfo)
         }
         catch (error) {
             console.log(error.message)
         }
     }
     return {
-        axiosInit, axiosKey, productPAndS, productRoom, markers, cardinfo
+        axiosInit, axiosKey, productPAndS, productRoom, markers, cardinfo, roominfo
     }
 });
 

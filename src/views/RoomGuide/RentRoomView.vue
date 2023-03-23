@@ -2,14 +2,14 @@
 import datepickerDesign from "../RoomGuide/datepickerDailyrentalDesign.vue";
 import datepickerDesign2 from "../RoomGuide/datepickerhourlyrentalDesign.vue";
 import Evaluation from "../Suppliers/ProductsmessageView.vue"
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, reactive } from "vue";
 import { Navigation, Pagination, Autoplay, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-cube";
-import photo1 from "../../assets/img/4.jpg";
+// import photo1 from "../../assets/img/4.jpg";
 import photo2 from "../../assets/img/5.jpg";
 import photo3 from "../../assets/img/6.jpg";
 import photo4 from "../../assets/img/7.jpg";
@@ -18,6 +18,7 @@ import { useEvaluationDataStore } from '../../stores/EvaluationData.js';
 import { useProductStore } from "../../stores/ProductsAxios.js"
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
+
 
 const evaluationStore = useEvaluationDataStore();
 const Productspinia = useProductStore();
@@ -28,47 +29,55 @@ const store = useStore();
 const route = useRoute();
 const roomId = ref(route.params.id);
 
+
 const getRoomInfo = async () => {
   try {
     const response = await store.dispatch('fetchRoomInfo', roomId.value);
     room.value = response.data;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
-//loading
-onMounted(async () => {
-  try {
 
-    await evaluationStore.EvaluationData();
-    console.log(evaluationStore.numberOfReviews.value); // 確認是否有取到值
-
-  } catch (error) {
-    console.error(error);
-  }
-  getRoomInfo();
-  console.log(roomId.value)
-  Productspinia.axiosKey(roomId.value);
-
-});
 
 
 
 
 //將圖片資料註傳入這裡
+const swiperPoperty = {
+  Title: "這是第一間房",
+  Address: "高雄市內湖區",
+  img: "",
+}
+const pingSet = reactive({
+  ping: "",
+})
 const swiperTextBase = [
-  { Title: "這是第一間房", Address: "高雄市內湖區", img: photo1 },
+
   { Title: "這是第二間房", Address: "高雄市內湖區", img: photo2 },
+  swiperPoperty,
   { Title: "這是第三間房", Address: "高雄市內湖區", img: photo3 },
   { Title: "這是第四間房", Address: "高雄市內湖區", img: photo4 },
 ];
+const path = `/src/assets/img/`
+
 const view = ref(1);
 const changview = (Index) => {
   view.value = Index;
 };
 const modules = [EffectCube, Autoplay, Pagination, Navigation];
 const showModal = ref(false);
+//loading
+onMounted(async () => {
+  await getRoomInfo().then(async () => {
+    await Productspinia.axiosKey(roomId.value)
+    swiperPoperty.img = `${path}${Productspinia.roominfo.image}`
+    pingSet.ping = `${Productspinia.roominfo.ping}`
+    console.log(pingSet.ping)
+  });
+});
+
 </script>
 
 <template>
@@ -89,7 +98,7 @@ const showModal = ref(false);
 }">
           <swiper-slide v-for="(text, index) in swiperTextBase" :key="index">
             <div class="image-wrapper">
-              <img :src="text.img" alt="img" class="object-fit-cover" style="height: 400px; width: 600px" />
+              <img :src=text.img alt="img" class="object-fit-cover" style="height: 400px; width: 600px" />
             </div>
           </swiper-slide>
         </swiper>
@@ -134,7 +143,7 @@ const showModal = ref(false);
           <ul class="price-list mt-3 col-8 d-flex justify-content-center">
             <li class="price-list-item clearfix">
               <span class="day-of-week" style="margin-right: 20px">周一 ~ 周五</span>
-              <span class="hours">08:00 ~ 22:00</span>
+              <span class="hours">{{ Productspinia.roominfo.openTime }}</span>
             </li>
           </ul>
           <div class="col-4 mt-3"><span class="price">$24000/天</span></div>
@@ -215,14 +224,14 @@ const showModal = ref(false);
             <div class="infoTitle" style="padding: 0px 20px">空間容納</div>
             <div class="infoDetail rules">
               <ul>
-                <li class="material-icons step step1">
-                  groups 建議人數 (人數) 人
+                <li class="step step1">
+                  <span class="material-icons">groups 建議人數 七人</span>
                 </li>
-                <li class="material-icons step step1" style="padding-top: 15px">
-                  accessible 場地大小約為
-                  <a class="floorplanBtn" @click="showModal = true">4 坪</a>
-                  | 此據點
-                  <a class="floorplanBtn" @click="showModal = true">樓層平面圖</a>
+                <li class="step step1" style="padding-top: 15px">
+                  <span class="material-icons">accessible 場地大小約為 </span>
+                  <a class="floorplanBtn" style="font-size: 20px;" @click="showModal = true">{{ pingSet.ping }}坪</a>
+                  <span style="font-size: 20px;"> | 此據點</span>
+                  <a class="floorplanBtn" style="font-size: 20px;" @click="showModal = true">樓層平面圖</a>
                 </li>
               </ul>
             </div>
@@ -312,15 +321,26 @@ const showModal = ref(false);
             <div class="infoTitle" style="padding: 0px 20px">使用規範</div>
             <div class="infoDetail">
               <ul class="use">
-                <li style=" text-align: left; list-style-type: decimal;     display: list-item;
-                                                                ">遵守大樓規範，公共區域應保持輕聲細語，請勿大聲喧嘩。</li>
-                <li style=" text-align: left; list-style-type: decimal;    display: list-item;
-                                                                ">自行清潔環境，愛惜空間內所有裝潢設備， Happ.小樹屋
+                <li
+                  style=" text-align: left; list-style-type: decimal;     display: list-item;
+                                                                                                                                                                                                                                      ">
+                  遵守大樓規範，公共區域應保持輕聲細語，請勿大聲喧嘩。
+                </li>
+                <li
+                  style=" text-align: left; list-style-type: decimal;    display: list-item;
+                                                                                                                                                                                                                                      ">
+                  自行清潔環境，愛惜空間內所有裝潢設備，
+                  Happ.小樹屋
                   不收取額外清潔、水電費，但若您留下髒亂的環境或造成家具損毀，需額外支付清潔維護費用。</li>
-                <li style=" text-align: left; list-style-type: decimal;    display: list-item;
-                                                                ">請配合準時離場，不得提早進入或超時使用。</li>
-                <li style=" text-align: left; list-style-type: decimal;    display: list-item;
-                                                                ">其他使用規範與罰則，請參考<a href="#" style="color: red;">使用者條款</a>。
+                <li
+                  style=" text-align: left; list-style-type: decimal;    display: list-item;
+                                                                                                                                                                                                                                      ">
+                  請配合準時離場，不得提早進入或超時使用。
+                </li>
+                <li
+                  style=" text-align: left; list-style-type: decimal;    display: list-item;
+                                                                                                                                                                                                                                      ">
+                  其他使用規範與罰則，請參考<a href="#" style="color: red;">使用者條款</a>。
                 </li>
 
               </ul>
@@ -341,7 +361,7 @@ const showModal = ref(false);
       </div>
     </div>
   </section>
-  
+
   <!-- 秀出圖片檔案 -->
   <div v-if="showModal" class="floor-mask" @click.self="showModal = false">
     <div class="floor-container floor">
