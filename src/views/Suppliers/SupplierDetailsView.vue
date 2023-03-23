@@ -5,10 +5,6 @@ import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import MemberHeader from "../../views/Members/Components/MemberHeader.vue";
 
-// onMounted(() => {
-//   setMaterialInput();
-// });
-
 const Suppliersstore = useSuppliersDataStore();
 //取得當前登入的供應商姓名
 const supplierName = computed(() => Suppliersstore.name);
@@ -26,19 +22,82 @@ const updateName = () => {
   <div style="margin-left: 10%; margin-bottom: 15%">
     <MemberHeader labelString="個人資料修改" />
     <form @submit.prevent="submitForm">
-      <div>
-        <h2>{{ supplierName }}</h2>
-        <input v-model="SName" />
-        <button @click="updateName">更新</button>
+      <div class="row">
+        <div class="col-6 border-bottom mb-5">
+          <h5>電子信箱</h5>
+          <div class="d-flex justify-content-between">
+            <p>{{ Suppliersstore.email }}</p>
+            <!-- <h6
+              id="email"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              @click="modalTitleBody"
+            >
+              編輯
+            </h6> -->
+          </div>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-6 border-bottom mb-5">
+          <h5>姓名</h5>
+          <div class="d-flex justify-content-between">
+            <p>{{ Suppliersstore.name }}</p>
+            <!-- <h6
+              id="email"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              @click="modalTitleBody"
+            >
+              編輯
+            </h6> -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 border-bottom mb-5">
+          <h5>電話號碼</h5>
+          <div class="d-flex justify-content-between">
+            <p>{{ Suppliersstore.phone }}</p>
+            <!-- <h6
+              id="email"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              @click="modalTitleBody"
+            >
+              編輯
+            </h6> -->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 border-bottom mb-5">
+          <h5>地址</h5>
+          <div class="d-flex justify-content-between">
+            <p>{{ Suppliersstore.address }}</p>
+            <!-- <h6
+              id="email"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              @click="modalTitleBody"
+            >
+              編輯
+            </h6> -->
+          </div>
+        </div>
+      </div>
+
       <div class="col-lg-4">
         <MaterialInput
           class="input-group-static mb-4"
           label="姓名"
           type="text"
-          placeholder="{{}}"
+          placeholder="欸另"
           v-model="Suppliersstore.name"
         />
+      </div>
+      <div>
+        <input type="text" value="Othani">
       </div>
       <div class="col-lg-4">
         <MaterialInput
@@ -46,6 +105,8 @@ const updateName = () => {
           label="電話"
           type="text"
           placeholder="{{}}"
+          value={{
+          Suppliersstore.name}}
           v-model="Suppliersstore.phone"
         />
       </div>
