@@ -8,7 +8,9 @@ import AboutUs1 from "@/assets/img/AboutUs4.jpg";
 import MaterialAvatar from "@/components/MaterialAvatar.vue";
 
 // image
-import team4 from "@/assets/img/team-4.jpg";
+import team1 from "@/assets/img/team1.jpg";
+import team2 from "@/assets/img/team2.jpg";
+import team3 from "@/assets/img/team3.jpg";
 
 //dep
 </script>
@@ -32,23 +34,28 @@ import team4 from "@/assets/img/team-4.jpg";
       </p>
       <p>
         最後，我們非常期待您的加入和支持。如果您是一個創意人士、自由工作者或新創公司，「想享」平台是您不可錯過的共享空間。我們相信，您在這裡將會找到一個讓您實現夢想的工作環境。感謝您的閱讀，期待與您相見！
-        我們的開發團隊非常自豪地為「想享」的設計和開發貢獻了自己的力量。我們的團隊由
-        Ken CC、Ken CCC、Elin、Enya 和 Kevien 組成
+        我們的開發團隊非常自豪地為「想享」的設計和開發貢獻了自己的力量。
       </p>
     </div>
     <div class="team">
-      <h2>About Team</h2>
+      <h2 style="text-align: center">About Team</h2>
       <div>
         <a href="javascript:;">
-          <MaterialAvatar :image="team4" alt="Image placeholder" size="xxl" />
+          <MaterialAvatar :image="team1" alt="Image placeholder" size="xxl" />
         </a>
         <a>執行長-鄭智智</a>
       </div>
       <div>
         <a href="javascript:;">
-          <MaterialAvatar :image="team4" alt="Image placeholder" size="xxl" />
+          <MaterialAvatar :image="team2" alt="Image placeholder" size="xxl" />
         </a>
         <a>KenCCC</a>
+      </div>
+      <div>
+        <a href="javascript:;">
+          <MaterialAvatar :image="team3" alt="Image placeholder" size="xxl" />
+        </a>
+        <a>KenCCCCCCCC</a>
       </div>
     </div>
   </div>
@@ -67,7 +74,7 @@ import team4 from "@/assets/img/team-4.jpg";
   width: 100%;
   height: 100vh;
   color: #012e01;
-  font-size: 90px;
+  font-size: 80px;
   line-height: 80vh;
   text-align: center;
   background-repeat: no-repeat;
@@ -84,7 +91,7 @@ import team4 from "@/assets/img/team-4.jpg";
   color: #111;
   font-size: 18px;
   line-height: 20vh;
-  text-align: center;
+  /* text-align: center; */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -101,10 +108,11 @@ import team4 from "@/assets/img/team-4.jpg";
 
 .p-box p {
   font-size: 22px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
+  text-indent: 44px;
 }
 .team {
   margin-top: 5%;
-  border-top: 1px solid #666;
+  border-top: 1px solid #888;
 }
 </style>
