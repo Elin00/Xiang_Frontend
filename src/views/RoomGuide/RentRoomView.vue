@@ -2,7 +2,7 @@
 import datepickerDesign from "../RoomGuide/datepickerDailyrentalDesign.vue";
 import datepickerDesign2 from "../RoomGuide/datepickerhourlyrentalDesign.vue";
 import Evaluation from "../Suppliers/ProductsmessageView.vue"
-import { ref, onMounted, computed, reactive } from "vue";
+import { ref, onMounted, watchEffect, reactive } from "vue";
 import { Navigation, Pagination, Autoplay, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -38,12 +38,50 @@ const getRoomInfo = async () => {
     console.log(error);
   }
 };
-
-
-
-
-
-
+//設備資訊
+const devices = ref([
+  [
+    { icon: "flutter_dash", name: "白板", description: "150*90cm/附白板筆、板擦" },
+    { icon: "add_box", name: "投影機", description: "附投影機遙控器" },
+    { icon: "movie_filter", name: "布幕", description: "200*200cm" },
+    { icon: "local_printshop", name: "印表機", description: "黑白A4尺寸/每張5元" },
+    { icon: "mouse", name: "滑鼠", description: "USB接口" },
+    { icon: "keyboard", name: "鍵盤", description: "USB接口" },
+  ],
+  [
+    { icon: "local_drink", name: "飲水機", description: "熱/冰水皆可" },
+    { icon: "speaker_notes", name: "會議桌", description: "附白板筆、板擦" },
+    { icon: "add_box", name: "投影機", description: "附投影機遙控器" },
+    { icon: "computer", name: "電腦", description: "i7/8G/27吋螢幕" },
+    { icon: "keyboard", name: "鍵盤", description: "USB接口" },
+    { icon: "mouse", name: "滑鼠", description: "USB接口" },
+  ],
+  [
+    { icon: "local_drink", name: "飲水機", description: "熱/冰水皆可" },
+    { icon: "brush", name: "畫架", description: "附畫板和畫筆" },
+    { icon: "lightbulb", name: "燈具", description: "可調節亮度" },
+    { icon: "photo_camera", name: "照相機", description: "單反相機/50mm鏡頭" },
+    { icon: "local_printshop", name: "印表機", description: "黑白A4尺寸/每張5元" },
+    { icon: "palette", name: "調色盤", description: "附調色板和調色劑" },
+  ],
+  [
+    { icon: "music_note", name: "音響", description: "可播放CD和MP3" },
+    { icon: "mic", name: "麥克風", description: "可調式有線麥克風" },
+    { icon: "videocam", name: "攝影機", description: "高清攝影機/附三腳架" },
+    { icon: "movie_filter", name: "投影機", description: "附投影機遙控器" },
+    { icon: "photo_camera", name: "照相機", description: "附三腳架和快門遙控器" },
+    { icon: "art_track", name: "展示架", description: "4層展示架" },
+  ],
+  [
+    { icon: "local_dining", name: "烤箱", description: "30L" },
+    { icon: "kitchen", name: "洗碗機", description: "附洗碗機乾燥劑" },
+    { icon: "kitchen", name: "冰箱", description: "200L" },
+    { icon: "microwave", name: "微波爐", description: "20L" },
+    { icon: "local_drink", name: "飲水機", description: "可冷熱" },
+    { icon: "local_cafe", name: "咖啡機", description: "自動研磨咖啡機" },
+  ],
+])
+const categoryId = ref(0)
 //將圖片資料註傳入這裡
 const swiperPoperty = {
   Title: "這是第一間房",
@@ -53,6 +91,7 @@ const swiperPoperty = {
 const pingSet = reactive({
   ping: "",
 })
+
 const swiperTextBase = [
 
   { Title: "這是第二間房", Address: "高雄市內湖區", img: photo2 },
@@ -68,13 +107,16 @@ const changview = (Index) => {
 };
 const modules = [EffectCube, Autoplay, Pagination, Navigation];
 const showModal = ref(false);
+
+
 //loading
 onMounted(async () => {
   await getRoomInfo().then(async () => {
     await Productspinia.axiosKey(roomId.value)
     swiperPoperty.img = `${path}${Productspinia.roominfo.image}`
     pingSet.ping = `${Productspinia.roominfo.ping}`
-    console.log(pingSet.ping)
+    categoryId.value = Productspinia.roominfo.categoryId - 1
+    console.log(categoryId.value)
   });
 });
 
@@ -197,7 +239,6 @@ onMounted(async () => {
           <div class="infoSection d-flex justify-content-center js-daily-rule">
             <div class="infoTitle" style="padding: 0px 20px">簡介</div>
             <div class="infoDetail rules">
-
               是以時計價的出租空間，線上付款，即訂即用，適合各類課程、會議、聚會、談話等活動。
             </div>
           </div>
@@ -240,48 +281,14 @@ onMounted(async () => {
           <div class="infoSection d-flex justify-content-center js-daily-rule mt-3">
             <div class="infoTitle" style="padding: 0px 20px">設備</div>
             <div class="infoDetail">
-              <ul class="deviceServe">
+              <ul class="deviceServe" v-for="device in devices[categoryId]">
                 <li>
-                  <i class="material-icons-round">flutter_dash</i>
-                  <p style="display: inline-block; font-size: 30px">白板</p>
-                  <small>150*90cm/附白板筆、板擦</small>
+                  <i class="material-icons-round">{{ device.icon }}</i>
+                  <p style="display: inline-block; font-size: 30px">{{ device.name }}</p>
+                  <small>{{ device.description }}</small>
                 </li>
               </ul>
-              <ul class="deviceServe">
-                <li>
-                  <i class="material-icons-round">flutter_dash</i>
-                  <p style="display: inline-block; font-size: 30px">白板</p>
-                  <small>150*90cm/附白板筆、板擦</small>
-                </li>
-              </ul>
-              <ul class="deviceServe">
-                <li>
-                  <i class="material-icons-round">flutter_dash</i>
-                  <p style="display: inline-block; font-size: 30px">白板</p>
-                  <small>150*90cm/附白板筆、板擦</small>
-                </li>
-              </ul>
-              <ul class="deviceServe">
-                <li>
-                  <i class="material-icons-round">flutter_dash</i>
-                  <p style="display: inline-block; font-size: 30px">白板</p>
-                  <small>150*90cm/附白板筆、板擦</small>
-                </li>
-              </ul>
-              <ul class="deviceServe">
-                <li>
-                  <i class="material-icons-round">flutter_dash</i>
-                  <p style="display: inline-block; font-size: 30px">白板</p>
-                  <small>150*90cm/附白板筆、板擦</small>
-                </li>
-              </ul>
-              <ul class="deviceServe">
-                <li>
-                  <i class="material-icons-round">flutter_dash</i>
-                  <p style="display: inline-block; font-size: 30px">白板</p>
-                  <small>150*90cm/附白板筆、板擦</small>
-                </li>
-              </ul>
+              <br>
               <p class="material-icons-round" style="font-size: small">
                 warning
                 場地未提供且禁止使用麥克風設備。使用電視時，請保持適當音量，以不影響其他空間使用者為原則。
@@ -321,25 +328,17 @@ onMounted(async () => {
             <div class="infoTitle" style="padding: 0px 20px">使用規範</div>
             <div class="infoDetail">
               <ul class="use">
-                <li
-                  style=" text-align: left; list-style-type: decimal;     display: list-item;
-                                                                                                                                                                                                                                      ">
+                <li style=" text-align: left; list-style-type: decimal; display: list-item;">
                   遵守大樓規範，公共區域應保持輕聲細語，請勿大聲喧嘩。
                 </li>
-                <li
-                  style=" text-align: left; list-style-type: decimal;    display: list-item;
-                                                                                                                                                                                                                                      ">
+                <li style=" text-align: left; list-style-type: decimal; display: list-item;">
                   自行清潔環境，愛惜空間內所有裝潢設備，
                   Happ.小樹屋
                   不收取額外清潔、水電費，但若您留下髒亂的環境或造成家具損毀，需額外支付清潔維護費用。</li>
-                <li
-                  style=" text-align: left; list-style-type: decimal;    display: list-item;
-                                                                                                                                                                                                                                      ">
+                <li style=" text-align: left; list-style-type: decimal; display: list-item; ">
                   請配合準時離場，不得提早進入或超時使用。
                 </li>
-                <li
-                  style=" text-align: left; list-style-type: decimal;    display: list-item;
-                                                                                                                                                                                                                                      ">
+                <li style=" text-align: left; list-style-type: decimal; display: list-item;">
                   其他使用規範與罰則，請參考<a href="#" style="color: red;">使用者條款</a>。
                 </li>
 

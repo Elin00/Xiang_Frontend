@@ -1,0 +1,36 @@
+export const useProductStore = defineStore('ProductsAxios', () => {
+    // 其他代码...
+  
+    const selectedMarker = ref(null);
+  
+    const selectedRoomInfo = computed(() => {
+      if (!selectedMarker.value) {
+        return cardinfo;
+      }
+      return cardinfo.filter((room) => room.title === selectedMarker.value.name);
+    });
+  
+    return {
+      // 其他代码...
+      selectedRoomInfo,
+    };
+  });
+  <div class="col-6 space-wrapper">
+    <div class="space-wrapper__list">
+      <div class="grid">
+        <template v-if="!selectedMarker">
+          <RotatingCardForRoom v-for="(item, index) in Productspinia.cardinfo" :key="index">
+            <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title" :description="item.description" />
+            <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description" :action="item.action" />
+          </RotatingCardForRoom>
+        </template>
+        <template v-else>
+          <RotatingCardForRoom v-for="(item, index) in selectedRoomInfo" :key="index">
+            <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title" :description="item.description" />
+            <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description" :action="item.action" />
+          </RotatingCardForRoom>
+        </template>
+      </div>
+    </div>
+  </div>
+    

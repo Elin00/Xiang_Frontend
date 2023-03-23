@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios';
-import { reactive } from "vue";
+import { reactive,ref,computed } from "vue";
+
 
 
 export const useProductStore = defineStore('ProductsAxios', () => {
@@ -14,7 +15,9 @@ export const useProductStore = defineStore('ProductsAxios', () => {
         image: "",
         openTime: "",
         ping: "",
+        categoryId: 0,
     })
+    
 
     //建立class
     class PAndS {
@@ -75,7 +78,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
                 };
                 markers.push(marker);
             });
-            console.log(markers);
+            // console.log(markers);
 
             const path = "/src/assets/img/"
             // 加入資料到cardinfo
@@ -95,14 +98,67 @@ export const useProductStore = defineStore('ProductsAxios', () => {
                 }
                 cardinfo.push(carditem)
             })
-            console.log(cardinfo)
-
-
-
+            // console.log(cardinfo)
         } catch (error) {
             console.log(error.message);
         }
     }
+    // //過濾房間資料方法1
+    // const axiosFilterroom = async (name)=>{
+    //     try{
+    //         const res = await axios.get("https://localhost:7073/api/Products");
+    //         res.data.forEach((product) => {
+
+    //             //抓PAndS資料
+    //             product.psite.forEach((site) => {
+    //                 const tpands = new PAndS(product.name, site.name, site.image, site.openTime, site.latitude, site.longitude, site.address, site.siteDescription, site.psiteRoom.length)
+    //                 productPAndS.push(tpands);
+
+    //                 //抓Room資料
+    //                 site.psiteRoom.forEach((room) => {
+    //                     const troom = new Room(room.roomId, product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
+    //                     productRoom.push(troom);
+    //                 })
+    //             })
+    //         });
+    //         if(name!=null){
+
+    //         }
+    //         else{
+    //              // 加入資料到cardinfo
+    //             productRoom.forEach((room) => {
+    //                 const carditem = {
+    //                     icon: "touch_app",
+    //                     title: room.sName,
+
+    //                     image: path + room.rImage,
+    //                     description: room.rDescription,
+    //                     action: [
+    //                         {
+    //                         route: `/views/rentroomview/${room.roomId}`,
+    //                         label: "現在就訂房",
+    //                         },
+    //                     ],
+    //                 }
+    //                 cardinfo.push(carditem)
+    //             })
+    //             console.log(cardinfo)
+    //         }
+    //     }
+    //     catch(error){
+    //         console.log(erro)
+    //     }
+    // }
+    // //過濾房間資料方法2   
+    // const selectedMarker = ref(null);
+    // // 计算属性，根据选中的 marker 返回对应的房间信息
+    // const selectedRoomInfo = computed(() => {
+    //     if (!selectedMarker.value) {
+    //     return cardinfo;
+    //     }
+    //     return cardinfo.filter((room) => room.title === selectedMarker.value.name);
+    // });
+
 
     //axios get{id} ${productId}
     const axiosKey = async (id) => {
@@ -115,6 +171,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
             roominfo.image = product.image
             roominfo.openTime = product.openTime
             roominfo.ping = product.ping
+            roominfo.categoryId = product.categoryId
             console.log(roominfo)
         }
         catch (error) {
@@ -122,7 +179,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
         }
     }
     return {
-        axiosInit, axiosKey, productPAndS, productRoom, markers, cardinfo, roominfo
+        axiosInit, axiosKey, productRoom, markers, cardinfo, roominfo
     }
 });
 

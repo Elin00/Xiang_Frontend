@@ -8,7 +8,7 @@ import RotatingCardBackForRoom from "@/examples/component/RotatingCardBackForRoo
 //leaflet
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref, reactive, computed } from "vue";
 
 //import pinia
 import { useProductStore } from "../../stores/ProductsAxios.js"
@@ -19,6 +19,7 @@ const Productspinia = useProductStore();
 //data
 const currentFilter = ref('location');
 const mapContainer = ref(null);
+const selectedMarker = ref(null);
 
 
 //function
@@ -26,32 +27,6 @@ const selectFilter = (filterName) => {
     currentFilter.value = filterName;
     store.selectFilter(filterName);
 }
-
-
-// const selectedCard = computed(() => {
-//   if (!selectedMarker.value) return null;
-
-//   const room = productRoom.value.find(
-//     (room) =>
-//       room.sName === selectedMarker.value.name && room.rStatus === "available"
-//   );
-
-//   if (!room) return null;
-
-//   return {
-//     icon: "touch_app",
-//     title: room.rDescription,
-//     image: `./src/assets/img/${room.rImage}`,
-//     description: room.rDescription,
-//     action: [
-//       {
-//         route: "/views/rentroomview",
-//         label: "現在就訂房",
-//       },
-//     ],
-//   };
-// });
-
 
 
 const markersLayer = L.layerGroup();
@@ -70,10 +45,11 @@ onMounted(() => {
 
     markersLayer.addTo(map);
 
-    const selectedMarker = reactive(null);
+    
     Productspinia.axiosInit().then(() => {
         //加入卡片
         const { cardinfo } = useProductStore();
+        console.log(cardinfo)
         //加入marker
         const { markers } = useProductStore();
         // console.log(markers)
@@ -82,14 +58,19 @@ onMounted(() => {
             const newMarker = L.marker([lat, lng]).addTo(markersLayer);
             newMarker.bindPopup(`<b>${name}</b><br>${description}`)
             newMarker.on("click", () => {
-                selectedMarker.value = marker;
-            });
+                selectedMarker.value = marker; // 保存选中的Marker对象
+                console.log(selectedMarker.value.name)               
+            });           
         });
     })
-
-    // Productspinia.axiosKey();
 });
-
+// 计算属性，根据选中的 marker 返回对应的房间信息
+Productspinia.cardinfo = computed(() => {
+  if (!selectedMarker.value) {
+    return Productspinia.cardinfo;
+  }
+  return Productspinia.cardinfo.filter((room) => room.title === selectedMarker.value.name);
+});
 </script>
 <template>
     <!-- 過濾器 -->
