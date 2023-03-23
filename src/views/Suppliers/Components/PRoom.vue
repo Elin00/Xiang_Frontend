@@ -1,9 +1,7 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
-import { RouterLink } from 'vue-router';
-import { useSuppliersDataStore } from '../../../stores/SuppliersData.js'
+import { ref, onMounted } from 'vue';
 
-const suppliersDataStore = useSuppliersDataStore();
+const emit = defineEmits(['funcModify']);
 
 const props = defineProps({
     Id: {
@@ -14,34 +12,38 @@ const props = defineProps({
         type: String,
         default: '1.jpg',
     },
-    Name: {
+    CategoryName: {
         type: String,
-        default: '崇明店',
+        default: '工作',
     },
-    OpenTime: {
-        type: String,
-        default: '08:00~22:00',
+    Ping: {
+        type: Number,
+        default: 0,
     },
-    Address: {
-        type: String,
-        default: '701台南市東區崇明路589-7號',
+    HourPrice: {
+        type: Number,
+        default: 0,
+    },
+    DatePrice: {
+        type: Number,
+        default: 0,
     },
     Description: {
         type: String,
-        default: '良好的空間，明亮的燈光',
+        default: '好房間',
     },
 })
 
-const ot = reactive(['', '']);
-const pathPSite = ref('/src/assets/img/PSite/')
+const pathPSiteRoom = ref('/src/assets/img/PSiteRoom/')
 
-const goRoomView = (e) => {
-    suppliersDataStore.currentSiteId = e.target.id;
+const ClickModify = (e) => {
+    const clickRoomId = e.target.parentNode.getAttribute('name');
+    const clickfunc = e.target.getAttribute('name');
+    emit('funcModify', clickfunc, clickRoomId);
 }
 
 onMounted(() => {
-    let ar = props.OpenTime.split(',');
-    ar.forEach((i, idx) => ot[idx] = ar[idx]);
+
 });
 
 </script>
@@ -49,28 +51,24 @@ onMounted(() => {
 <template>
     <div class="row border-bottom mb-3">
         <div class="col-4">
-            <img name="siteImg" :src="pathPSite + Image" class="w-70" alt="SiteImg">
+            <img :src="pathPSiteRoom + Image" class="w-70" alt="RoomImg">
         </div>
         <div class="col-2">
-            <h6>站點名稱</h6>
-            <p>{{ props.Name }}</p>
-            <h6>開放時間</h6>
-            <p class="mb-0">{{ ot[0] }}&ensp;{{ ot[1] }}</p>
+            <h6>空間類型</h6>
+            <p>{{ props.CategoryName }}</p>
+            <h6>價格</h6>
+            <p>{{ HourPrice }}/時,&ensp;{{ DatePrice }}/天</p>
         </div>
         <div class="col-4">
-            <h6>地址</h6>
-            <p>{{ props.Address }}</p>
+            <h6>坪數</h6>
+            <p>{{ props.Ping }}</p>
             <h6>描述</h6>
             <p class="mb-0">{{ props.Description }}</p>
         </div>
-        <div class="col-2">
-            <button class="btn btn-dark btn-sm" @click="">修改</button>
+        <div :name="props.Id" class="col-2">
+            <button name="modify" class="btn btn-dark btn-sm" @click="ClickModify">修改</button>
             <br />
-            <button class="btn btn-danger btn-sm" @click="">刪除</button>
-            <br />
-            <RouterLink :to="{ name: 'addRoom' }"><button :id="props.Id" @click="goRoomView"
-                    class="btn btn-info btn-sm">房管</button>
-            </RouterLink>
+            <button name="delete" class="btn btn-danger btn-sm" @click="ClickModify">刪除</button>
         </div>
     </div>
 </template>

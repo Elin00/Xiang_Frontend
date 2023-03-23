@@ -7,10 +7,10 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     const phone = ref('');
     const email = ref('');
     const password = ref('');
-    const siteAndRoom = reactive([]);
-    const orderBySite = [];
     const currentSiteId = ref(null);
     const currentProductId = ref(3);
+    const orderBySite = [];
+    const siteAndRoom = reactive([]);
     const allCategory = reactive([]);
 
     const SupplierRegister = async () => {
@@ -33,9 +33,9 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
             const res = await axios.get(`https://localhost:7073/api/Products/${currentProductId.value}`);
             res.data.psite.forEach(site => {
                 siteAndRoom.push(site);
-                orderBySite.push(`${site.siteId}`);
+                orderBySite.push(site.siteId.toString());
             });
-            // console.log(siteAndRoom);
+            // console.log('siteAndRoom', siteAndRoom);
         }
         catch (error) {
             console.log(error)

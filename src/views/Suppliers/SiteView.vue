@@ -51,11 +51,9 @@ const initCurrentSiteDate = () => {
 const addSiteModalOpen = () => {
     initCurrentSiteDate();
     AddSiteModal.show();
-    // console.log(AddSiteModal.show);
 }
 const addSiteModalClose = () => {
     AddSiteModal.hide();
-    // console.log(AddSiteModal.hide);
 }
 const ModifySiteModalOpen = () => {
     ModifySiteModal.show();
@@ -64,7 +62,6 @@ const ModifySiteModalClose = () => {
     ModifySiteModal.hide();
 }
 const ModifyPSite = async (func, id) => {
-    console.log(id);
     switch (func) {
         case 'modify':
             initCurrentSiteDate();
@@ -82,7 +79,7 @@ const ModifyPSite = async (func, id) => {
         case 'delete':
             if (confirm('確定要刪除嗎?')) {
                 try {
-                    const res = await axios.delete(`https://localhost:7073/api/Products/PSite/${id}`);
+                    await axios.delete(`https://localhost:7073/api/Products/PSite/${id}`);
                     // console.log(res);
                     suppliersDataStore.getProduct();
                 }
