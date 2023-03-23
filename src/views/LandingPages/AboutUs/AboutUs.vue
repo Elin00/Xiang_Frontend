@@ -8,6 +8,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
 import team4 from "@/assets/img/team-4.jpg";
 import KenCC from "../../../assets/img/202303chengbao.jpg"
 import Elin from "../../../assets/img/Elin.jpg"
+import KenCCC from "../../../assets/img/KenCCC.png"
 import Enya from "../../../assets/img/Enya.jpg"
 
 //example components
@@ -73,7 +74,7 @@ const body = document.getElementsByTagName("body")[0];
             </div>
             <div  class="col">
                 <a href="javascript:;">
-                    <MaterialAvatar :image="KenCC" alt="Image placeholder" size="xxl" />
+                    <MaterialAvatar :image="KenCCC" alt="Image placeholder" size="xxl" />
                 </a>
                 <p class="name">KenCCC</p>
             </div>
