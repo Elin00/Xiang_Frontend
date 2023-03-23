@@ -13,7 +13,6 @@ const suppliersDataStore = useSuppliersDataStore();
 const currentSiteDate = reactive({
     ProductId: 0,
     Name: '',
-    Image: '',
     OpenTime: '',
     Address: '',
     Latitude: '',
@@ -42,7 +41,6 @@ const savePSite = async () => {
 }
 const initCurrentSiteDate = () => {
     currentSiteDate.Name = '';
-    currentSiteDate.Image = '';
     currentSiteDate.OpenTime = '';
     currentSiteDate.Address = '';
     currentSiteDate.Latitude = '';
@@ -70,8 +68,8 @@ const ModifyPSite = async (func, id) => {
     switch (func) {
         case 'modify':
             initCurrentSiteDate();
-            const arrayNum = suppliersDataStore.orderBy.indexOf(`${id}`);
-            const modalArr = suppliersDataStore.siteAndRoom[arrayNum];
+            const arraySiteNum = suppliersDataStore.orderBySite.indexOf(id);
+            const modalArr = suppliersDataStore.siteAndRoom[arraySiteNum];
             currentSiteDate.Name = modalArr.name;
             currentSiteDate.OpenTime = modalArr.openTime;
             currentSiteDate.Address = modalArr.address;
@@ -85,7 +83,7 @@ const ModifyPSite = async (func, id) => {
             if (confirm('確定要刪除嗎?')) {
                 try {
                     const res = await axios.delete(`https://localhost:7073/api/Products/PSite/${id}`);
-                    console.log(res);
+                    // console.log(res);
                     suppliersDataStore.getProduct();
                 }
                 catch (error) {
@@ -99,7 +97,7 @@ const ModifyPSite = async (func, id) => {
     }
 
 }
-const changeg = (e) => {
+const changeSitePhoto = (e) => {
     currentSiteDate.SitePhoto = e.target.files[0];
     // console.log(addSiteDate.SitePhoto);
 }
@@ -156,7 +154,7 @@ onMounted(() => {
                     <p>圖片</p>
                     <div class="d-flex mb-3">
                         <input type="file" class="form-control btn-light creditCardText" accept=".jpg,.png"
-                            @change="changeg">
+                            @change="changeSitePhoto">
                     </div>
                     <p>開放時間</p>
                     <div class="d-flex mb-3">
@@ -212,7 +210,7 @@ onMounted(() => {
                     <p>新增圖片</p>
                     <div class="d-flex mb-3">
                         <input type="file" class="form-control btn-light creditCardText" accept=".jpg,.png"
-                            @change="changeg">
+                            @change="changeSitePhoto">
                     </div>
                     <p>開放時間</p>
                     <div class="d-flex mb-3">
