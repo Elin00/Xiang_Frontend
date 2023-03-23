@@ -16,6 +16,7 @@
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.3",
+    "moment": "^2.29.4",
     "naive": "^0.0.0",
     "pinia": "^2.0.14",
     "prismjs": "1.28.0",

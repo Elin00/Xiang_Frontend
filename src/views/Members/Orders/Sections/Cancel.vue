@@ -7,23 +7,13 @@ import { useOrdersDataStore } from "../../../../stores/ordersData.js";
 const storeOrdersData = useOrdersDataStore();
 
 
-// defineComponent({
-//    range: ref([118313526e4, Date.now()])
-// });
+
 </script>
 
 <template>
    <div class="container">
       <div class="row">
-         <!-- <div class="col-5">
-            <NCard title="HEADSHOT OF CHENGBAO 2023MARCH ">
-               <template #cover>
-                  <img src="../../../../assets/img/202303chengbao.jpg">
-               </template>
-               NTD$50/piece
-            </NCard>
-            <h4>BUY 1 GET 1 FREE !!!!<br>call now 0963177377</h4>
-         </div> -->
+
          <div class="col-10">
             <section>
                <NTable :bordered="true" :single-line="false" class="my-table">
@@ -33,20 +23,22 @@ const storeOrdersData = useOrdersDataStore();
                         <th>房型種類</th>
                         <th>開始時間</th>
                         <th>結束時間</th>
+                        <th>取消時間</th>
                         <th>優惠券</th>
                         <th>總價</th>
                      </tr>
                   </thead>
                   <tbody class="my-table-tbody">
-                     <tr>
-                        <td>{{ storeOrdersData.OrderID }}</td>
-                        <td>{{ storeOrdersData.CategoryName }}</td>
-                        <td>{{ storeOrdersData.StartDate }}</td>
-                        <td>{{ storeOrdersData.EndDate }}</td>
-                        <td>{{ storeOrdersData.Discount }}</td>
-                        <td>{{ storeOrdersData.Price }}</td>
-                     </tr>   
+                     <tr v-for="(order, index) in storeOrdersData.o" :key="index">
+                        <td>{{ order.tradeNO }}</td>
+                        <td>{{ order.CategoryName }}</td>
+                        <td>{{ order.StartDate }}</td>
+                        <td>{{ order.EndDate }}</td>
+                        <td>{{ order.Discount }}%</td>
+                        <td>{{ order.Price }}</td>
+                        </tr>
                   </tbody>
+                  
                </NTable>
                <hr class="style-two">
                <p style="color:cadetblue; font-weight: 400;">

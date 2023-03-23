@@ -77,7 +77,6 @@ const modalHandler = async (text) => {
     
         if (response.status === 200) {
           EditCustomer.user.email = text;
-          break;
         }
        
       } catch (error) {
@@ -101,7 +100,6 @@ const modalHandler = async (text) => {
         console.log(response);
         if (response.status === 200) {
           EditCustomer.user.phone = text;
-          break;
         }
       } catch (error) {
         if ( error.response.status === 400) {
