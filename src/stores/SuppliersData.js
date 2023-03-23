@@ -5,12 +5,12 @@ import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 
 export const useSuppliersDataStore = defineStore('SuppliersData', () => {
-  const id = ref('');
-  const name = ref('');
-  const phone = ref('');
-  const email = ref('');
-  const password = ref('');
-  const address = ref('');
+  const id = ref("");
+  const name = ref("");
+  const phone = ref("");
+  const email = ref("");
+  const password = ref("");
+  const address = ref("");
   const loggedIn = ref(false);
   //登入
   const SLogin = async () => {
