@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-
 import MemberHeader from "../Components/MemberHeader.vue";
 
 </script>

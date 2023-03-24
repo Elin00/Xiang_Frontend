@@ -5,6 +5,7 @@ import router from "./router";
 import ElementPlus from 'element-plus'
 
 import { useCustomerStore } from '../src/stores/CustomerData.js'
+import { useEditCustomerStore } from '../src/stores/EditCustomerData.js'
 
 
 // Nucleo Icons
@@ -21,12 +22,14 @@ router.beforeEach((to, from, next) => {
 const app = createApp(App);
 const pinia = createPinia();
 const CustomerStore = useCustomerStore(pinia);
+
 app.use(createPinia());
 
 // 從 localStorage 讀取使用者資訊
 const user = JSON.parse(localStorage.getItem('user'));
 if (user) {
   CustomerStore.Name = user.Name;
+  CustomerStore.id = user.id;
   CustomerStore.loggedIn = true;
 }
 

@@ -53,9 +53,8 @@ defineProps({
         items: [
           {
             name: "關於我們",
-            href: "https://www.creative-tim.com/presentation"
+            href: "http://localhost:3000//pages/landing-pages/about-us"
           },
-          { name: "加入我們", href: "https://www.creative-tim.com/blog" }
         ]
       },
       {
@@ -64,7 +63,7 @@ defineProps({
           { name: "供應商登入", href: "https://iradesign.io/" },
           {
             name: "合作夥伴",
-            href: "https://www.creative-tim.com/bits"
+            href: "http://localhost:3000/cooperation"
           },
 
         ]
@@ -93,6 +92,8 @@ defineProps({
     ]
   }
 });
+
+
 </script>
 <template>
   <footer class="footer py-5">

@@ -31,6 +31,7 @@ import CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
 import SiteView from "../views/Suppliers/SiteView.vue";
 import RoomView from "../views/Suppliers/RoomView.vue";
+import AboutUsView from "../views/Other/AboutUs/AboutUsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,7 +58,11 @@ const router = createRouter({
       name: "presentation",
       component: PresentationView,
     },
-
+    {
+      path: "/AboutUs",
+      name: "AboutUs",
+      component: AboutUsView,
+    },
     {
       path: "/questions",
       name: "questions",

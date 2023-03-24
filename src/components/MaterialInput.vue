@@ -77,8 +77,8 @@ function getClasses(size, success, error) {
     <span v-if="icon" class="input-group-text"
       ><i class="fas" :class="`fa-${icon}`" aria-hidden="true"></i
     ></span>
+    <!-- :id="id" -->
     <input
-      :id="id"
       :type="type"
       class="form-control"
       :class="[getClasses(size, success, error), inputClass]"
