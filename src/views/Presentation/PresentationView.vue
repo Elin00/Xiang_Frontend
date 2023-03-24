@@ -6,7 +6,6 @@ import Header from "../../examples/Header.vue";
 import homefooter from "../../examples/footers/homefooter.vue";
 
 // sections
-import PresentationTestimonials from "./Sections/PresentationTestimonials.vue";
 import presentationcarousel from "./Sections/presentationcarousel.vue";
 import presentation跑馬燈 from "./Sections/presentation跑馬燈.vue";
 import presentation使用者操作 from "./Sections/presentation使用者操作.vue";
@@ -52,7 +51,6 @@ onUnmounted(() => {
     </div>
   </div>
   <presentation跑馬燈 />
-  <PresentationTestimonials />
   <presentation使用者操作 />
   <div class="container-fluid">
     <div class="row">

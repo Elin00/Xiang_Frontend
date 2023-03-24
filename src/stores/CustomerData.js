@@ -113,6 +113,6 @@ export const useCustomerStore = defineStore("CustomerData", () => {
     token,
     loggedIn,
     logout,
-    register, registerCustomer, handleGoogleAccessTokenLogin
+    register, registerCustomer
   };
 });

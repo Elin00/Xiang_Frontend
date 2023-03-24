@@ -215,7 +215,7 @@ async function submitRegister() {
                             </a>
                           </div>
                           <div class="col-2 text-center me-auto">
-                            <button @click="Customer.handleGoogleAccessTokenLogin" class="btn btn-primary">
+                            <button @click="" class="btn btn-primary">
                               <i class="fa fa-google"></i>
                             </button>
                           </div>
