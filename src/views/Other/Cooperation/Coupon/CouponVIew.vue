@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { RouterLink, RouterView } from "vue-router";
-import pointstable from "./pointstableView.vue";
+import { RouterLink, RouterView ,useRouter } from "vue-router";
 
 const activeLink = ref(0);
 
@@ -12,6 +11,9 @@ const moveUnderline = (index) => {
 const underlineLeft = computed(() =>
   activeLink.value === 0 ? "10px" : "130px"
 );
+
+const router = useRouter();
+router.push({ name: "other-CouponView-pointstable" });
 </script>
 
 <template>

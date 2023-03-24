@@ -1,13 +1,12 @@
 <script setup>
 //Naive
-import { onMounted } from "vue";
+
 import { NButton, NTable } from "naive-ui";
 import { useOrdersDataStore } from "../../../../stores/ordersData.js";
-import { useCustomerStore } from "../../../../stores/CustomerData.js"
 
-import axios from "axios";
+
 const storeOrdersData = useOrdersDataStore()
-const CustomerData = useOrdersDataStore()
+
 
 
 </script>
@@ -27,11 +26,10 @@ const CustomerData = useOrdersDataStore()
                         <th>優惠券折扣</th>
                         <th>總價</th>
                         <th>取消訂單</th>
-                        <th>刪除訂單</th>
                      </tr>
                   </thead>
                   <tbody class="my-table-tbody">
-                     <tr v-for="(order, index) in storeOrdersData.o" :key="index">
+                     <tr v-for="order in storeOrdersData.o" :key="order.tradeNO">
                         <td>{{ order.tradeNO }}</td>
                         <td>{{ order.CategoryName }}</td>
                         <td>{{ order.StartDate }}</td>
@@ -40,9 +38,6 @@ const CustomerData = useOrdersDataStore()
                         <td>{{ order.Price }}</td>
                         <td>
                            <NButton type="error" @click="storeOrdersData.CancelDate">取消</NButton>
-                        </td>
-                        <td>
-                           <NButton type="error" @click="storeOrdersData.DeleteDate">刪除</NButton>
                         </td>
                      </tr>
                   </tbody>

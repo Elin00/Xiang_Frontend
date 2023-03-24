@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
-import { useCouponDataStore } from "../../../../stores/CouponData.js";
+
 import { useCustomerStore } from "../../../../stores/CustomerData";
 
 import axios from 'axios'
@@ -9,24 +9,11 @@ import axios from 'axios'
 const CustomerData = useCustomerStore();
 const result = reactive([]);
 
-const fetchData = async () => {
-  try {
-    const response = await axios.get(
-      "https://localhost:7073/api/Client/ListCoupon"
-    );
-    result.push(...response.data);
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-onMounted(fetchData);
 
 const discount = ref("");
 const couponCode = ref("");
 const isCouponValid = ref(false);
-const myCoupons = reactive('');
+const myCoupons = reactive([]);
 
 
 const applyAndClaimCoupon = async () => {
@@ -35,33 +22,36 @@ const applyAndClaimCoupon = async () => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${CustomerData.token}`,
-      },    
+      },     
     })
     if (response.data.success) {
       const foundCoupon = result.find(coupon => coupon.code === couponCode.value);
       if (foundCoupon) {
         discount.value = foundCoupon.discount;
         isCouponValid.value = true;
-        myCoupons.push(...foundCoupon);
+        myCoupons.push(foundCoupon);
         localStorage.setItem("myCoupons", JSON.stringify(myCoupons));
         
       } else {
         isCouponValid.value = false;
+        alert("已領過優惠卷");
       }
-    } else {
-      alert("已領過優惠卷");
     }
   } catch (error) {
     console.log(error);
   }
 };
+
+
+
 onMounted(() => {
   const storedCoupons = localStorage.getItem("myCoupons");
   console.log(storedCoupons);
-  // if (storedCoupons) {
-  //   const parsedCoupons = JSON.parse(storedCoupons);
-  //   myCoupons.push(...parsedCoupons);
-  // }
+  if (storedCoupons) {
+    const parsedCoupons = JSON.parse(storedCoupons);
+    Array.prototype.push.apply(myCoupons, parsedCoupons);
+    console.log(myCoupons);
+  }
 });
 
 

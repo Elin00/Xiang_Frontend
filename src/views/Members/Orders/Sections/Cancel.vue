@@ -29,11 +29,12 @@ const storeOrdersData = useOrdersDataStore();
                      </tr>
                   </thead>
                   <tbody class="my-table-tbody">
-                     <tr v-for="(order, index) in storeOrdersData.o" :key="index">
+                     <tr v-for="(order, index) in storeOrdersData.ocancel" :key="index">
                         <td>{{ order.tradeNO }}</td>
                         <td>{{ order.CategoryName }}</td>
                         <td>{{ order.StartDate }}</td>
                         <td>{{ order.EndDate }}</td>
+                        <td>{{ order.CancelDate }}</td>
                         <td>{{ order.Discount }}%</td>
                         <td>{{ order.Price }}</td>
                         </tr>

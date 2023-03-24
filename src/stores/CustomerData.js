@@ -1,7 +1,8 @@
 import { reactive, ref, computed } from "vue";
 import { defineStore } from "pinia";
+import { googleTokenLogin,googleAuthCodeLogin  } from 'vue3-google-login'
 import axios from "axios";
-// import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
+import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 export const useCustomerStore = defineStore("CustomerData", () => {
   const id = ref("")
@@ -11,6 +12,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
   const Password = ref("");
   const loggedIn = ref(false);
   const EditEmail = ref('')
+  
   //登入
   const Login = async () => {
     try {
@@ -24,7 +26,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
         }
       );
       // 解碼JWT檔案
-      // const decodedToken = jwt_decode(response.data);
+      const decodedToken = jwt_decode(response.data);
       // 設置Email的值
       Name.value = decodedToken.Name;
       id.value = decodedToken.sub;
@@ -103,6 +105,29 @@ export const useCustomerStore = defineStore("CustomerData", () => {
       return null;
     }
   });
+
+
+   //google驗整ID
+   const CLIENT_ID = '791286941146-n77r23cg1g2is104lbldn5f2qdjidvja.apps.googleusercontent.com'
+
+
+   const handleGoogleAccessTokenLogin = () => {
+    googleAuthCodeLogin({
+      clientId: CLIENT_ID,
+    }).then((response) => {
+      console.log(response);
+      const code = response.code;
+      axios.get(`https://localhost:7073/api/Google/callback?code=${code}&grant_type=authorization_code&redirect_uri=http://localhost:3000&client_id=${CLIENT_ID}&client_secret=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`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
   return {
     Email, id,
     Password,
@@ -112,6 +137,6 @@ export const useCustomerStore = defineStore("CustomerData", () => {
     token,
     loggedIn,
     logout,
-    register, registerCustomer,
+    register, registerCustomer,handleGoogleAccessTokenLogin 
   };
 });

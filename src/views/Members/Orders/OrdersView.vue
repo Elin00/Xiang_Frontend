@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView} from "vue-router";
+import { RouterLink, RouterView,useRouter} from "vue-router";
 
 import MemberHeader from "../Components/MemberHeader.vue";
 
@@ -30,6 +30,8 @@ function useAxiosCard() {
    }
 }
 
+const router = useRouter();
+router.push({ name: "member-orders-inprogress" });
 </script>
 
 <template>

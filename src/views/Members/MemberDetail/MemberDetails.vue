@@ -1,7 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink, RouterView,useRouter } from "vue-router";
 import MemberHeader from "../Components/MemberHeader.vue";
 
+const router = useRouter();
+router.push({ name: "member-memberdetail-information" });
 </script>
 
 <template>
