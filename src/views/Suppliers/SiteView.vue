@@ -12,6 +12,7 @@ let ModifySiteModal = null;
 const suppliersDataStore = useSuppliersDataStore();
 const currentSiteDate = reactive({
     ProductId: 0,
+    SiteId: 0,
     Name: '',
     OpenTime: '',
     Address: '',
@@ -61,12 +62,23 @@ const ModifySiteModalOpen = () => {
 const ModifySiteModalClose = () => {
     ModifySiteModal.hide();
 }
+const ModifySave = async () => {
+    // try {
+    //     res = await axios.put(`https://localhost:7073/api/Products/PSite/${currentSiteDate.SiteId}`);
+    //     // console.log(res);
+    //     suppliersDataStore.getProduct();
+    // }
+    // catch (error) {
+    //     console.log(error)
+    // }
+}
 const ModifyPSite = async (func, id) => {
     switch (func) {
         case 'modify':
             initCurrentSiteDate();
             const arraySiteNum = suppliersDataStore.orderBySite.indexOf(id);
             const modalArr = suppliersDataStore.siteAndRoom[arraySiteNum];
+            currentSiteDate.SiteId = id;
             currentSiteDate.Name = modalArr.name;
             currentSiteDate.OpenTime = modalArr.openTime;
             currentSiteDate.Address = modalArr.address;
@@ -234,7 +246,7 @@ onMounted(() => {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="ModifySiteModalClose">關閉</button>
-                    <button type="button" class="btn btn-primary" @click="ModifyPSite">儲存更新</button>
+                    <button type="button" class="btn btn-primary" @click="ModifySave">儲存更新</button>
                 </div>
             </div>
         </div>

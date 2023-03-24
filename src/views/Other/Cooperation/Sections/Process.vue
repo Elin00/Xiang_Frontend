@@ -4,15 +4,18 @@ import { onMounted } from "vue";
 //Naive
 import { NTimeline, NTimelineItem, NIcon } from "naive-ui";
 
-// image
-import team4 from "@/assets/img/team-2.jpg";
-import vueMkHeader from "@/assets/img/office-dark.jpg";
-import Cooperation from "@/assets/img/Cooperation.jpg";
-
 //Vue Material Kit 2 components
 import MaterialButton from "@/components/MaterialButton.vue";
 import setMaterialInput from "@/assets/js/material-input";
+
+let registerModal = null;
+
+const RegisterModalOpen = () => {
+  registerModal.show();
+}
+
 onMounted(() => {
+  registerModal = new bootstrap.Modal(document.getElementById('CooperationRegister'));
   setMaterialInput();
 });
 </script>
@@ -22,9 +25,8 @@ onMounted(() => {
   <div class="process" id="JoinUs">
     <div class="process-box" style="margin-left: auto">
       <h2>與我們合作</h2>
-
-      <MaterialButton variant="gradient" color="warning" class="w-auto me-2" size="lg" data-bs-toggle="modal"
-        data-bs-target="#CooperationRegister">立即註冊</MaterialButton>
+      <MaterialButton variant="gradient" color="warning" class="w-auto me-2" size="lg" @click="RegisterModalOpen">立即註冊
+      </MaterialButton>
       <a href="#">聯絡我們</a>
     </div>
 

@@ -86,8 +86,8 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     //註冊
     const SupplierRegister = async () => {
         try {
-            const response = await axios.post('https://localhost:7073/api/TSuppliers/PostTSuppliers',
-
+            console.log(registerSupplier);
+            const response = await axios.post('https://localhost:7073/api/TSuppliers',
                 {
                     name: registerSupplier.name,
                     phone: registerSupplier.phone,
