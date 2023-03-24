@@ -17,18 +17,17 @@ import { useProductStore } from "../../stores/ProductsAxios.js"
 
 const Productspinia = useProductStore();
 //data
-const currentFilter = ref('location');
 const mapContainer = ref(null);
+const state = reactive({
+    map: null,
+    moveToCity: (latlng) => {
+        state.map.setView(latlng, 12);
+    },
+});
 const selectedMarker = ref(null);
-
-
-//function
-const selectFilter = (filterName) => {
-    currentFilter.value = filterName;
-    store.selectFilter(filterName);
-}
-
-
+const moveToCity = ref((latlng) => {
+    map.setView(latlng, 12);
+});
 const markersLayer = L.layerGroup();
 //hook
 onMounted(() => {
@@ -42,10 +41,10 @@ onMounted(() => {
         attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
-
     markersLayer.addTo(map);
 
-    
+    state.map = map;
+
     Productspinia.axiosInit().then(() => {
         //加入卡片
         const { cardinfo } = useProductStore();
@@ -59,29 +58,38 @@ onMounted(() => {
             newMarker.bindPopup(`<b>${name}</b><br>${description}`)
             newMarker.on("click", () => {
                 selectedMarker.value = marker; // 保存选中的Marker对象
-                console.log(selectedMarker.value.name)               
-            });           
+                console.log(selectedMarker.value.name)
+            });
         });
     })
 });
-// 计算属性，根据选中的 marker 返回对应的房间信息
-Productspinia.cardinfo = computed(() => {
-  if (!selectedMarker.value) {
-    return Productspinia.cardinfo;
-  }
-  return Productspinia.cardinfo.filter((room) => room.title === selectedMarker.value.name);
+
+//marker對應房間選擇器 
+const selectedRoomInfo = computed(() => {
+    if (!selectedMarker.value) {
+        return Productspinia.cardinfo;
+    }
+    return Productspinia.cardinfo.filter((room) => room.title === selectedMarker.value.name);
 });
 </script>
 <template>
     <!-- 過濾器 -->
     <header>
         <div class="filter-bar filter-wrapper mt-3 ml-3">
-            <div class="filter-group location" @click="selectFilter('location')">
-                <span :class="{ focus: currentFilter === 'location' }">城市</span>
+            <div class="filter-group location" @click="state.moveToCity([25.0339639, 121.5644722])">
+                <span>全部地區</span>
             </div>
             <div class="divider"></div>
-            <div class="filter-group hourlyTime" @click="selectFilter('hourlyTime')">
-                <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
+            <div class="filter-group location" @click="state.moveToCity([25.0339639, 121.5644722])">
+                <span>台北</span>
+            </div>
+            <div class="divider"></div>
+            <div class="filter-group location" @click="state.moveToCity([24.1469, 120.6839])">
+                <span>台中</span>
+            </div>
+            <div class="divider"></div>
+            <div class="filter-group location" @click="state.moveToCity([22.9997, 120.227])">
+                <span>台南</span>
             </div>
         </div>
     </header>
@@ -90,12 +98,22 @@ Productspinia.cardinfo = computed(() => {
             <div class="col-6 space-wrapper">
                 <div class="space-wrapper__list">
                     <div class="grid">
-                        <RotatingCardForRoom v-for="(item, index) in Productspinia.cardinfo" :key="index">
-                            <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
-                                :description="item.description" />
-                            <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description"
-                                :action="item.action" />
-                        </RotatingCardForRoom>
+                        <template v-if="!selectedMarker">
+                            <RotatingCardForRoom v-for="(item, index) in Productspinia.cardinfo" :key="index">
+                                <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
+                                    :description="item.description" />
+                                <RotatingCardBackForRoom :image="item.image" :title="item.title"
+                                    :description="item.description" :action="item.action" />
+                            </RotatingCardForRoom>
+                        </template>
+                        <template v-else>
+                            <RotatingCardForRoom v-for="(item, index) in selectedRoomInfo" :key="index">
+                                <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
+                                    :description="item.description" />
+                                <RotatingCardBackForRoom :image="item.image" :title="item.title"
+                                    :description="item.description" :action="item.action" />
+                            </RotatingCardForRoom>
+                        </template>
                     </div>
                 </div>
             </div>
