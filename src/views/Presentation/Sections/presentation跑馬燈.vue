@@ -9,7 +9,7 @@ import photo6 from "../../../assets/img/6.jpg";
 import photo7 from "../../../assets/img/7.jpg";
 
 const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
-const imageUrls = ref([...photos.map((photo) => ({ src: photo, link: "/views/roomguide" })), ...photos.map((photo) => ({ src: photo, link: "/views/roomguide" }))]);
+const imageUrls = ref([...photos.map((photo) => ({ src: photo, link: "/views/rentroomview" })), ...photos.map((photo) => ({ src: photo, link: "/views/rentroomview" }))]);
 const scrollPosition = ref(0);
 const scrollStep = 4;
 const itemWidth = ref(0);

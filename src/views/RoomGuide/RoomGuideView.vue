@@ -8,67 +8,30 @@ import RotatingCardBackForRoom from "@/examples/component/RotatingCardBackForRoo
 //leaflet
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref, reactive, computed } from "vue";
 
 //import pinia
+import { useProductStore } from "../../stores/ProductsAxios.js"
 
 
+
+const Productspinia = useProductStore();
 //data
-const currentFilter = ref('location');
 const mapContainer = ref(null);
-const productDetail = reactive();
-
-const cardinfo = {
-    image: "https://www.uicbc.com/upload/service/c.jpg",
-    icon: "touch_app",
-    title: "成功大學",
-    description: "All the Bootstrap components that you need in a development have been re-design with the new look.",
-    action: [
-        {
-            route: "/views/rentroomview",
-            label: "現在就訂房",
-        },
-    ],
-}
-const data = [cardinfo, cardinfo, cardinfo, cardinfo, cardinfo, cardinfo];
-
-const markers = [
-    { lat: 22.9971, lng: 120.2169, name: "成功大學", description: "這是成功大學" },
-    { lat: 22.6273, lng: 120.3014, name: "高雄市立圖書館總館", description: "這是高雄市立圖書館總館" },
-    { lat: 22.6746, lng: 120.4899, name: "旗津渡輪", description: "這是旗津渡輪" },
-];
-
-//建立class
-class Person {
-    constructor(name) {
-        this.name = name;
-    }
-
-    getFrom() {
-        const state = 'Taiwan';
-        return `${this.name} from ${state}.`;
-    }
-}
-
-
-//function
-const selectFilter = (filterName) => {
-    currentFilter.value = filterName;
-    store.selectFilter(filterName);
-}
-const axiosInit = async () => {
-    try {
-        const res = await axios.get("https://localhost:7073/api/Products");
-        axiosData.value = res.data;
-        console.log(axiosData.value[0].name);
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-
-
+const state = reactive({
+    map: null,
+    moveToCity: (latlng) => {
+        state.map.setView(latlng, 12);
+    },
+});
+const selectedMarker = ref(null);
+const moveToCity = ref((latlng) => {
+    map.setView(latlng, 12);
+});
+const markersLayer = L.layerGroup();
 //hook
 onMounted(() => {
+
     const map = L.map(mapContainer.value, {
         center: [22.8, 120.5],
         zoom: 10,
@@ -78,38 +41,55 @@ onMounted(() => {
         attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
+    markersLayer.addTo(map);
 
-    const markersLayer = L.layerGroup().addTo(map);
+    state.map = map;
 
-    markers.forEach((marker) => {
-        const { lat, lng, name, description } = marker;
-        const newMarker = L.marker([lat, lng]).addTo(markersLayer);
-        newMarker.bindPopup(`<b>${name}</b><br>${description}`).on("click", () => {
-            const card = document.getElementById(`card-${name}`);
-            if (card) {
-                card.classList.add("rotate-card-up");
-                setTimeout(() => {
-                    card.classList.remove("rotate-card-up");
-                }, 2000);
-            }
+    Productspinia.axiosInit().then(() => {
+        //加入卡片
+        const { cardinfo } = useProductStore();
+        console.log(cardinfo)
+        //加入marker
+        const { markers } = useProductStore();
+        // console.log(markers)
+        markers.forEach((marker) => {
+            const { lat, lng, name, description } = marker;
+            const newMarker = L.marker([lat, lng]).addTo(markersLayer);
+            newMarker.bindPopup(`<b>${name}</b><br>${description}`)
+            newMarker.on("click", () => {
+                selectedMarker.value = marker; // 保存选中的Marker对象
+                console.log(selectedMarker.value.name)
+            });
         });
-    });
-
-    axiosInit();
-
+    })
 });
 
+//marker對應房間選擇器 
+const selectedRoomInfo = computed(() => {
+    if (!selectedMarker.value) {
+        return Productspinia.cardinfo;
+    }
+    return Productspinia.cardinfo.filter((room) => room.title === selectedMarker.value.name);
+});
 </script>
 <template>
     <!-- 過濾器 -->
     <header>
         <div class="filter-bar filter-wrapper mt-3 ml-3">
-            <div class="filter-group location" @click="selectFilter('location')">
-                <span :class="{ focus: currentFilter === 'location' }">城市</span>
+            <div class="filter-group location" @click="state.moveToCity([25.0339639, 121.5644722])">
+                <span>全部地區</span>
             </div>
             <div class="divider"></div>
-            <div class="filter-group hourlyTime" @click="selectFilter('hourlyTime')">
-                <span :class="{ focus: currentFilter === 'hourlyTime' }">時間</span>
+            <div class="filter-group location" @click="state.moveToCity([25.0339639, 121.5644722])">
+                <span>台北</span>
+            </div>
+            <div class="divider"></div>
+            <div class="filter-group location" @click="state.moveToCity([24.1469, 120.6839])">
+                <span>台中</span>
+            </div>
+            <div class="divider"></div>
+            <div class="filter-group location" @click="state.moveToCity([22.9997, 120.227])">
+                <span>台南</span>
             </div>
         </div>
     </header>
@@ -118,12 +98,22 @@ onMounted(() => {
             <div class="col-6 space-wrapper">
                 <div class="space-wrapper__list">
                     <div class="grid">
-                        <RotatingCardForRoom v-for="(item, index) in data" :key="index">
-                            <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
-                                :description="item.description" />
-                            <RotatingCardBackForRoom :image="item.image" :title="item.title" :description="item.description"
-                                :action="item.action" />
-                        </RotatingCardForRoom>
+                        <template v-if="!selectedMarker">
+                            <RotatingCardForRoom v-for="(item, index) in Productspinia.cardinfo" :key="index">
+                                <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
+                                    :description="item.description" />
+                                <RotatingCardBackForRoom :image="item.image" :title="item.title"
+                                    :description="item.description" :action="item.action" />
+                            </RotatingCardForRoom>
+                        </template>
+                        <template v-else>
+                            <RotatingCardForRoom v-for="(item, index) in selectedRoomInfo" :key="index">
+                                <RotatingCardFrontForRoom :image="item.image" :icon="item.icon" :title="item.title"
+                                    :description="item.description" />
+                                <RotatingCardBackForRoom :image="item.image" :title="item.title"
+                                    :description="item.description" :action="item.action" />
+                            </RotatingCardForRoom>
+                        </template>
                     </div>
                 </div>
             </div>
