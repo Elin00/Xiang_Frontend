@@ -79,6 +79,7 @@ const modalHandler = async (text) => {
           EditCustomer.user.email = text;
           // console.log(EditCustomer.user.email);
         }
+       
       } catch (error) {
         if (error.response.status === 400) {
           // console.log(error.response.data);

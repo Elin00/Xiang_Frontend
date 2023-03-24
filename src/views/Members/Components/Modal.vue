@@ -22,13 +22,23 @@ const modalText = ref("");
 
 const emit = defineEmits(["modifyText"]);
 
-const save = () => {
-  emit("modifyText", modalText.value);
-  modalText.value = "";
-};
+
 const save1 = async () => {
   emit("modifyText", modalText.value);
   modalText.value = "";
+  console.log(11);
+  const proxy1 = new Proxy(EditCustomerData, {});
+  console.log(proxy1)
+  console.log(12);
+  console.log({ ...proxy1 })
+  console.log(13);
+  console.log(JSON.parse(JSON.stringify(proxy1)))
+  console.log(14);
+  console.log({ ...proxy1 }.user)
+  console.log(15);
+  console.log(JSON.parse(JSON.stringify(EditCustomerData)))
+
+
   try {
     const response = await axios.put(
       `https://localhost:7073/api/Client/id?id=${CustomerData.id}`,
@@ -64,49 +74,24 @@ const save1 = async () => {
 </script>
 
 <template>
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
             <h3>{{ props.title }}</h3>
           </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <h5>{{ props.body }}</h5>
-          <input
-            type="text"
-            class="form-control btn-light"
-            placeholder="請輸入內容"
-            v-model="modalText"
-          />
+          <input type="text" class="form-control btn-light" placeholder="請輸入內容" v-model="modalText" />
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             關閉
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            @click="save1"
-          >
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="save1">
             儲存變更
           </button>
         </div>

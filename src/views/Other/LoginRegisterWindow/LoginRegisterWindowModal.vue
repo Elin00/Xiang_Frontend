@@ -35,6 +35,7 @@ const Supplier = reactive({
 
 const Customer = useCustomerStore();
 
+
 //當登入時，移除掉所有Modal資訊
 async function submitLogin() {
   const isLoginSuccess = await Customer.Login();
@@ -197,7 +198,8 @@ async function submitRegister() {
                         </div>
 
                         <div class="text-center">
-                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2" @click="submitLogin">
+                          <button type="button" class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
+                            @click.prevent="submitLogin">
                             登入
                           </button>
                         </div>
@@ -213,9 +215,9 @@ async function submitRegister() {
                             </a>
                           </div>
                           <div class="col-2 text-center me-auto">
-                            <a class="btn btn-link px-3" href="javascript:;">
-                              <i class="fa fa-google text-warning text-lg"></i>
-                            </a>
+                            <button @click="Customer.handleGoogleAccessTokenLogin" class="btn btn-primary">
+                              <i class="fa fa-google"></i>
+                            </button>
                           </div>
                         </div>
                       </form>

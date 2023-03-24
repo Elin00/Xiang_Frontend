@@ -1,4 +1,4 @@
-import { reactive, ref,computed  } from "vue";
+import { reactive, ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
@@ -10,7 +10,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
   const Phone = ref("");
   const Password = ref("");
   const loggedIn = ref(false);
-  const EditEmail = ref('')
+
   //登入
   const Login = async () => {
     try {
@@ -34,7 +34,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
         "user",
         JSON.stringify({
           token: response.data, // 存储 JWT
-          id :  decodedToken.sub,
+          id: decodedToken.sub,
           Name: decodedToken.Name,
         })
       );
@@ -103,8 +103,9 @@ export const useCustomerStore = defineStore("CustomerData", () => {
       return null;
     }
   });
+
   return {
-    Email,id,
+    Email, id,
     Password,
     Name,
     Phone,
@@ -112,6 +113,6 @@ export const useCustomerStore = defineStore("CustomerData", () => {
     token,
     loggedIn,
     logout,
-    register, registerCustomer,
+    register, registerCustomer, handleGoogleAccessTokenLogin
   };
 });

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, reactive, computed } from "vue";
 import axios from "axios";
-import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
+// import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     const id = ref("");

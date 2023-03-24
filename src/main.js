@@ -4,8 +4,15 @@ import App from "./App.vue";
 import router from "./router";
 import ElementPlus from 'element-plus'
 
+
+
+const googleAuthOptions = {
+  clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com', // Replace with your client ID
+  scope: 'profile email',
+  prompt: 'select_account',
+};
 import { useCustomerStore } from '../src/stores/CustomerData.js'
-import { useEditCustomerStore } from '../src/stores/EditCustomerData.js'
+
 
 
 // Nucleo Icons
@@ -33,8 +40,6 @@ if (user) {
   CustomerStore.loggedIn = true;
 }
 
-
-// app.use(pinia);
 app.use(ElementPlus);
 app.use(router);
 app.use(materialKit);
