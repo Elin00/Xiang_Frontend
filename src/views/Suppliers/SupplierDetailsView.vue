@@ -13,7 +13,7 @@ const Suppliersstore = useSuppliersDataStore();
 const updateEmployee = async () => {
   try {
     await axios.put(
-      `https://localhost:7073/api/Suppliers/${SUser.id}`,
+      `https://localhost:7073/api/TSuppliers/${SUser.id}`,
       SUser,
       {
         headers: {
@@ -34,7 +34,7 @@ const updateEmployee = async () => {
   <h2>修改員工資料</h2>
   <div>
     <label for="name">姓名：</label>
-    <input id="name" type="text" v-model="SUser.name" />
+    <input id="name" type="text" v-model="Suppliersstore.name" />
   </div>
   <div>
     <label for="phone">電話：</label>
@@ -62,7 +62,7 @@ const updateEmployee = async () => {
           <div class="d-flex justify-content-between">
             <p>{{ Suppliersstore.email }}</p>
             <!-- <h6
-                        id="email"
+                                      id="email"
                                   data-bs-toggle="modal"
                                           data-bs-target="#exampleModal"
                                                     @click="modalTitleBody"
@@ -78,7 +78,7 @@ const updateEmployee = async () => {
           <div class="d-flex justify-content-between">
             <p>{{ Suppliersstore.name }}</p>
             <!-- <h6
-                        id="email"
+                                      id="email"
                                   data-bs-toggle="modal"
                                           data-bs-target="#exampleModal"
                                                     @click="modalTitleBody"
@@ -94,13 +94,13 @@ const updateEmployee = async () => {
           <div class="d-flex justify-content-between">
             <p>{{ Suppliersstore.phone }}</p>
             <!-- <h6
-                        id="email"
-                                        data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal"
-                                                          @click="modalTitleBody"
-                                                        >
-                                                          編輯
-                                                        </h6> -->
+                                      id="email"
+                                                      data-bs-toggle="modal"
+                                                              data-bs-target="#exampleModal"
+                                                                        @click="modalTitleBody"
+                                                                      >
+                                                                        編輯
+                                                                      </h6> -->
           </div>
         </div>
       </div>
@@ -110,13 +110,13 @@ const updateEmployee = async () => {
           <div class="d-flex justify-content-between">
             <p>{{ Suppliersstore.address }}</p>
             <!-- <h6
-                                                          id="email"
-                                                          data-bs-toggle="modal"
-                                                          data-bs-target="#exampleModal"
-                                                          @click="modalTitleBody"
-                                                        >
-                                                          編輯
-                                                        </h6> -->
+                                                                        id="email"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#exampleModal"
+                                                                        @click="modalTitleBody"
+                                                                      >
+                                                                        編輯
+                                                                      </h6> -->
           </div>
         </div>
       </div>
