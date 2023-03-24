@@ -23,18 +23,87 @@ import ElDropdowns from "../layouts/sections/elements/dropdowns/DropdownsView.vu
 import ElProgressBars from "../layouts/sections/elements/progress-bars/ProgressBarsView.vue";
 import ElToggles from "../layouts/sections/elements/toggles/TogglesView.vue";
 import ElTypography from "../layouts/sections/elements/typography/TypographyView.vue";
+import RentRoomView from "../views/RoomGuide/RentRoomView.vue";
+import RoomGuideView from "../views/RoomGuide/RoomGuideView.vue";
+import CooperationView from "../views/Other/Cooperation/CooperationView.vue";
+import QuestionsView from "../views/Other/Questions/QuestionsView.vue";
+import CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
+import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
+import SiteView from "../views/Suppliers/SiteView.vue";
+import RoomView from "../views/Suppliers/RoomView.vue";
+//import AboutUsView from "../views/Other/AboutUs/AboutUsView.vue";
+import AboutUs from "../views/LandingPages/AboutUs/AboutUs.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/userview",
+      name: "userview",
+      component: () => import("../views/Other/UserTerms/UserView.vue"),
+      children: [
+        {
+          path: "userterms",
+          name: "userview-userterms",
+          component: () => import('../views/Other/UserTerms/Section/userterms.vue'),
+        },
+        {
+          path: "privacy",
+          name: "userview-privacy",
+          component: () => import('../views/Other/UserTerms/Section/privacy.vue'),
+        },
+      ]
+    },
     {
       path: "/",
       name: "presentation",
       component: PresentationView,
     },
+    // {
+    //   path: "/AboutUs",
+    //   name: "AboutUs",
+    //   component: AboutUsView,
+    // },
+    {
+      path: "/questions",
+      name: "questions",
+      component: QuestionsView,
+    },
+    {
+      path: "/addSite",
+      name: "addSite",
+      component: SiteView,
+    },
+    {
+      path: "/addRoom",
+      name: "addRoom",
+      component: RoomView,
+    },
+    {
+      path: "/supplierDetails",
+      name: "supplierDetails",
+      component: SupplierDetailsView,
+    },
+    {
+      path: "/cooperation",
+      name: "cooperation",
+      component: CooperationView,
+    },
+    {
+      path: "/views/rentroomview/:id",
+      name: "rentroomView",
+      component: RentRoomView,
+    },
     {
       path: "/pages/landing-pages/about-us",
       name: "about",
       component: AboutView,
+    },
+    //test about us page.
+    {
+      path: "/pages/landing-pages/AboutUs",
+      name: "AboutUs",
+      component: AboutUs,
     },
     {
       path: "/pages/landing-pages/contact-us",
@@ -146,7 +215,72 @@ const router = createRouter({
       name: "el-typography",
       component: ElTypography,
     },
+    {
+      path: "/roomguide",
+      name: "RoomGuideView",
+      component: RoomGuideView,
+    },
+    {
+      path: "/member/orders",
+      name: "member-orders",
+      component: () => import('../views/Members/Orders/OrdersView.vue'),
+      children: [
+        {
+          path: "inprogress",
+          name: "member-orders-inprogress",
+          component: () => import('../views/Members/Orders/Sections/InProgress.vue'),
+        },
+        {
+          path: "cancel",
+          name: "member-orders-cancel",
+          component: () => import('../views/Members/Orders/Sections/Cancel.vue'),
+        },
+        {
+          path: "finish",
+          name: "member-orders-finish",
+          component: () => import('../views/Members/Orders/Sections/Finish.vue'),
+        },
+      ]
+    },
+    {
+      path: "/member/memberdetail",
+      name: "member-memberdetail",
+      component: () => import('../views/Members/MemberDetail/MemberDetails.vue'),
+      children: [
+        {
+          path: "information",
+          name: "member-memberdetail-information",
+          component: () => import('../views/Members/MemberDetail/Sections/Information.vue'),
+        },
+        {
+          path: "point",
+          name: "member-memberdetail-point",
+          component: () => import('../views/Members/MemberDetail/Sections/Point.vue'),
+        },
+        {
+          path: "creditcard",
+          name: "member-memberdetail-creditcard",
+          component: () => import('../views/Members/MemberDetail/Sections/CreditCard.vue'),
+        },
+      ]
+    },
+    {
+      path: "/other/CouponView",
+      name: "other-CouponView",
+      component: CouponView,
+      children: [
+        {
+          path: "pointstableView",
+          name: "other-CouponView-pointstable",
+          component: () => import('../views/Other/Cooperation/Coupon/pointstableView.vue'),
+        },
+        {
+          path: "UseCouponView",
+          name: "other-CouponView-UseCouponView",
+          component: () => import('../views/Other/Cooperation/Coupon/UseCouponView.vue'),
+        },
+      ]
+    },
   ],
 });
-
 export default router;

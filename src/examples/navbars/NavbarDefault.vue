@@ -2,77 +2,44 @@
 import { RouterLink } from "vue-router";
 import { ref, watch } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
+import { useCustomerStore } from "../../stores/CustomerData.js";
+import { useSuppliersDataStore } from "../../stores/SuppliersData.js";
+
 // images
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
 
+const CustomerStore = useCustomerStore();
+const Suppliersstore = useSuppliersDataStore();
 
 const props = defineProps({
   action: {
     default: () => ({
-      label1: "登入"
-    })
+      color: "black",
+      label1: "登入",
+    }),
   },
   transparent: {
     type: Boolean,
-    default: true
+    default: false,
   },
   light: {
     type: Boolean,
-    default: false
+    default: false,
   },
   dark: {
     type: Boolean,
-    default: false
+    default: false,
   },
   sticky: {
     type: Boolean,
-    default: false
+    default: false,
   },
   darkText: {
     type: Boolean,
-    default: false
-  },
-
-  data() {
-    return {
-      isTransparent: this.transparent,
-      isLight: this.light,
-      isDark: this.dark,
-      isSticky: this.sticky,
-    };
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  watch: {
-    isTransparent(newVal) {
-      this.$emit('update:transparent', newVal);
-    },
-    isSticky(newVal) {
-      this.$emit('update:sticky', newVal);
-    },
-  },
-  methods: {
-    handleScroll() {
-      // Check if the page is scrolled more than 100px
-      if (window.pageYOffset > 100) {
-        this.isTransparent = false;
-        this.isSticky = true;
-      } else {
-        this.isTransparent = true;
-        this.isSticky = false;
-      }
-    },
-    ChangeColor() {
-      document.querySelector('a').style.color = "red"
-    }
+    default: false,
   },
 });
-
 // set arrow  color
 function getArrowColor() {
   if (props.transparent && textDark.value) {
@@ -87,7 +54,7 @@ function getArrowColor() {
 // set text color
 const getTextColor = () => {
   let color;
-  if (props.transparent && textDark.value) {
+  if (props.transparent) {
     color = "text-dark";
   } else if (props.transparent) {
     color = "text-white";
@@ -97,7 +64,6 @@ const getTextColor = () => {
 
   return color;
 };
-
 
 // set nav color on mobile && desktop
 
@@ -110,7 +76,6 @@ if (type.value === "mobile") {
   textDark.value = false;
 }
 
-
 watch(
   () => type.value,
   (newValue) => {
@@ -121,41 +86,36 @@ watch(
     }
   }
 );
-
-
 </script>
 <template>
-  <nav class="navbar navbar-expand-lg top-0 p-0" :class="{
-    'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-3 ':
+  <nav class="navbar navbar-expand-lg top-0 p-0" style="margin: 0px -24px" :class="{
+    'z-index-3 w-100 shadow-none navbar-transparent position-absolute my-':
       props.transparent,
-    ' blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0  position-absolute navbar-shrink sticky ':
+    ' blur border-radius-lg z-index-3 py-2 shadow py-2 start-0 end-0  ':
       props.sticky,
     'navbar-light bg-white py-3': props.light,
-    ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark
+    ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark,
   }">
-    <div :class="
-      props.transparent || props.light || props.dark
-        ? 'container-fluid'
-        : 'container-fluid '
-    ">
+  <div :class="
+    props.transparent || props.light || props.dark
+      ? 'container-fluid'
+      : 'container-fluid '
+  ">
       <RouterLink class="navbar-brand d-none d-md-block" :class="[
         (props.transparent && textDark.value) || !props.transparent
           ? 'text-dark font-weight-bolder ms-sm-3'
-          : 'text-white font-weight-bolder ms-sm-3'
+          : 'text-white font-weight-bolder ms-sm-3',
       ]" :to="{ name: 'presentation' }" rel="tooltip" title="Designed and Coded by Creative Tim"
         data-placement="bottom">
-        <font-awesome-icon :icon="['fa', 'house']" size="3x"></font-awesome-icon>
-        <span style="font-size: 36px;">想享Xing</span>
+        <span style="font-size: 36px">想享Xiang</span>
       </RouterLink>
       <RouterLink class="navbar-brand d-block d-md-none" :class="
         props.transparent || props.dark
           ? 'text-white'
           : 'font-weight-bolder ms-sm-3'
       " to="/" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
-        Material Design
+        想享Xiang
       </RouterLink>
-      <a href="https://www.creative-tim.com/product/vue-material-kit-pro"
-        class="btn btn-sm bg-gradient-success mb-0 ms-auto d-lg-none d-block">Buy Now</a>
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation"
         aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">
@@ -166,45 +126,119 @@ watch(
       </button>
       <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
         <ul class="navbar-nav navbar-nav-hover ms-auto">
-          <a class=" py-3 ps-3 d-flex" id="title" style="padding-right: 15px; color: aliceblue;font-size:24px;" :class="[
-            (props.transparent && textDark.value) || !props.transparent
-              ? 'text-dark font-weight-bolder ms-sm-3'
-              : 'text-white font-weight-bolder ms-sm-3'
-          ]" href="#" onclick="smoothToPricing('pricing-soft-ui')" @mouseover="ChangeColor">瀏覽空間</a>
-          <a class=" py-3 ps-3 d-flex" id="title" style="padding-right: 15px; color: aliceblue;font-size:24px;" :class="[
-            (props.transparent && textDark.value) || !props.transparent
-              ? 'text-dark font-weight-bolder ms-sm-3'
-              : 'text-white font-weight-bolder ms-sm-3'
-          ]" href="#" onclick="smoothToPricing('pricing-soft-ui')">加入合作空間</a>
+          <RouterLink :to="{ name: 'RoomGuideView' }" class="py-3 ps-3 d-flex" id="title"
+            style="padding-right: 15px; color: aliceblue; font-size: 24px" :class="[
+              (props.transparent && textDark.value) || !props.transparent
+                ? 'text-dark font-weight-bolder ms-sm-3'
+                : 'text-white font-weight-bolder ms-sm-3',
+            ]" href="#" onclick="smoothToPricing('pricing-soft-ui')">瀏覽空間</RouterLink>
+          <RouterLink :to="{ name: 'cooperation' }" class="py-3 ps-3 d-flex" id="title"
+            style="padding-right: 15px; color: aliceblue; font-size: 24px" :class="[
+              (props.transparent && textDark.value) || !props.transparent
+                ? 'text-dark font-weight-bolder ms-sm-3'
+                : 'text-white font-weight-bolder ms-sm-3',
+            ]">加入合作空間</RouterLink>
         </ul>
-        <ul class="navbar-nav d-lg-block d-none ">
-          <li class="nav-item dropdown dropdown-hover ">
-            <a href="#" class="nav-link  d-flex align-items-center cursor-pointer happ-icon-menu icon-menu"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              <div style="border-radius: 40%; background-color: rgba(255, 255, 255, 0.7); padding: 8px;">
-                <span class="material-icons" style="font-size: 3em;">
+        <ul class="navbar-nav d-lg-block">
+          <li class="nav-item dropdown dropdown-hover">
+            <a id="menu" class="nav-link d-flex align-items-center cursor-pointer" data-bs-toggle="dropdown"
+              aria-expanded="false" data-bs-offset="10,20">
+              <div style="
+                    border-radius: 40%;
+                    background-color: rgba(255, 255, 255, 0.7);
+                  ">
+                <span class="material-icons" style="font-size: 3em">
                   manage_accounts
                 </span>
-
               </div>
             </a>
-            <div class="dropdown-menu dropdown-menu-end dropdown-md mt-0 mt-lg-3 p-3 border-radius-lg"
-              aria-labelledby="pricingDropdown">
-              <RouterLink :to="{ name: 'about' }" class="dropdown-item py-3 ps-3 border-radius-md " style="color: black;"
-                :href="action.route"><span>{{ action.label1 }}</span></RouterLink>
-              <a class="dropdown-item py-3 ps-3 border-radius-md" style="color: black;" href="#pricing-soft-ui"
-                onclick="smoothToPricing('pricing-soft-ui')">註冊</a>
-              <a class="dropdown-item py-3 ps-3 border-radius-md" style="color: black;" href="#pricing-soft-ui"
-                onclick="smoothToPricing('pricing-soft-ui')">領取優惠</a>
-              <a class="dropdown-item py-3 ps-3 border-radius-md" style="color: black;" href="#pricing-soft-ui"
-                onclick="smoothToPricing('pricing-soft-ui')">常見問答</a>
+
+            <!-- 沒登入時選單 -->
+            <div v-if="!CustomerStore.loggedIn && !Suppliersstore.loggedIn" id="dropdown"
+              class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
+              style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" data-bs-toggle="modal"
+                data-bs-target="#Login">
+                登入
+              </div>
+
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" data-bs-toggle="modal"
+                data-bs-target="#Register">
+                註冊
+              </div>
+
+              <RouterLink :to="{ name: 'other-CouponView' }" class="dropdown-item py-3 ps-3 border-radius-md"
+                :style="action.color" :href="action.route">領取優惠卷
+              </RouterLink>
+              <RouterLink :to="{ name: 'questions' }" class="dropdown-item py-3 ps-3 border-radius-md"
+                :style="action.color">常見問答</RouterLink>
+              <div v-if="CustomerStore.loggedIn"></div>
+            </div>
+
+            <!-- 登入時換取顧客帳戶 -->
+            <div v-if="CustomerStore.loggedIn" id="dropdown"
+              class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
+              style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
+              <!-- <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                    data-bs-toggle="modal" data-bs-target="#Login">登入
+                  </div>
+
+                  <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                    data-bs-toggle="modal" data-bs-target="#Register">註冊
+                  </div> -->
+              <div v-if="CustomerStore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md"
+                  style="color: green; border-bottom: 1px solid grey">
+                  {{ CustomerStore.Name }}
+                </span>
+              </div>
+              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'member-orders' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的預定
+              </RouterLink>
+              <RouterLink v-if="CustomerStore.loggedIn" :to="{ name: 'member-memberdetail' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的帳戶
+              </RouterLink>
+              <RouterLink :to="{ name: 'other-CouponView' }" class="dropdown-item py-3 ps-3 border-radius-md"
+                :style="action.color" :href="action.route">領取優惠卷
+              </RouterLink>
+              <RouterLink :to="{ name: 'questions' }" class="dropdown-item py-3 ps-3 border-radius-md"
+                :style="action.color">常見問答</RouterLink>
+              <div v-if="CustomerStore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md" @click="CustomerStore.logout"
+                  :style="action.color">
+                  登出
+                </span>
+              </div>
+            </div>
+
+            <!-- 業者登入時換取業者帳戶 -->
+            <div v-if="Suppliersstore.loggedIn" id="dropdown"
+              class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
+              style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
+              <div v-if="Suppliersstore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md"
+                  style="color: green; border-bottom: 1px solid grey">
+                  {{ Suppliersstore.name }}
+                </span>
+              </div>
+              <RouterLink v-if="Suppliersstore.loggedIn" :to="{ name: 'supplierDetails' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的帳戶
+              </RouterLink>
+              <RouterLink v-if="Suppliersstore.loggedIn" :to="{ name: 'addRoom' }"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的空間
+              </RouterLink>
+              <div v-if="Suppliersstore.loggedIn">
+                <span class="dropdown-item py-3 ps-3 border-radius-md" @click="Suppliersstore.SLogout"
+                  :style="action.color">
+                  登出
+                </span>
+              </div>
             </div>
           </li>
         </ul>
-
       </div>
     </div>
   </nav>
   <!-- End Navbar -->
 </template>
-
+<style></style>

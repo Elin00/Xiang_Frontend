@@ -214,3 +214,7 @@ Dribbble: <https://dribbble.com/creativetim>
 Google+: <https://plus.google.com/+CreativetimPage>
 
 Instagram: <https://instagram.com/creativetimofficial>
+
+
+
+以上代码中，我们新增了一个响应式变量`selectedRoomInfo`，用于存储选中站点的房间信息。在监听Marker点击事件时，我们首先将选中的Marker对象存储到`selectedMarker`中，并清空`selectedRoomInfo`列表。然后遍历所有房间数据，将属于选中站点的房间数据转换为`carditem`对象，再将其存储到`selectedRoomInfo`列表中。最后，我们将`selectedRoomInfo`列表作为参数传递给`RotatingCardForRoom`组件，用于更新房间列表显示。

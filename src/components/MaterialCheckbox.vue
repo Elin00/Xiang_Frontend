@@ -6,7 +6,7 @@ defineProps({
   },
   color: {
     type: String,
-    default: "dark",
+    default: "success",
   },
   inputClass: {
     type: String,
@@ -24,14 +24,8 @@ defineProps({
 </script>
 <template>
   <div class="form-check">
-    <input
-      class="form-check-input"
-      :class="`bg-${color} border-${color} ${inputClass}`"
-      type="checkbox"
-      value=""
-      :id="id"
-      :checked="checked"
-    />
+    <input class="form-check-input" :class="`bg-${color} border-${color} ${inputClass}`" type="checkbox" value="" :id="id"
+      :checked="checked" />
     <label class="form-check-label" :class="labelClass" :for="id">
       <slot />
     </label>

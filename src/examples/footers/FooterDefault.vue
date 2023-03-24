@@ -1,5 +1,12 @@
 <script setup>
+import { RouterLink, RouterView, useRouter } from "vue-router";
 import logoDark from "@/assets/img/logo-ct-dark.png";
+const router = useRouter();
+
+const navigateTo = (path) => {
+  router.push(path);
+};
+
 defineProps({
   brand: {
     type: Object,
@@ -53,20 +60,17 @@ defineProps({
         items: [
           {
             name: "關於我們",
-            href: "https://www.creative-tim.com/presentation"
+            path: "/pages/landing-pages/AboutUs"
           },
-          { name: "加入我們", href: "https://www.creative-tim.com/blog" }
         ]
       },
       {
         name: "攜手Xiang",
         items: [
-          { name: "供應商登入", href: "https://iradesign.io/" },
           {
             name: "合作夥伴",
-            href: "https://www.creative-tim.com/bits"
-          },
-
+            path: "/cooperation"
+          }
         ]
       },
       {
@@ -74,33 +78,27 @@ defineProps({
         items: [
           {
             name: "使用條款",
-            href: "https://www.creative-tim.com/contact-us"
+            path: "/userview/userterms"
           },
           {
             name: "隱私政策",
-            href: "https://www.creative-tim.com/knowledge-center"
+            path: "/userview/privacy"
           },
-          {
-            name: "Cookie政策",
-            href: "https://services.creative-tim.com/"
-          },
-          {
-            name: "技術問題",
-            href: "https://www.creative-tim.com/sponsorships"
-          }
         ]
       },
+      // ...
     ]
   }
 });
+
+
 </script>
 <template>
   <footer class="footer py-5">
-    <div class="container p-0" >
+    <div class="container p-0">
       <div class="row">
         <div class="col-4  ">
           <div>
-            <img src="../../assets/img/logo100x60.png">
             <h3 class="fw-bold" style="font-size: 24px;">讓每次推開門都是一段絕無僅有的美好時光</h3>
             <p style="font-size: 16px; line-height: 1.5; margin-top: 20px;">
               Happ. 小樹屋想帶給你的不僅僅是空間，更是一段絕無僅有的時光；獻給每個「實現此刻」的你，讓美好的事物與回憶就此發生。
@@ -110,8 +108,8 @@ defineProps({
         <div class="col-lg-1 col-sm-6 col-md-2 mb-4 offset-1" v-for="{ name, items } of menus" :key="name">
           <h6 class="text-sm">{{ name }}</h6>
           <ul class="flex-column ms-n3 nav">
-            <li class="nav-item" v-for="item of items" :key="item.name">
-              <a class="nav-link" :href="item.href" target="_blank">{{ item.name }}</a>
+            <li id="link" class="nav-item" v-for="item of items" :key="item.name">
+              <a class="nav-link" @click="navigateTo(item.path)">{{ item.name }}</a>
             </li>
           </ul>
         </div>
@@ -120,16 +118,16 @@ defineProps({
           <ul class="flex-column ms-n3 nav">
             <li class="nav-item">
               <span class="nav-link" href="#">
-                <img src="../../assets/img/logo100x60.png" alt="綠界信用卡支付"
-                  style="max-height: 30px;"></span>
+                <img src="../../assets/img/logo100x60.png" alt="綠界信用卡支付" style="max-height: 30px;"></span>
             </li>
           </ul>
         </div>
         <div class="col-12">
           <hr style="border-color: #ddd;">
           <div class="text-center">
+            <img class="w-15" src="../../assets/img/XiangLogo.png">
             <p class="text-dark my-4 text-sm font-weight-normal">
-              僅作第四組專題使用 &copy; {{ new Date().getFullYear() }} 台南全端班 All rights reserved
+              僅作FUEN23第四組專題使用 &copy; {{ new Date().getFullYear() }} 台南全端班 All rights reserved
             </p>
           </div>
         </div>
@@ -138,3 +136,10 @@ defineProps({
   </footer>
 </template>
 
+<style>
+#link :hover {
+  color: #FFBF00;
+  /* background-color: #ccc; */
+  cursor: pointer;
+}
+</style>
