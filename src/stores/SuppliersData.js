@@ -53,9 +53,10 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
                 })
             );
             console.log(name.value);
+            console.log("response", response);
             return true; // 登录成功
         } catch (error) {
-            console.log(error);
+            console.log('errorMessage', error);
             return false;
         }
     };
@@ -86,7 +87,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     //註冊
     const SupplierRegister = async () => {
         try {
-            const response = await axios.post('https://localhost:7073/api/TSuppliers',
+            const response = await axios.post('https://localhost:7073/api/TSuppliers/PostTSuppliers',
                 {
                     name: registerSupplier.name,
                     phone: registerSupplier.phone,
@@ -100,7 +101,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
                     }
                 }
             );
-            //console.log(response);
+            console.log(response);
             return true;
         }
         catch (error) {

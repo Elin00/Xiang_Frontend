@@ -122,7 +122,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <SupplierHeader label-string="產品資訊" />
+    <SupplierHeader label-string="管理站點資訊" />
     <div class="container">
         <div class="row">
             <ul class="list-unstyled d-flex border-bottom">

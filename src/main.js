@@ -30,7 +30,7 @@ const app = createApp(App);
 const pinia = createPinia();
 const CustomerStore = useCustomerStore(pinia);
 
-app.use(createPinia());
+
 
 // 從 localStorage 讀取使用者資訊
 const user = JSON.parse(localStorage.getItem('user'));
@@ -39,7 +39,7 @@ if (user) {
   CustomerStore.id = user.id;
   CustomerStore.loggedIn = true;
 }
-
+app.use(pinia);
 app.use(ElementPlus);
 app.use(router);
 app.use(materialKit);
