@@ -31,7 +31,8 @@ import CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
 import SiteView from "../views/Suppliers/SiteView.vue";
 import RoomView from "../views/Suppliers/RoomView.vue";
-import AboutUsView from "../views/Other/AboutUs/AboutUsView.vue";
+//import AboutUsView from "../views/Other/AboutUs/AboutUsView.vue";
+import AboutUs from "../views/LandingPages/AboutUs/AboutUs.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,11 +59,11 @@ const router = createRouter({
       name: "presentation",
       component: PresentationView,
     },
-    {
-      path: "/AboutUs",
-      name: "AboutUs",
-      component: AboutUsView,
-    },
+    // {
+    //   path: "/AboutUs",
+    //   name: "AboutUs",
+    //   component: AboutUsView,
+    // },
     {
       path: "/questions",
       name: "questions",
@@ -97,6 +98,12 @@ const router = createRouter({
       path: "/pages/landing-pages/about-us",
       name: "about",
       component: AboutView,
+    },
+    //test about us page.
+    {
+      path: "/pages/landing-pages/AboutUs",
+      name: "AboutUs",
+      component: AboutUs,
     },
     {
       path: "/pages/landing-pages/contact-us",

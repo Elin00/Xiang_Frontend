@@ -198,8 +198,7 @@ async function submitRegister() {
                         </div>
 
                         <div class="text-center">
-                          <button type="button" class="btn bg-gradient-success btn-md w-100 false my-4 mb-2"
-                            @click.prevent="submitLogin">
+                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2" @click="submitLogin">
                             登入
                           </button>
                         </div>

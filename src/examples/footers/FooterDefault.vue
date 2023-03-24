@@ -60,7 +60,7 @@ defineProps({
         items: [
           {
             name: "關於我們",
-            path: "/pages/landing-pages/about-us"
+            path: "/pages/landing-pages/AboutUs"
           },
         ]
       },
@@ -68,13 +68,9 @@ defineProps({
         name: "攜手Xiang",
         items: [
           {
-            name: "供應商登入",
-            path: "/cooperation"
-          },
-          {
             name: "合作夥伴",
             path: "/cooperation"
-          },
+          }
         ]
       },
       {
@@ -103,7 +99,6 @@ defineProps({
       <div class="row">
         <div class="col-4  ">
           <div>
-            <img src="../../assets/img/logo100x60.png">
             <h3 class="fw-bold" style="font-size: 24px;">讓每次推開門都是一段絕無僅有的美好時光</h3>
             <p style="font-size: 16px; line-height: 1.5; margin-top: 20px;">
               Happ. 小樹屋想帶給你的不僅僅是空間，更是一段絕無僅有的時光；獻給每個「實現此刻」的你，讓美好的事物與回憶就此發生。
@@ -130,6 +125,7 @@ defineProps({
         <div class="col-12">
           <hr style="border-color: #ddd;">
           <div class="text-center">
+            <img class="w-15" src="../../assets/img/XiangLogo.png">
             <p class="text-dark my-4 text-sm font-weight-normal">
               僅作FUEN23第四組專題使用 &copy; {{ new Date().getFullYear() }} 台南全端班 All rights reserved
             </p>
