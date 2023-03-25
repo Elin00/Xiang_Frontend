@@ -3,7 +3,7 @@ import axios from "axios";
 import datepickerDesign from "../RoomGuide/datepickerDailyrentalDesign.vue";
 import datepickerDesign2 from "../RoomGuide/datepickerhourlyrentalDesign.vue";
 import Evaluation from "../Suppliers/ProductsmessageView.vue"
-import { ref, onMounted, watchEffect, reactive, computed  } from "vue";
+import { ref, onMounted, watchEffect, reactive, computed } from "vue";
 import { Navigation, Pagination, Autoplay, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -129,7 +129,7 @@ const dateDifference = computed(() => {
 
   return Math.ceil(diffInDays);
 });
-const totalcost = computed(()=>{
+const totalcost = computed(() => {
   if (!startDate.value || !endDate.value) {
     return 0;
   }
@@ -138,8 +138,8 @@ const totalcost = computed(()=>{
     console.error("無法解析 Productspinia.roominfo.datePrice 的值為整數");
     return "無法解析";
   }
-  const total = price *  parseInt(dateDifference.value, 10);
-  
+  const total = price * parseInt(dateDifference.value, 10);
+
   return total
 })
 
@@ -148,7 +148,6 @@ const user = JSON.parse(localStorage.getItem('user'));
 const userid = ref(user ? user.id : null);
 
 //日租版
-let tradeno = 30
 const submitBooking = async () => {
   // 確保所有需要的數據都可用
   if (!startDate.value || !endDate.value || !totalcost.value) {
@@ -156,8 +155,8 @@ const submitBooking = async () => {
     return;
   }
 
-   // 在送出訂單之前彈出確定購買的提示
-   const confirmed = window.confirm('確定要購買嗎？');
+  // 在送出訂單之前彈出確定購買的提示
+  const confirmed = window.confirm('確定要購買嗎？');
   if (!confirmed) {
     return;
   }
@@ -175,12 +174,11 @@ const submitBooking = async () => {
   startDate1.setMilliseconds(0);
   // 組裝要發送的數據
   const bookingData = {
-    tradeNo:tradeno,
     customerId: parseInt(userid.value),
     productId: parseInt(Productspinia.roominfo.productId),
-    orderDate: new Date().toISOString(), 
+    orderDate: new Date().toISOString(),
     startDate: new Date(startDate1).toISOString(),
-    endDate:endDate1.toISOString(),
+    endDate: endDate1.toISOString(),
     roomId: parseInt(Productspinia.roominfo.roomId),
     price: parseInt(totalcost.value)
   };
@@ -188,16 +186,16 @@ const submitBooking = async () => {
   console.log(jsonbd)
   try {
     // 發送 POST 請求
-    const response = await axios.post('https://localhost:7073/api/Orders/create', bookingData,{     
+    const response = await axios.post('https://localhost:7073/api/Orders/payform', bookingData, {
       headers: {
         'Content-Type': 'application/json'
       },
       // body: jsonbd
-    }); 
+    });
     console.log(response);
-    if (response.data==="新增成功") {
+    if (response.data === "新增成功") {
       // 請求成功，處理響應（如導航到其他頁面、顯示消息等）
-      
+
       alert('預訂成功！');
     } else {
       // 請求失敗，處理錯誤
@@ -237,8 +235,8 @@ const hourDifference = computed(() => {
 
   return diffInHours;
 });
-const totalcostforhour = computed(()=>{
-  if (!ChooseDate||!StartHour.value || !EndHour.value) {
+const totalcostforhour = computed(() => {
+  if (!ChooseDate || !StartHour.value || !EndHour.value) {
     return 0;
   }
   const price = parseInt(Productspinia.roominfo.hourPrice)
@@ -246,8 +244,8 @@ const totalcostforhour = computed(()=>{
     console.error("無法解析 Productspinia.roominfo.datePrice 的值為整數");
     return 0;
   }
-  const total = price *  parseFloat(hourDifference.value)
-  
+  const total = price * parseFloat(hourDifference.value)
+
   return total
 })
 //時租版
@@ -258,15 +256,15 @@ const submitBookingHour = async () => {
     return;
   }
 
-   // 在送出訂單之前彈出確定購買的提示
-   const confirmed = window.confirm('確定要購買嗎？');
+  // 在送出訂單之前彈出確定購買的提示
+  const confirmed = window.confirm('確定要購買嗎？');
   if (!confirmed) {
     return;
   }
 
   //日期設定
   const startDate1 = new Date(ChooseDate.value)
-  const sh  = StartHour.value
+  const sh = StartHour.value
   const [hours1, minutes1] = sh.split(":").map(Number);
   startDate1.setHours(hours1, minutes1);
 
@@ -274,37 +272,37 @@ const submitBookingHour = async () => {
   const eh = EndHour.value
   const [hours, minutes] = eh.split(":").map(Number);
   endDate1.setHours(hours, minutes);
-  
+
 
   // 組裝要發送的數據
   const bookingData = {
-    tradeNo:tradeno,
     customerId: parseInt(userid.value),
     productId: parseInt(Productspinia.roominfo.productId),
-    orderDate: new Date().toISOString(), 
+    orderDate: new Date().toISOString(),
     startDate: new Date(startDate1).toISOString(),
-    endDate:endDate1.toISOString(),
+    endDate: endDate1.toISOString(),
     roomId: parseInt(Productspinia.roominfo.roomId),
-    price: parseInt(totalcostforhour.value)
+    price: parseInt(totalcostforhour.value),
+    itemName: Productspinia.roominfo.categoryname,
   };
   const jsonbd = JSON.stringify(bookingData)
   console.log(jsonbd)
   try {
     // 發送 POST 請求
-    const response = await axios.post('https://localhost:7073/api/Orders/create', bookingData,{     
+    const response = await axios.post('https://localhost:7073/api/Orders/payform', bookingData, {
       headers: {
         'Content-Type': 'application/json'
       },
       // body: jsonbd
-    }); 
-    console.log(response);
-    if (response.data==="新增成功") {
+    });
+    console.log('status', response.status);
+    if (response.status === 200) {
       // 請求成功，處理響應（如導航到其他頁面、顯示消息等）
-      
-      alert('預訂成功！');
+      document.getElementById('divContent').innerHTML = response.data;
+      document.getElementById('payForm').submit();
     } else {
       // 請求失敗，處理錯誤
-      // const errorData = await response.json();
+      const errorData = await response.json();
       alert(`預訂失敗：${errorData.message}`);
     }
   } catch (error) {
@@ -336,11 +334,11 @@ onMounted(async () => {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }" :cube-effect="{
-                shadow: false,
-                slideShadows: false,
-                shadowOffset: 20,
-                shadowScale: 0.94,
-              }">
+  shadow: false,
+  slideShadows: false,
+  shadowOffset: 20,
+  shadowScale: 0.94,
+}">
           <swiper-slide v-for="(text, index) in swiperTextBase" :key="index">
             <div class="image-wrapper">
               <img :src=text.img alt="img" class="object-fit-cover" style="height: 400px; width: 600px" />
@@ -400,26 +398,27 @@ onMounted(async () => {
             </li>
           </ul>
           <div class="col-4">
-            <span class="price d-flex mt-2 justify-content-start">${{ Productspinia.roominfo.datePrice }}/天<span class="price-tag">假日收費</span></span>
+            <span class="price d-flex mt-2 justify-content-start">${{ Productspinia.roominfo.datePrice }}/天<span
+                class="price-tag">假日收費</span></span>
           </div>
           <div class="time-choose clearfix d-flex justify-content-center mt-5">
             <!-- 這邊顯示日租的時間 -->
-            <datepickerDesign  @update-values="handleValuesUpdate"/>
-            
+            <datepickerDesign @update-values="handleValuesUpdate" />
+
           </div>
           <div class="actionBtn mb-5">
-            <span>產品編號: {{  Productspinia.roominfo.productId }}</span>
+            <span>產品編號: {{ Productspinia.roominfo.productId }}</span>
             <hr>
             <span>起始日期: {{ startDate }}</span>
             <hr>
             <span>結束日期: {{ endDate }}</span>
             <hr>
             <span>選取的天數: {{ dateDifference }}</span>
-            <hr>                                 
+            <hr>
             <span>租金: {{ totalcost }}元</span>
-            <hr> 
-            <button class="fullBtn"  @click="submitBooking">${{ totalcost }} | 立即預訂</button>
-        
+            <hr>
+            <button class="fullBtn" @click="submitBooking">${{ totalcost }} | 立即預訂</button>
+
           </div>
         </div>
 
@@ -427,9 +426,9 @@ onMounted(async () => {
         <div class="row" v-if="view === 1">
           <div class="time-choose mt-5 col-8 clearfix d-flex justify-content-end">
             <label for="start-date" style="color: black; font-size: larger">選擇日期:</label>
-            <datepickerDesign2 @update-values-hours="handleValuesUpdateHours"/>
+            <datepickerDesign2 @update-values-hours="handleValuesUpdateHours" />
 
-            
+
           </div>
           <div class="col-4 mt-5">
             <span class="price" style="color: black; font-size: larger">${{ Productspinia.roominfo.hourPrice }}/小時</span>
@@ -443,10 +442,10 @@ onMounted(async () => {
             <span>結束時間: {{ EndHour }}</span>
             <hr>
             <span>選取的時數: {{ hourDifference }}</span>
-            <hr>                                 
-            <span>租金: {{ totalcostforhour  }}元</span>
-            <hr> 
-            <button class="fullBtn" @click="submitBookingHour">${{ totalcostforhour  }} | 立即預訂</button>
+            <hr>
+            <span>租金: {{ totalcostforhour }}元</span>
+            <hr>
+            <button class="fullBtn" @click="submitBookingHour">${{ totalcostforhour }} | 立即預訂</button>
           </div>
         </div>
       </div>
@@ -590,7 +589,11 @@ onMounted(async () => {
       <img class="floor-container-main" src="../../assets/img/房間坪數格局/product-1.png" alt="image description" />
     </div>
   </div>
+
+  <!-- 裝準備submit的ecpayform -->
+  <div id="divContent"></div>
 </template>
+
 <style>
 .swiper {
   width: 100%;
