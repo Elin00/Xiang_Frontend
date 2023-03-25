@@ -10,6 +10,11 @@ const { SUser, EditSuppliers } = useEditSuppliersStore();
 const Suppliersstore = useSuppliersDataStore();
 
 
+onMounted(() => {
+  Suppliersstore.EditSuppliers();
+})
+
+
 const updateEmployee = async () => {
   try {
     await axios.put(
@@ -52,6 +57,8 @@ const updateEmployee = async () => {
 </div>
 <p>eeeeeeeeeeeeaa{{ Suppliersstore.email }}</p>
 <p>eeeeeeeeeeeeaa{{ SUser.email }}</p>
+<p>aaaaaaaaaaaa{{ SUser.name }}</p>
+
 
 <div style="margin-left: 10%; margin-bottom: 15%">
     <MemberHeader labelString="個人資料修改" />

@@ -15,16 +15,18 @@ export const useEditSuppliersStore = defineStore("EditSuppliersData", () => {
 
     const EditSuppliers = async () => {
         try {
-            const response = await axios.get(`https://localhost:7073/api/TSuppliers/${SuppliersData.id}`, {
+            const response = await axios.get(`https://localhost:7073/api/TSuppliers/id?id=${SuppliersData.id}`, {
                 headers: {
                     'Authorization': `Bearer ${SuppliersData.token}`,
                 },
             });
+            console.log(response);
+            console.log(response.data);
             Object.assign(SUser, response.data);
-            SUser.name = SUser.data.name;
-            SUser.phone = SUser.data.phone;
-            SUser.email = SUser.data.email;
-            // console.log(SUser.name, SUser.phone, SUser.email);
+            SUser.name = response.data.name;
+            SUser.phone = response.data.phone;
+            SUser.email = response.data.email;
+            console.log(SUser.name, SUser.phone, SUser.email);
         } catch (error) {
             console.log(error);
         }
