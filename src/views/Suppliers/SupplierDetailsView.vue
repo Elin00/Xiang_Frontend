@@ -5,29 +5,37 @@ import { useEditSuppliersStore } from "../../stores/EditSuppliersData.js"
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import MemberHeader from "../../views/Members/Components/MemberHeader.vue";
+import axios from "axios";
 
-const { SUser, EditSuppliers } = useEditSuppliersStore();
-const Suppliersstore = useSuppliersDataStore();
+const storeEditSuppliers = useEditSuppliersStore();
+const storeSuppliersData = useSuppliersDataStore();
 
 
 onMounted(() => {
-  Suppliersstore.EditSuppliers();
+  storeEditSuppliers.getSuppliers();
 })
 
 
-const updateEmployee = async () => {
+const updateSupplier = async () => {
   try {
     await axios.put(
-      `https://localhost:7073/api/TSuppliers/${SUser.id}`,
-      SUser,
+      `https://localhost:7073/api/TSuppliers/${storeSuppliersData.id}`,
+      {
+        supplierId:storeSuppliersData.id,
+        name:storeSuppliersData.name,
+        phone:storeSuppliersData.phone,
+        address:storeSuppliersData.address,
+        email:storeSuppliersData.email,
+      },
       {
         headers: {
-          Authorization: `Bearer ${SuppliersData.token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${storeSuppliersData.token}`,
         },
       }
     );
     // 更新完畢後重新載入資料
-    EditSuppliers();
+    storeEditSuppliers.getSuppliers();
   } catch (error) {
     console.log(error);
   }
@@ -39,26 +47,24 @@ const updateEmployee = async () => {
   <h2>修改員工資料</h2>
   <div>
     <label for="name">姓名：</label>
-    <input id="name" type="text" v-model="Suppliersstore.name" />
+    <input id="name" type="text" v-model=" storeSuppliersData.name" />
   </div>
   <div>
     <label for="phone">電話：</label>
-      <input id="phone" type="text" v-model="SUser.phone" />
+      <input id="phone" type="text" v-model="storeSuppliersData.phone" />
     </div>
     <div>
       <label for="email">電子郵件：</label>
-      <input id="email" type="email" v-model="SUser.email" />
+      <input id="email" type="email" v-model="storeSuppliersData.email" />
     </div>
     <div>
       <label for="address">地址：</label>
-      <input id="address" type="text" v-model="SUser.address" />
+      <input id="address" type="text" v-model="storeSuppliersData.address" />
   </div>
-  <button @click="updateEmployee">更新員工資料</button>
+  <button @click="updateSupplier">更新員工資料</button>
 </div>
-<p>eeeeeeeeeeeeaa{{ Suppliersstore.email }}</p>
-<p>eeeeeeeeeeeeaa{{ SUser.email }}</p>
-<p>aaaaaaaaaaaa{{ SUser.name }}</p>
-
+<p>eeeeeeeeeeeeaa{{ storeSuppliersData.email }}</p>
+<p>eeeeeeeeeeeeaa{{ storeEditSuppliers.SUser.email }}</p>
 
 <div style="margin-left: 10%; margin-bottom: 15%">
     <MemberHeader labelString="個人資料修改" />
@@ -67,7 +73,7 @@ const updateEmployee = async () => {
         <div class="col-6 border-bottom mb-5">
           <h5>電子信箱</h5>
           <div class="d-flex justify-content-between">
-            <p>{{ Suppliersstore.email }}</p>
+            <p>{{ storeSuppliersData.email }}</p>
             <!-- <h6
                                       id="email"
                                   data-bs-toggle="modal"
@@ -83,7 +89,7 @@ const updateEmployee = async () => {
         <div class="col-6 border-bottom mb-5">
           <h5>姓名</h5>
           <div class="d-flex justify-content-between">
-            <p>{{ Suppliersstore.name }}</p>
+            <p>{{ storeSuppliersData.name }}</p>
             <!-- <h6
                                       id="email"
                                   data-bs-toggle="modal"
@@ -99,7 +105,7 @@ const updateEmployee = async () => {
         <div class="col-6 border-bottom mb-5">
           <h5>電話號碼</h5>
           <div class="d-flex justify-content-between">
-            <p>{{ Suppliersstore.phone }}</p>
+            <p>{{ storeSuppliersData.phone }}</p>
             <!-- <h6
                                       id="email"
                                                       data-bs-toggle="modal"
@@ -115,7 +121,7 @@ const updateEmployee = async () => {
         <div class="col-6 border-bottom mb-5">
           <h5>地址</h5>
           <div class="d-flex justify-content-between">
-            <p>{{ Suppliersstore.address }}</p>
+            <p>{{ storeSuppliersData.address }}</p>
             <!-- <h6
                                                                         id="email"
                                                                         data-bs-toggle="modal"
@@ -130,26 +136,26 @@ const updateEmployee = async () => {
 
       <div class="col-lg-4">
         <MaterialInput class="input-group-static mb-4" label="姓名" type="text" placeholder="欸另"
-          v-model="Suppliersstore.name" />
+          v-model="storeSuppliersData.name" />
       </div>
       <div>
         <input type="text" value="Othani">
       </div>
       <div class="col-lg-4">
         <MaterialInput class="input-group-static mb-4" label="電話" type="text" placeholder="{{}}"
-          v-model="Suppliersstore.phone" />
+          v-model="storeSuppliersData.phone" />
       </div>
       <div class="col-lg-4">
         <MaterialInput class="input-group-static mb-4" label="Email" type="text" placeholder="{{}}"
-          v-model="Suppliersstore.email" />
+          v-model="storeSuppliersData.email" />
       </div>
       <div class="col-lg-4">
         <MaterialInput class="input-group-static mb-4" label="聯絡地址" type="text" placeholder="{{}}"
-          v-model="Suppliersstore.address" />
+          v-model="storeSuppliersData.address" />
       </div>
       <div class="col-lg-4">
         <MaterialInput class="input-group-static mb-4" label="密碼" type="password" placeholder="{{}}"
-          v-model="Suppliersstore.password" />
+          v-model="storeSuppliersData.password" />
       </div>
       <MaterialButton variant="outline" color="success" class="w-auto me-2" size="sm">確認修改</MaterialButton>
     </form>
