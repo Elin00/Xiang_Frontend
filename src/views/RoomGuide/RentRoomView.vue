@@ -146,7 +146,9 @@ const totalcost = computed(()=>{
 //送出訂單
 const user = JSON.parse(localStorage.getItem('user'));
 const userid = ref(user ? user.id : null);
+
 //日租版
+let tradeno = 30
 const submitBooking = async () => {
   // 確保所有需要的數據都可用
   if (!startDate.value || !endDate.value || !totalcost.value) {
@@ -173,7 +175,7 @@ const submitBooking = async () => {
   startDate1.setMilliseconds(0);
   // 組裝要發送的數據
   const bookingData = {
-    tradeNo:23,
+    tradeNo:tradeno,
     customerId: parseInt(userid.value),
     productId: parseInt(Productspinia.roominfo.productId),
     orderDate: new Date().toISOString(), 
@@ -276,7 +278,7 @@ const submitBookingHour = async () => {
 
   // 組裝要發送的數據
   const bookingData = {
-    tradeNo:25,
+    tradeNo:tradeno,
     customerId: parseInt(userid.value),
     productId: parseInt(Productspinia.roominfo.productId),
     orderDate: new Date().toISOString(), 
