@@ -10,12 +10,16 @@ export const useProductStore = defineStore('ProductsAxios', () => {
     const markers = reactive([]);
     const cardinfo = reactive([]);
     const roominfo = reactive({
-        roomId: "",
+        roomId: 0,
         datePrice: "",
+        hourPrice:"",
         image: "",
         openTime: "",
         ping: "",
+        categoryname:"",
         categoryId: 0,
+        productId: 0,
+        
     })
     
 
@@ -103,63 +107,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
             console.log(error.message);
         }
     }
-    // //過濾房間資料方法1
-    // const axiosFilterroom = async (name)=>{
-    //     try{
-    //         const res = await axios.get("https://localhost:7073/api/Products");
-    //         res.data.forEach((product) => {
-
-    //             //抓PAndS資料
-    //             product.psite.forEach((site) => {
-    //                 const tpands = new PAndS(product.name, site.name, site.image, site.openTime, site.latitude, site.longitude, site.address, site.siteDescription, site.psiteRoom.length)
-    //                 productPAndS.push(tpands);
-
-    //                 //抓Room資料
-    //                 site.psiteRoom.forEach((room) => {
-    //                     const troom = new Room(room.roomId, product.name, site.name, room.categoryId, room.hourPrice, room.datePrice, room.ping, room.image, room.status, room.roomDescription);
-    //                     productRoom.push(troom);
-    //                 })
-    //             })
-    //         });
-    //         if(name!=null){
-
-    //         }
-    //         else{
-    //              // 加入資料到cardinfo
-    //             productRoom.forEach((room) => {
-    //                 const carditem = {
-    //                     icon: "touch_app",
-    //                     title: room.sName,
-
-    //                     image: path + room.rImage,
-    //                     description: room.rDescription,
-    //                     action: [
-    //                         {
-    //                         route: `/views/rentroomview/${room.roomId}`,
-    //                         label: "現在就訂房",
-    //                         },
-    //                     ],
-    //                 }
-    //                 cardinfo.push(carditem)
-    //             })
-    //             console.log(cardinfo)
-    //         }
-    //     }
-    //     catch(error){
-    //         console.log(erro)
-    //     }
-    // }
-    // //過濾房間資料方法2   
-    // const selectedMarker = ref(null);
-    // // 计算属性，根据选中的 marker 返回对应的房间信息
-    // const selectedRoomInfo = computed(() => {
-    //     if (!selectedMarker.value) {
-    //     return cardinfo;
-    //     }
-    //     return cardinfo.filter((room) => room.title === selectedMarker.value.name);
-    // });
-
-
+   
     //axios get{id} ${productId}
     const axiosKey = async (id) => {
         try {
@@ -168,10 +116,15 @@ export const useProductStore = defineStore('ProductsAxios', () => {
             // 抓Room資料
             // console.log(product)
             // console.log(product.image)
+            roominfo.roomId = product.roomId
             roominfo.image = product.image
             roominfo.openTime = product.openTime
             roominfo.ping = product.ping
             roominfo.categoryId = product.categoryId
+            roominfo.datePrice = product.datePrice
+            roominfo.hourPrice = product.hourPrice
+            roominfo.productId = product.productId
+            roominfo.categoryname = product.categoryName
             console.log(roominfo)
         }
         catch (error) {

@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, defineEmits } from 'vue'
 
 const selectedDate = ref('')
 const startTime = ref('')
@@ -92,6 +92,7 @@ const selectableEndTimes = computed(() => {
   }
   return times
 })
+const emit = defineEmits(["update-values-hours"]);
 watch(
   selectedDate,
   (newValue, oldValue) => {
@@ -100,5 +101,7 @@ watch(
     endTime.value = ''
   }
 )
-
+watch([selectedDate, startTime,endTime], () => {
+  emit("update-values-hours", { value1: selectedDate.value, value2: startTime.value, value3:endTime.value });
+});
 </script>

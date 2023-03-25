@@ -6,7 +6,7 @@
       type="date"
       placeholder="選擇日期"
       :disabled-date="disabledDate"
-   
+      
     />
   </div>
   <div class="block">
@@ -15,44 +15,27 @@
       v-model="value2"
       type="date"
       placeholder="選擇日期"
-      :disabled-date="disabledDate"
-      
+      :disabled-date="disabledDate"     
     />
   </div>
+  
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref,watch, defineEmits} from "vue";
 
 const value1 = ref("");
 const value2 = ref("");
 
-// const shortcuts = [
-//   {
-//     text: "Today",
-//     value: new Date(),
-//   },
-//   {
-//     text: "Yesterday",
-//     value: () => {
-//       const date = new Date();
-//       date.setTime(date.getTime() - 3600 * 1000 * 24);
-//       return date;
-//     },
-//   },
-//   {
-//     text: "A week ago",
-//     value: () => {
-//       const date = new Date();
-//       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-//       return date;
-//     },
-//   },
-// ];
-
 const disabledDate = (time: Date) => {
   return time.getTime() < Date.now();
 };
+
+const emit = defineEmits(["update-values"]);
+
+watch([value1, value2], () => {
+  emit("update-values", { value1: value1.value, value2: value2.value });
+});
 </script>
 
 <style>
