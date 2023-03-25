@@ -10,25 +10,25 @@ import { ref } from "vue";
 const store = useOrdersDataStore()
 
 // import axioss from "axios";
-function useAxiosCard() {
-   const data = ref(null);
-   const errorMessage = ref('');
-   const axiosInit = async () => {
-      //使用 then 寫法 
-      //await axioss.get("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=rdec-key-123-45678-011121314").then(res => { 
-      //data.value = res.data; 
-      //}).catch(err => { 
-      //errorMessage.value = "API發生錯誤"; 
-      //}).finally(() => { }) 
-      //也可以用給變數的做法 
-      try {
-         const res = await axios.get("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=rdec-key-123-45678-011121314");
-         data.value = res.data;
-      } catch (error) {
-         errorMessage.value = "API發生錯誤";
-      }
-   }
-}
+// function useAxiosCard() {
+//    const data = ref(null);
+//    const errorMessage = ref('');
+//    const axiosInit = async () => {
+//       //使用 then 寫法 
+//       //await axioss.get("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=rdec-key-123-45678-011121314").then(res => { 
+//       //data.value = res.data; 
+//       //}).catch(err => { 
+//       //errorMessage.value = "API發生錯誤"; 
+//       //}).finally(() => { }) 
+//       //也可以用給變數的做法 
+//       try {
+//          const res = await axios.get("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=rdec-key-123-45678-011121314");
+//          data.value = res.data;
+//       } catch (error) {
+//          errorMessage.value = "API發生錯誤";
+//       }
+//    }
+// }
 
 const router = useRouter();
 router.push({ name: "member-orders-inprogress" });
