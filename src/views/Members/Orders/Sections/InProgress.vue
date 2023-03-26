@@ -7,14 +7,13 @@ import { useOrdersDataStore } from "../../../../stores/ordersData.js";
 
 const storeOrdersData = useOrdersDataStore()
 
-
-
 </script>
 
 <template>
    <div class="container">
       <div class="row">
          <div class="col-10">
+            <!-- <div class="col-xs-4 col-md-6 col-lg-10"> -->
             <section>
                <NTable :bordered="true" :single-line="false" class="my-table">
                   <thead class="my-table-header">
@@ -42,6 +41,7 @@ const storeOrdersData = useOrdersDataStore()
                      </tr>
                   </tbody>
                </NTable>
+               <hr>
             </section>
          </div>
       </div>
@@ -80,7 +80,7 @@ hr.style-two {
 }
 
 .my-table-tbody tr td {
-   border-color: gray;
    text-align: left;
+   border-color: gray;
 }
 </style>
