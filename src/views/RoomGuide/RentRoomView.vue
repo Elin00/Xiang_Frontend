@@ -15,6 +15,7 @@ import photo2 from "../../assets/img/5.jpg";
 import photo3 from "../../assets/img/6.jpg";
 import photo4 from "../../assets/img/7.jpg";
 
+import { useCustomerStore} from "../../stores/CustomerData.js"
 import { useEvaluationDataStore } from '../../stores/EvaluationData.js';
 import { useProductStore } from "../../stores/ProductsAxios.js"
 import { useRoute } from 'vue-router';
@@ -23,7 +24,7 @@ import { useStore } from 'vuex';
 
 const evaluationStore = useEvaluationDataStore();
 const Productspinia = useProductStore();
-
+const customerStore = useCustomerStore();
 const store = useStore();
 
 
@@ -203,10 +204,11 @@ const submitBooking = async () => {
       },
       // body: jsonbd
     });
+   
     console.log(response);
     if (response.data === "新增成功") {
       // 請求成功，處理響應（如導航到其他頁面、顯示消息等）
-
+      console.log();
       alert('預訂成功！');
     } else {
       // 請求失敗，處理錯誤
@@ -302,7 +304,8 @@ const submitBookingHour = async () => {
     // 發送 POST 請求
     const response = await axios.post('https://localhost:7073/api/Orders/payform', bookingData, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${customerStore.token}` // 添加这一行
       },
       // body: jsonbd
     });
@@ -321,6 +324,7 @@ const submitBookingHour = async () => {
     alert(`預訂過程中出現錯誤：${error.message}`);
   }
 };
+
 //loading
 onMounted(async () => {
   await getRoomInfo().then(async () => {
