@@ -17,6 +17,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
         openTime: "",
         ping: "",
         categoryname:"",
+        iframe:"",
         categoryId: 0,
         productId: 0,
         
@@ -125,6 +126,7 @@ export const useProductStore = defineStore('ProductsAxios', () => {
             roominfo.hourPrice = product.hourPrice
             roominfo.productId = product.productId
             roominfo.categoryname = product.categoryName
+            roominfo.iframe = product.iframe
             console.log(roominfo)
         }
         catch (error) {

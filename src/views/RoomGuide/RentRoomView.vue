@@ -26,9 +26,20 @@ const Productspinia = useProductStore();
 
 const store = useStore();
 
+
+
 //取得房間資訊
 const route = useRoute();
 const roomId = ref(route.params.id);
+//iframe url取得
+const mapUrl = ref('');
+const iframeSrc = computed(() => mapUrl.value);
+
+watchEffect(() => {
+  if (Productspinia.roominfo.iframe) {
+    mapUrl.value = Productspinia.roominfo.iframe;
+  }
+});
 
 
 const getRoomInfo = async () => {
@@ -334,11 +345,11 @@ onMounted(async () => {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }" :cube-effect="{
-  shadow: false,
-  slideShadows: false,
-  shadowOffset: 20,
-  shadowScale: 0.94,
-}">
+                shadow: false,
+                slideShadows: false,
+                shadowOffset: 20,
+                shadowScale: 0.94,
+          }">
           <swiper-slide v-for="(text, index) in swiperTextBase" :key="index">
             <div class="image-wrapper">
               <img :src=text.img alt="img" class="object-fit-cover" style="height: 400px; width: 600px" />
@@ -572,7 +583,7 @@ onMounted(async () => {
             <div class="infoDetail rules">
               <P>捷運府中站 1 號出口，步行 7 分鐘</P>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.6666850007955!2d120.2137666153539!3d22.999281222968683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e76f2ae1e81a1%3A0xefb13720d722d1c0!2z5oiQ5Yqf5aSn5a245ZSv6L6y5aSn5qiT!5e0!3m2!1szh-TW!2stw!4v1678760586527!5m2!1szh-TW!2stw"
+                :src="iframeSrc"
                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
