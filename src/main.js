@@ -5,12 +5,8 @@ import router from "./router";
 import ElementPlus from 'element-plus'
 
 
+// window.gapi = gapi;
 
-const googleAuthOptions = {
-  clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com', // Replace with your client ID
-  scope: 'profile email',
-  prompt: 'select_account',
-};
 import { useCustomerStore } from '../src/stores/CustomerData.js'
 
 

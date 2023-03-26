@@ -35,25 +35,12 @@ const Supplier = reactive({
 
 const Customer = useCustomerStore();
 
+onMounted(() => {
+  Customer.FacebookOnmouned();
+});
+
 
 //當登入時，移除掉所有Modal資訊
-async function submitLogin() {
-  const isLoginSuccess = await Customer.Login();
-  if (isLoginSuccess) {
-    const modalElement = document.getElementById("Login");
-    modalElement.classList.remove("show");
-    modalElement.style.display = "none";
-    document.body.classList.remove("modal-open");
-    document.body.style.overflow = "";
-    document.body.style.paddingRight = "";
-    const backdrop = document.querySelector(".modal-backdrop");
-    if (backdrop) {
-      backdrop.remove();
-    }
-  } else {
-    alert("帳密錯誤");
-  }
-}
 async function SuppliersLogin() {
   const isLoginSuccess = await Suppliersstore.SLogin();
   if (isLoginSuccess) {
@@ -93,23 +80,6 @@ async function SupplierRegister() {
   }
 }
 
-async function submitRegister() {
-  const isregisterSuccess = await Customer.register();
-  if (isregisterSuccess) {
-    const modalElement = document.getElementById("Register");
-    modalElement.classList.remove("show");
-    modalElement.style.display = "none";
-    document.body.classList.remove("modal-open");
-    document.body.style.overflow = "";
-    document.body.style.paddingRight = "";
-    // 找到所有的背景元素
-    const backdrops = document.querySelectorAll(".modal-backdrop");
-    // 逐個移除所有背景元素
-    for (let i = 0; i < backdrops.length; i++) {
-      backdrops[i].remove();
-    }
-  }
-}
 </script>
 
 <template>
@@ -182,7 +152,7 @@ async function submitRegister() {
 
                     <!-- 會員的登入畫面 -->
                     <div v-else>
-                      <form role="form" class="text-start" @submit.prevent="submitLogin">
+                      <form role="form" class="text-start" @submit.prevent="Customer.Login">
                         <div class="input-group input-group-outline my-3">
                           <label class="form-label" data-bs-toggle="modal"></label>
                           <input v-model="Customer.Email" type="email" class="form-control form-control-md"
@@ -198,7 +168,7 @@ async function submitRegister() {
                         </div>
 
                         <div class="text-center">
-                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2" @click="submitLogin">
+                          <button class="btn bg-gradient-success btn-md w-100 false my-4 mb-2">
                             登入
                           </button>
                         </div>
@@ -207,19 +177,21 @@ async function submitRegister() {
                           <span class="txt">或</span>
                           <span class="line"></span>
                         </div>
-                        <div class="row mt-3">
-                          <div class="col-2 text-center ms-auto">
-                            <a class="btn btn-link px-3" href="javascript:;">
-                              <i class="fa fa-facebook text-info text-lg"></i>
-                            </a>
-                          </div>
-                          <div class="col-2 text-center me-auto">
-                            <button @click="" class="btn btn-primary">
-                              <i class="fa fa-google"></i>
-                            </button>
-                          </div>
-                        </div>
+                        
                       </form>
+                      <div class="row mt-3">
+                        <div class="col-2 text-center ms-auto">
+                          <button class="btn btn-link px-3" @click="Customer.loginWithFacebook ">
+                            <i class="fa fa-facebook text-info text-lg"></i>
+                          </button>
+                        </div>
+                        <div class="col-2 text-center me-auto">
+                          <button @click="Customer.handleGoogleAccessTokenLogin" class="btn btn-primary">
+                            <i class="fa fa-google"></i>
+                          </button>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -229,6 +201,7 @@ async function submitRegister() {
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- 業者註冊彈出視窗 -->
@@ -328,7 +301,7 @@ async function submitRegister() {
                   </div>
                 </div>
                 <div class="card-body">
-                  <form role="form" class="text-start" @submit.prevent="submitRegister">
+                  <form role="form" class="text-start" @submit.prevent="Customer.register">
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label" data-bs-toggle="modal">姓名</label>
                       <input v-model="Customer.registerCustomer.Name" type="name" class="form-control form-control-md"

@@ -277,7 +277,19 @@ const router = createRouter({
         {
           path: "UseCouponView",
           name: "other-CouponView-UseCouponView",
-          component: () => import('../views/Other/Cooperation/Coupon/UseCouponView.vue'),
+          component: () => import('../views/Other/Cooperation/Coupon/UseCouponView.vue'), 
+           children: [
+            {
+              path: "CouponpageavailableView",
+              name: "other-CouponView-pointstable-CouponpageavailableView",
+              component: () => import('../views/Other/Cooperation/Coupon/CouponpageavailableView.vue'),
+            }, 
+            {
+              path: "UsedcouponpageView",
+              name: "other-CouponView-pointstable-UsedcouponpageView",
+              component: () => import('../views/Other/Cooperation/Coupon/UsedcouponpageView.vue'),
+            },
+          ]
         },
       ]
     },

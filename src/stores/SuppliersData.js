@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, reactive, computed } from "vue";
 import axios from "axios";
-// import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
+import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
 
 export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     const id = ref("");
@@ -52,8 +52,8 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
                     id: decodedToken.sub,
                 })
             );
-            console.log(name.value);
-            console.log("response", response);
+            // console.log(name.value);
+            // console.log("response", response);
             return true; // 登录成功
         } catch (error) {
             console.log('errorMessage', error);

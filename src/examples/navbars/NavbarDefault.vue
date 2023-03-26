@@ -1,22 +1,23 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { ref, watch } from "vue";
+import { ref, watch,onMounted  } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 import { useCustomerStore } from "../../stores/CustomerData.js";
 import { useSuppliersDataStore } from "../../stores/SuppliersData.js";
-
+import { useModalStore } from "../../stores/ModalData";
 // images
 import ArrDark from "@/assets/img/down-arrow-dark.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
 
 const CustomerStore = useCustomerStore();
 const Suppliersstore = useSuppliersDataStore();
-
+const ModalStore = useModalStore();
 const props = defineProps({
   action: {
     default: () => ({
       color: "black",
       label1: "登入",
+      href:"http://localhost:3000/"
     }),
   },
   transparent: {
@@ -86,6 +87,11 @@ watch(
     }
   }
 );
+
+
+onMounted(() => {
+  ModalStore.Modalmaterial();
+});
 </script>
 <template>
   <nav class="navbar navbar-expand-lg top-0 p-0" style="margin: 0px -24px" :class="{
@@ -157,17 +163,15 @@ watch(
             <div v-if="!CustomerStore.loggedIn && !Suppliersstore.loggedIn" id="dropdown"
               class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
               style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
-              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" data-bs-toggle="modal"
-                data-bs-target="#Login">
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" @click="ModalStore.LoginModalOpen">
                 登入
               </div>
 
-              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" data-bs-toggle="modal"
-                data-bs-target="#Register">
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" @click="ModalStore.RegisterModalOpen">
                 註冊
               </div>
 
-              <RouterLink :to="{ name: 'other-CouponView' }" class="dropdown-item py-3 ps-3 border-radius-md"
+              <RouterLink :to="CustomerStore.loggedIn? { name: 'other-CouponView' } : ''" class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color" :href="action.route">領取優惠卷
               </RouterLink>
               <RouterLink :to="{ name: 'questions' }" class="dropdown-item py-3 ps-3 border-radius-md"
