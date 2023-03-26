@@ -5,11 +5,12 @@ import { } from "vue";
 import MaterialAvatar from "@/components/MaterialAvatar.vue";
 
 // image
-import team4 from "@/assets/img/team-4.jpg";
+// import team4 from "@/assets/img/team-4.jpg";
 import KenCC from "../../../assets/img/202303chengbao.jpg"
 import Elin from "../../../assets/img/Elin.jpg"
-import KenCCC from "../../../assets/img/KenCCC.png"
+import KenCCC from "../../../assets/img/KenCCC.jpg"
 import Enya from "../../../assets/img/Enya.jpg"
+import Kevien from "../../../assets/img/Kevien.jpg"
 
 //example components
 
@@ -34,17 +35,16 @@ const body = document.getElementsByTagName("body")[0];
     <header class="">
         <section class="room">
             <div class="room_bg bg1">
-                <h1 class="title1">關於你的歌</h1>
+                <h1 class="title1">關於我們</h1>
             </div>
             <div class="room_bg bg2">
                 <h1 class="title2">
                     大家好，我們很高興向大家介紹一個共享空間平台網站叫做「想享」。<br>
-                    「想享」是一個專為創意人士、自由工作者和新創公司等群體打造的共享空間平台，<br>
+                    是一個專為創意人士、自由工作者和新創公司等群體打造的共享空間平台，<br>
                     旨在提供一個舒適、便捷、具有創意氛圍的工作環境，讓使用者能夠更加高效地工作和交流合作。<br>
                     <br>
-                    我們的開發團隊非常自豪地為「想享」的設計和開發貢獻了自己的力量。<br>
-                    我們的團隊由 Ken CC、Ken CCC、Elin、Enya 和 Kevien組成，<br>
-                    他們是一群對創新和科技有著極大熱情的年輕人。他們通過自己的不斷學習和實踐，<br>
+                    我們的開發團隊由 Ken CC、Ken CCC、Elin、Enya 和 Kevien等5位成員組成，<br>
+                    是一群對創新和科技有著極大熱情的年輕人。通過自己的不斷學習和實踐，<br>
                     為「想享」的開發提供了專業和高效的支持。<br>
                     <br>
                     除了我們的開發團隊之外，「想享」平台還有一支優秀的管理團隊，<br>
@@ -58,7 +58,7 @@ const body = document.getElementsByTagName("body")[0];
                 </h1>
             </div>
             <div class="room_bg bg3">
-                <h1 class="title">唱著後來我們</h1>
+                <h1 class="title">Team Members</h1>
                 <div class="row">
                 <div class="col">
                     <a href="javascript:;">
@@ -86,7 +86,7 @@ const body = document.getElementsByTagName("body")[0];
                     </div>
                     <div class="col">
                         <a href="javascript:;">
-                            <MaterialAvatar :image="team4" alt="Image placeholder" size="xxl" />
+                            <MaterialAvatar :image="Kevien" alt="Image placeholder" size="xxl" />
                         </a>
                         <p class="name">Kevien</p>
                     </div>
@@ -95,16 +95,16 @@ const body = document.getElementsByTagName("body")[0];
                             <img src="../../../assets/img/202303chengbao.jpg" alt="">
                         </div> -->
             </div>
-            <div class="room_bg bg4">
+            <!-- <div class="room_bg bg4">
                 <h1 class="title">一遍遍唱著</h1>
-            </div>
+            </div> -->
         </section>
     </header>
     <div class="">
         <!-- <Information />
-                <AboutTeam />
-                <Featuring />
-                <Newsletter /> -->
+            <AboutTeam />
+            <Featuring />
+            <Newsletter /> -->
     </div>
 </template>
 <style scoped>
@@ -131,14 +131,14 @@ const body = document.getElementsByTagName("body")[0];
 
 .title1 {
     color: #fff;
-    font-size: 9rem;
+    font-size: 8rem;
     mix-blend-mode: difference;
 }
 
 .title2 {
     color: #fff;
-    font-size: 27px;
-    mix-blend-mode: difference;
+    font-size: 25px;
+    mix-blend-mode:color #ccc;
     max-width: 100%;
     font-family: DFKai-SB;
     /* display: flex; */
@@ -152,16 +152,16 @@ const body = document.getElementsByTagName("body")[0];
 }
 
 .bg2 {
-    background-image: url(../../../assets/img/pexels02.jpg);
+    background-image: url(../../../assets/img/pexels07.jpg);
 }
 
 .bg3 {
     background-image: url(../../../assets/img/pexels05.jpg);
 }
 
-.bg4 {
+/* .bg4 {
     background-image: url(../../../assets/img/pexels04.jpg);
-}
+} */
 
 /* 
 .img-wrap img {

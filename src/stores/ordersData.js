@@ -80,6 +80,19 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
       ordersChanged.value = false; // 更新成功後設為 false
   };
 
+// 昱廷教學區
+//   axios.get(`url/${id}`)
+//   .then(res=>{
+//     console.log(res.data);
+//   }).catch(err=>{
+//     console.log(err);
+//   })
+
+//  axios.post(`url`,{
+//    account: "",
+//    password : "",
+//  }).then().catch()
+
   //一開始先寫入資料，後來判斷是否有更新
   onMounted(() => {
     orderinformation();

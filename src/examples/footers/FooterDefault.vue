@@ -97,24 +97,24 @@ defineProps({
   <footer class="footer py-5">
     <div class="container p-0">
       <div class="row">
-        <div class="col-4  ">
-          <div>
-            <h3 class="fw-bold" style="font-size: 24px;">讓每次推開門都是一段絕無僅有的美好時光</h3>
-            <p style="font-size: 16px; line-height: 1.5; margin-top: 20px;">
-              Happ. 小樹屋想帶給你的不僅僅是空間，更是一段絕無僅有的時光；獻給每個「實現此刻」的你，讓美好的事物與回憶就此發生。
+        <div class="col-4 rwd00 ">
+          <div class="">
+            <h3 class="rwd01">讓每次推開門都是一段你專屬的美好時光</h3>
+            <p class="rwd02">
+              我們想帶給你的不僅僅是空間，更是一段絕無僅有的時光，讓美好的事物與回憶就此發生。
             </p>
           </div>
         </div>
-        <div class="col-lg-1 col-sm-6 col-md-2 mb-4 offset-1" v-for="{ name, items } of menus" :key="name">
-          <h6 class="text-sm">{{ name }}</h6>
+        <div class="col-lg-1 col-md-4 mb-6 col-sm-2 offset-1" v-for="{ name, items } of menus" :key="name">
+          <h6 class="rwd03 text-sm">{{ name }}</h6>
           <ul class="flex-column ms-n3 nav">
             <li id="link" class="nav-item" v-for="item of items" :key="item.name">
               <a class="nav-link" @click="navigateTo(item.path)">{{ item.name }}</a>
             </li>
           </ul>
         </div>
-        <div class="col-lg-1 col-sm-6 col-md-2 mb-4 offset-1">
-          <h6 class="text-sm">付款方式</h6>
+        <div class="col-lg-1 col-md-4 mb-6 col-sm-2 offset-1">
+          <h6 class=" rwd03 text-sm">付款方式</h6>
           <ul class="flex-column ms-n3 nav">
             <li class="nav-item">
               <span class="nav-link" href="#">
@@ -141,5 +141,72 @@ defineProps({
   color: #FFBF00;
   /* background-color: #ccc; */
   cursor: pointer;
+}
+
+.rwd00 {
+  display: none;
+}
+
+@media(min-width: 0px) {
+  .rwd01 {
+    background: lightskyblue;
+    font-size: 12px;
+  }
+
+  .rwd02 {
+    font-size: 8px;
+    line-height: 1.0;
+    margin-top: 8px;
+  }
+}
+
+@media(min-width: 400px) {
+  .rwd01 {
+    background: lightyellow;
+    font-size: 16px;
+  }
+
+  .rwd02 {
+    font-size: 10px;
+    line-height: 1.1;
+    margin-top: 12px;
+  }
+}
+
+@media(min-width: 800px) {
+  .rwd01 {
+    background: orange;
+    font-size: 20px;
+  }
+
+  .rwd02 {
+    font-size: 14px;
+    line-height: 1.3;
+    margin-top: 16px;
+  }
+
+}
+
+@media(min-width: 1200px) {
+  .rwd00 {
+    display: block;
+  }
+
+  .rwd01 {
+    background: lightpink;
+    font-size: 24px;
+  }
+
+  .rwd02 {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+
+  .rwd03 {
+    font-size: 16px;
+  }
+
+
 }
 </style>

@@ -8,11 +8,11 @@ import { RouterLink, RouterView } from "vue-router";
             <aside class="menu col-3 justify-content-center mt-5">
                 <ul style="display: inline-block;">
                     <li style="list-style-type: none;">
-                        <img src="../../../assets/img/pornhub_official_logo_icon.png" />
+                        <img src="../../../assets/img/search.png" />
                         <RouterLink :to="{ name: 'userview-userterms' }">使用條款</RouterLink>
                     </li>
                     <li style="list-style-type: none;">
-                    <img src="../../../assets/img/pornhub_official_logo_icon.png" />
+                    <img src="../../../assets/img/search.png" />
                     <RouterLink :to="{ name: 'userview-privacy' }">隱私政策</RouterLink>
                 </li>
                     <!-- <li style="list-style-type: none;">
@@ -20,9 +20,9 @@ import { RouterLink, RouterView } from "vue-router";
                         <RouterLink :to="{ name: 'userview-cookiepolicy' }">Cookie政策</RouterLink>
                     </li> -->
                     <!-- <li style="list-style-type: none;">
-                                                                <img src="../../../assets/img/pornhub_official_logo_icon.png" />
-                                                                <RouterLink to="/ccc">技術問題c</RouterLink>
-                                                            </li> -->
+                        <img src="../../../assets/img/pornhub_official_logo_icon.png" />
+                        <RouterLink to="/ccc">技術問題c</RouterLink>
+                    </li> -->
                 </ul>
             </aside>
             <!-- <div class="col-8"></div> -->
