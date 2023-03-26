@@ -12,13 +12,15 @@ const suppliersDataStore = useSuppliersDataStore();
 let AddRoomModal = null;
 let ModalRoomModal = null;
 const currentRoomDate = reactive({
+    roomId: 0,
     siteId: 0,
     categoryId: 0,
     ping: '',
     datePrice: '',
     hourPrice: '',
     roomDescription: '',
-    roomPhoto: null
+    roomPhoto: null,
+    iframe: ''
 })
 const currentSiteRoom = reactive([]);
 const arraySiteNum = ref(0);
@@ -32,8 +34,8 @@ const initCurrentRoomDate = () => {
     currentRoomDate.roomDescription = '';
     currentRoomDate.roomPhoto = null;
 }
-const saveRoom = async () => {
-    if (currentRoomDate.categoryId != 0 && currentRoomDate.ping != '' && currentRoomDate.datePrice != '' && currentRoomDate.hourPrice != '' && currentRoomDate.roomDescription != '' && currentRoomDate.roomPhoto != null) {
+const addSaveRoom = async () => {
+    if (currentRoomDate.categoryId != 0 && currentRoomDate.ping != '' && currentRoomDate.datePrice != '' && currentRoomDate.hourPrice != '' && currentRoomDate.roomDescription != '' && currentRoomDate.roomPhoto != null && currentRoomDate.iframe != null) {
         try {
             const res = await axios.post('https://localhost:7073/api/Products/PSiteRoom', currentRoomDate, { headers: { 'Content-Type': 'multipart/form-data' } });
             suppliersDataStore.getProduct();
@@ -46,6 +48,26 @@ const saveRoom = async () => {
         catch (error) {
             console.log(error)
         }
+    }
+    else
+        alert('輸入格式不正確');
+}
+const ModifySaveRoom = async () => {
+    if (currentRoomDate.categoryId != 0 && currentRoomDate.ping != '' && currentRoomDate.datePrice != '' && currentRoomDate.hourPrice != '' && currentRoomDate.roomDescription != '') {
+        try {
+            const res = await axios.put(`https://localhost:7073/api/PsiteRooms/${currentRoomDate.roomId}`, currentRoomDate, { headers: { 'Content-Type': 'application/json' } });
+            suppliersDataStore.getProduct();
+
+            setTimeout(() => {
+                Object.assign(currentSiteRoom, suppliersDataStore.siteAndRoom[arraySiteNum.value]);
+                console.log('currentSiteRoomModify', currentSiteRoom);
+            }, 50);
+            addRoomModalClose();
+        }
+        catch (error) {
+            console.log(error)
+        }
+        ModifyRoomModalClose();
     }
     else
         alert('輸入格式不正確');
@@ -76,13 +98,14 @@ const ModifyPSiteRoom = async (func, id) => {
             const modalArr = currentSiteRoom.psiteRoom[arrayRoomNum];
 
             setTimeout(() => {
-                console.log(modalArr.ping);
+                console.log('modalArr', modalArr);
+                currentRoomDate.roomId = modalArr.roomId;
                 currentRoomDate.categoryId = modalArr.categoryId;
                 currentRoomDate.ping = modalArr.ping;
                 currentRoomDate.datePrice = modalArr.datePrice;
                 currentRoomDate.hourPrice = modalArr.hourPrice;
                 currentRoomDate.roomDescription = modalArr.roomDescription;
-                currentRoomDate.roomPhoto = null;
+                currentRoomDate.iframe = modalArr.iframe
             }, 50)
             ModifyRoomModalOpen();
             break;
@@ -125,8 +148,8 @@ onMounted(() => {
         if (suppliersDataStore.allCategory.length != 0)
             currentRoomDate.categoryId = 1;
 
-        console.log(suppliersDataStore.allCategory);
-        console.log(currentSiteRoom.psiteRoom);
+        console.log('allCategory', suppliersDataStore.allCategory);
+        console.log('psiteRoom', currentSiteRoom.psiteRoom);
     }, 50)
 })
 </script>
@@ -202,10 +225,15 @@ onMounted(() => {
                         <input type="text" class="form-control btn-light creditCardText" placeholder="簡述介紹這個房間"
                             v-model="currentRoomDate.roomDescription">
                     </div>
+                    <p>iframe</p>
+                    <div class="d-flex mb-3">
+                        <input type="text" class="form-control btn-light creditCardText" placeholder="google iframe"
+                            v-model="currentRoomDate.iframe">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="addRoomModalClose">關閉</button>
-                    <button type="button" class="btn btn-primary" @click="saveRoom">儲存更新</button>
+                    <button type="button" class="btn btn-primary" @click="addSaveRoom">儲存更新</button>
                 </div>
             </div>
         </div>
@@ -261,10 +289,15 @@ onMounted(() => {
                         <input type="text" class="form-control btn-light creditCardText" placeholder="簡述介紹這個房間"
                             v-model="currentRoomDate.roomDescription">
                     </div>
+                    <p>iframe</p>
+                    <div class="d-flex mb-3">
+                        <input type="text" class="form-control btn-light creditCardText" placeholder="google iframe"
+                            v-model="currentRoomDate.iframe">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="ModifyRoomModalClose">關閉</button>
-                    <button type="button" class="btn btn-primary" @click="saveRoom">儲存更新</button>
+                    <button type="button" class="btn btn-primary" @click="ModifySaveRoom">儲存更新</button>
                 </div>
             </div>
         </div>

@@ -10,6 +10,21 @@ import "../../assets/js/core/bootstrap.min.js";
 let AddSiteModal = null;
 let ModifySiteModal = null;
 const suppliersDataStore = useSuppliersDataStore();
+const modifySiteDate = reactive({
+    ProductId: 0,
+    SupplierId: 0,
+    Name: '',
+    Psite: [{
+        ProductId: 0,
+        SiteId: 0,
+        Name: '',
+        OpenTime: '',
+        Address: '',
+        Latitude: '',
+        Longitude: '',
+        SiteDescription: '',
+    }]
+})
 const currentSiteDate = reactive({
     ProductId: 0,
     SiteId: 0,
@@ -63,14 +78,16 @@ const ModifySiteModalClose = () => {
     ModifySiteModal.hide();
 }
 const ModifySave = async () => {
-    // try {
-    //     res = await axios.put(`https://localhost:7073/api/Products/PSite/${currentSiteDate.SiteId}`);
-    //     // console.log(res);
-    //     suppliersDataStore.getProduct();
-    // }
-    // catch (error) {
-    //     console.log(error)
-    // }
+    try {
+        console.log('modifySiteDate', modifySiteDate);
+        res = await axios.put(`https://localhost:7073/api/Products/${currentSiteDate.ProductId}`, modifySiteDate, { headers: { 'Content-Type': 'application/json' } });
+        // console.log(res);
+    }
+    catch (error) {
+        console.log(error)
+    }
+    suppliersDataStore.getProduct();
+    ModifySiteModalClose();
 }
 const ModifyPSite = async (func, id) => {
     switch (func) {
@@ -78,14 +95,17 @@ const ModifyPSite = async (func, id) => {
             initCurrentSiteDate();
             const arraySiteNum = suppliersDataStore.orderBySite.indexOf(id);
             const modalArr = suppliersDataStore.siteAndRoom[arraySiteNum];
-            currentSiteDate.SiteId = id;
-            currentSiteDate.Name = modalArr.name;
-            currentSiteDate.OpenTime = modalArr.openTime;
-            currentSiteDate.Address = modalArr.address;
-            currentSiteDate.Latitude = modalArr.latitude;
-            currentSiteDate.Longitude = modalArr.longitude;
-            currentSiteDate.siteDescription = modalArr.siteDescription;
-            currentSiteDate.SitePhoto = null;
+            modifySiteDate.ProductId = currentSiteDate.ProductId;
+            modifySiteDate.SupplierId = suppliersDataStore.currentSupplierId;
+            modifySiteDate.Name = suppliersDataStore.currentSuppliername;
+            modifySiteDate.Psite[0].ProductId = currentSiteDate.ProductId;
+            modifySiteDate.Psite[0].SiteId = id;
+            modifySiteDate.Psite[0].Name = modalArr.name;
+            modifySiteDate.Psite[0].OpenTime = modalArr.openTime;
+            modifySiteDate.Psite[0].Address = modalArr.address;
+            modifySiteDate.Psite[0].Latitude = modalArr.latitude;
+            modifySiteDate.Psite[0].Longitude = modalArr.longitude;
+            modifySiteDate.Psite[0].SiteDescription = modalArr.siteDescription;
             ModifySiteModalOpen();
             break;
         case 'delete':
@@ -117,7 +137,6 @@ onMounted(() => {
     ModifySiteModal = new bootstrap.Modal(document.getElementById('ModifyModal'));
     suppliersDataStore.getProduct();
     currentSiteDate.ProductId = suppliersDataStore.currentProductId;
-    // console.log(suppliersDataStore.siteAndRoom);
 })
 </script>
 
@@ -214,7 +233,7 @@ onMounted(() => {
                     <p>站點名稱</p>
                     <div class="d-flex mb-3">
                         <input type="text" class="form-control btn-light creditCardText" placeholder="請填入站點名字"
-                            v-model="currentSiteDate.Name">
+                            v-model="modifySiteDate.Psite[0].Name">
                     </div>
                     <p>新增圖片</p>
                     <div class="d-flex mb-3">
@@ -224,24 +243,24 @@ onMounted(() => {
                     <p>開放時間</p>
                     <div class="d-flex mb-3">
                         <input type="text" class="form-control btn-light creditCardText" placeholder="08:00~22:00"
-                            v-model="currentSiteDate.OpenTime">
+                            v-model="modifySiteDate.Psite[0].OpenTime">
                     </div>
                     <p>地點</p>
                     <div class="d-flex mb-3">
                         <input type="text" class="form-control btn-light creditCardText" placeholder="請填入地址"
-                            v-model="currentSiteDate.Address">
+                            v-model="modifySiteDate.Psite[0].Address">
                     </div>
                     <p>經緯度</p>
                     <div class="d-flex mb-3">
                         <input type="number" class="form-control btn-light creditCardText me-3"
-                            placeholder="緯度(latitude) S、N" v-model="currentSiteDate.Latitude">
+                            placeholder="緯度(latitude) S、N" v-model="modifySiteDate.Psite[0].Latitude">
                         <input type="number" class="form-control btn-light creditCardText ms-3"
-                            placeholder="經度(longitude) E、W" v-model="currentSiteDate.Longitude">
+                            placeholder="經度(longitude) E、W" v-model="modifySiteDate.Psite[0].Longitude">
                     </div>
                     <p>描述</p>
                     <div class="d-flex mb-3">
                         <input type="text" class="form-control btn-light creditCardText" placeholder="簡述介紹這個站點"
-                            v-model="currentSiteDate.siteDescription">
+                            v-model="modifySiteDate.Psite[0].SiteDescription">
                     </div>
                 </div>
                 <div class="modal-footer">

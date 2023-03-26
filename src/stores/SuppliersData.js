@@ -15,6 +15,8 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     const allCategory = reactive([]);
     const currentSiteId = ref(null);
     const currentProductId = ref(3);
+    const currentSupplierId = ref(0);
+    const currentSuppliername = ref('');
     const orderBySite = [];
     const registerSupplier = reactive({
         name: "",
@@ -129,7 +131,9 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
                 siteAndRoom.push(site);
                 orderBySite.push(site.siteId.toString());
             });
-            // console.log('siteAndRoom', siteAndRoom);
+            currentSuppliername.value = res.data.supplier.name;
+            currentSupplierId.value = res.data.supplierId;
+            console.log('siteAndRoom', siteAndRoom);
         }
         catch (error) {
             console.log(error)
@@ -148,6 +152,5 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
         }
     }
 
-
-    return { name, phone, email, password, address, id, loggedIn, registerSupplier, token, siteAndRoom, currentSiteId, currentProductId, orderBySite, allCategory, SupplierRegister, SLogin, SLogout, getProduct, getCategory };
+    return { name, phone, email, password, address, id, loggedIn, registerSupplier, token, siteAndRoom, currentSiteId, currentProductId, orderBySite, allCategory, currentSuppliername, currentSupplierId, SupplierRegister, SLogin, SLogout, getProduct, getCategory };
 });
