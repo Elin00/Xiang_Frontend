@@ -138,7 +138,7 @@ const dateDifference = computed(() => {
   const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
 
 
-  return Math.ceil(diffInDays);
+  return Math.ceil(diffInDays + 1);
 });
 const totalcost = computed(() => {
   if (!startDate.value || !endDate.value) {
