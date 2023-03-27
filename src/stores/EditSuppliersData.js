@@ -3,35 +3,33 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { useSuppliersDataStore } from "../stores/SuppliersData.js"
 
-
 export const useEditSuppliersStore = defineStore("EditSuppliersData", () => {
-    const SuppliersData = useSuppliersDataStore();
+    const storeSuppliersData = useSuppliersDataStore();
     const SUser = reactive({
-        id: "",
+        // id: "",
         name: "",
         phone: "",
         email: "",
         address: "",
     });
 
-    const EditSuppliers = async () => {
+    const getSuppliers = async () => {
         try {
-            const response = await axios.get(`https://localhost:7073/api/Suppliers/id?id=${SuppliersData.$id}`,
+            const response = await axios.get(`https://localhost:7073/api/TSuppliers/${storeSuppliersData.id}`,
                 {
                     headers: {
-                        'Authorization': `Bearer ${SuppliersData.token}`,
+                        'Authorization': `Bearer ${storeSuppliersData.token}`,
                     },
                 })
-            Object.assign(SUser, response.data);
-            //   console.log(user.data);
-            //   console.log("name", user.data.name);
-            SUser.name = SUser.data.name,
-                SUser.phone = SUser.data.phone,
-                SUser.email = SUser.data.email,
-                console.log(SUser.name, SUser.phone, SUser.email);
+            // Object.assign(SUser, response.data);
+            console.log('response.data', response.data);
+            storeSuppliersData.name = response.data.name;
+            storeSuppliersData.address = response.data.address;
+            storeSuppliersData.email = response.data.email;
+            storeSuppliersData.phone = response.data.phone;
         } catch (error) {
             console.log(error);
         }
     }
-    return { EditSuppliers, SUser }
+    return { getSuppliers, SUser }
 })
