@@ -1,11 +1,12 @@
 <script setup>
 //Naive
-import { NCard, NTable } from "naive-ui";
+import {  NTable,NButton } from "naive-ui";
 
 import { useOrdersDataStore } from '../../../../stores/ordersData.js'
-
+import { RouterLink, useRouter } from "vue-router";
+import { useEvaluationDataStore } from '../../../../stores/EvaluationData.js'
 const storeOrdersData = useOrdersDataStore()
-
+const storeEvaluationData = useEvaluationDataStore()
 
 </script>
 
@@ -23,6 +24,7 @@ const storeOrdersData = useOrdersDataStore()
                         <th>結束時間</th>
                         <th>優惠券</th>
                         <th>總價</th>
+                        <th>留言</th>
                      </tr>
                   </thead>
                   <tbody class="my-table-tbody">
@@ -33,6 +35,9 @@ const storeOrdersData = useOrdersDataStore()
                         <td>{{ order.EndDate }}</td>
                         <td>{{ order.Discount }}%</td>
                         <td>{{ order.Price }}</td>
+                        <td>
+                           <NButton type="error"><router-link to="/Productmessage">留言</router-link></NButton>
+                        </td>
                         </tr>
                   </tbody>
                </NTable>

@@ -1,71 +1,112 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue";
-
+import { ref, onMounted, computed } from "vue";
+import { RouterLink, RouterView, useRouter } from "vue-router";
 import { useCustomerStore } from "../../../../stores/CustomerData";
-
+import { useCouponDataStore } from "../../../../stores/CouponData.js";
 import axios from 'axios'
 
 
 const CustomerData = useCustomerStore();
-const result = reactive([]);
+const CouponData = useCouponDataStore();
+
+const router = useRouter();
+router.push({ name: "other-CouponView-pointstable-CouponpageavailableView" });
 
 
-const discount = ref("");
-const couponCode = ref("");
-const isCouponValid = ref(false);
-const myCoupons = reactive([]);
-
-
+const discount = ref('');  //顯示折扣碼
+const couponCode = ref('');
+const myCoupons = ref([]);   //使用優惠卷
+const usedCoupons = ref([]);  //已使用的優惠卷
 const applyAndClaimCoupon = async () => {
-  try {
-    const response = await axios.get(`https://localhost:7073/api/Client/claimCoupon/${couponCode.value}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${CustomerData.token}`,
-      },     
-    })
-    if (response.data.success) {
-      const foundCoupon = result.find(coupon => coupon.code === couponCode.value);
-      if (foundCoupon) {
-        discount.value = foundCoupon.discount;
-        isCouponValid.value = true;
-        myCoupons.push(foundCoupon);
-        localStorage.setItem("myCoupons", JSON.stringify(myCoupons));
-        
-      } else {
-        isCouponValid.value = false;
-        alert("已領過優惠卷");
+  if (couponCode.value) {
+    const matchedCoupon = CouponData.result.find(coupon => coupon.code === couponCode.value);
+
+    if (matchedCoupon) {
+      const newCoupon = {
+        code: matchedCoupon.code,
+        discount: matchedCoupon.discount,
+      };
+      discount.value = matchedCoupon.discount;
+
+      try {
+        const response = await axios.get(`https://localhost:7073/api/Client/claimCoupon/${couponCode.value}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${CustomerData.token}`,
+          },
+        });
+
+        if (response.data.success) {
+          myCoupons.value.push(newCoupon);
+          localStorage.setItem('myCoupons', JSON.stringify(myCoupons.value));
+          couponCode.value = '';
+          alert(response.data.message);
+        } else {
+          alert(response.data.message);
+        }
+      } catch (error) {
+        if (error.response.status === 400) {
+          alert(error.response.data.message);
+        } else {
+          console.error(error);
+        }
       }
     }
-  } catch (error) {
-    console.log(error);
+  };
+}
+const isCouponValid = computed(() => myCoupons.value.length > 0);
+
+const useCoupon = async (coupon) => {
+  const matchedCoupon = CouponData.result.find(c => c.code === coupon.code);
+
+  if (matchedCoupon) {
+    const couponId = matchedCoupon.couponId;
+
+    const response = await axios.post(
+      `https://localhost:7073/api/Client/${couponId}`,
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${CustomerData.token}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      const index = myCoupons.value.indexOf(coupon);
+      if (index > -1) {
+        myCoupons.value.splice(index, 1);
+      }
+      usedCoupons.value.push(coupon);
+      localStorage.setItem('myCoupons', JSON.stringify(myCoupons.value));
+      localStorage.setItem('usedCoupons', JSON.stringify(usedCoupons.value));
+      console.log(response.data);
+      alert(response.data);
+    } else {
+      alert(response.data);
+    }
+
   }
 };
-
-
-
 onMounted(() => {
-  const storedCoupons = localStorage.getItem("myCoupons");
-  console.log(storedCoupons);
+  const storedCoupons = localStorage.getItem('myCoupons');
   if (storedCoupons) {
-    const parsedCoupons = JSON.parse(storedCoupons);
-    Array.prototype.push.apply(myCoupons, parsedCoupons);
-    console.log(myCoupons);
+    myCoupons.value = JSON.parse(storedCoupons);
+  }
+  const storedUsedCoupons = localStorage.getItem('usedCoupons');
+  if (storedUsedCoupons) {
+    usedCoupons.value = JSON.parse(storedUsedCoupons);
   }
 });
-
-
 </script>
 <template>
   <div class="coupon_group mt-5">
-    <div class="coupon-card" v-if="isCouponValid">
+    <div class="coupon-card">
       <div class="coupon-card__div">
         <div class="coupon-card__line"></div>
         <p class=" coupon-card__symbol">{{ discount }}%</p>
       </div>
-    </div>
-    <div v-else>
-      <p>請輸入正確優惠卷代碼。</p>
     </div>
     <form>
       <input type="text" class="coupon-form__input-code" placeholder="輸入優惠卷" v-model="couponCode" />
@@ -78,25 +119,15 @@ onMounted(() => {
     <div class="coupon-record mt-5">
       <h6>我的優惠券</h6>
       <ul class="d-flex" style="border-bottom: 1px solid black; list-style: none">
-        <li class="mb-2 ml-2" style="padding-right: 25px; margin-left: -32px">
-          可使用
-        </li>
-        <li><a>已使用</a></li>
+        <li><router-link :to="{ name: 'other-CouponView-pointstable-CouponpageavailableView' }" class="mb-2 ml-2"
+            style="padding-right: 25px; margin-left: -32px">
+            可使用
+          </router-link></li>
+        <li><router-link :to="{ name: 'other-CouponView-pointstable-UsedcouponpageView' }">已使用</router-link></li>
       </ul>
-      <div style="border-bottom: solid 2px #e0e0e0; padding-bottom">
-        <ul>
-          <p v-if="!isCouponValid">目前沒有可用的優惠卷</p>
-          <li v-if="isCouponValid" v-for="(coupon, index) in myCoupons" :key="index">
-            <div class="coupon-item">
-              <div class="coupon-info">
-                <span>優惠碼：{{ coupon.code }}</span>
-                <span>折扣：{{ coupon.discount }}%</span>
-              </div>
-              <button type="button" class="use-coupon-btn">使用</button>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <router-view :is-coupon-valid="isCouponValid" :my-coupons="myCoupons" :used-coupons="usedCoupons"
+        :use-coupon="useCoupon" />
+
     </div>
   </div>
 </template>

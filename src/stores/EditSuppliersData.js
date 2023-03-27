@@ -6,7 +6,6 @@ import { useSuppliersDataStore } from "../stores/SuppliersData.js"
 export const useEditSuppliersStore = defineStore("EditSuppliersData", () => {
     const storeSuppliersData = useSuppliersDataStore();
     const SUser = reactive({
-        // id: "",
         name: "",
         phone: "",
         email: "",

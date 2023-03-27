@@ -35,7 +35,7 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
     await axios.get(`https://localhost:7073/api/Orders/queryAll/${CustomerData.id}`)
     .then((response) => {
         const orders = response.data;
-       
+
         orders.forEach((order) => {
          const endDate = new Date(Date.parse(order.endDate));
           if (order.cancelDate === null && endDate > new Date() ) {
@@ -56,6 +56,7 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
                Price: order.price,
                CategoryName: order.categoryName,
                Discount: order.discount,
+               roomId :order.roomId
              };
              oendDate.push(item)
             console.log(oendDate);
@@ -106,6 +107,7 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
       { flush: 'sync', immediate: false }
     ).value;
   });
+  
   ///取消訂單
   const CancelDate = async () => {
     if (confirm("再想一下，是否要取消預定?")) {
@@ -115,6 +117,7 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
       try {
         axios.put(`https://localhost:7073/api/Orders/cancel/${o[0].tradeNO}`);
         ordersChanged.value = !ordersChanged.value; // 更改 ordersChanged 的值
+       
       } catch (error) {
         console.log(error);
       }

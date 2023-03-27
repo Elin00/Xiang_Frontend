@@ -31,6 +31,7 @@ import CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
 import SiteView from "../views/Suppliers/SiteView.vue";
 import RoomView from "../views/Suppliers/RoomView.vue";
+import Productmessage from "../views/Suppliers/ProductmessageDesign.vue";
 //import AboutUsView from "../views/Other/AboutUs/AboutUsView.vue";
 import AboutUs from "../views/LandingPages/AboutUs/AboutUs.vue";
 
@@ -221,6 +222,11 @@ const router = createRouter({
       component: RoomGuideView,
     },
     {
+      path: "/Productmessage",
+      name: "Productmessage",
+      component: Productmessage,
+    },
+    {
       path: "/member/orders",
       name: "member-orders",
       component: () => import('../views/Members/Orders/OrdersView.vue'),
@@ -277,7 +283,19 @@ const router = createRouter({
         {
           path: "UseCouponView",
           name: "other-CouponView-UseCouponView",
-          component: () => import('../views/Other/Cooperation/Coupon/UseCouponView.vue'),
+          component: () => import('../views/Other/Cooperation/Coupon/UseCouponView.vue'), 
+           children: [
+            {
+              path: "CouponpageavailableView",
+              name: "other-CouponView-pointstable-CouponpageavailableView",
+              component: () => import('../views/Other/Cooperation/Coupon/CouponpageavailableView.vue'),
+            }, 
+            {
+              path: "UsedcouponpageView",
+              name: "other-CouponView-pointstable-UsedcouponpageView",
+              component: () => import('../views/Other/Cooperation/Coupon/UsedcouponpageView.vue'),
+            },
+          ]
         },
       ]
     },

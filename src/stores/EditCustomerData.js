@@ -3,9 +3,9 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { useCustomerStore } from "../stores/CustomerData.js"
 
-
 export const useEditCustomerStore = defineStore("EditCustomerData", () => {
   const CustomerData = useCustomerStore();  //引用customerData
+
   const user = reactive({
     name: "",
     phone: '',

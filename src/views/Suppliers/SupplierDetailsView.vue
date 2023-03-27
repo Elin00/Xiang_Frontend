@@ -1,7 +1,8 @@
 <script setup>
 import { onMounted } from "vue";
 import { useSuppliersDataStore } from "../../stores/SuppliersData.js";
-import { useEditSuppliersStore } from "../../stores/EditSuppliersData.js"
+import { useEditSuppliersStore } from "../../stores/EditSuppliersData.js";
+import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import MemberHeader from "../../views/Members/Components/MemberHeader.vue";
 import axios from "axios";
@@ -9,11 +10,9 @@ import axios from "axios";
 const storeEditSuppliers = useEditSuppliersStore();
 const storeSuppliersData = useSuppliersDataStore();
 
-
 onMounted(() => {
   storeEditSuppliers.getSuppliers();
 })
-
 
 const updateSupplier = async () => {
   try {

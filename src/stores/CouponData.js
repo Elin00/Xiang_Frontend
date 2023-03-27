@@ -13,6 +13,7 @@ export const useCouponDataStore = defineStore("CouponData", () => {
         "https://localhost:7073/api/Client/ListCoupon"
       );
       result.push(...response.data);
+console.log(result);
     } catch (error) {
       console.error(error);
     }

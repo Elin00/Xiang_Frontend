@@ -1,5 +1,9 @@
 # [Vue Material Kit 2](http://demos.creative-tim.com/vue-material-kit/#/?ref=readme-vmk) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https://www.creative-tim.com/product/vue-material-kit&text=Check%20Vue%20Material%20kit%20Pro%20made%20by%20@CreativeTim%20#webdesign%20#kit%20#materialdesign%20#vue%20https://www.creative-tim.com/product/vue-material-kit)
 
+
+### 编程第一法则 程式能动就不要动它
+![R](https://user-images.githubusercontent.com/117416482/227117819-fab83c65-8a78-47d1-bc13-f84f6f5f6130.gif)
+
 ![version](https://img.shields.io/badge/version-2.0.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/vue-material-kit.svg)](https://github.com/creativetimofficial/vue-material-kit/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/vue-material-kit.svg)](https://github.com/creativetimofficial/vue-material-kit/issues?q=is%3Aissue+is%3Aclosed)
 
 ![Image](https://s3.amazonaws.com/creativetim_bucket/products/97/original/vue-material-kit-2.jpg)
