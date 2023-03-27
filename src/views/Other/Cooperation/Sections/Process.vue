@@ -102,7 +102,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .process {
   width: auto;
   height: 300px;
@@ -110,6 +110,7 @@ onMounted(() => {
   background-color: #d8e2dc;
   padding-bottom: 20px;
   padding-left: 20px;
+  padding-top: 20px;
 
   display: grid;
   grid-template-columns: auto auto;

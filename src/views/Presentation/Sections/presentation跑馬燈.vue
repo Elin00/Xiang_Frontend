@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import photo1 from "../../../assets/img/1.jpg";
-import photo2 from "../../../assets/img/2.jpg";
-import photo3 from "../../../assets/img/3.jpg";
-import photo4 from "../../../assets/img/4.jpg";
-import photo5 from "../../../assets/img/5.jpg";
-import photo6 from "../../../assets/img/6.jpg";
-import photo7 from "../../../assets/img/7.jpg";
+import photo1 from "../../../assets/img/PSiteRoom/1-1.jpg";
+import photo2 from "../../../assets/img/PSiteRoom/2-1.jpg";
+import photo3 from "../../../assets/img/PSiteRoom/3-1.jpg";
+import photo4 from "../../../assets/img/PSiteRoom/4-1.jpg";
+import photo5 from "../../../assets/img/PSiteRoom/5-1.jpg";
+import photo6 from "../../../assets/img/PSiteRoom/2-2.jpg";
+import photo7 from "../../../assets/img/PSiteRoom/3-3.jpg";
 
 const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
 const imageUrls = ref([...photos.map((photo) => ({ src: photo, link: "/views/rentroomview" })), ...photos.map((photo) => ({ src: photo, link: "/views/rentroomview" }))]);
@@ -79,15 +79,15 @@ function getItemAndContainerWidth() {
   <div class="promote-container">
     <div class="row">
       <div class="promote-main d-flex justify-content-center">
-        <img src="../../../assets/img/下載.jpg" class="promote-main__img" alt="" />
+        <img src="../../../assets/img/PsiteRoom/2-6.jpg" class="promote-main__img" alt="" />
         <div style="margin-left: 120px">
           <h1 class="content-title">
-            鄭仲智皮包 共享中....
-            <br />
-            歡迎各位！
+            設備完善的共享會議室
+            <br>
+            一日開會首選！
           </h1>
-          <a href="https://thehapp.com/space/result?lat=25.008323165610395&lng=121.45451073244777" class="content-link">
-            一起共襄盛舉
+          <a href="#" class="content-link">
+            立即預定＞＞
           </a>
         </div>
       </div>
@@ -118,12 +118,14 @@ function getItemAndContainerWidth() {
   max-width: unset;
   overflow-x: hidden;
   padding: 20px 0;
+
 }
 
 .promote-list.item-4x .space-item {
   flex: 0 0 auto;
   width: 344px;
   margin-right: 24px;
+  margin-top: 100px;
 }
 
 .promote-list {

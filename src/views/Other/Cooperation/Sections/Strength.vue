@@ -17,15 +17,15 @@ import MaterialButton from "@/components/MaterialButton.vue";
 
 <template>
   <h1 style="
-        text-align: center;
-        color: #909fa6;
-        text-shadow: 4px 5px 6px #ccc;
-        margin-top: 150px;
-      ">
+            text-align: center;
+            color: #909fa6;
+            text-shadow: 4px 5px 6px #ccc;
+            margin-top: 150px;
+          ">
     善用閒置空間，輕鬆極大化收益
   </h1>
 
-  <p style="text-align: center; font-size: 26px">
+  <p style="text-align: center; font-size: 26px;margin-bottom: 300px;">
     讓你的房屋物件每月提高 50% 租金收益的方法
   </p>
 
