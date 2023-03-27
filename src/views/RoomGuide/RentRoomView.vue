@@ -509,16 +509,13 @@ onMounted(async () => {
             <hr>
             <span>租金: {{ totalcostforhour }}元</span>
             <hr>
-            <div>
-              <ul>
-                <li v-for="(coupon, index) in myCoupons" :key="index" class="coupon-item">
+            <div>             
+                <div v-for="(coupon, index) in myCoupons" :key="index" class="coupon-item">
                   <div class="coupon-info">
-                    <p>優惠卷代碼：{{ coupon.code }}</p>
-                    <p>折扣：{{ coupon.discount }}%</p>
+                    <span>優惠卷代碼：{{ coupon.code }} 折扣：{{ coupon.discount }}% </span>
+                    <input type="checkbox" class="use-coupon-btn" @click="useCoupon(coupon)"> 使用
                   </div>
-                  <input type="checkbox" class="use-coupon-btn" @click="useCoupon(coupon)">使用
-                </li>
-              </ul>
+                </div>
             </div>
             <hr>
             <button class="fullBtn" @click="submitBookingHour">${{ totalcostforhour }} | 立即預訂</button>
