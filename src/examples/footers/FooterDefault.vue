@@ -187,8 +187,8 @@ defineProps({
 
 }
 
-/* @media(min-width: 1200px) {
-  .rwd00 {
+@media(min-width: 1200px) {
+  /* .rwd00 {
     display: block;
   } */
 
