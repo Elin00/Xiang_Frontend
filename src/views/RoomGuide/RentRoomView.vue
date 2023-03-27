@@ -3,7 +3,7 @@ import axios from "axios";
 import datepickerDesign from "../RoomGuide/datepickerDailyrentalDesign.vue";
 import datepickerDesign2 from "../RoomGuide/datepickerhourlyrentalDesign.vue";
 import Evaluation from "../Suppliers/ProductsmessageView.vue"
-import { ref, onMounted, watchEffect, reactive, computed } from "vue";
+import { ref, onMounted, watchEffect, reactive, computed, defineProps } from "vue";
 import { Navigation, Pagination, Autoplay, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -14,8 +14,8 @@ import "swiper/css/effect-cube";
 import photo2 from "../../assets/img/5.jpg";
 import photo3 from "../../assets/img/6.jpg";
 import photo4 from "../../assets/img/7.jpg";
-
-import { useCustomerStore} from "../../stores/CustomerData.js"
+import CouponpageavailableView from "../../views/Other/Cooperation/Coupon/CouponpageavailableView.vue";
+import { useCustomerStore } from "../../stores/CustomerData.js"
 import { useEvaluationDataStore } from '../../stores/EvaluationData.js';
 import { useProductStore } from "../../stores/ProductsAxios.js"
 import { useRoute } from 'vue-router';
@@ -28,6 +28,12 @@ const customerStore = useCustomerStore();
 const store = useStore();
 
 
+
+const props = defineProps({
+  isCouponValid: Boolean,
+  myCoupons: Array,
+  useCoupon: Function,
+});
 
 //取得房間資訊
 const route = useRoute();
@@ -124,6 +130,16 @@ const showModal = ref(false);
 //天數計算
 const startDate = ref("");
 const endDate = ref("");
+const useCoupon = (selectedCoupon) => {
+  myCoupons.value = myCoupons.value.map((coupon) => {
+    if (coupon.code === selectedCoupon.code) {
+      coupon.selected = !coupon.selected;
+    } else {
+      coupon.selected = false;
+    }
+    return coupon;
+  });
+};
 const handleValuesUpdate = ({ value1, value2 }) => {
   startDate.value = value1;
   endDate.value = value2;
@@ -151,6 +167,14 @@ const totalcost = computed(() => {
     return "無法解析";
   }
   const total = price * parseInt(dateDifference.value, 10);
+
+  // 在此處查找選中的優惠券
+  const selectedCoupon = myCoupons.value.find(coupon => coupon.selected);
+  if (selectedCoupon) {
+    const discount = selectedCoupon.discount / 100;
+    const td = total * discount
+    return Math.round(td);
+  }
 
   return total
 })
@@ -204,7 +228,7 @@ const submitBooking = async () => {
       },
       // body: jsonbd
     });
-   
+
     console.log(response);
     if (response.data === "新增成功") {
       // 請求成功，處理響應（如導航到其他頁面、顯示消息等）
@@ -258,6 +282,13 @@ const totalcostforhour = computed(() => {
     return 0;
   }
   const total = price * parseFloat(hourDifference.value)
+
+  const selectedCoupon = myCoupons.value.find(coupon => coupon.selected);
+  if (selectedCoupon) {
+    const discount = selectedCoupon.discount / 100;
+    const td = total * discount
+    return Math.round(td);
+  }
 
   return total
 })
@@ -324,6 +355,7 @@ const submitBookingHour = async () => {
     alert(`預訂過程中出現錯誤：${error.message}`);
   }
 };
+const myCoupons = ref([])
 
 //loading
 onMounted(async () => {
@@ -334,8 +366,13 @@ onMounted(async () => {
     pingSet.ping = `${Productspinia.roominfo.ping}`
     categoryId.value = Productspinia.roominfo.categoryId - 1
     console.log(categoryId.value)
+    const storedCoupons = localStorage.getItem('myCoupons');
+  if (storedCoupons) {
+    myCoupons.value = JSON.parse(storedCoupons);
+  }
   });
 });
+
 </script>
 
 <template>
@@ -349,11 +386,11 @@ onMounted(async () => {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }" :cube-effect="{
-                shadow: false,
-                slideShadows: false,
-                shadowOffset: 20,
-                shadowScale: 0.94,
-          }">
+  shadow: false,
+  slideShadows: false,
+  shadowOffset: 20,
+  shadowScale: 0.94,
+}">
           <swiper-slide v-for="(text, index) in swiperTextBase" :key="index">
             <div class="image-wrapper">
               <img :src=text.img alt="img" class="object-fit-cover" style="height: 400px; width: 600px" />
@@ -432,6 +469,18 @@ onMounted(async () => {
             <hr>
             <span>租金: {{ totalcost }}元</span>
             <hr>
+            <div>
+              <ul>
+                <li v-for="(coupon, index) in myCoupons" :key="index" class="coupon-item">
+                  <div class="coupon-info">
+                    <p>優惠卷代碼：{{ coupon.code }}</p>
+                    <p>折扣：{{ coupon.discount }}%</p>
+                  </div>
+                  <input type="checkbox" class="use-coupon-btn" @click="useCoupon(coupon)">使用
+                </li>
+              </ul>
+            </div>
+            <hr>
             <button class="fullBtn" @click="submitBooking">${{ totalcost }} | 立即預訂</button>
 
           </div>
@@ -459,6 +508,18 @@ onMounted(async () => {
             <span>選取的時數: {{ hourDifference }}</span>
             <hr>
             <span>租金: {{ totalcostforhour }}元</span>
+            <hr>
+            <div>
+              <ul>
+                <li v-for="(coupon, index) in myCoupons" :key="index" class="coupon-item">
+                  <div class="coupon-info">
+                    <p>優惠卷代碼：{{ coupon.code }}</p>
+                    <p>折扣：{{ coupon.discount }}%</p>
+                  </div>
+                  <input type="checkbox" class="use-coupon-btn" @click="useCoupon(coupon)">使用
+                </li>
+              </ul>
+            </div>
             <hr>
             <button class="fullBtn" @click="submitBookingHour">${{ totalcostforhour }} | 立即預訂</button>
           </div>
@@ -586,9 +647,7 @@ onMounted(async () => {
             <div class="infoTitle" style="padding: 0px 20px">地圖</div>
             <div class="infoDetail rules">
               <P>捷運府中站 1 號出口，步行 7 分鐘</P>
-              <iframe
-                :src="iframeSrc"
-                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+              <iframe :src="iframeSrc" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
