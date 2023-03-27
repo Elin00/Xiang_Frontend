@@ -6,10 +6,11 @@ import SupplierHeader from './Components/SupplierHeader.vue'
 import PSite from './Components/PSite.vue'
 import "../../assets/js/core/bootstrap.min.js";
 
+const suppliersDataStore = useSuppliersDataStore();
+
 //data
 let AddSiteModal = null;
 let ModifySiteModal = null;
-const suppliersDataStore = useSuppliersDataStore();
 const modifySiteDate = reactive({
     ProductId: 0,
     SupplierId: 0,
@@ -79,7 +80,6 @@ const ModifySiteModalClose = () => {
 }
 const ModifySave = async () => {
     try {
-        console.log('modifySiteDate', modifySiteDate);
         res = await axios.put(`https://localhost:7073/api/Products/${currentSiteDate.ProductId}`, modifySiteDate, { headers: { 'Content-Type': 'application/json' } });
         // console.log(res);
     }
@@ -135,9 +135,12 @@ const changeSitePhoto = (e) => {
 onMounted(() => {
     AddSiteModal = new bootstrap.Modal(document.getElementById('AddModal'));
     ModifySiteModal = new bootstrap.Modal(document.getElementById('ModifyModal'));
-    suppliersDataStore.getProduct();
+    suppliersDataStore.getProId();
+    setTimeout(() => {
+        suppliersDataStore.getProduct();
+    }, 150);
     currentSiteDate.ProductId = suppliersDataStore.currentProductId;
-})
+});
 </script>
 
 <template>

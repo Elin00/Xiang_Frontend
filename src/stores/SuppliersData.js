@@ -14,7 +14,7 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
     const siteAndRoom = reactive([]);
     const allCategory = reactive([]);
     const currentSiteId = ref(null);
-    const currentProductId = ref(3);
+    const currentProductId = ref(0);
     const currentSupplierId = ref(0);
     const currentSuppliername = ref('');
     const orderBySite = [];
@@ -119,6 +119,17 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
         }
     });
 
+    const getProId = async () => {
+        try {
+            const res = await axios.get(`https://localhost:7073/api/Products/product/${id.value}`);
+            currentProductId.value = res.data.productId;
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+
     //產品相關
     const getProduct = async () => {
         try {
@@ -131,7 +142,6 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
             });
             currentSuppliername.value = res.data.supplier.name;
             currentSupplierId.value = res.data.supplierId;
-            console.log('siteAndRoom', siteAndRoom);
         }
         catch (error) {
             console.log(error)
@@ -150,5 +160,5 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
         }
     }
 
-    return { name, phone, email, password, address, id, loggedIn, registerSupplier, token, siteAndRoom, currentSiteId, currentProductId, orderBySite, allCategory, currentSuppliername, currentSupplierId, SupplierRegister, SLogin, SLogout, getProduct, getCategory };
+    return { name, phone, email, password, address, id, loggedIn, registerSupplier, token, siteAndRoom, currentProductId, currentSiteId, orderBySite, allCategory, currentSuppliername, currentSupplierId, SupplierRegister, SLogin, SLogout, getProId, getProduct, getCategory };
 });

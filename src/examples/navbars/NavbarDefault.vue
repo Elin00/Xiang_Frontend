@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { ref, watch,onMounted  } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { useWindowsWidth } from "../../assets/js/useWindowsWidth";
 import { useCustomerStore } from "../../stores/CustomerData.js";
 import { useSuppliersDataStore } from "../../stores/SuppliersData.js";
@@ -17,7 +17,7 @@ const props = defineProps({
     default: () => ({
       color: "black",
       label1: "登入",
-      href:"http://localhost:3000/"
+      href: "http://localhost:3000/"
     }),
   },
   transparent: {
@@ -102,11 +102,11 @@ onMounted(() => {
     'navbar-light bg-white py-3': props.light,
     ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark,
   }">
-  <div :class="
-    props.transparent || props.light || props.dark
-      ? 'container-fluid'
-      : 'container-fluid '
-  ">
+    <div :class="
+      props.transparent || props.light || props.dark
+        ? 'container-fluid'
+        : 'container-fluid '
+    ">
       <RouterLink class="navbar-brand d-none d-md-block" :class="[
         (props.transparent && textDark.value) || !props.transparent
           ? 'text-dark font-weight-bolder ms-sm-3'
@@ -150,9 +150,9 @@ onMounted(() => {
             <a id="menu" class="nav-link d-flex align-items-center cursor-pointer" data-bs-toggle="dropdown"
               aria-expanded="false" data-bs-offset="10,20">
               <div style="
-                    border-radius: 40%;
-                    background-color: rgba(255, 255, 255, 0.7);
-                  ">
+                      border-radius: 40%;
+                      background-color: rgba(255, 255, 255, 0.7);
+                    ">
                 <span class="material-icons" style="font-size: 3em">
                   manage_accounts
                 </span>
@@ -163,16 +163,18 @@ onMounted(() => {
             <div v-if="!CustomerStore.loggedIn && !Suppliersstore.loggedIn" id="dropdown"
               class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
               style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
-              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" @click="ModalStore.LoginModalOpen">
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                @click="ModalStore.LoginModalOpen">
                 登入
               </div>
 
-              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" @click="ModalStore.RegisterModalOpen">
+              <div class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                @click="ModalStore.RegisterModalOpen">
                 註冊
               </div>
 
-              <RouterLink :to="CustomerStore.loggedIn? { name: 'other-CouponView' } : ''" class="dropdown-item py-3 ps-3 border-radius-md"
-                :style="action.color" :href="action.route">領取優惠卷
+              <RouterLink :to="CustomerStore.loggedIn ? { name: 'other-CouponView' } : ''"
+                class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color" :href="action.route">領取優惠卷
               </RouterLink>
               <RouterLink :to="{ name: 'questions' }" class="dropdown-item py-3 ps-3 border-radius-md"
                 :style="action.color">常見問答</RouterLink>
@@ -184,12 +186,12 @@ onMounted(() => {
               class="dropdown-menu dropdown-menu-end mt-0 mt-lg-3 p-3 border-radius-lg"
               style="margin-top: 4rem !important" aria-labelledby="dropdownMenuOffset">
               <!-- <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
-                    data-bs-toggle="modal" data-bs-target="#Login">登入
-                  </div>
+                      data-bs-toggle="modal" data-bs-target="#Login">登入
+                    </div>
 
-                  <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
-                    data-bs-toggle="modal" data-bs-target="#Register">註冊
-                  </div> -->
+                    <div v-if="!CustomerStore.loggedIn" class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color"
+                      data-bs-toggle="modal" data-bs-target="#Register">註冊
+                    </div> -->
               <div v-if="CustomerStore.loggedIn">
                 <span class="dropdown-item py-3 ps-3 border-radius-md"
                   style="color: green; border-bottom: 1px solid grey">
@@ -228,7 +230,7 @@ onMounted(() => {
               <RouterLink v-if="Suppliersstore.loggedIn" :to="{ name: 'supplierDetails' }"
                 class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的帳戶
               </RouterLink>
-              <RouterLink v-if="Suppliersstore.loggedIn" :to="{ name: 'addRoom' }"
+              <RouterLink v-if="Suppliersstore.loggedIn" :to="{ name: 'addSite' }"
                 class="dropdown-item py-3 ps-3 border-radius-md" :style="action.color">我的空間
               </RouterLink>
               <div v-if="Suppliersstore.loggedIn">
