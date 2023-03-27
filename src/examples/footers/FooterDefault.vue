@@ -105,7 +105,7 @@ defineProps({
             </p>
           </div>
         </div>
-        <div class="col-lg-1 col-md-4 mb-6 col-sm-2 offset-1" v-for="{ name, items } of menus" :key="name">
+        <div class="col-lg-1 col-md-4 col-sm-2 offset-1 mb-2" v-for="{ name, items } of menus" :key="name">
           <h6 class="rwd03 text-sm">{{ name }}</h6>
           <ul class="flex-column ms-n3 nav">
             <li id="link" class="nav-item" v-for="item of items" :key="item.name">
@@ -113,7 +113,7 @@ defineProps({
             </li>
           </ul>
         </div>
-        <div class="col-lg-1 col-md-4 mb-6 col-sm-2 offset-1">
+        <div class="col-lg-1 col-md-4 col-sm-2 offset-1 mb-2">
           <h6 class=" rwd03 text-sm">付款方式</h6>
           <ul class="flex-column ms-n3 nav">
             <li class="nav-item">
@@ -143,13 +143,13 @@ defineProps({
   cursor: pointer;
 }
 
-.rwd00 {
+/* .rwd00 {
   display: none;
-}
+} */
 
 @media(min-width: 0px) {
   .rwd01 {
-    background: lightskyblue;
+    /* background: lightskyblue; */
     font-size: 12px;
   }
 
@@ -162,7 +162,7 @@ defineProps({
 
 @media(min-width: 400px) {
   .rwd01 {
-    background: lightyellow;
+    /* background: lightyellow; */
     font-size: 16px;
   }
 
@@ -175,7 +175,7 @@ defineProps({
 
 @media(min-width: 800px) {
   .rwd01 {
-    background: orange;
+    /* background: orange; */
     font-size: 20px;
   }
 
@@ -188,12 +188,12 @@ defineProps({
 }
 
 @media(min-width: 1200px) {
-  .rwd00 {
+  /* .rwd00 {
     display: block;
-  }
+  } */
 
   .rwd01 {
-    background: lightpink;
+    /* background: lightpink; */
     font-size: 24px;
   }
 
