@@ -15,7 +15,7 @@ import photo2 from "../../assets/img/5.jpg";
 import photo3 from "../../assets/img/6.jpg";
 import photo4 from "../../assets/img/7.jpg";
 
-import { useCustomerStore} from "../../stores/CustomerData.js"
+import { useCustomerStore } from "../../stores/CustomerData.js"
 import { useEvaluationDataStore } from '../../stores/EvaluationData.js';
 import { useProductStore } from "../../stores/ProductsAxios.js"
 import { useRoute } from 'vue-router';
@@ -139,7 +139,7 @@ const dateDifference = computed(() => {
   const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
 
 
-  return Math.ceil(diffInDays);
+  return Math.ceil(diffInDays + 1);
 });
 const totalcost = computed(() => {
   if (!startDate.value || !endDate.value) {
@@ -192,7 +192,8 @@ const submitBooking = async () => {
     startDate: new Date(startDate1).toISOString(),
     endDate: endDate1.toISOString(),
     roomId: parseInt(Productspinia.roominfo.roomId),
-    price: parseInt(totalcost.value)
+    price: parseInt(totalcost.value),
+    itemName: Productspinia.roominfo.categoryname,
   };
   const jsonbd = JSON.stringify(bookingData)
   console.log(jsonbd)
@@ -204,15 +205,15 @@ const submitBooking = async () => {
       },
       // body: jsonbd
     });
-   
+
     console.log(response);
-    if (response.data === "新增成功") {
+    if (response.status === 200) {
       // 請求成功，處理響應（如導航到其他頁面、顯示消息等）
-      console.log();
-      alert('預訂成功！');
+      document.getElementById('divContent').innerHTML = response.data;
+      document.getElementById('payForm').submit();
     } else {
       // 請求失敗，處理錯誤
-      // const errorData = await response.json();
+      const errorData = await response.json();
       alert(`預訂失敗：${errorData.message}`);
     }
   } catch (error) {
@@ -349,11 +350,11 @@ onMounted(async () => {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }" :cube-effect="{
-                shadow: false,
-                slideShadows: false,
-                shadowOffset: 20,
-                shadowScale: 0.94,
-          }">
+  shadow: false,
+  slideShadows: false,
+  shadowOffset: 20,
+  shadowScale: 0.94,
+}">
           <swiper-slide v-for="(text, index) in swiperTextBase" :key="index">
             <div class="image-wrapper">
               <img :src=text.img alt="img" class="object-fit-cover" style="height: 400px; width: 600px" />
@@ -369,7 +370,7 @@ onMounted(async () => {
       <div class="locationTitle">
         <div class="locationTitleLeft">
           <div class="locationTitleComment">
-            <h3 class="title">{{ swiperTextBase[0].Title }}</h3>
+            <h3 class="title">{{ `${Productspinia.roominfo.siteName}&nbsp${Productspinia.roominfo.categoryname}` }}</h3>
             <div class="locationComment">
               <div class="material-icons">feedback</div>
               <div class="text">
@@ -586,9 +587,7 @@ onMounted(async () => {
             <div class="infoTitle" style="padding: 0px 20px">地圖</div>
             <div class="infoDetail rules">
               <P>捷運府中站 1 號出口，步行 7 分鐘</P>
-              <iframe
-                :src="iframeSrc"
-                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+              <iframe :src="iframeSrc" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios';
-import { reactive,ref,computed } from "vue";
+import { reactive, ref, computed } from "vue";
 
 
 
@@ -12,17 +12,17 @@ export const useProductStore = defineStore('ProductsAxios', () => {
     const roominfo = reactive({
         roomId: 0,
         datePrice: "",
-        hourPrice:"",
+        hourPrice: "",
         image: "",
         openTime: "",
         ping: "",
-        categoryname:"",
-        iframe:"",
+        categoryname: "",
+        iframe: "",
         categoryId: 0,
         productId: 0,
-        
+
     })
-    
+
 
     //建立class
     class PAndS {
@@ -108,14 +108,14 @@ export const useProductStore = defineStore('ProductsAxios', () => {
             console.log(error.message);
         }
     }
-   
+
     //axios get{id} ${productId}
     const axiosKey = async (id) => {
         try {
             const { data } = await axios.get(`https://localhost:7073/api/PsiteRooms/${id}`)
             const product = data;
             // 抓Room資料
-            // console.log(product)
+            console.log('producty資料', product)
             // console.log(product.image)
             roominfo.roomId = product.roomId
             roominfo.image = product.image
@@ -126,8 +126,9 @@ export const useProductStore = defineStore('ProductsAxios', () => {
             roominfo.hourPrice = product.hourPrice
             roominfo.productId = product.productId
             roominfo.categoryname = product.categoryName
+            roominfo.siteName = product.siteName
             roominfo.iframe = product.iframe
-            console.log(roominfo)
+            // console.log(roominfo)
         }
         catch (error) {
             console.log(error.message)
