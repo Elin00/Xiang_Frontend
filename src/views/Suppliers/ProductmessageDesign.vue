@@ -2,14 +2,17 @@
 import { ref, onMounted, reactive } from "vue";
 import axios from "axios";
 import { useCustomerStore } from "../../stores/CustomerData.js";
-
+import {  useRouter } from "vue-router";
+import { useOrdersDataStore } from "../../stores/ordersData.js";
 const CustomerData = useCustomerStore();
+const router = useRouter();
+const OrdersData = useOrdersDataStore();
 
-const productId = 2;
+
 const showFeedbackForm = ref(true);
 const title = ref("");
 const rating = ref(0);
-// const token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0IiwianRpIjoiMmIxYmVkMGUtNTczZS00NjFhLTljZTEtMjA5ZGRhNjI0N2FkIiwiaWF0IjoiMjAyMy8zLzE5IOS4iuWNiCAxMDo1NjoyMyIsIk5hbWUiOiLmrLjlj6YiLCJlbWFpbCI6ImMyOTczNDU3QGdtYWlsLmNvbSIsImV4cCI6MTY3OTgyODE4MywiaXNzIjoiSldUQXV0aGVudGljYXRpb25TZXJ2ZXIiLCJhdWQiOiJKV1RTZXJ2aWNlUG9zdG1hbkNsaWVudCJ9.zfT0VzTvpN4Z6n8QgUGiHA17_1kfkNTH54HTuQNa2V0";
+
 //點擊星星
 const setRating = (n) => {
   rating.value = n;
@@ -44,13 +47,14 @@ const submitFeedback = () => {
       `https://localhost:7073/api/TEvaluations`,
       {
         title: selectedTitle.value.toString(),
+        roomID :OrdersData.oendDate[0].roomId,
         description: result.description,
         customerName: CustomerData.Name,
         star: rating.value,
       },
       {
         headers: {
-          // Authorization: `Bearer ${token1}`,
+          Authorization: `Bearer ${CustomerData.token}`,
           "Content-Type": "application/json",
         },
       }
@@ -66,6 +70,7 @@ const submitFeedback = () => {
 
   // 隱藏留言表單
   showFeedbackForm.value = false;
+  router.push({ name: "presentation" });
 };
 
 </script>
@@ -91,7 +96,7 @@ const submitFeedback = () => {
         </div>
       </label>
       <label>評論: <textarea v-model="result.description"></textarea></label>
-      <button @click="submitFeedback">儲存</button>
+      <button  @click="submitFeedback" >提交</button>
     </div>
   </div>
 </template>

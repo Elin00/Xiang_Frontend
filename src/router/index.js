@@ -31,6 +31,7 @@ import CouponView from "../views/Other/Cooperation/Coupon/CouponVIew.vue";
 import SupplierDetailsView from "../views/Suppliers/SupplierDetailsView.vue";
 import SiteView from "../views/Suppliers/SiteView.vue";
 import RoomView from "../views/Suppliers/RoomView.vue";
+import Productmessage from "../views/Suppliers/ProductmessageDesign.vue";
 //import AboutUsView from "../views/Other/AboutUs/AboutUsView.vue";
 import AboutUs from "../views/LandingPages/AboutUs/AboutUs.vue";
 
@@ -219,6 +220,11 @@ const router = createRouter({
       path: "/roomguide",
       name: "RoomGuideView",
       component: RoomGuideView,
+    },
+    {
+      path: "/Productmessage",
+      name: "Productmessage",
+      component: Productmessage,
     },
     {
       path: "/member/orders",
