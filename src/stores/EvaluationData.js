@@ -4,11 +4,10 @@ import axios from 'axios';
 
 export const useEvaluationDataStore = defineStore("EvaluationData", () => {
   const number = ref();
-
-  const EvaluationData = async () => {
+  
+  const EvaluationData = async (id) => {
     try {
-      const productId = 2; 
-      const response = await axios.get(`https://localhost:7073/api/TEvaluations/${productId}`);
+      const response = await axios.get(`https://localhost:7073/api/TEvaluations/${id}`);
       number.value = response.data.map(review => ({
         customerId: review.evaluationId,
         name: review.customerName,
@@ -30,7 +29,7 @@ export const useEvaluationDataStore = defineStore("EvaluationData", () => {
     }
   });
 
-  return {
+  return {number,
     EvaluationData ,
     numberOfReviews
   }

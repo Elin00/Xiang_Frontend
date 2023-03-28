@@ -2,6 +2,7 @@ import { reactive, ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // 引入解碼JWT檔案的庫
+import { googleTokenLogin } from 'vue3-google-login'
 import { useModalStore } from "../stores/ModalData.js"
 
 
@@ -110,7 +111,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
     }
   });
 
-
+  
 
   //google登入 目前可以拿到google的access_token
   const GOOGLE_CLIENT_ID = '791286941146-n77r23cg1g2is104lbldn5f2qdjidvja.apps.googleusercontent.com'
@@ -142,7 +143,6 @@ export const useCustomerStore = defineStore("CustomerData", () => {
   const handleGoogleAccessTokenLogin = async () => {
     try {
       const response = await googleTokenLogin({ clientId: GOOGLE_CLIENT_ID });
-      console.log(response);
       data.value = response;
 
       const apiResponse = await axios.post("https://localhost:7073/api/Google", {
@@ -224,7 +224,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
       });
     });
   };
-
+  
   const loginWithFacebook = () => {
     return new Promise((resolve, reject) => {
       FB.login(
@@ -239,7 +239,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
       );
     });
   };
-
+  
   async function facebookLogin() {
     try {
       let accessToken;
@@ -249,14 +249,14 @@ export const useCustomerStore = defineStore("CustomerData", () => {
         console.log('User not logged in, trying to log in with Facebook...');
         accessToken = await loginWithFacebook();
       }
-
+  
       console.log('Facebook access token:', accessToken);
       await sendFacebookAccessTokenToBackend(accessToken);
     } catch (error) {
       console.error('Error during Facebook login:', error);
     }
   }
-
+  
   async function sendFacebookAccessTokenToBackend(accessToken) {
     try {
       const response = await axios.post('https://localhost:7073/api/Google/FacebookLogin',
@@ -284,7 +284,7 @@ export const useCustomerStore = defineStore("CustomerData", () => {
     token,
     loggedIn,
     logout,
-    register, registerCustomer, handleGoogleAccessTokenLogin, sendFacebookAccessTokenToBackend,
+    register, registerCustomer, handleGoogleAccessTokenLogin,sendFacebookAccessTokenToBackend,
     FacebookOnmouned, loginWithFacebook
   };
 });

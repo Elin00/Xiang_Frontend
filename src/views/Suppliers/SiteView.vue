@@ -48,6 +48,7 @@ const savePSite = async () => {
             const res = await axios.post('https://localhost:7073/api/Products/PSite', currentSiteDate, { headers: { 'Content-Type': 'multipart/form-data' } });
             // console.log(res);
             suppliersDataStore.getProduct();
+            addSiteModalClose();
         }
         catch (error) {
             console.log(error)
@@ -138,7 +139,7 @@ onMounted(() => {
     suppliersDataStore.getProId();
     setTimeout(() => {
         suppliersDataStore.getProduct();
-    }, 150);
+    }, 250);
     currentSiteDate.ProductId = suppliersDataStore.currentProductId;
 });
 </script>

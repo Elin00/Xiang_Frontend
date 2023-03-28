@@ -337,6 +337,7 @@ onMounted(async () => {
     console.log(categoryId.value)
   });
 });
+
 </script>
 
 <template>

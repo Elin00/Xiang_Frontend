@@ -59,7 +59,6 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
                roomId :order.roomId
              };
              oendDate.push(item)
-            console.log(oendDate);
           }
           else {
             const item = {

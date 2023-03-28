@@ -1,30 +1,21 @@
 <script setup>
-import { ref,onMounted,computed  } from 'vue';
-import axios from 'axios';
+import { ref,onMounted  } from 'vue';
+import { useEvaluationDataStore } from "../../stores/EvaluationData.js";
+import { useRoute} from'vue-router';
 
-const Evaluation = ref([]);
+const EvaluationData = useEvaluationDataStore();
+
+const router = useRoute();
+const roomid = ref(router.params.id);
 onMounted(async () => {
-  try {
-    const productId = 2; // 用正確的值替換
-    const response = await axios.get(`https://localhost:7073/api/TEvaluations/${productId}`);
-    Evaluation.value = response.data.map(review => ({
-      customerId: review.evaluationId,
-      name: review.customerName,
-      rating: review.star,
-      time: review.date,
-      review: review.description
-    }));
-  } catch (error) {
-    console.error("Failed to fetch reviews:", error);
-  }
-});
-const numberOfReviews = computed(() => Evaluation.value.length);
+  await EvaluationData.EvaluationData(roomid.value);
+})
 
 </script>
 
 <template>
   <div class="container">
-    <div class="row mt-0"  v-for="review in Evaluation" :key="review.customerId">
+    <div class="row mt-0"  v-for="review in EvaluationData.number" :key="review.customerId">
       <div class="material-icons col-1 d-flex justify-content-center" style="font-size: 20px">
         account_circle
       </div>
