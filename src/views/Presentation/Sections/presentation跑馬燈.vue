@@ -1,15 +1,16 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import photo1 from "../../../assets/img/1.jpg";
-import photo2 from "../../../assets/img/2.jpg";
-import photo3 from "../../../assets/img/3.jpg";
-import photo4 from "../../../assets/img/4.jpg";
-import photo5 from "../../../assets/img/5.jpg";
-import photo6 from "../../../assets/img/6.jpg";
-import photo7 from "../../../assets/img/7.jpg";
+import photo1 from "../../../assets/img/1-1.jpg";
+import photo2 from "../../../assets/img/5-1.jpg";
+import photo3 from "../../../assets/img/1-2.jpg";
+import photo4 from "../../../assets/img/5-2.jpg";
+import photo5 from "../../../assets/img/3-1.jpg";
+import photo6 from "../../../assets/img/2-2.jpg";
+import photo7 from "../../../assets/img/3-2.jpg";
 
 const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
-const imageUrls = ref([...photos.map((photo) => ({ src: photo, link: "/views/rentroomview" })), ...photos.map((photo) => ({ src: photo, link: "/views/rentroomview" }))]);
+const id =[1, 2, 3, 4, 5, 6, 7];
+const imageUrls = ref([...photos.map((photo,id) => ({ src: photo, link: `/views/rentroomview/${id}` }))]);
 const scrollPosition = ref(0);
 const scrollStep = 4;
 const itemWidth = ref(0);
