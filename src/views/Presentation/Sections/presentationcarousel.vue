@@ -25,22 +25,22 @@ const props = defineProps({
                             </div>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="../../../assets/img/banner_2_desktop.jpg" :class="action.class" alt="..."
-                                        style="height: 300px;width: 300px;">
+                                    <img src="../../../assets/img/CounterCard1.jpg" :class="action.class" alt="..."
+                                        style="height: 400px;width: 400px;">
                                     <div class="carousel-caption d-none d-md-block">
                                         <!-- <h5>First slide label</h5>
-                                                <p>Some representative placeholder content for the first slide.</p> -->
+                                                                                        <p>Some representative placeholder content for the first slide.</p> -->
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="../../../assets/img/banner_3_desktop.jpg" :class="action.class" alt=".."
-                                        style="height: 300px;width: 300px;">
+                                    <img src="../../../assets/img/CounterCard2.jpg" :class="action.class" alt=".."
+                                        style="height: 400px;width: 400px;">
                                     <div class="carousel-caption d-none d-md-block">
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="../../../assets/img/banner_4_desktop.jpg" :class="action.class" alt="..."
-                                        style="height: 300px;width: 300px;">
+                                    <img src="../../../assets/img/CounterCard3.jpg" :class="action.class" alt="..."
+                                        style="height: 400px;width: 400px;">
                                     <div class="carousel-caption d-none d-md-block">
 
                                     </div>

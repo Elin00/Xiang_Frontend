@@ -32,7 +32,7 @@ onUnmounted(() => {
     <div class="page-header min-vh-75" :style="`background-image: url(${vueMkHeader})`" loading="lazy">
       <div class="container">
         <div class="row">
-          <div class="col-lg-7 text-center mx-auto position-relative">
+          <div class="col-lg-9 text-center mx-auto position-relative">
             <presentationHeader打字效果 />
             <div class="container">
               <div class="row">

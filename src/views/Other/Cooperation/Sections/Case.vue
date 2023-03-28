@@ -4,7 +4,7 @@ import { NCard } from "naive-ui";
 
 // image
 import team4 from "@/assets/img/team-2.jpg";
-import team8 from "@/assets/img/team-8.jpg";
+import team1 from "@/assets/img/team-1.jpg";
 import vueMkHeader from "@/assets/img/office-dark.jpg";
 import Cooperation from "@/assets/img/Cooperation.jpg";
 import Cooperation2 from "@/assets/img/Cooperation2.jpg";
@@ -26,11 +26,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
           <div class="title-box">
             <div class="title-img">
               <a href="javascript:;">
-                <MaterialAvatar
-                  :image="team8"
-                  alt="Image placeholder"
-                  size="lg"
-                />
+                <MaterialAvatar :image="team1" alt="Image placeholder" size="lg" />
               </a>
             </div>
             <div class="title-p" style="vertical-align: middle">
@@ -57,11 +53,7 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
           <div class="title-box">
             <div class="title-img">
               <a href="javascript:;">
-                <MaterialAvatar
-                  :image="team4"
-                  alt="Image placeholder"
-                  size="lg"
-                />
+                <MaterialAvatar :image="team4" alt="Image placeholder" size="lg" />
               </a>
             </div>
             <div class="title-p" style="vertical-align: middle">
