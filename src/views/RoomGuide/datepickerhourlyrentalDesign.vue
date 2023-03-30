@@ -2,7 +2,7 @@
   <div class="demo-date-picker">
     <div class="block">
       <span class="demonstration"></span>
-      <el-date-picker v-model="selectedDate" type="date" placeholder="請選擇租借日期"  :disabled-date="disabledDate"/>
+      <el-date-picker v-model="selectedDate" type="date" placeholder="請選擇租借日期" :disabled-date="disabledDate" />
     </div>
 
   </div>
@@ -14,11 +14,10 @@
       <el-option v-for="time in selectableEndTimes" :key="time" :label="time" :value="time" />
     </el-select>
   </div>
-
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, defineEmits } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const selectedDate = ref('')
 const startTime = ref('')
@@ -101,7 +100,7 @@ watch(
     endTime.value = ''
   }
 )
-watch([selectedDate, startTime,endTime], () => {
-  emit("update-values-hours", { value1: selectedDate.value, value2: startTime.value, value3:endTime.value });
+watch([selectedDate, startTime, endTime], () => {
+  emit("update-values-hours", { value1: selectedDate.value, value2: startTime.value, value3: endTime.value });
 });
 </script>

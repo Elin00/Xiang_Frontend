@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, defineEmits } from "vue";
+import { ref, watch } from "vue";
 
 const value1 = ref("");
 const value2 = ref("");

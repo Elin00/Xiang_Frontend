@@ -4,13 +4,8 @@ import App from "./App.vue";
 import router from "./router";
 import ElementPlus from 'element-plus'
 
-
-// window.gapi = gapi;
-
 import { useCustomerStore } from '../src/stores/CustomerData.js'
 import { useSuppliersDataStore } from '../src/stores/SuppliersData.js'
-
-
 
 // Nucleo Icons
 import "./assets/css/nucleo-icons.css";
