@@ -35,7 +35,6 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
     await axios.get(`https://localhost:7073/api/Orders/queryAll/${CustomerData.id}`)
     .then((response) => {
         const orders = response.data;
-
         orders.forEach((order) => {
          const endDate = new Date(Date.parse(order.endDate));
           if (order.cancelDate === null && endDate > new Date() ) {
@@ -96,17 +95,16 @@ export const useOrdersDataStore = defineStore("ordersData", () => {
   //一開始先寫入資料，後來判斷是否有更新
   onMounted(() => {
     orderinformation();
-    watch(
-      ordersChanged,
-      async (newValue, oldValue) => {
-        if (newValue !== oldValue) {
-          await orderinformation();
-        }
-      },
-      { flush: 'sync', immediate: false }
-    ).value;
   });
-  
+  watch(
+    ordersChanged,
+    async (newValue, oldValue) => {
+      if (newValue !== oldValue) {
+        await orderinformation();
+      }
+    },
+    { flush: 'sync', immediate: false }
+  )
   ///取消訂單
   const CancelDate = async () => {
     if (confirm("再想一下，是否要取消預定?")) {

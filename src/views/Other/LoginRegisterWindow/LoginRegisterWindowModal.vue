@@ -2,6 +2,7 @@
 import { onMounted, ref, reactive, watch } from "vue";
 import { useCustomerStore } from "../../../stores/CustomerData.js";
 import "../../../assets/js/core/bootstrap.min.js";
+import { RouterLink } from "vue-router";
 
 //Vue Material Kit 2 components
 import setMaterialInput from "@/assets/js/material-input";
@@ -156,7 +157,7 @@ async function SupplierRegister() {
                             placeholder="密碼" isrequired="true" />
                         </div>
                         <div class="form-check" style="padding-left: 0px">
-                          <a href="#" style="color: green">忘記密碼?</a>
+                          <a href="http://localhost:3000/ForgetPasswordView" style="color: green">忘記密碼?</a>
                         </div>
 
                         <div class="text-center">
@@ -177,8 +178,8 @@ async function SupplierRegister() {
                           </button>
                         </div>
                         <div class="col-2 text-center me-auto">
-                          <button @click="Customer.handleGoogleAccessTokenLogin" class="btn btn-primary">
-                            <i class="fa fa-google"></i>
+                          <button @click="Customer.handleGoogleAccessTokenLogin" class="btn btn-link px-3">
+                            <i class="fa fa-google text-warning text-lg"></i>
                           </button>
                         </div>
                       </div>

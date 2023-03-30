@@ -43,7 +43,7 @@ const addSaveRoom = async () => {
             setTimeout(() => {
                 Object.assign(currentSiteRoom, suppliersDataStore.siteAndRoom[arraySiteNum.value]);
                 addRoomModalClose();
-            }, 50);
+            }, 150);
         }
         catch (error) {
             console.log(error)

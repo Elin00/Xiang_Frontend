@@ -7,9 +7,11 @@ export const useEditCustomerStore = defineStore("EditCustomerData", () => {
   const CustomerData = useCustomerStore();  //引用customerData
 
   const user = reactive({
+    
     name: "",
     phone: '',
-    email: ''
+    email: '',
+  
   })
 
   const EditCustomerres = async () => {

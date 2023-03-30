@@ -123,7 +123,6 @@ export const useSuppliersDataStore = defineStore('SuppliersData', () => {
         try {
             const res = await axios.get(`https://localhost:7073/api/Products/product/${id.value}`);
             currentProductId.value = res.data.productId;
-            console.log('currentProductId.value',currentProductId.value);
         }
         catch (error) {
             console.log(error)

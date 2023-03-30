@@ -9,11 +9,11 @@ import photo5 from "../../../assets/img/3-1.jpg";
 import photo6 from "../../../assets/img/2-2.jpg";
 import photo7 from "../../../assets/img/3-2.jpg";
 
-const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
-const id =[1, 2, 3, 4, 5, 6, 7];
-const imageUrls = ref([...photos.map((photo,id) => ({ src: photo, link: `/views/rentroomview/${id}` }))]);
+const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo1, photo2, photo3, photo4, photo5, photo6, photo7];
+const id = [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7];
+const imageUrls = ref([...photos.map((photo, id) => ({ src: photo, link: `/views/rentroomview/${id}` }))]);
 const scrollPosition = ref(0);
-const scrollStep = 4;
+const scrollStep = 3;
 const itemWidth = ref(0);
 const containerWidth = ref(0);
 const promoteList = ref(null);
@@ -78,7 +78,7 @@ function getItemAndContainerWidth() {
 }
 </script>
 <template>
-  <div class="promote-container">
+  <div class="promote-container" @mouseenter="stopAutoScroll">
     <div class="row">
       <div class="promote-main d-flex justify-content-center">
         <img src="../../../assets/img/PsiteRoom/2-6.jpg" class="promote-main__img" alt="" />
@@ -88,10 +88,8 @@ function getItemAndContainerWidth() {
             <br>
             一日開會首選！
           </h1>
-          <RouterLink :to="{ name: 'RoomGuideView' }">
-            <a href="#" class="content-link">
+          <RouterLink :to="{ name: 'RoomGuideView' }" class="content-link">
             立即預定＞＞
-          </a>
           </RouterLink>
         </div>
       </div>
@@ -99,14 +97,14 @@ function getItemAndContainerWidth() {
     <div class="promote-list item-4x" ref="promoteList">
       <div v-for="(imageUrl, index) in imageUrls" :key="index">
         <a :href="imageUrl.link">
-          <img class="space-item" :src="imageUrl.src" @mouseover="stopAutoScroll" @mouseout="startAutoScroll" />
+          <img class="space-item" :src="imageUrl.src" @mouseover="stopAutoScroll" @mouseleave="startAutoScroll" />
         </a>
       </div>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 @keyframes scrollLeft {
   0% {
     transform: translateX(0);

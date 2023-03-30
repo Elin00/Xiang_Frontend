@@ -10,7 +10,6 @@ import presentationcarousel from "./Sections/presentationcarousel.vue";
 import presentation跑馬燈 from "./Sections/presentation跑馬燈.vue";
 import presentation使用者操作 from "./Sections/presentation使用者操作.vue";
 import presentationHeader打字效果 from "./Sections/presentationHeader打字效果.vue";
-
 //images
 import vueMkHeader from "@/assets/img/office-dark.jpg";
 

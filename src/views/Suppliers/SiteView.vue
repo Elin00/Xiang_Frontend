@@ -45,10 +45,13 @@ const regOpenTime = /^\d{2}:\d{2}~\d{2}:\d{2}$/;
 const savePSite = async () => {
     if (regOpenTime.test(currentSiteDate.OpenTime) && currentSiteDate.Name != '' && currentSiteDate.Address != '' && currentSiteDate.Latitude != '' && currentSiteDate.Longitude != '' && currentSiteDate.siteDescription != '' && currentSiteDate.SitePhoto != null) {
         try {
+            console.log(currentSiteDate);
             const res = await axios.post('https://localhost:7073/api/Products/PSite', currentSiteDate, { headers: { 'Content-Type': 'multipart/form-data' } });
             // console.log(res);
-            suppliersDataStore.getProduct();
-            addSiteModalClose();
+            setTimeout(() => {
+        suppliersDataStore.getProduct();
+        addSiteModalClose();
+        }, 250);
         }
         catch (error) {
             console.log(error)
@@ -83,6 +86,9 @@ const ModifySave = async () => {
     try {
         res = await axios.put(`https://localhost:7073/api/Products/${currentSiteDate.ProductId}`, modifySiteDate, { headers: { 'Content-Type': 'application/json' } });
         // console.log(res);
+        setTimeout(() => {
+        suppliersDataStore.getProduct();
+        }, 150);
     }
     catch (error) {
         console.log(error)
@@ -139,8 +145,8 @@ onMounted(() => {
     suppliersDataStore.getProId();
     setTimeout(() => {
         suppliersDataStore.getProduct();
+        currentSiteDate.ProductId = suppliersDataStore.currentProductId;
     }, 250);
-    currentSiteDate.ProductId = suppliersDataStore.currentProductId;
 });
 </script>
 

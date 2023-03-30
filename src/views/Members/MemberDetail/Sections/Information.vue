@@ -33,6 +33,7 @@ const modalText = reactive({
 });
 
 const modalTitleBody = (e) => {
+  console.log(e.target.id);
   switch (e.target.id) {
     case "name":
       modalTitle.value = modalText.name.title;
@@ -79,7 +80,7 @@ const modalHandler = async (text) => {
           EditCustomer.user.email = text;
           // console.log(EditCustomer.user.email);
         }
-       
+
       } catch (error) {
         if (error.response.status === 400) {
           // console.log(error.response.data);
@@ -128,12 +129,7 @@ const modalHandler = async (text) => {
         <h5>姓名</h5>
         <div class="d-flex justify-content-between">
           <p>{{ EditCustomer.user.name }}</p>
-          <h6
-            id="name"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            @click="modalTitleBody"
-          >
+          <h6 id="name" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="modalTitleBody">
             編輯
           </h6>
         </div>
@@ -144,12 +140,7 @@ const modalHandler = async (text) => {
         <h5>電子信箱</h5>
         <div class="d-flex justify-content-between">
           <p>{{ EditCustomer.user.email }}</p>
-          <h6
-            id="email"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            @click="modalTitleBody"
-          >
+          <h6 id="email" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="modalTitleBody">
             編輯
           </h6>
         </div>
@@ -160,12 +151,7 @@ const modalHandler = async (text) => {
         <h5>電話號碼</h5>
         <div class="d-flex justify-content-between">
           <p>{{ EditCustomer.user.phone }}</p>
-          <h6
-            id="phone"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            @click="modalTitleBody"
-          >
+          <h6 id="phone" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="modalTitleBody">
             編輯
           </h6>
         </div>
@@ -176,7 +162,7 @@ const modalHandler = async (text) => {
 </template>
 
 <style scoped>
-h5 + p {
+h5+p {
   font-family: sans-serif;
   font-weight: 900;
 }

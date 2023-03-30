@@ -17,6 +17,7 @@ import { RouterView } from "vue-router";
 import NavbarDefault from "../src/examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "../src/examples/footers/FooterDefault.vue";
 import LoginRegisterWindowModal from "../src/views/Other/LoginRegisterWindow/LoginRegisterWindowModal.vue";
+import CheatbotView from "../src/views/Other/Cheatbot/CheatbotView.vue";
 </script>
 
 <template>
@@ -30,4 +31,5 @@ import LoginRegisterWindowModal from "../src/views/Other/LoginRegisterWindow/Log
   <router-view />
   <DefaultFooter />
   <LoginRegisterWindowModal />
+  <CheatbotView />
 </template>
