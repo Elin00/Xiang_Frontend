@@ -112,7 +112,7 @@ async function SupplierRegister() {
                         <div class="input-group input-group-outline mb-3">
                           <label class="form-label"></label>
                           <input v-model="storeSuppliersData.password" type="password"
-                            class="form-control form-control-md" placeholder="密碼" isrequired="true" />
+                            class="form-control form-control-md" placeholder="密碼" isrequired="true" autocomplete="on" />
                         </div>
                         <div class="form-check" style="padding-left: 0px">
                           <a href="#" style="color: green">忘記密碼?</a>
@@ -154,7 +154,7 @@ async function SupplierRegister() {
                         <div class="input-group input-group-outline mb-3">
                           <label class="form-label"></label>
                           <input v-model="Customer.Password" type="password" class="form-control form-control-md"
-                            placeholder="密碼" isrequired="true" />
+                            placeholder="密碼" isrequired="true" autocomplete="on" />
                         </div>
                         <div class="form-check" style="padding-left: 0px">
                           <a href="http://localhost:3000/ForgetPasswordView" style="color: green">忘記密碼?</a>
@@ -183,7 +183,6 @@ async function SupplierRegister() {
                           </button>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -236,7 +235,7 @@ async function SupplierRegister() {
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">密碼</label>
                       <input v-model="storeSuppliersData.registerSupplier.password" type="password"
-                        class="form-control form-control-md" placeholder="" isrequired="true" />
+                        class="form-control form-control-md" placeholder="" isrequired="true" autocomplete="on" />
                     </div>
                     <div class="form-check" style="padding-left: 0">
                       <MaterialCheckbox id="terms" style="padding-left: 0" checked>我已閱讀並同意 想享<a href="#"
@@ -313,7 +312,7 @@ async function SupplierRegister() {
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">密碼</label>
                       <input v-model="Customer.registerCustomer.Password" type="password"
-                        class="form-control form-control-md" placeholder="" isrequired />
+                        class="form-control form-control-md" placeholder="" isrequired autocomplete="on" />
                     </div>
                     <div class="form-check" style="padding-left: 0px">
                       <MaterialCheckbox id="terms2" style="padding-left: 0" checked>我已閱讀並同意 想享<a href="#"

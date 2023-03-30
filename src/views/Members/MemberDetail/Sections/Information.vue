@@ -9,7 +9,6 @@ import axios from "axios";
 const currentSelectModal = ref("");
 const CustomerData = useCustomerStore();
 const EditCustomer = useEditCustomerStore();
-
 const modalTitle = ref("編輯姓名");
 const modalBody = ref("會呈現在訂單上的名稱。");
 
@@ -59,6 +58,7 @@ const modalTitleBody = (e) => {
 };
 
 const modalHandler = async (text) => {
+  console.log('modalHandlerStart');
   switch (currentSelectModal.value) {
     case "name":
       EditCustomer.user.name = text;
@@ -75,10 +75,9 @@ const modalHandler = async (text) => {
             },
           }
         );
-        console.log(response);
+        console.log('switchRes', response);
         if (response.status === 200) {
           EditCustomer.user.email = text;
-          // console.log(EditCustomer.user.email);
         }
 
       } catch (error) {
@@ -100,7 +99,8 @@ const modalHandler = async (text) => {
             },
           }
         );
-        // console.log(response);
+
+        console.log('switchRes', response);
         if (response.status === 200) {
           EditCustomer.user.phone = text;
         }
@@ -114,6 +114,43 @@ const modalHandler = async (text) => {
     default:
       EditCustomer.user.name = text;
       break;
+  }
+  console.log('modalHandlerEnd');
+
+  //axios.put
+  try {
+    console.log('EditCustomerData', EditCustomer.user);
+    const response = await axios.put(
+      `https://localhost:7073/api/Client/id?id=${CustomerData.id}`,
+      {
+        name: EditCustomer.user.name,
+        email: EditCustomer.user.email,
+        phone: EditCustomer.user.phone,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${CustomerData.token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log('saveRes', response);
+    if (response.status === 200) {
+      // 更新成功
+      // 更新本地存儲中的名稱
+      const currentUser = JSON.parse(localStorage.getItem("user"));
+      // console.log(currentUser);
+      currentUser.Name = EditCustomer.user.name;
+      currentUser.token = response.data; //把token資料換新的
+      localStorage.setItem("user", JSON.stringify(currentUser));
+
+      // 更新 CustomerData 中的名稱
+      CustomerData.Name = EditCustomer.user.name;
+
+      console.log('save1end');
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 </script>

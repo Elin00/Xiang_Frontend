@@ -3,7 +3,7 @@ import axios from "axios";
 import datepickerDesign from "../RoomGuide/datepickerDailyrentalDesign.vue";
 import datepickerDesign2 from "../RoomGuide/datepickerhourlyrentalDesign.vue";
 import Evaluation from "../Suppliers/ProductsmessageView.vue"
-import { ref, onMounted, watchEffect, reactive, computed, defineProps } from "vue";
+import { ref, onMounted, watchEffect, reactive, computed } from "vue";
 import { Navigation, Pagination, Autoplay, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -368,9 +368,9 @@ onMounted(async () => {
     categoryId.value = Productspinia.roominfo.categoryId - 1
     console.log(categoryId.value)
     const storedCoupons = localStorage.getItem('myCoupons');
-  if (storedCoupons) {
-    myCoupons.value = JSON.parse(storedCoupons);
-  }
+    if (storedCoupons) {
+      myCoupons.value = JSON.parse(storedCoupons);
+    }
   });
 });
 
@@ -507,13 +507,13 @@ onMounted(async () => {
             <hr>
             <span>租金: {{ totalcostforhour }}元</span>
             <hr>
-            <div>             
-                <div v-for="(coupon, index) in myCoupons" :key="index" class="coupon-item">
-                  <div class="coupon-info">
-                    <span>優惠卷代碼：{{ coupon.code }} 折扣：{{ coupon.discount }}% </span>
-                    <input type="checkbox" class="use-coupon-btn" @click="useCoupon(coupon)"> 使用
-                  </div>
+            <div>
+              <div v-for="(coupon, index) in myCoupons" :key="index" class="coupon-item">
+                <div class="coupon-info">
+                  <span>優惠卷代碼：{{ coupon.code }} 折扣：{{ coupon.discount }}% </span>
+                  <input type="checkbox" class="use-coupon-btn" @click="useCoupon(coupon)"> 使用
                 </div>
+              </div>
             </div>
             <hr>
             <button class="fullBtn" @click="submitBookingHour">${{ totalcostforhour }} | 立即預訂</button>

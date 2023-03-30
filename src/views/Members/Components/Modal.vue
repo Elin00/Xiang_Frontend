@@ -25,38 +25,6 @@ const emit = defineEmits(["modifyText"]);
 const save1 = async () => {
   emit("modifyText", modalText.value);
   modalText.value = "";
- 
-  try {
-    const response=await axios.put(
-      `https://localhost:7073/api/Client/id?id=${CustomerData.id}`,
-      {
-        name: EditCustomerData.user.name,
-        email: EditCustomerData.user.email,
-        phone: EditCustomerData.user.phone,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${CustomerData.token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (response.status === 200) {
-      // 更新成功
-      // 更新本地存儲中的名稱
-      const currentUser = JSON.parse(localStorage.getItem("user"));
-      // console.log(currentUser);
-      currentUser.Name = EditCustomerData.user.name;
-      currentUser.token = response.data; //把token資料換新的
-      localStorage.setItem("user", JSON.stringify(currentUser));
-
-      // 更新 CustomerData 中的名稱
-      CustomerData.Name = EditCustomerData.user.name;
-    }
-  } catch (error) {
-    console.log(error);
-  }
 };
 </script>
 

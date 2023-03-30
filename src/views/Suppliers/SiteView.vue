@@ -139,14 +139,18 @@ const changeSitePhoto = (e) => {
 }
 
 //hook
-onMounted(() => {
+onMounted(async () => {
     AddSiteModal = new bootstrap.Modal(document.getElementById('AddModal'));
     ModifySiteModal = new bootstrap.Modal(document.getElementById('ModifyModal'));
-    suppliersDataStore.getProId();
+    await suppliersDataStore.getProId();
+    console.log('View');
+    console.log('ViewCurrentProductId', suppliersDataStore.currentProductId);
     setTimeout(() => {
         suppliersDataStore.getProduct();
         currentSiteDate.ProductId = suppliersDataStore.currentProductId;
     }, 250);
+    currentSiteDate.ProductId = suppliersDataStore.currentProductId;
+    console.log('View');
 });
 </script>
 
