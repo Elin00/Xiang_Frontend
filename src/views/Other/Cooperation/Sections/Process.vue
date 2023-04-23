@@ -22,15 +22,15 @@ onMounted(() => {
 
 
 <template>
-  <div class="process" id="JoinUs">
-    <div class="process-box" style="margin-left: auto">
+  <div class="row process" id="JoinUs">
+    <div class="col-12 col-lg-6 process-box" style="margin-left: auto">
       <h2>與我們合作</h2>
       <MaterialButton variant="gradient" color="warning" class="w-auto me-2" size="lg" @click="RegisterModalOpen">立即註冊
       </MaterialButton>
       <a href="#">聯絡我們</a>
     </div>
 
-    <div class="process-box col-sm-6 mt-sm-3">
+    <div class="col-12 col-lg-6 process-box ">
       <n-timeline :icon-size="20">
         <n-timeline-item color="grey" style="font-weight: bold" content="註冊成為想享會員">
           <template #icon>
