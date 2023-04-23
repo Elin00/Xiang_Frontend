@@ -22,15 +22,14 @@ onMounted(() => {
 
 
 <template>
-  <div class="row process" id="JoinUs">
-    <div class="col-12 col-lg-6 process-box" style="margin-left: auto">
+  <div class="row justify-content-center p-3 pbox">
+    <div class="col-12 col-lg-4 pCard">
       <h2>與我們合作</h2>
       <MaterialButton variant="gradient" color="warning" class="w-auto me-2" size="lg" @click="RegisterModalOpen">立即註冊
       </MaterialButton>
       <a href="#">聯絡我們</a>
     </div>
-
-    <div class="col-12 col-lg-6 process-box ">
+    <div class="col-12 col-lg-4 pCard">
       <n-timeline :icon-size="20">
         <n-timeline-item color="grey" style="font-weight: bold" content="註冊成為想享會員">
           <template #icon>
@@ -103,22 +102,12 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.process {
-  width: auto;
-  height: 300px;
-  margin-top: 80px;
+.pbox {
+  width: 100%;
   background-color: #d8e2dc;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-top: 20px;
-
-  display: grid;
-  grid-template-columns: auto auto;
 }
 
-
-.process-box {
-  /* border: 1px solid red; */
-  margin-right: 150px;
+.pCard {
+  margin: 20px;
 }
 </style>

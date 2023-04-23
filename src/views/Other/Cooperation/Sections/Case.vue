@@ -24,13 +24,13 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
       <div class="col-10 col-lg-5 mb-5">
         <n-card title="带封面的卡片" hoverable>
           <template #header>
-            <div class="title-box">
-              <div class="title-img">
+            <div class="row">
+              <div class="col-4 col-lg-2">
                 <a href="javascript:;">
                   <MaterialAvatar :image="team1" alt="Image placeholder" size="lg" />
                 </a>
               </div>
-              <div class="title-p">
+              <div class="col-8 col-lg-10">
                 <h5>業主A</h5>
                 <p style="font-weight: bold">大幅補貼了辦公室的租金！</p>
               </div>
@@ -51,13 +51,13 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
       <div class="col-10 col-lg-5 mb-5">
         <n-card title="带封面的卡片" hoverable>
           <template #header>
-            <div class="title-box">
-              <div class="title-img">
+            <div class="row">
+              <div class="col-4 col-lg-2">
                 <a href="javascript:;">
                   <MaterialAvatar :image="team4" alt="Image placeholder" size="lg" />
                 </a>
               </div>
-              <div class="title-p" style="vertical-align: middle">
+              <div class="col-8 col-lg-10" style="vertical-align: middle">
                 <h5>業主B</h5>
                 <p style="font-weight: bold">讓我放心輕鬆地收租金！</p>
               </div>
